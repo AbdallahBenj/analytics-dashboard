@@ -15,6 +15,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 import ToggleDarkMode from "./ToggleDarkMode";
+import ThreeDarkMode from "./ThreeDarkMode";
 
 const user = {
   name: "Tom Cook",
@@ -86,10 +87,11 @@ const HomeDashboard = () => {
               <div className="hidden md:block">
                 <div className="ml-4 flex items-center md:ml-6">
                   {/* Dark Mode Button */}
+                  <ThreeDarkMode />
                   <ToggleDarkMode />
                   <button
                     type="button"
-                    className="relative rounded-full ml-3 p-1 text-gray-400 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500"
+                    className="relative rounded-full p-1 text-gray-400 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500"
                   >
                     <span className="absolute -inset-1.5" />
                     <span className="sr-only">View notifications</span>
@@ -131,7 +133,11 @@ const HomeDashboard = () => {
                 </div>
               </div>
 
-              <div className="-mr-2 flex md:hidden">
+              <div className="-mr-2 flex items-center md:hidden">
+                {/* Dark Mode Button */}
+                <ThreeDarkMode />
+                <ToggleDarkMode />
+
                 {/* Mobile menu button */}
                 <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500">
                   <span className="absolute -inset-0.5" />
