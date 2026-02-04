@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="8.4666662mm"
+   height="8.4666662mm"
+   viewBox="0 0 8.4666662 8.4666662"
+   version="1.1"
+   id="svg5"
+   sodipodi:docname="analytics-dashboard-icon.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview296"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="13.81068"
+     inkscape:cx="20.925834"
+     inkscape:cy="11.549033"
+     inkscape:window-width="1600"
+     inkscape:window-height="831"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg5" />
+  <defs
+     id="defs2" />
+  <g
+     id="layer1"
+     transform="translate(-62.31477,-89.542973)">
+    <circle
+       style="fill:#ffffff;stroke-width:0.0282226"
+       id="path234"
+       cx="66.548103"
+       cy="93.776306"
+       r="4.2333331" />
+    <circle
+       style="fill:#ff2056;stroke-width:0.0238536;fill-opacity:1"
+       id="circle365"
+       cx="66.548103"
+       cy="93.776306"
+       r="3.577985" />
+  </g>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:5.22634px;font-family:Oswald;-inkscape-font-specification:'Oswald Bold';letter-spacing:-0.264583px;fill:#ffffff;stroke-width:0.435528"
+     x="1.467618"
+     y="6.3500009"
+     id="text464"><tspan
+       sodipodi:role="line"
+       id="tspan462"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Oswald;-inkscape-font-specification:'Oswald Bold';fill:#ffffff;stroke-width:0.435528"
+       x="1.467618"
+       y="6.3500009">AD</tspan></text>
+</svg>
