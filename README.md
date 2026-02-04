@@ -4,7 +4,7 @@ A modern analytics dashboard built with React, Vite, and Tailwind CSS.
 
 ## Live Demo
 
-[Analytics Dashboard](https://abdallahbenj.github.io/analytics-dashboard/)
+🔗 [Analytics Dashboard](https://abdallahbenj.github.io/analytics-dashboard/)
 
 ## Features
 

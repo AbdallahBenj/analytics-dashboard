@@ -36,7 +36,7 @@ const HomeDashboard = () => {
                 <div className="flex items-center">
                   <div className="shrink-0">
                     <a
-                      href="/"
+                      href="./"
                       aria-label="Go to homepage"
                       className="flex items-center"
                     >
