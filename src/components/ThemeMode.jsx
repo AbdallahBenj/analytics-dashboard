@@ -15,22 +15,21 @@ const plans = [
   { name: "dark", icon: MoonIcon },
 ];
 
-const isEnable = true;
-
-const ThreeDarkMode = () => {
-  const [selected, setSelected] = useState(plans[1].name);
+const ThemeMode = () => {
+  const [selected, setSelected] = useState(() => {
+    if (typeof window === "undefined") return;
+    return localStorage.getItem("theme") ?? "system";
+  });
 
   const systemMode = useSystemMode();
   useThemeMode({ selected, systemMode });
-
-  if (!isEnable) return null;
 
   return (
     <RadioGroup
       value={selected}
       onChange={setSelected}
       aria-label="Server size"
-      className="flex h-8 w-22 flex-row rounded-full mx-3
+      className="flex h-8 w-25 md:w-22 flex-row rounded-full mr-3
       bg-white/10 p-1 ease-in-out"
     >
       {plans.map((plan) => {
@@ -41,11 +40,11 @@ const ThreeDarkMode = () => {
               value={plan.name}
               className="group 
               flex items-center justify-center 
-              rounded-full size-6
+              rounded-full size-7 md:size-6
               data-checked:bg-white/25
               focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
             >
-              <Icon className="size-5 rounded-full text-gray-500 group-data-checked:text-white" />
+              <Icon className="size-6 md:size-5 rounded-full text-gray-500 group-data-checked:text-white" />
             </Radio>
             <Label className="sr-only">{plan.name}</Label>
           </Field>
@@ -55,4 +54,4 @@ const ThreeDarkMode = () => {
   );
 };
 
-export default ThreeDarkMode;
+export default ThemeMode;

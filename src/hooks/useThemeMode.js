@@ -5,17 +5,10 @@ const useThemeMode = ({ selected, systemMode = "" }) => {
     if (typeof window === "undefined") return;
 
     const rootElement = document.documentElement;
+    const activeMode = selected === "system" ? systemMode : selected;
 
-    const setMode = (mode) => {
-      rootElement.setAttribute("data-theme", mode);
-      localStorage.setItem("theme", mode);
-    };
-
-    if (selected === "system") {
-      setMode(systemMode);
-    } else {
-      setMode(selected);
-    }
+    rootElement.setAttribute("data-theme", activeMode);
+    localStorage.setItem("theme", selected);
   }, [selected, systemMode]);
 };
 
