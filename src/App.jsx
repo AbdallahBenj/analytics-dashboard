@@ -1,10 +1,14 @@
-import HomeDashboard from "./components/HomeDashboard";
+import Header from "./layout/Header";
+import SectionsHeader from "./layout/SectionsHeader";
+import Main from "./layout/Main";
 
 function App() {
   return (
-    <>
-      <HomeDashboard />
-    </>
+    <div className="min-h-full">
+      <Header />
+      <SectionsHeader />
+      <Main />
+    </div>
   );
 }
 

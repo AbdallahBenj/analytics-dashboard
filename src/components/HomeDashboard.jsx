@@ -47,7 +47,7 @@ const HomeDashboard = () => {
                           className="size-8"
                         />
                       ) : (
-                        <span className="text-3xl font-bold tracking-tight text-rose-500">
+                        <span className="text-3xl font-bold tracking-tight text-indigo-500">
                           {brand.name}
                         </span>
                       )}
