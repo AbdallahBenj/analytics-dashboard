@@ -1,8 +1,17 @@
-import { UserCircleIcon } from "@heroicons/react/24/outline";
+import {
+  UserCircleIcon,
+  HomeIcon,
+  UsersIcon,
+  ChartBarIcon,
+  CreditCardIcon,
+  SparklesIcon,
+  ChartPieIcon,
+  Cog6ToothIcon,
+} from "@heroicons/react/24/outline";
 
 const navContent = {
   brand: {
-    name: "A.Dashboard",
+    name: "Analytics",
     imageUrl: "",
   },
   user: {
@@ -12,17 +21,53 @@ const navContent = {
     imageUrl: "",
   },
   navigation: [
-    { name: "Dashboard", href: "#", current: true },
-    { name: "Team", href: "#", current: false },
-    { name: "Projects", href: "#", current: false },
-    { name: "Calendar", href: "#", current: false },
-    { name: "Reports", href: "#", current: false },
+    {
+      name: "Dashboard",
+      href: "#",
+      Icon: HomeIcon,
+      current: true,
+    },
+    {
+      name: "Analytics",
+      href: "#",
+      Icon: ChartBarIcon,
+      current: false,
+    },
+    {
+      name: "Customers",
+      href: "#",
+      Icon: UsersIcon,
+      current: false,
+    },
+
+    {
+      name: "Subscriptions",
+      href: "#",
+      Icon: CreditCardIcon,
+      current: false,
+    },
+    {
+      name: "Features",
+      href: "#",
+      Icon: SparklesIcon,
+      current: false,
+    },
+    {
+      name: "Reports",
+      href: "#",
+      Icon: ChartPieIcon,
+      current: false,
+    },
   ],
   userNavigation: [
     { name: "Your profile", href: "#" },
     { name: "Settings", href: "#" },
     { name: "Sign out", href: "#" },
   ],
+  settings: {
+    name: "Settings",
+    Icon: Cog6ToothIcon,
+  },
 };
 
 export default navContent;

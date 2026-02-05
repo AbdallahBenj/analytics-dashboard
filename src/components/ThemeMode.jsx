@@ -38,7 +38,7 @@ const ThemeMode = () => {
           <Field key={plan.name} className="flex items-center gap-2 space-x-1">
             <Radio
               value={plan.name}
-              className="group 
+              className="group cursor-pointer
               flex items-center justify-center 
               rounded-full size-7 md:size-6
               data-checked:bg-white/25

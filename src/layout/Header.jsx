@@ -17,14 +17,22 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const Header = () => {
+const Header = ({ isSidebarLayout }) => {
   return (
     <header>
       <Disclosure as="nav" className="bg-gray-800 dark:bg-gray-800/50">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div
+          className={`
+            mx-auto px-4 sm:px-6 lg:px-8 
+          ${
+            isSidebarLayout
+              ? "max-w-(--main-width) md:mr-(--content-margin)"
+              : "mx-auto max-w-7xl"
+          }`}
+        >
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center">
-              <div className="shrink-0">
+              <div className={`shrink-0 ${isSidebarLayout ? "md:hidden" : ""}`}>
                 <a
                   href="./"
                   aria-label="Go to homepage"
@@ -43,25 +51,27 @@ const Header = () => {
                   )}
                 </a>
               </div>
-              <div className="hidden md:block">
-                <div className="ml-10 flex items-baseline space-x-4">
-                  {navigation.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      aria-current={item.current ? "page" : undefined}
-                      className={classNames(
-                        item.current
-                          ? "bg-gray-900 text-white dark:bg-gray-950/50 dark:text-white"
-                          : "text-gray-300 hover:bg-white/5 hover:text-white",
-                        "rounded-md px-3 py-2 text-sm font-medium",
-                      )}
-                    >
-                      {item.name}
-                    </a>
-                  ))}
+              {!isSidebarLayout && (
+                <div className="hidden md:block">
+                  <div className="ml-10 flex items-baseline space-x-4">
+                    {navigation.map((item) => (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        aria-current={item.current ? "page" : undefined}
+                        className={classNames(
+                          item.current
+                            ? "bg-gray-900 text-white dark:bg-gray-950/50 dark:text-white"
+                            : "text-gray-300 hover:bg-white/5 hover:text-white",
+                          "rounded-md px-3 py-2 text-sm font-medium",
+                        )}
+                      >
+                        {item.name}
+                      </a>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
             <div className="hidden md:block">
               <div className="ml-4 flex items-center md:ml-6">
@@ -69,7 +79,7 @@ const Header = () => {
                 <ThemeMode />
                 <button
                   type="button"
-                  className="relative rounded-full p-1 text-gray-400 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500"
+                  className="relative cursor-pointer rounded-full p-1 text-gray-400 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500"
                 >
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">View notifications</span>
@@ -78,7 +88,7 @@ const Header = () => {
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
-                  <MenuButton className="relative flex max-w-xs items-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+                  <MenuButton className="relative cursor-pointer flex max-w-xs items-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
                     <span className="absolute -inset-1.5" />
                     <span className="sr-only">Open user menu</span>
                     {user.imageUrl ? (
