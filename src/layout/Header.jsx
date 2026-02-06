@@ -10,6 +10,7 @@ import {
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 import ThemeMode from "../components/ThemeMode";
+import SearchInput from "../components/SearchInput";
 import navContent from "../data/navContent";
 const { brand, user, navigation, userNavigation } = navContent;
 
@@ -17,22 +18,27 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const Header = ({ isSidebarLayout }) => {
+const Header = ({ layoutType }) => {
   return (
     <header>
-      <Disclosure as="nav" className="bg-gray-800 dark:bg-gray-800/50">
+      <Disclosure
+        as="nav"
+        className="bg-gray-800 md:bg-gray-100 dark:bg-gray-800/25"
+      >
         <div
           className={`
             mx-auto px-4 sm:px-6 lg:px-8 
           ${
-            isSidebarLayout
+            layoutType === "sidebar"
               ? "max-w-(--main-width) md:mr-(--content-margin)"
               : "mx-auto max-w-7xl"
           }`}
         >
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center">
-              <div className={`shrink-0 ${isSidebarLayout ? "md:hidden" : ""}`}>
+              <div
+                className={`shrink-0 ${layoutType === "sidebar" ? "md:hidden" : ""}`}
+              >
                 <a
                   href="./"
                   aria-label="Go to homepage"
@@ -51,7 +57,7 @@ const Header = ({ isSidebarLayout }) => {
                   )}
                 </a>
               </div>
-              {!isSidebarLayout && (
+              {layoutType === "header" && (
                 <div className="hidden md:block">
                   <div className="ml-10 flex items-baseline space-x-4">
                     {navigation.map((item) => (
@@ -61,8 +67,8 @@ const Header = ({ isSidebarLayout }) => {
                         aria-current={item.current ? "page" : undefined}
                         className={classNames(
                           item.current
-                            ? "bg-gray-900 text-white dark:bg-gray-950/50 dark:text-white"
-                            : "text-gray-300 hover:bg-white/5 hover:text-white",
+                            ? "text-white hover:text-indigo-400 dark:text-white dark:hover:text-indigo-500 bg-gray-900 dark:bg-gray-950/50"
+                            : "text-gray-500 hover:text-indigo-500 hover:bg-gray-200/70 dark:text-gray-400 dark:hover:text-gray-200  dark:hover:bg-white/5",
                           "rounded-md px-3 py-2 text-sm font-medium",
                         )}
                       >
@@ -79,7 +85,10 @@ const Header = ({ isSidebarLayout }) => {
                 <ThemeMode />
                 <button
                   type="button"
-                  className="relative cursor-pointer rounded-full p-1 text-gray-400 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500"
+                  className="relative cursor-pointer rounded-full p-1 
+                  text-gray-400 
+                  hover:text-gray-500 dark:hover:text-white 
+                  focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500"
                 >
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">View notifications</span>
@@ -88,7 +97,7 @@ const Header = ({ isSidebarLayout }) => {
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
-                  <MenuButton className="relative cursor-pointer flex max-w-xs items-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+                  <MenuButton className="group relative cursor-pointer flex max-w-xs items-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
                     <span className="absolute -inset-1.5" />
                     <span className="sr-only">Open user menu</span>
                     {user.imageUrl ? (
@@ -98,7 +107,12 @@ const Header = ({ isSidebarLayout }) => {
                         className="size-8 rounded-full outline -outline-offset-1 outline-white/10"
                       />
                     ) : (
-                      <user.profileIcon className="size-8 rounded-full text-gray-400 outline -outline-offset-1 outline-white/10" />
+                      <user.profileIcon
+                        className="size-8 rounded-full 
+                        text-gray-400 
+                        group-hover:text-gray-500 dark:group-hover:text-white 
+                        outline -outline-offset-1 outline-white/10"
+                      />
                     )}
                   </MenuButton>
 
@@ -110,7 +124,10 @@ const Header = ({ isSidebarLayout }) => {
                       <MenuItem key={item.name}>
                         <a
                           href={item.href}
-                          className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 data-focus:bg-gray-100 dark:data-focus:bg-white/5 data-focus:outline-hidden"
+                          className="block px-4 py-2 text-sm 
+                          text-gray-700 dark:text-gray-300 
+                          data-focus:bg-gray-100 dark:data-focus:bg-white/5 
+                          data-focus:outline-hidden"
                         >
                           {item.name}
                         </a>
@@ -150,7 +167,7 @@ const Header = ({ isSidebarLayout }) => {
                 aria-current={item.current ? "page" : undefined}
                 className={classNames(
                   item.current
-                    ? "bg-gray-900 dark:bg-gray-950/50 text-white"
+                    ? "bg-gray-900  dark:bg-gray-950/50 text-white"
                     : "text-gray-300 hover:bg-white/5 hover:text-white",
                   "block rounded-md px-3 py-2 text-base font-medium",
                 )}
@@ -158,6 +175,9 @@ const Header = ({ isSidebarLayout }) => {
                 {item.name}
               </DisclosureButton>
             ))}
+            <div className="px-3">
+              <SearchInput />
+            </div>
           </div>
           <div className="border-t border-white/10 pt-4 pb-3">
             <div className="flex items-center px-5">

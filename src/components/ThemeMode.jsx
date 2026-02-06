@@ -30,7 +30,7 @@ const ThemeMode = () => {
       onChange={setSelected}
       aria-label="Server size"
       className="flex h-8 w-25 md:w-22 flex-row rounded-full mr-3
-      bg-white/10 p-1 ease-in-out"
+      bg-white/10 md:bg-white dark:bg-white/10 p-1 ease-in-out"
     >
       {plans.map((plan) => {
         const Icon = plan.icon;
@@ -41,10 +41,14 @@ const ThemeMode = () => {
               className="group cursor-pointer
               flex items-center justify-center 
               rounded-full size-7 md:size-6
-              data-checked:bg-white/25
+              data-checked:bg-white/25 md:data-checked:bg-gray-200 dark:data-checked:bg-white/25
               focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
             >
-              <Icon className="size-6 md:size-5 rounded-full text-gray-500 group-data-checked:text-white" />
+              <Icon
+                className="size-6 md:size-5 rounded-full 
+              text-gray-500 md:text-gray-400 dark:text-gray-500 
+              group-data-checked:text-white md:group-data-checked:text-gray-700 dark:group-data-checked:text-white"
+              />
             </Radio>
             <Label className="sr-only">{plan.name}</Label>
           </Field>

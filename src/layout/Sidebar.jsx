@@ -23,7 +23,7 @@ const Sidebar = () => {
       ml-(--content-margin)"
       >
         <div className="">
-          <div className="shrink-0 mb-25">
+          <div className="shrink-0 px-3 py-2 mb-25">
             <a
               href="./"
               aria-label="Go to homepage"
@@ -53,8 +53,8 @@ const Sidebar = () => {
                     aria-current={item.current ? "page" : undefined}
                     className={classNames(
                       item.current
-                        ? "bg-gray-200 text-indigo-500 dark:bg-gray-950/50 dark:text-white"
-                        : "text-gray-500 hover:text-indigo-500 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-200/70 dark:hover:bg-white/5",
+                        ? "text-indigo-500 hover:text-indigo-600 dark:text-white bg-gray-200 dark:bg-gray-950/50"
+                        : "text-gray-500 hover:text-indigo-500 hover:bg-gray-200/70 dark:text-gray-400 dark:hover:text-gray-200  dark:hover:bg-white/5",
                       "rounded-md px-3 py-2 text-md font-bold w-full",
                     )}
                   >
