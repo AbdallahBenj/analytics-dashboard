@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 import {
   Disclosure,
   DisclosureButton,
@@ -31,7 +33,7 @@ const Header = ({ layoutType }) => {
           ${
             layoutType === "sidebar"
               ? "max-w-(--main-width) md:mr-(--content-margin)"
-              : "mx-auto max-w-7xl"
+              : "max-w-7xl"
           }`}
         >
           <div className="flex h-16 items-center justify-between">
@@ -61,19 +63,23 @@ const Header = ({ layoutType }) => {
                 <div className="hidden md:block">
                   <div className="ml-10 flex items-baseline space-x-4">
                     {navigation.map((item) => (
-                      <a
+                      <NavLink
                         key={item.name}
-                        href={item.href}
+                        to={item.href}
                         aria-current={item.current ? "page" : undefined}
-                        className={classNames(
-                          item.current
-                            ? "text-white hover:text-indigo-400 dark:text-white dark:hover:text-indigo-500 bg-gray-900 dark:bg-gray-950/50"
-                            : "text-gray-500 hover:text-indigo-500 hover:bg-gray-200/70 dark:text-gray-400 dark:hover:text-gray-200  dark:hover:bg-white/5",
-                          "rounded-md px-3 py-2 text-sm font-medium",
-                        )}
+                        className={({ isActive }) =>
+                          classNames(
+                            "rounded-md px-3 py-2 text-md font-medium w-full",
+                            isActive
+                              ? "text-indigo-600 dark:text-indigo-500 bg-gray-200 dark:bg-gray-950/50"
+                              : item.current
+                                ? "text-indigo-500 hover:text-indigo-600 dark:text-white dark:hover:text-indigo-500 bg-gray-200 dark:bg-gray-950/50"
+                                : "text-gray-500 hover:text-gray-600 hover:bg-gray-200/70 dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-white/5",
+                          )
+                        }
                       >
                         {item.name}
-                      </a>
+                      </NavLink>
                     ))}
                   </div>
                 </div>
@@ -122,15 +128,15 @@ const Header = ({ layoutType }) => {
                   >
                     {userNavigation.map((item) => (
                       <MenuItem key={item.name}>
-                        <a
-                          href={item.href}
+                        <NavLink
+                          to={item.href}
                           className="block px-4 py-2 text-sm 
                           text-gray-700 dark:text-gray-300 
                           data-focus:bg-gray-100 dark:data-focus:bg-white/5 
                           data-focus:outline-hidden"
                         >
                           {item.name}
-                        </a>
+                        </NavLink>
                       </MenuItem>
                     ))}
                   </MenuItems>
@@ -162,15 +168,19 @@ const Header = ({ layoutType }) => {
             {navigation.map((item) => (
               <DisclosureButton
                 key={item.name}
-                as="a"
-                href={item.href}
+                as={NavLink}
+                to={item.href}
                 aria-current={item.current ? "page" : undefined}
-                className={classNames(
-                  item.current
-                    ? "bg-gray-900  dark:bg-gray-950/50 text-white"
-                    : "text-gray-300 hover:bg-white/5 hover:text-white",
-                  "block rounded-md px-3 py-2 text-base font-medium",
-                )}
+                className={({ isActive }) =>
+                  classNames(
+                    "block rounded-md px-3 py-2 text-base font-medium",
+                    isActive
+                      ? "text-indigo-500 dark:text-indigo-500 bg-gray-200 dark:bg-gray-950/50"
+                      : item.current
+                        ? "text-white bg-gray-900  dark:bg-gray-950/50 "
+                        : "text-gray-300 hover:text-white hover:bg-white/5 ",
+                  )
+                }
               >
                 {item.name}
               </DisclosureButton>

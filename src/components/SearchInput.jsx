@@ -2,11 +2,11 @@ import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
 
 const SearchInput = () => {
   return (
-    <div className="md:w-90">
+    <div className="">
       <label htmlFor="search" className="sr-only">
         Search
       </label>
-      <div className="mt-2">
+      <div className="">
         <div
           className="
         flex items-center rounded-md pl-3
@@ -27,7 +27,7 @@ const SearchInput = () => {
             name="search"
             type="text"
             placeholder="Search"
-            className="block min-w-0 grow
+            className="block min-w-0 w-0 grow
             py-1.5 pr-3 pl-1 
             text-base sm:text-sm/6
             focus:outline-none

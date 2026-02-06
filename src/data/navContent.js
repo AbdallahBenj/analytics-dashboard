@@ -23,38 +23,38 @@ const navContent = {
   navigation: [
     {
       name: "Dashboard",
-      href: "#",
+      href: "/",
       Icon: HomeIcon,
       current: true,
     },
     {
       name: "Analytics",
-      href: "#",
+      href: "/analytics",
       Icon: ChartBarIcon,
       current: false,
     },
     {
       name: "Customers",
-      href: "#",
+      href: "/customers",
       Icon: UsersIcon,
       current: false,
     },
 
     {
       name: "Subscriptions",
-      href: "#",
+      href: "/subscriptions",
       Icon: CreditCardIcon,
       current: false,
     },
     {
       name: "Features",
-      href: "#",
+      href: "/features",
       Icon: SparklesIcon,
       current: false,
     },
     {
       name: "Reports",
-      href: "#",
+      href: "/reports",
       Icon: ChartPieIcon,
       current: false,
     },

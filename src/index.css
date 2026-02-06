@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+
 @import "tailwindcss";
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
@@ -5,6 +7,9 @@
 @theme {
   /* Brand color (Tailwind token) */
   --color-brand: theme(colors.indigo.500);
+
+  --font-Geist: "Geist", sans-serif;
+
 
   /* Layout widths */
   --content-width: 90rem;

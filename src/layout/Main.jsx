@@ -1,17 +1,23 @@
+import { Routes, Route } from "react-router-dom";
+
+import DashboardPage from "../pages/DashboardPage";
+import AnalyticsPage from "../pages/AnalyticsPage";
+
 const Main = ({ layoutType }) => {
   return (
-    <main className="flex-1 bg-gray-100 dark:bg-gray-800/25">
-      <div
-        className={`
-          mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 h-full
+    <main
+      className={`
+          mx-auto w-full h-full
+          px-4 py-6 sm:px-6 lg:px-8
+          border border-red-500 mr-2
+          bg-gray-100 dark:bg-gray-800/25
           ${
             layoutType === "sidebar"
               ? "max-w-(--main-width) md:mr-(--content-margin)"
-              : "mx-auto max-w-7xl"
+              : "max-w-7xl"
           }`}
-      >
-        {/* Your content */}
-      </div>
+    >
+      {/* Your content */}
     </main>
   );
 };

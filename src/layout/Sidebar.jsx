@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 import navContent from "../data/navContent";
 const { brand, navigation, settings } = navContent;
 const { name, Icon } = settings;
@@ -9,7 +11,7 @@ function classNames(...classes) {
 const Sidebar = () => {
   return (
     <div
-      className="h-full
+      className="
       relative shadow-sm
       dark:after:pointer-events-none dark:after:absolute 
       dark:after:inset-x-0 dark:after:inset-y-0 
@@ -18,7 +20,7 @@ const Sidebar = () => {
       <aside
         className="hidden 
         md:flex flex-col justify-between
-      p-6 h-full
+      p-6 min-h-screen
       w-(--sidebar-width)
       ml-(--content-margin)"
       >
@@ -36,7 +38,7 @@ const Sidebar = () => {
                   className="size-8"
                 />
               ) : (
-                <span className="text-3xl font-bold tracking-tight text-indigo-500">
+                <span className="text-4xl font-bold tracking-tight text-indigo-500">
                   {brand.name}
                 </span>
               )}
@@ -47,32 +49,36 @@ const Sidebar = () => {
               {navigation.map((item) => {
                 const Icon = item.Icon;
                 return (
-                  <a
+                  <NavLink
                     key={item.name}
-                    href={item.href}
+                    to={item.href}
                     aria-current={item.current ? "page" : undefined}
-                    className={classNames(
-                      item.current
-                        ? "text-indigo-500 hover:text-indigo-600 dark:text-white bg-gray-200 dark:bg-gray-950/50"
-                        : "text-gray-500 hover:text-indigo-500 hover:bg-gray-200/70 dark:text-gray-400 dark:hover:text-gray-200  dark:hover:bg-white/5",
-                      "rounded-md px-3 py-2 text-md font-bold w-full",
-                    )}
+                    className={({ isActive }) =>
+                      classNames(
+                        "rounded-md px-3 py-2 text-md font-medium w-full",
+                        isActive
+                          ? "text-indigo-600 dark:text-indigo-500 bg-gray-200 dark:bg-gray-950/50"
+                          : item.current
+                            ? "text-indigo-500 hover:text-indigo-600 dark:text-white dark:hover:text-indigo-500 bg-gray-200 dark:bg-gray-950/50"
+                            : "text-gray-500 hover:text-gray-600 hover:bg-gray-200/70 dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-white/5",
+                      )
+                    }
                   >
                     <div className="flex items-center gap-2">
                       {Icon && <Icon className="size-7" />}
                       {item.name}
                     </div>
-                  </a>
+                  </NavLink>
                 );
               })}
             </div>
           </div>
         </div>
         <div
-          className="rounded-md px-3 py-2 text-md font-bold w-full
+          className="rounded-md px-3 py-2 text-md w-full
             text-gray-500 hover:text-indigo-500 dark:text-gray-400 dark:hover:text-gray-300 hover:bg-gray-200/70 dark:hover:bg-white/5"
         >
-          <a href="#">
+          <a href="./">
             <div className="flex items-center gap-2">
               {Icon && <Icon className="size-7" />}
               {name}
