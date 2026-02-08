@@ -2,7 +2,7 @@ const DashboardPage = () => {
   return (
     <section
       className="h-full
-      border border-emerald-600"
+    border border-gray-500"
     >
       {/* Your content */}
       <h1 className="text-2xl text-emerald-500">Dashboard Page</h1>

@@ -29,7 +29,7 @@ const Header = ({ layoutType }) => {
       >
         <div
           className={`
-            mx-auto px-4 sm:px-6 lg:px-8 
+            mx-auto px-4 sm:px-6 lg:px-8
           ${
             layoutType === "sidebar"
               ? "max-w-(--main-width) md:mr-(--content-margin)"
@@ -46,14 +46,15 @@ const Header = ({ layoutType }) => {
                   aria-label="Go to homepage"
                   className="flex items-center"
                 >
-                  {brand.imageUrl ? (
+                  {brand.imageUrl && (
                     <img
                       alt={`${brand.name} logo`}
                       src={brand.imageUrl}
-                      className="size-8"
+                      className="size-10 max-w-fit rounded-full text-indigo-500"
                     />
-                  ) : (
-                    <span className="text-3xl font-bold tracking-tight text-indigo-500">
+                  )}
+                  {brand.name && (
+                    <span className="text-3xl font-bold ml-2 tracking-tight text-indigo-500">
                       {brand.name}
                     </span>
                   )}
@@ -171,16 +172,12 @@ const Header = ({ layoutType }) => {
                 as={NavLink}
                 to={item.href}
                 aria-current={item.current ? "page" : undefined}
-                className={({ isActive }) =>
-                  classNames(
-                    "block rounded-md px-3 py-2 text-base font-medium",
-                    isActive
-                      ? "text-indigo-500 dark:text-indigo-500 bg-gray-200 dark:bg-gray-950/50"
-                      : item.current
-                        ? "text-white bg-gray-900  dark:bg-gray-950/50 "
-                        : "text-gray-300 hover:text-white hover:bg-white/5 ",
-                  )
-                }
+                className={classNames(
+                  "block rounded-md px-3 py-2 text-base font-medium",
+                  item.current
+                    ? "text-white bg-gray-900  dark:bg-gray-950/50 "
+                    : "text-gray-300 hover:text-white hover:bg-white/5 ",
+                )}
               >
                 {item.name}
               </DisclosureButton>

@@ -12,7 +12,7 @@ import {
 const navContent = {
   brand: {
     name: "Analytics",
-    imageUrl: "",
+    imageUrl: "analytics-dashboard-icon.svg",
   },
   user: {
     name: "Tom Cook",

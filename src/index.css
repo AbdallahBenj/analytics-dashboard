@@ -12,13 +12,14 @@
 
 
   /* Layout widths */
-  --content-width: 90rem;
+  --content-width: 100rem;
   /* max-w-7xl */
-  --sidebar-width: 22.5rem;
+  --open-sidebar-width: 20rem;
+  --close-sidebar-width: 6.25rem;
   /* w-90 */
 
   /* Derived values */
-  --main-width: calc(var(--content-width) - var(--sidebar-width));
+  --main-width: calc(var(--content-width) - var(--close-sidebar-width));
 
   --content-margin: max(0px,
       calc((100vw - var(--content-width)) / 2));
