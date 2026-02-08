@@ -6,60 +6,29 @@
    height="8.4666662mm"
    viewBox="0 0 8.4666662 8.4666662"
    version="1.1"
-   id="svg5"
-   sodipodi:docname="analytics-dashboard-icon.svg"
-   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   id="svg1372"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-  <sodipodi:namedview
-     id="namedview296"
-     pagecolor="#ffffff"
-     bordercolor="#000000"
-     borderopacity="0.25"
-     inkscape:showpageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1"
-     inkscape:document-units="mm"
-     showgrid="false"
-     inkscape:zoom="13.81068"
-     inkscape:cx="19.694903"
-     inkscape:cy="11.549033"
-     inkscape:window-width="1600"
-     inkscape:window-height="831"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg5" />
   <defs
-     id="defs2" />
+     id="defs1369" />
   <g
      id="layer1"
-     transform="translate(-62.31477,-89.542973)">
-    <circle
-       style="fill:#ffffff;stroke-width:0.0282226"
-       id="path234"
-       cx="66.548103"
-       cy="93.776306"
-       r="4.2333331" />
-    <circle
-       style="fill:#1e2939;stroke-width:0.0238536;fill-opacity:1"
-       id="circle365"
-       cx="66.548103"
-       cy="93.776306"
-       r="3.577985" />
+     transform="translate(-82.372059,-129.44021)">
+    <path
+       id="path683"
+       style="fill:#615fff;stroke-width:0.305532"
+       d="m 86.605392,129.44021 a 4.2333331,4.2333331 0 0 0 -4.233333,4.23333 4.2333331,4.2333331 0 0 0 4.233333,4.23334 4.2333331,4.2333331 0 0 0 4.233334,-4.23334 4.2333331,4.2333331 0 0 0 -4.233334,-4.23333 z m 0,0.97617 a 3.2569745,3.2569745 0 0 1 3.257166,3.25716 3.2569745,3.2569745 0 0 1 -3.257166,3.25717 3.2569745,3.2569745 0 0 1 -3.257165,-3.25717 3.2569745,3.2569745 0 0 1 3.257165,-3.25716 z" />
+    <g
+       aria-label="AD"
+       id="text741"
+       style="font-weight:600;font-size:4.95402px;font-family:Oswald;-inkscape-font-specification:'Oswald Semi-Bold';fill:#615fff;stroke-width:0.412835"
+       transform="matrix(1.0105061,0,0,1.0105061,-0.77479849,-1.4043772)">
+      <path
+         d="m 83.930428,135.67992 0.777781,-4.01276 h 0.906585 l 0.772827,4.01276 H 85.629656 L 85.48599,134.7981 h -0.634115 l -0.153574,0.88182 z m 0.995758,-1.38218 h 0.48054 l -0.242747,-1.61996 z"
+         id="path2045" />
+      <path
+         d="m 86.467652,135.67992 v -4.01276 h 0.980896 q 0.510264,0 0.792643,0.13376 0.287333,0.1288 0.40623,0.41118 0.118896,0.27743 0.118896,0.71338 v 1.46144 q 0,0.44586 -0.118896,0.73319 -0.118897,0.28734 -0.401276,0.42605 -0.277425,0.13376 -0.777781,0.13376 z m 0.817413,-0.56972 h 0.173391 q 0.227885,0 0.322011,-0.0693 0.09908,-0.0743 0.123851,-0.21303 0.02477,-0.14366 0.02477,-0.35173 v -1.65464 q 0,-0.20807 -0.03468,-0.33192 -0.02972,-0.12881 -0.128805,-0.18826 -0.09413,-0.0594 -0.312103,-0.0594 h -0.168437 z"
+         id="path2042" />
+    </g>
   </g>
-  <text
-     xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:5.22634px;font-family:Oswald;-inkscape-font-specification:'Oswald Bold';letter-spacing:-0.264583px;fill:#ffffff;stroke-width:0.435528"
-     x="1.467618"
-     y="6.3500009"
-     id="text464"><tspan
-       sodipodi:role="line"
-       id="tspan462"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Oswald;-inkscape-font-specification:'Oswald Bold';fill:#ffffff;stroke-width:0.435528"
-       x="1.467618"
-       y="6.3500009">AD</tspan></text>
 </svg>
