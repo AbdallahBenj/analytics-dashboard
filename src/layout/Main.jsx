@@ -1,3 +1,5 @@
+// Not Active
+
 import { Routes, Route } from "react-router-dom";
 
 import DashboardPage from "../pages/DashboardPage";
@@ -9,7 +11,6 @@ const Main = ({ layoutType }) => {
       className={`
           mx-auto w-full h-full
           px-4 py-6 sm:px-6 lg:px-8
-          border border-red-500 mr-2
           bg-gray-100 dark:bg-gray-800/25
           ${
             layoutType === "sidebar"

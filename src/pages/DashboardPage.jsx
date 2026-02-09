@@ -1,11 +1,13 @@
+import DashboardMiniCardIcon from "../ui/DashboardMiniCardIcon";
+
 const DashboardPage = () => {
   return (
     <section
-      className="h-full
-    border border-gray-500"
+      className="h-full rounded-lg
+    border border-gray-500/10"
     >
       {/* Your content */}
-      <h1 className="text-2xl text-emerald-500">Dashboard Page</h1>
+      <DashboardMiniCardIcon />
     </section>
   );
 };
