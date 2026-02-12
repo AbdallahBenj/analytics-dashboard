@@ -1,10 +1,10 @@
-import dashboardMiniCardData from "../data/dashboardMiniCardData.js";
+import dashboardData from "../data/dashboardData.js";
 import { ArrowUpIcon, ArrowDownIcon } from "@heroicons/react/24/solid";
 
 const DashboardMiniCardIcon = () => {
   return (
     <div className="mini-cards grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-      {dashboardMiniCardData.map((card) => {
+      {dashboardData.miniCardsData.map((card) => {
         const { id, title, type, newValue, lastValue, unit, Icon } = card;
 
         const percentageValue =
