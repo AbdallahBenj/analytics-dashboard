@@ -14,7 +14,13 @@ import {
 import dashboardData from "../data/dashboardData";
 
 const DashboardPrimaryChart = () => {
-  const { dailyData30, dailyData90, monthlyData6m } = dashboardData;
+  const {
+    dailyData30,
+    dailyData90,
+    monthlyData6m,
+    monthlyRevenue,
+    perCentMonthlyRevenue,
+  } = dashboardData;
 
   const rangeConfig = {
     d30: { data: dailyData30, xKey: "date", yKey: "revenue", label: "30 Days" },
@@ -26,6 +32,9 @@ const DashboardPrimaryChart = () => {
       label: "6 Months",
     },
   };
+
+  const convertToK = (value) =>
+    value >= 1000 ? `${(value / 1000).toFixed(2)} k` : value;
 
   const [range, setRange] = useState("d30");
 
@@ -54,7 +63,11 @@ const DashboardPrimaryChart = () => {
               Monthly Revenue
             </h3>
             <p className="text-xl font-semibold text-gray-900 dark:text-white">
-              $48k <span className="text-sm text-gray-500">+6.2%</span>
+              ${convertToK(monthlyRevenue)}
+              <span className="text-sm text-gray-500">
+                {" "}
+                {`${perCentMonthlyRevenue >= 0 ? "+" : "-"}${perCentMonthlyRevenue}%`}
+              </span>
             </p>
           </div>
           <div className="Button date range ">
@@ -105,13 +118,13 @@ const DashboardPrimaryChart = () => {
                 tickLine={false}
               />
               <YAxis
-                tickFormatter={(value) => `$${value}k`}
+                tickFormatter={(value) => `$${convertToK(value)}`}
                 tick={{ fill: "#9CA3AF", fontSize: 12 }}
                 axisLine={false}
                 tickLine={false}
               />
               <Tooltip
-                formatter={(v) => [`$${v}k`, "Revenue"]}
+                formatter={(v) => [`$${convertToK(v)}`, "Revenue"]}
                 contentStyle={{
                   backgroundColor: "rgba(17, 24, 39, 0.9)",
                   borderRadius: "12px",

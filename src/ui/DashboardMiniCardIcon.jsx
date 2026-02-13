@@ -2,14 +2,17 @@ import dashboardData from "../data/dashboardData.js";
 import { ArrowUpIcon, ArrowDownIcon } from "@heroicons/react/24/solid";
 
 const DashboardMiniCardIcon = () => {
+  const convertToK = (value) =>
+    value >= 1000 ? `${(value / 1000).toFixed(2)} k` : value;
+
   return (
     <div className="mini-cards grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
       {dashboardData.miniCardsData.map((card) => {
-        const { id, title, type, newValue, lastValue, unit, Icon } = card;
+        const { id, title, type, value, prevValue, unit, Icon } = card;
 
         const percentageValue =
-          lastValue && lastValue !== 0
-            ? ((newValue - lastValue) / lastValue) * 100
+          prevValue && prevValue !== 0
+            ? ((value - prevValue) / prevValue) * 100
             : null;
 
         const isUp = percentageValue > 0;
@@ -46,11 +49,16 @@ const DashboardMiniCardIcon = () => {
                 {title}
               </p>
               <p className="text-2xl font-semibold text-gray-900 dark:text-white">
-                {newValue.toFixed(2)}{" "}
-                <span className="text-md text-indigo-500">{unit}</span>
+                {unit === "$" && (
+                  <span className="text-md text-indigo-500">{unit}</span>
+                )}
+                {convertToK(value)}
+                {unit !== "$" && (
+                  <span className="text-md text-indigo-500"> {unit}</span>
+                )}{" "}
                 {hasChange && (
                   <span
-                    className={`text-[1.3rem] ml-1
+                    className={`text-[1rem] ml-1 inline-block
                   ${isGoodChange ? "text-green-500" : "text-red-500"}
                     `}
                   >

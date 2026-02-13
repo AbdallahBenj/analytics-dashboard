@@ -29,20 +29,11 @@ const generateTrendingDailyRevenue = ({
     };
   });
 
-// Usage
-const revenue30d = generateTrendingDailyRevenue({
-  days: 30,
-  start: 120,
-  dailyGrowth: 2,
-  volatility: 12,
-});
+// Usage Generate 180 90 30 days Revenue
 
-const revenue90d = generateTrendingDailyRevenue({
-  days: 90,
-  start: 80,
-  dailyGrowth: 1.2,
-  volatility: 18,
-});
+const revenue180d = generateTrendingDailyRevenue({ days: 180 });
+const revenue90d = revenue180d.slice(-90);
+const revenue30d = revenue180d.slice(-30);
 
 // Generate Trending Monthly Revenue
 
@@ -65,13 +56,32 @@ const generateTrendingMonthlyRevenue = ({
     };
   });
 
-// Usage
-const revenue6m = generateTrendingMonthlyRevenue({
-  months: 6,
-  start: 2800,
-  monthlyGrowth: 350,
-  volatility: 180,
-});
+// Usage Generate 6 Months
+
+const revenue6m = generateTrendingMonthlyRevenue({ months: 6 });
+
+// Get Monthly Revenue
+
+const getMonthlyRevenue = (arr, months = 1) => {
+  const allRevenue = arr.map((obj) => obj.revenue);
+  const monthlyRevenue = allRevenue.reduce((acc, curr) => acc + curr) / months;
+  return monthlyRevenue;
+};
+
+const lastMonthRevenue = getMonthlyRevenue(revenue180d.slice(-30));
+const prevMonthRevenue = getMonthlyRevenue(revenue180d.slice(-60, -30));
+
+const getPerCentMonthlyRevenue = () => {
+  if (prevMonthRevenue === 0) return 0;
+
+  const perCentRevenue = (
+    ((lastMonthRevenue - prevMonthRevenue) / prevMonthRevenue) *
+    100
+  ).toFixed(2);
+
+  console.log("perCentRevenue:", perCentRevenue);
+  return perCentRevenue;
+};
 
 const dashboardData = {
   miniCardsData: [
@@ -79,8 +89,8 @@ const dashboardData = {
       id: 1,
       name: "MRR", // MRR
       title: "Monthly Revenue",
-      newValue: 48.25,
-      lastValue: 48.2,
+      value: getMonthlyRevenue(revenue180d.slice(-30)), //48.25,
+      prevValue: getMonthlyRevenue(revenue180d.slice(-60, -30)), // 48.2,
       unit: "$",
       Icon: CurrencyDollarIcon,
     },
@@ -88,7 +98,7 @@ const dashboardData = {
       id: 2,
       name: "AS",
       title: "Active Subscriptions",
-      newValue: 1.12,
+      value: 1.12,
       unit: "K",
       Icon: UserIcon,
     },
@@ -97,8 +107,8 @@ const dashboardData = {
       name: "CR",
       title: "Churn Rate",
       type: "churn",
-      newValue: 3.1,
-      lastValue: 3.0,
+      value: 3.1,
+      prevValue: 3.0,
       unit: "%",
       Icon: ArrowTrendingDownIcon,
     },
@@ -106,7 +116,7 @@ const dashboardData = {
       id: 4,
       name: "CR",
       title: "Conversion Rate",
-      newValue: 6.4,
+      value: 6.4,
       unit: "%",
       Icon: ArrowPathIcon,
     },
@@ -114,6 +124,9 @@ const dashboardData = {
   dailyData30: revenue30d,
   dailyData90: revenue90d,
   monthlyData6m: revenue6m,
+
+  monthlyRevenue: getMonthlyRevenue(revenue30d),
+  perCentMonthlyRevenue: getPerCentMonthlyRevenue(revenue90d),
 };
 
 export default dashboardData;
