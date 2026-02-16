@@ -1,24 +1,68 @@
-import dashboardData from "../data/dashboardData.js";
-import { ArrowUpIcon, ArrowDownIcon } from "@heroicons/react/24/solid";
+import {
+  CurrencyDollarIcon,
+  UserIcon,
+  ArrowTrendingDownIcon,
+  ArrowPathIcon,
+  ArrowUpIcon,
+  ArrowDownIcon,
+} from "@heroicons/react/24/solid";
+
+import generateTrendingDailyRevenue from "../utils/generateTrendingDailyRevenue.js";
+import getMonthlyRevenue from "../utils/getMonthlyRevenue.js";
+import getPerCentRevenue from "../utils/getPerCentRevenue.js";
+import convertToKilo from "../utils/convertToKilo.js";
 
 const DashboardMiniCardIcon = () => {
-  const convertToK = (value) =>
-    value >= 1000 ? `${(value / 1000).toFixed(2)} k` : value;
+  const dailyData30 = generateTrendingDailyRevenue.slice(-30);
+  const prevDailyData30 = generateTrendingDailyRevenue.slice(-60, -30);
+
+  const miniCardsData = [
+    {
+      id: 1,
+      name: "MRR",
+      title: "Monthly Revenue",
+      value: getMonthlyRevenue(dailyData30) || 0.0, // 10.00
+      prevValue: getMonthlyRevenue(prevDailyData30) || 0.0, // 10.00
+      unit: "$",
+      Icon: CurrencyDollarIcon,
+    },
+    {
+      id: 2,
+      name: "AS",
+      title: "Active Subscriptions",
+      value: 1.12,
+      unit: "K",
+      Icon: UserIcon,
+    },
+    {
+      id: 3,
+      name: "CR",
+      title: "Churn Rate",
+      type: "churn",
+      value: 3.1,
+      prevValue: 3.0,
+      unit: "%",
+      Icon: ArrowTrendingDownIcon,
+    },
+    {
+      id: 4,
+      name: "CR",
+      title: "Conversion Rate",
+      value: 6.4,
+      unit: "%",
+      Icon: ArrowPathIcon,
+    },
+  ];
 
   return (
     <div className="mini-cards grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-      {dashboardData.miniCardsData.map((card) => {
+      {miniCardsData.map((card) => {
         const { id, title, type, value, prevValue, unit, Icon } = card;
 
-        const percentageValue =
-          prevValue && prevValue !== 0
-            ? ((value - prevValue) / prevValue) * 100
-            : null;
+        const percentageValue = getPerCentRevenue(value, prevValue);
 
         const isUp = percentageValue > 0;
-
         const isGoodChange = type === "churn" ? !isUp : isUp;
-
         const hasChange = percentageValue !== null && percentageValue !== 0;
 
         return (
@@ -52,11 +96,11 @@ const DashboardMiniCardIcon = () => {
                 {unit === "$" && (
                   <span className="text-md text-indigo-500">{unit}</span>
                 )}
-                {convertToK(value)}
+                {convertToKilo(value)}
                 {unit !== "$" && (
                   <span className="text-md text-indigo-500"> {unit}</span>
                 )}{" "}
-                {hasChange && (
+                {hasChange && prevValue && (
                   <span
                     className={`text-[1rem] ml-1 inline-block
                   ${isGoodChange ? "text-green-500" : "text-red-500"}

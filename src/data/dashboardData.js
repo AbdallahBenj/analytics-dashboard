@@ -89,8 +89,8 @@ const dashboardData = {
       id: 1,
       name: "MRR", // MRR
       title: "Monthly Revenue",
-      value: getMonthlyRevenue(revenue180d.slice(-30)), //48.25,
-      prevValue: getMonthlyRevenue(revenue180d.slice(-60, -30)), // 48.2,
+      value: 48.25, // getMonthlyRevenue(revenue180d.slice(-30)),
+      prevValue: 48.2, // getMonthlyRevenue(revenue180d.slice(-60, -30))
       unit: "$",
       Icon: CurrencyDollarIcon,
     },

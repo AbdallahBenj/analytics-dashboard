@@ -11,30 +11,45 @@ import {
   Tooltip,
 } from "recharts";
 
-import dashboardData from "../data/dashboardData";
+import generateTrendingDailyRevenue from "../utils/generateTrendingDailyRevenue.js";
+import convertDateToDailyRevenue from "../utils/convertDateToDailyRevenue.js";
+import convertDateToMonthlyRevenue from "../utils/convertDateToMonthlyRevenue.js";
+
+import getMonthlyRevenue from "../utils/getMonthlyRevenue.js";
+import getPerCentRevenue from "../utils/getPerCentRevenue.js";
+import convertToKilo from "../utils/convertToKilo.js";
 
 const DashboardPrimaryChart = () => {
-  const {
-    dailyData30,
-    dailyData90,
-    monthlyData6m,
+  const trendingDailyRevenue = convertDateToDailyRevenue(
+    generateTrendingDailyRevenue,
+  );
+
+  const trendingMonthlyRevenue = convertDateToMonthlyRevenue(
+    generateTrendingDailyRevenue,
+  );
+
+  const dailyData30 = trendingDailyRevenue.slice(-30);
+  const dailyData90 = trendingDailyRevenue.slice(-90);
+  const prevDailyData30 = trendingDailyRevenue.slice(-60, -30);
+
+  const monthlyRevenue = getMonthlyRevenue(dailyData30);
+  const prevMonthRevenue = getMonthlyRevenue(prevDailyData30);
+
+  const perCentMonthlyRevenue = getPerCentRevenue(
     monthlyRevenue,
-    perCentMonthlyRevenue,
-  } = dashboardData;
+    prevMonthRevenue,
+  );
 
   const rangeConfig = {
     d30: { data: dailyData30, xKey: "date", yKey: "revenue", label: "30 Days" },
     d90: { data: dailyData90, xKey: "date", yKey: "revenue", label: "90 Days" },
     m6: {
-      data: monthlyData6m,
-      xKey: "month",
+      data: trendingMonthlyRevenue,
+      xKey: "date",
       yKey: "revenue",
       label: "6 Months",
     },
   };
-
-  const convertToK = (value) =>
-    value >= 1000 ? `${(value / 1000).toFixed(2)} k` : value;
 
   const [range, setRange] = useState("d30");
 
@@ -63,10 +78,10 @@ const DashboardPrimaryChart = () => {
               Monthly Revenue
             </h3>
             <p className="text-xl font-semibold text-gray-900 dark:text-white">
-              ${convertToK(monthlyRevenue)}
+              ${convertToKilo(monthlyRevenue)}
               <span className="text-sm text-gray-500">
                 {" "}
-                {`${perCentMonthlyRevenue >= 0 ? "+" : "-"}${perCentMonthlyRevenue}%`}
+                {`${perCentMonthlyRevenue >= 0 ? "+" : ""}${perCentMonthlyRevenue}%`}
               </span>
             </p>
           </div>
@@ -103,7 +118,7 @@ const DashboardPrimaryChart = () => {
             </RadioGroup>
           </div>
         </div>
-        <div className="flex-1">
+        <div className="flex-1 min-h-0">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={rangeConfig[range].data}>
               <CartesianGrid
@@ -118,13 +133,13 @@ const DashboardPrimaryChart = () => {
                 tickLine={false}
               />
               <YAxis
-                tickFormatter={(value) => `$${convertToK(value)}`}
+                tickFormatter={(value) => `$${convertToKilo(value)}`}
                 tick={{ fill: "#9CA3AF", fontSize: 12 }}
                 axisLine={false}
                 tickLine={false}
               />
               <Tooltip
-                formatter={(v) => [`$${convertToK(v)}`, "Revenue"]}
+                formatter={(v) => [`$${convertToKilo(v)}`, "Revenue"]}
                 contentStyle={{
                   backgroundColor: "rgba(17, 24, 39, 0.9)",
                   borderRadius: "12px",
