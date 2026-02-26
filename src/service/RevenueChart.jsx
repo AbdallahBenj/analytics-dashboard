@@ -13,11 +13,11 @@ import {
 
 // import testFunction from "../service/testFunction.js";
 
-import generateTimeLine from "../service/generateTimeLine.js";
-import generateUsers from "../service/generateUsers.js";
-import generateSubscriptions from "../service/generateSubscriptions.js";
-import generatePayments from "../service/generatePayments.js";
-import calculateRevenue from "../service/calculateRevenue.js";
+import generateTimeLine from "./generateTimeLine.js";
+import generateUsers from "./generateUsers.js";
+import generateSubscriptions from "./generateSubscriptions.js";
+import generatePayments from "./generatePayments.js";
+import calculateRevenue from "./calculateRevenue.js";
 
 import generateTrendingDailyRevenue from "../utils/generateTrendingDailyRevenue.js";
 import convertDateToDailyRevenue from "../utils/convertDateToDailyRevenue.js";
@@ -27,7 +27,7 @@ import getMonthlyRevenue from "../utils/getMonthlyRevenue.js";
 import getPerCentRevenue from "../utils/getPerCentRevenue.js";
 import convertToKilo from "../utils/convertToKilo.js";
 
-const DashboardPrimaryChart = () => {
+const RevenueChart = () => {
   // Start test
 
   const timeData = generateTimeLine(180);
@@ -48,6 +48,8 @@ const DashboardPrimaryChart = () => {
 
   const data = generateTrendingDailyRevenue({ days: 180 });
   const trendingDailyRevenue = convertDateToDailyRevenue(data);
+
+  console.log("trendingDailyRevenue:", trendingDailyRevenue);
 
   const trendingMonthlyRevenue = convertDateToMonthlyRevenue(data);
 
@@ -201,4 +203,4 @@ const DashboardPrimaryChart = () => {
   );
 };
 
-export default DashboardPrimaryChart;
+export default RevenueChart;

@@ -17,4 +17,4 @@ const generateTrendingDailyRevenue = ({
     };
   });
 
-export default generateTrendingDailyRevenue({ days: 180 });
+export default generateTrendingDailyRevenue;

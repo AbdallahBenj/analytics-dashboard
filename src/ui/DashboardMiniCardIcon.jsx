@@ -13,8 +13,9 @@ import getPerCentRevenue from "../utils/getPerCentRevenue.js";
 import convertToKilo from "../utils/convertToKilo.js";
 
 const DashboardMiniCardIcon = () => {
-  const dailyData30 = generateTrendingDailyRevenue.slice(-30);
-  const prevDailyData30 = generateTrendingDailyRevenue.slice(-60, -30);
+  const data = generateTrendingDailyRevenue({ days: 180 });
+  const dailyData30 = data.slice(-30);
+  const prevDailyData30 = data.slice(-60, -30);
 
   const miniCardsData = [
     {

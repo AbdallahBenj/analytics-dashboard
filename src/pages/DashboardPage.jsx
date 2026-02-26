@@ -1,5 +1,6 @@
 import DashboardMiniCardIcon from "../ui/DashboardMiniCardIcon";
 import DashboardPrimaryChart from "../ui/DashboardPrimaryChart";
+import RevenueChart from "../service/RevenueChart.jsx";
 
 const DashboardPage = () => {
   return (
@@ -11,6 +12,7 @@ const DashboardPage = () => {
       {/* Your content */}
       <DashboardMiniCardIcon />
       <DashboardPrimaryChart />
+      <RevenueChart />
     </section>
   );
 };
