@@ -19,9 +19,9 @@ import generateSubscriptions from "./generateSubscriptions.js";
 import generatePayments from "./generatePayments.js";
 import calculateRevenue from "./calculateRevenue.js";
 
-import generateTrendingDailyRevenue from "../utils/generateTrendingDailyRevenue.js";
-import convertDateToDailyRevenue from "../utils/convertDateToDailyRevenue.js";
-import convertDateToMonthlyRevenue from "../utils/convertDateToMonthlyRevenue.js";
+// import generateTrendingDailyRevenue from "../utils/generateTrendingDailyRevenue.js";
+// import convertDateToDailyRevenue from "../utils/convertDateToDailyRevenue.js";
+// import convertDateToMonthlyRevenue from "../utils/convertDateToMonthlyRevenue.js";
 
 import getMonthlyRevenue from "../utils/getMonthlyRevenue.js";
 import getPerCentRevenue from "../utils/getPerCentRevenue.js";
@@ -35,41 +35,63 @@ const RevenueChart = () => {
   const subscriptionsData = generateSubscriptions(usersData);
   const paymentsData = generatePayments(subscriptionsData);
 
-  // console.log("Generate TimeLine:", timeData);
-  // console.log("Generate Users:", usersData);
-  // console.log("Generate Subscriptions:", subscriptionsData);
-  // console.log("Generate Payments:", paymentsData);
+  const dailyRevenueV2 = calculateRevenue(timeData, paymentsData);
+  const dailyRevenueLast30daysV2 = dailyRevenueV2.slice(-30);
+  const dailyRevenuePrev30daysV2 = dailyRevenueV2.slice(-60, -30);
+  const dailyRevenueLast90daysV2 = dailyRevenueV2.slice(-90);
 
-  console.log("Calculate Daily Revenue:", calculateRevenue(paymentsData));
+  // const dailyRevenue90daysV2 = calculateRevenue(timeData, paymentsData);
+
+  const monthlyRevenueV2 = calculateRevenue(timeData, paymentsData, "month");
+  const LastMonthRevenueV2 = getMonthlyRevenue(dailyRevenueLast30daysV2);
+  const prevMonthRevenueV2 = getMonthlyRevenue(dailyRevenuePrev30daysV2);
+
+  console.log("Generate TimeLine:", timeData);
+  // console.log("Generate Users:", usersData);
+  // console.log("Generate Subscriptions V2:", subscriptionsData);
+  console.log("Generate Payments V2:", paymentsData);
+
+  console.log("Calculate Daily 30 Revenue V2:", dailyRevenueLast30daysV2);
+  console.log("Calculate Daily 90 Revenue V2:", dailyRevenueLast90daysV2);
 
   // console.log("testFunction:", testFunction());
 
   // End test
 
-  const data = generateTrendingDailyRevenue({ days: 180 });
-  const trendingDailyRevenue = convertDateToDailyRevenue(data);
+  // const data = generateTrendingDailyRevenue({ days: 180 });
+  // const trendingDailyRevenue = convertDateToDailyRevenue(data);
 
-  console.log("trendingDailyRevenue:", trendingDailyRevenue);
+  // console.log("trendingDailyRevenue V1:", trendingDailyRevenue);
 
-  const trendingMonthlyRevenue = convertDateToMonthlyRevenue(data);
+  // const trendingMonthlyRevenue = convertDateToMonthlyRevenue(data);
 
-  const dailyData30 = trendingDailyRevenue.slice(-30);
-  const dailyData90 = trendingDailyRevenue.slice(-90);
-  const prevDailyData30 = trendingDailyRevenue.slice(-60, -30);
+  // const dailyData30 = trendingDailyRevenue.slice(-30);
+  // const dailyData90 = trendingDailyRevenue.slice(-90);
+  // const prevDailyData30 = trendingDailyRevenue.slice(-60, -30);
 
-  const monthlyRevenue = getMonthlyRevenue(dailyData30);
-  const prevMonthRevenue = getMonthlyRevenue(prevDailyData30);
+  // const monthlyRevenue = getMonthlyRevenue(dailyData30);
+  // const prevMonthRevenue = getMonthlyRevenue(prevDailyData30);
 
   const perCentMonthlyRevenue = getPerCentRevenue(
-    monthlyRevenue,
-    prevMonthRevenue,
+    LastMonthRevenueV2,
+    prevMonthRevenueV2,
   );
 
   const rangeConfig = {
-    d30: { data: dailyData30, xKey: "date", yKey: "revenue", label: "30 Days" },
-    d90: { data: dailyData90, xKey: "date", yKey: "revenue", label: "90 Days" },
+    d30: {
+      data: dailyRevenueLast30daysV2,
+      xKey: "date",
+      yKey: "revenue",
+      label: "30 Days",
+    },
+    d90: {
+      data: dailyRevenueLast90daysV2,
+      xKey: "date",
+      yKey: "revenue",
+      label: "90 Days",
+    },
     m6: {
-      data: trendingMonthlyRevenue,
+      data: monthlyRevenueV2,
       xKey: "date",
       yKey: "revenue",
       label: "6 Months",
@@ -103,7 +125,7 @@ const RevenueChart = () => {
               Monthly Revenue
             </h3>
             <p className="text-xl font-semibold text-gray-900 dark:text-white">
-              ${convertToKilo(monthlyRevenue)}
+              ${convertToKilo(LastMonthRevenueV2)}
               <span className="text-sm text-gray-500">
                 {" "}
                 {`${perCentMonthlyRevenue >= 0 ? "+" : ""}${perCentMonthlyRevenue}%`}

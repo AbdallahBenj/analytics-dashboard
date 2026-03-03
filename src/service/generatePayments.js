@@ -38,11 +38,28 @@ const generatePayments = (subscriptions = []) => {
 
         // Determine payment status based on today's date
 
-        if (end < toDay) {
-          paymentStatus = "paid";
-        } else if (start <= toDay && end >= toDay) {
-          paymentStatus = "active";
-        } else paymentStatus = "pending";
+        const paidDate = new Date(invoiceStart);
+        paidDate.setDate(paidDate.getDate() + Math.floor(Math.random() * 3));
+
+        if (start > toDay) {
+          paymentStatus = "pending";
+        } else {
+          const random = Math.random();
+
+          if (random > 0.1) paymentStatus = "paid";
+          else if (random > 0.05) paymentStatus = "pending";
+          else paymentStatus = "failed";
+        }
+
+        let paidAt;
+        if (paymentStatus === "paid") {
+          paidAt =
+            paidDate < toDay
+              ? paidDate.toISOString().slice(0, 10)
+              : toDay.toISOString().slice(0, 10);
+        } else {
+          paidAt = null;
+        }
 
         const payment = {
           id: `pay_${++id}`,
@@ -50,6 +67,7 @@ const generatePayments = (subscriptions = []) => {
           invoicePrice: sub.priceMonthly,
           invoiceNumber: invoiceNumber,
           paymentStatus: paymentStatus,
+          paidAt: paidAt,
           invoiceStart: invoiceStart.toISOString().slice(0, 10),
           invoiceEnd: invoiceEnd.toISOString().slice(0, 10),
           // Hide nextInvoice when reaching the final billing month

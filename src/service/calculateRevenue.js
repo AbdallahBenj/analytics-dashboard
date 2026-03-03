@@ -1,22 +1,51 @@
-const calculateRevenue = (payments = [], time = "day") => {
+const calculateRevenue = (timeData = [], payments = [], time = "day") => {
   const revenue = {};
 
-  let slice = 10; // daily
-  if (time === "month") slice = 7; // monthly
-  if (time === "year") slice = 4; // yearly
+  const slices = {
+    day: 10,
+    month: 7,
+    year: 4,
+  };
 
-  payments.forEach((payment) => {
-    if (!payment.invoiceStart || !payment.invoicePrice) return;
+  const slice = slices[time] || 10;
 
-    const invoiceDate = new Date(payment.invoiceStart)
-      .toISOString()
-      .slice(0, slice);
+  payments
+    .filter((payment) => payment.paymentStatus === "paid")
+    .forEach((payment) => {
+      if (!payment.paidAt || payment.invoicePrice == null) return;
 
-    if (!revenue[invoiceDate]) revenue[invoiceDate] = 0;
-    revenue[invoiceDate] += Number(payment.invoicePrice);
-  });
+      const invoiceDate = new Date(payment.paidAt)
+        .toISOString()
+        .slice(0, slice);
 
-  return revenue;
+      revenue[invoiceDate] =
+        (revenue[invoiceDate] ?? 0) + Number(payment.invoicePrice);
+    });
+
+  for (let day of timeData) {
+    const date = new Date(day.date).toISOString().slice(0, slice);
+    if (!(date in revenue)) revenue[date] = 0;
+  }
+
+  const revenueArr = Object.entries(revenue)
+    .map(([key, value]) => {
+      return {
+        date: key,
+        revenue: value,
+      };
+    })
+    .sort((a, b) => new Date(a.date) - new Date(b.date))
+    .map((obj) => {
+      return {
+        date: new Date(obj.date).toLocaleDateString("en-us", {
+          month: "short",
+          ...(time === "day" && { day: "numeric" }),
+        }),
+        revenue: obj.revenue,
+      };
+    });
+
+  return revenueArr;
 };
 
 export default calculateRevenue;

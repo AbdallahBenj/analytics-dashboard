@@ -40,7 +40,7 @@ const DashboardPrimaryChart = () => {
   // console.log("Generate Subscriptions:", subscriptionsData);
   // console.log("Generate Payments:", paymentsData);
 
-  console.log("Calculate Daily Revenue:", calculateRevenue(paymentsData));
+  // console.log("Version 2 Calculate Revenue:", calculateRevenue(paymentsData));
 
   // console.log("testFunction:", testFunction());
 
@@ -48,6 +48,8 @@ const DashboardPrimaryChart = () => {
 
   const data = generateTrendingDailyRevenue({ days: 180 });
   const trendingDailyRevenue = convertDateToDailyRevenue(data);
+
+  // console.log("Version 1 Calculate Revenue:", trendingDailyRevenue);
 
   const trendingMonthlyRevenue = convertDateToMonthlyRevenue(data);
 
