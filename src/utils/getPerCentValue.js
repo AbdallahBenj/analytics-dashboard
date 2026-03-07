@@ -1,4 +1,4 @@
-const getPerCentRevenue = (revenue, prevRevenue) => {
+const getPerCentValue = (revenue, prevRevenue) => {
   const perCentRevenue =
     prevRevenue && prevRevenue !== 0
       ? (((revenue - prevRevenue) / prevRevenue) * 100).toFixed(2)
@@ -7,4 +7,4 @@ const getPerCentRevenue = (revenue, prevRevenue) => {
   return perCentRevenue;
 };
 
-export default getPerCentRevenue;
+export default getPerCentValue;

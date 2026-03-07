@@ -1,3 +1,5 @@
+// Not Used
+
 const convertDateToDailyRevenue = (arr = []) => {
   const dailyData = arr.map((obj) => {
     const dateObj = new Date(obj.date);

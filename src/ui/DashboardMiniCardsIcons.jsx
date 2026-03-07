@@ -7,23 +7,63 @@ import {
   ArrowDownIcon,
 } from "@heroicons/react/24/solid";
 
-import generateTrendingDailyRevenue from "../utils/generateTrendingDailyRevenue.js";
+import calculateRevenue from "../service/calculateRevenue.js";
+import {
+  timeData,
+  usersData,
+  subscriptionsData,
+  paymentsData,
+} from "../service/revenueData.js";
+
 import getMonthlyRevenue from "../utils/getMonthlyRevenue.js";
-import getPerCentRevenue from "../utils/getPerCentRevenue.js";
+import getPerCentValue from "../utils/getPerCentValue.js";
 import convertToKilo from "../utils/convertToKilo.js";
 
-const DashboardMiniCardIcon = () => {
-  const data = generateTrendingDailyRevenue({ days: 180 });
-  const dailyData30 = data.slice(-30);
-  const prevDailyData30 = data.slice(-60, -30);
+import getActiveSubscriptions from "../utils/getActiveSubscriptions.js";
+
+import getChurnRate from "../utils/getChurnRate.js";
+
+import getConversionRate from "../utils/getConversionRate.js";
+
+const MiniCards = () => {
+  const dailyRevenueV2 = calculateRevenue(timeData, paymentsData);
+  const dailyRevenueLast30daysV2 = dailyRevenueV2.slice(-30);
+  const dailyRevenuePrev30daysV2 = dailyRevenueV2.slice(-60, -30);
+
+  const LastMonthRevenueV2 = getMonthlyRevenue(dailyRevenueLast30daysV2);
+
+  const activeSubscriptions = getActiveSubscriptions(subscriptionsData);
+  const totalActiveSubscriptions = activeSubscriptions.length;
+
+  const lastMonthChurnRate = getChurnRate(subscriptionsData);
+  const prevMonthChurnRate = getChurnRate(subscriptionsData, 30);
+  const churnRate = (lastMonthChurnRate * 100).toFixed(2);
+  const churnRateChange = getPerCentValue(
+    lastMonthChurnRate,
+    prevMonthChurnRate,
+  );
+
+  const currentConversionRate = getConversionRate(usersData, subscriptionsData);
+  const conversionRate = (currentConversionRate * 100).toFixed(2);
+
+  // test Start
+  console.log("usersData:", usersData);
+
+  console.log("subscriptionsData:", subscriptionsData);
+  console.log("activeSubscriptions:", activeSubscriptions);
+  console.log("lastMonthChurnRate:", lastMonthChurnRate);
+  console.log("prevMonthChurnRate:", prevMonthChurnRate);
+  console.log("getConversionRate:", conversionRate);
+
+  // test End
 
   const miniCardsData = [
     {
       id: 1,
       name: "MRR",
       title: "Monthly Revenue",
-      value: getMonthlyRevenue(dailyData30) || 0.0, // 10.00
-      prevValue: getMonthlyRevenue(prevDailyData30) || 0.0, // 10.00
+      value: LastMonthRevenueV2 || 0.0, // 10.00
+      prevValue: getMonthlyRevenue(dailyRevenuePrev30daysV2) || 0.0, // 10.00
       unit: "$",
       Icon: CurrencyDollarIcon,
     },
@@ -31,8 +71,8 @@ const DashboardMiniCardIcon = () => {
       id: 2,
       name: "AS",
       title: "Active Subscriptions",
-      value: 1.12,
-      unit: "K",
+      value: totalActiveSubscriptions || 1.12,
+      unit: "user",
       Icon: UserIcon,
     },
     {
@@ -40,8 +80,8 @@ const DashboardMiniCardIcon = () => {
       name: "CR",
       title: "Churn Rate",
       type: "churn",
-      value: 3.1,
-      prevValue: 3.0,
+      value: churnRate || 3.1,
+      prevValue: churnRateChange || 3.0,
       unit: "%",
       Icon: ArrowTrendingDownIcon,
     },
@@ -49,7 +89,7 @@ const DashboardMiniCardIcon = () => {
       id: 4,
       name: "CR",
       title: "Conversion Rate",
-      value: 6.4,
+      value: conversionRate || 6.4,
       unit: "%",
       Icon: ArrowPathIcon,
     },
@@ -60,7 +100,7 @@ const DashboardMiniCardIcon = () => {
       {miniCardsData.map((card) => {
         const { id, title, type, value, prevValue, unit, Icon } = card;
 
-        const percentageValue = getPerCentRevenue(value, prevValue);
+        const percentageValue = getPerCentValue(value, prevValue);
 
         const isUp = percentageValue > 0;
         const isGoodChange = type === "churn" ? !isUp : isUp;
@@ -125,4 +165,4 @@ const DashboardMiniCardIcon = () => {
   );
 };
 
-export default DashboardMiniCardIcon;
+export default MiniCards;

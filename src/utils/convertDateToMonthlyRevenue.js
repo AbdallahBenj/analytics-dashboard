@@ -1,3 +1,5 @@
+// Not Used
+
 const convertDateToMonthlyRevenue = (arr = []) => {
   const monthlyData = arr.reduce((acc, obj) => {
     const monthDate = new Date(obj.date).toLocaleDateString("en-US", {

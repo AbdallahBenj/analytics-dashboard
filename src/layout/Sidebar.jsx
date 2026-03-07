@@ -34,29 +34,30 @@ const Sidebar = () => {
       >
         <div className="flex flex-col flex-1">
           {/* Logo and Site Name */}
-          <div className="shrink-0 px-2 py-2 mb-25">
+          <div className={`shrink-0 mb-25`}>
             <a
               href="./"
               aria-label="Go to homepage"
-              className="flex items-center gap-2"
+              className="flex items-center px-2 py-2"
             >
               {brand.imageUrl && (
                 <img
                   alt={`${brand.name} logo`}
                   src={brand.imageUrl}
-                  className="size-10 max-w-fit rounded-full text-indigo-500"
+                  className="size-9 max-w-fit rounded-full text-indigo-500"
                 />
               )}
               <span
                 aria-hidden={!isSidebarOpen}
-                className={`text-4xl font-semibold tracking-tight text-indigo-500 
-                whitespace-nowrap
-                transition-[opacity,width] duration-300 ease-in-out 
-                ${
-                  isSidebarOpen
-                    ? "opacity-100 w-auto"
-                    : "opacity-0 w-0 pointer-events-none"
-                }`}
+                className={`text-4xl font-semibold tracking-tight text-indigo-500 ml-2
+                  overflow-hidden
+                  whitespace-nowrap
+                  transition-[opacity,max-width] duration-300 ease-in-out 
+                  ${
+                    isSidebarOpen
+                      ? "opacity-100 max-w-50 "
+                      : "opacity-0 max-w-0"
+                  }`}
               >
                 {brand.name}
               </span>
@@ -93,13 +94,14 @@ const Sidebar = () => {
                       <span
                         aria-hidden={!isSidebarOpen}
                         className={`
-                        whitespace-nowrap ml-2
-                        transition-[opacity,width] duration-300 ease-in-out
-                        ${
-                          isSidebarOpen
-                            ? "opacity-100 w-auto "
-                            : "opacity-0 w-0 pointer-events-none"
-                        }`}
+                          overflow-hidden
+                          whitespace-nowrap ml-2
+                          transition-[opacity,max-width] duration-300 ease-in-out
+                          ${
+                            isSidebarOpen
+                              ? "opacity-100 max-w-50 "
+                              : "opacity-0 max-w-0"
+                          }`}
                       >
                         {item.name}
                       </span>
@@ -108,16 +110,17 @@ const Sidebar = () => {
                 );
               })}
             </div>
-            <div className="space-y-1">
+            <div className="flex flex-col space-y-2">
               {/* Setting Button Sidebar */}
-              <div
-                className="rounded-md mx-0
+
+              <NavLink to="/">
+                <div
+                  className="rounded-md mx-0
               px-3 py-2 text-md w-full
               text-gray-500 hover:text-indigo-500 
               dark:text-gray-400 dark:hover:text-gray-300 
               hover:bg-gray-200/70 dark:hover:bg-white/5"
-              >
-                <NavLink to="/">
+                >
                   <div className="flex items-center">
                     <span>
                       {Icon && (
@@ -131,19 +134,20 @@ const Sidebar = () => {
                     <span
                       aria-hidden={!isSidebarOpen}
                       className={`
+                        overflow-hidden
                         whitespace-nowrap ml-2
-                        transition-[opacity,width] duration-300 ease-in-out
+                        transition-[opacity,max-width] duration-300 ease-in-out
                         ${
                           isSidebarOpen
-                            ? "opacity-100 w-auto "
-                            : "opacity-0 w-0 pointer-events-none"
+                            ? "opacity-100 max-w-50 "
+                            : "opacity-0 max-w-0"
                         }`}
                     >
                       {name}
                     </span>
-                  </div>{" "}
-                </NavLink>
-              </div>
+                  </div>
+                </div>
+              </NavLink>
               {/* Toggle Button Sidebar */}
               <button
                 type="button"
@@ -171,13 +175,14 @@ const Sidebar = () => {
                   <span
                     aria-hidden={!isSidebarOpen}
                     className={`
-                        whitespace-nowrap ml-2
-                        transition-[opacity,width] duration-300 ease-in-out
-                        ${
-                          isSidebarOpen
-                            ? "opacity-100 w-auto "
-                            : "opacity-0 w-0 pointer-events-none"
-                        }`}
+                      overflow-hidden
+                      whitespace-nowrap ml-2
+                      transition-[opacity,max-width] duration-300 ease-in-out
+                      ${
+                        isSidebarOpen
+                          ? "opacity-100 max-w-50 "
+                          : "opacity-0 max-w-0"
+                      }`}
                   >
                     Collapse
                   </span>

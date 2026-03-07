@@ -1,4 +1,4 @@
-// Not Active
+// Not Used
 
 const generateTrendingMonthlyRevenue = ({
   months,

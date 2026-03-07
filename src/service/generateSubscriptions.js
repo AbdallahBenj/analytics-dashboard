@@ -14,6 +14,8 @@ const generateSubscriptions = (users = []) => {
     const plan = plans[plansIndex];
     const isFreePlan = plan.price === 0;
 
+    if (isFreePlan) return;
+
     // Compute how many days user existed before today
 
     const createdDate = new Date(user.createdAt);
@@ -42,10 +44,7 @@ const generateSubscriptions = (users = []) => {
 
     let randomlyDuration;
     let durationMonths;
-    if (isFreePlan) {
-      durationMonths = 0;
-      randomlyDuration = 0;
-    } else if (availableMonths === 0) {
+    if (availableMonths === 0) {
       durationMonths = 1;
     } else {
       randomlyDuration = Math.floor(Math.random() * availableMonths) + 1;
@@ -61,9 +60,7 @@ const generateSubscriptions = (users = []) => {
 
     let subStatus;
 
-    if (isFreePlan) {
-      subStatus = "free";
-    } else if (endDate < toDay) {
+    if (endDate < toDay) {
       subStatus = "canceled";
     } else {
       subStatus = "active";
@@ -73,8 +70,8 @@ const generateSubscriptions = (users = []) => {
       id: `sub_${i}`,
       userId: user.id,
       createdAt: createdDate.toISOString(),
-      startDate: !isFreePlan ? startDate.toISOString() : null,
-      endDate: !isFreePlan ? endDate.toISOString() : null,
+      startDate: startDate.toISOString(),
+      endDate: endDate.toISOString(),
       duration: durationMonths,
       plan: plan.name,
       priceMonthly: plan.price,
@@ -82,7 +79,7 @@ const generateSubscriptions = (users = []) => {
     };
   });
 
-  return subscriptions;
+  return subscriptions.filter(Boolean);
 };
 
 export default generateSubscriptions;

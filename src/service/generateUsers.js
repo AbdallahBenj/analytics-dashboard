@@ -1,4 +1,4 @@
-import usersNames from "./usersNames";
+import usersNames from "../data/usersNames";
 
 const generateUsers = (timeline = [], min = 1, max = 5) => {
   let id = 1;
