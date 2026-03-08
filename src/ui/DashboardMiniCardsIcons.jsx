@@ -46,17 +46,6 @@ const MiniCards = () => {
   const currentConversionRate = getConversionRate(usersData, subscriptionsData);
   const conversionRate = (currentConversionRate * 100).toFixed(2);
 
-  // test Start
-  console.log("usersData:", usersData);
-
-  console.log("subscriptionsData:", subscriptionsData);
-  console.log("activeSubscriptions:", activeSubscriptions);
-  console.log("lastMonthChurnRate:", lastMonthChurnRate);
-  console.log("prevMonthChurnRate:", prevMonthChurnRate);
-  console.log("getConversionRate:", conversionRate);
-
-  // test End
-
   const miniCardsData = [
     {
       id: 1,
@@ -96,20 +85,21 @@ const MiniCards = () => {
   ];
 
   return (
-    <div className="mini-cards grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-      {miniCardsData.map((card) => {
-        const { id, title, type, value, prevValue, unit, Icon } = card;
+    <div className="col-span-4">
+      <div className="mini-cards grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        {miniCardsData.map((card) => {
+          const { id, title, type, value, prevValue, unit, Icon } = card;
 
-        const percentageValue = getPerCentValue(value, prevValue);
+          const percentageValue = getPerCentValue(value, prevValue);
 
-        const isUp = percentageValue > 0;
-        const isGoodChange = type === "churn" ? !isUp : isUp;
-        const hasChange = percentageValue !== null && percentageValue !== 0;
+          const isUp = percentageValue > 0;
+          const isGoodChange = type === "churn" ? !isUp : isUp;
+          const hasChange = percentageValue !== null && percentageValue !== 0;
 
-        return (
-          <div
-            key={id}
-            className="mini-card flex-1 min-h-16
+          return (
+            <div
+              key={id}
+              className="mini-card flex-1 min-h-16
             rounded-2xl p-4 cursor-pointer
             flex flex-row items-center gap-3
 
@@ -121,46 +111,47 @@ const MiniCards = () => {
             shadow-md shadow-black/10
             hover:shadow-xl hover:shadow-black/20 hover:-translate-y-0.5
             transition-all duration-300"
-          >
-            <div
-              className="rounded-lg
+            >
+              <div
+                className="rounded-lg
               flex items-center justify-center
               h-12 w-12 bg-indigo-500"
-            >
-              <Icon className="h-8 w-8 text-white" />
-            </div>
-            <div>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                {title}
-              </p>
-              <p className="text-2xl font-semibold text-gray-900 dark:text-white">
-                {unit === "$" && (
-                  <span className="text-md text-indigo-500">{unit}</span>
-                )}
-                {convertToKilo(value)}
-                {unit !== "$" && (
-                  <span className="text-md text-indigo-500"> {unit}</span>
-                )}{" "}
-                {hasChange && prevValue && (
-                  <span
-                    className={`text-[1rem] ml-1 inline-block
+              >
+                <Icon className="h-8 w-8 text-white" />
+              </div>
+              <div>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  {title}
+                </p>
+                <p className="text-2xl font-semibold text-gray-900 dark:text-white">
+                  {unit === "$" && (
+                    <span className="text-md text-indigo-500">{unit}</span>
+                  )}
+                  {convertToKilo(value)}
+                  {unit !== "$" && (
+                    <span className="text-md text-indigo-500"> {unit}</span>
+                  )}{" "}
+                  {hasChange && prevValue && (
+                    <span
+                      className={`text-[1rem] ml-1 inline-block
                   ${isGoodChange ? "text-green-500" : "text-red-500"}
                     `}
-                  >
-                    {" "}
-                    {isUp ? (
-                      <ArrowUpIcon className="inline size-5" />
-                    ) : (
-                      <ArrowDownIcon className="inline size-5" />
-                    )}
-                    {`${Math.abs(percentageValue).toFixed(2)} %`}
-                  </span>
-                )}
-              </p>
+                    >
+                      {" "}
+                      {isUp ? (
+                        <ArrowUpIcon className="inline size-5" />
+                      ) : (
+                        <ArrowDownIcon className="inline size-5" />
+                      )}
+                      {`${Math.abs(percentageValue).toFixed(2)} %`}
+                    </span>
+                  )}
+                </p>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 };
