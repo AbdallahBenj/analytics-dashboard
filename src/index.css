@@ -4,11 +4,26 @@
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
+/* Charts dark colors variable */
+[data-theme="dark"] {
+  --color-pie-free: #c6d2ff;
+  --color-pie-basic: #7c86ff;
+  --color-pie-pro: #4f39f6;
+  --color-chart-gray: #99a1af;
+}
+
 @theme {
   /* Brand color (Tailwind token) */
   --color-brand: theme(colors.indigo.500);
 
   --font-Geist: "Geist", sans-serif;
+
+  /* Charts light colors variable */
+  --color-pie-free: #99a1af;
+  --color-pie-basic: #7c86ff;
+  --color-pie-pro: #4f39f6;
+  --color-chart-gray: #6a7282;
+
 
 
   /* Layout widths */

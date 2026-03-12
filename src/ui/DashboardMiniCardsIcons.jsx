@@ -13,7 +13,7 @@ import {
   usersData,
   subscriptionsData,
   paymentsData,
-} from "../service/revenueData.js";
+} from "../service/generateData.js";
 
 import getMonthlyRevenue from "../utils/getMonthlyRevenue.js";
 import getPerCentValue from "../utils/getPerCentValue.js";
@@ -120,7 +120,7 @@ const MiniCards = () => {
                 <Icon className="h-8 w-8 text-white" />
               </div>
               <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-300">
                   {title}
                 </p>
                 <p className="text-2xl font-semibold text-gray-900 dark:text-white">

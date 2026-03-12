@@ -1,18 +1,23 @@
-import { Pie, PieChart, Tooltip, ResponsiveContainer } from "recharts";
+import { Pie, PieChart, Legend, Tooltip, ResponsiveContainer } from "recharts";
+import { usersData, subscriptionsData } from "../service/generateData.js";
 
-const plans = [
-  { name: "free", value: 1200, fill: "#c6d2ff" },
-  { name: "basic", value: 620, fill: "#7c86ff" },
-  { name: "pro", value: 250, fill: "#4f39f6" },
-];
+import getUsersByPlan from "../utils/getUsersByPlan.js";
+
+const pieColors = {
+  free: "var(--color-pie-free)",
+  basic: "var(--color-pie-basic)",
+  pro: "var(--color-pie-pro)",
+};
+
+const totalUsers = usersData.length;
+const usersByPlan = getUsersByPlan(usersData, subscriptionsData, pieColors);
 
 const DashboardPlansPieChart = () => {
-  console.log("DashboardPlansPieChart");
   return (
     <div
       className="primary-chart h-96
             rounded-2xl p-4 cursor-pointer
-            col-span-4 lg:col-span-1 
+            col-span-4 md:col-span-2 lg:col-span-1 
 
             bg-white/60 dark:bg-gray-900/40
             backdrop-blur-md
@@ -26,27 +31,47 @@ const DashboardPlansPieChart = () => {
       <h3
         className="title-pie-chart mb-3
         text-md font-medium 
-        text-gray-500 dark:text-gray-400"
+        text-gray-600 dark:text-gray-300"
       >
         Subscription Plans
       </h3>
       <ResponsiveContainer width="100%" height={300}>
         <PieChart>
+          <text
+            x="50%"
+            y="45%"
+            pointerEvents="none"
+            textAnchor="middle"
+            dominantBaseline="middle"
+            className="text-2xl font-bold fill-gray-800 dark:fill-white"
+          >
+            {totalUsers}
+          </text>
+          <text
+            x="50%"
+            y="55%"
+            pointerEvents="none"
+            textAnchor="middle"
+            dominantBaseline="middle"
+            className="text-sm fill-gray-500"
+          >
+            Total Users
+          </text>
           <Pie
-            data={plans}
+            data={usersByPlan}
             nameKey="name"
-            label={({ name, percent }) =>
-              `${name} ${(percent * 100).toFixed()}%`
-            }
+            label={({ percent }) => `${(percent * 100).toFixed()}%`}
             dataKey="value"
             innerRadius={70}
-            outerRadius={100}
+            outerRadius={90}
             paddingAngle={3}
             stroke="#99a1af"
             labelLine={false}
+            isAnimationActive={true}
+            animationDuration={500}
           ></Pie>
+          <Legend />
           <Tooltip
-            formatter={(value, name) => [value, name]}
             contentStyle={{
               backgroundColor: "rgba(17, 24, 39, 0.9)",
               borderRadius: "12px",

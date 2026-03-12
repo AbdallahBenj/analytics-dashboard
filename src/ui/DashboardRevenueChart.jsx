@@ -12,7 +12,7 @@ import {
 } from "recharts";
 
 import calculateRevenue from "../service/calculateRevenue.js";
-import { timeData, paymentsData } from "../service/revenueData.js";
+import { timeData, paymentsData } from "../service/generateData.js";
 
 const dailyRevenueV2 = calculateRevenue(timeData, paymentsData);
 const monthlyRevenueV2 = calculateRevenue(timeData, paymentsData, "month");
@@ -61,7 +61,7 @@ const RevenueChart = () => {
     <div
       className="primary-chart h-96
             rounded-2xl p-4 cursor-pointer 
-            col-span-4 lg:col-span-3
+            col-span-4 md:col-span-2 lg:col-span-3
             flex flex-col
 
             bg-white/60 dark:bg-gray-900/40
@@ -75,7 +75,7 @@ const RevenueChart = () => {
     >
       <div className="flex justify-between">
         <div className="Title-chart mb-3">
-          <h3 className="text-md font-medium text-gray-500 dark:text-gray-400">
+          <h3 className="text-md font-medium text-gray-600 dark:text-gray-300">
             Monthly Revenue
           </h3>
           <p className="text-xl font-semibold text-gray-900 dark:text-white">
@@ -91,7 +91,7 @@ const RevenueChart = () => {
             value={range}
             onChange={setRange}
             aria-label="Server size"
-            className="flex gap-4"
+            className="flex gap-3"
           >
             {Object.keys(rangeConfig).map((date) => (
               <Field
@@ -111,7 +111,7 @@ const RevenueChart = () => {
                 >
                   <span className="invisible size-2 rounded-full bg-white group-data-checked:visible" />
                 </Radio>
-                <Label className="cursor-pointer text-sm font-medium text-gray-500 dark:text-gray-400">
+                <Label className="cursor-pointer text-sm font-medium text-gray-600 dark:text-gray-300">
                   {rangeConfig[date].label}
                 </Label>
               </Field>
@@ -129,13 +129,13 @@ const RevenueChart = () => {
             />
             <XAxis
               dataKey={rangeConfig[range].xKey}
-              tick={{ fill: "#9CA3AF", fontSize: 12 }}
+              tick={{ fill: "var(--color-chart-gray)", fontSize: 12 }}
               axisLine={false}
               tickLine={false}
             />
             <YAxis
               tickFormatter={(value) => `$${convertToKilo(value)}`}
-              tick={{ fill: "#9CA3AF", fontSize: 12 }}
+              tick={{ fill: "var(--color-chart-gray)", fontSize: 12 }}
               axisLine={false}
               tickLine={false}
             />
