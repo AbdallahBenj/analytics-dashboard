@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Field, Label, Radio, RadioGroup } from "@headlessui/react";
+import { RadioGroup } from "@headlessui/react";
 
 import {
   LineChart,
@@ -14,41 +14,41 @@ import {
 import calculateRevenue from "../service/calculateRevenue.js";
 import { timeData, paymentsData } from "../service/generateData.js";
 
-const dailyRevenueV2 = calculateRevenue(timeData, paymentsData);
-const monthlyRevenueV2 = calculateRevenue(timeData, paymentsData, "month");
+const dailyRevenue = calculateRevenue(timeData, paymentsData);
+const monthlyRevenue = calculateRevenue(timeData, paymentsData, "month");
 
 import getMonthlyRevenue from "../utils/getMonthlyRevenue.js";
 import getPerCentValue from "../utils/getPerCentValue.js";
 import convertToKilo from "../utils/convertToKilo.js";
 
 const RevenueChart = () => {
-  const dailyRevenueLast30daysV2 = dailyRevenueV2.slice(-30);
-  const dailyRevenuePrev30daysV2 = dailyRevenueV2.slice(-60, -30);
-  const dailyRevenueLast90daysV2 = dailyRevenueV2.slice(-90);
+  const dailyRevenueLast30days = dailyRevenue.slice(-30);
+  const dailyRevenuePrev30days = dailyRevenue.slice(-60, -30);
+  const dailyRevenueLast90days = dailyRevenue.slice(-90);
 
-  const LastMonthRevenueV2 = getMonthlyRevenue(dailyRevenueLast30daysV2);
-  const prevMonthRevenueV2 = getMonthlyRevenue(dailyRevenuePrev30daysV2);
+  const LastMonthRevenue = getMonthlyRevenue(dailyRevenueLast30days);
+  const prevMonthRevenue = getMonthlyRevenue(dailyRevenuePrev30days);
 
   const perCentMonthlyRevenue = getPerCentValue(
-    LastMonthRevenueV2,
-    prevMonthRevenueV2,
+    LastMonthRevenue,
+    prevMonthRevenue,
   );
 
-  const rangeConfig = {
+  const revenueRangeConfig = {
     d30: {
-      data: dailyRevenueLast30daysV2,
+      data: dailyRevenueLast30days,
       xKey: "date",
       yKey: "revenue",
       label: "30 Days",
     },
     d90: {
-      data: dailyRevenueLast90daysV2,
+      data: dailyRevenueLast90days,
       xKey: "date",
       yKey: "revenue",
       label: "90 Days",
     },
     m6: {
-      data: monthlyRevenueV2,
+      data: monthlyRevenue,
       xKey: "date",
       yKey: "revenue",
       label: "6 Months",
@@ -79,7 +79,7 @@ const RevenueChart = () => {
             Monthly Revenue
           </h3>
           <p className="text-xl font-semibold text-gray-900 dark:text-white">
-            ${convertToKilo(LastMonthRevenueV2)}
+            ${convertToKilo(LastMonthRevenue)}
             <span className="text-sm text-gray-500">
               {" "}
               {`${perCentMonthlyRevenue >= 0 ? "+" : ""}${perCentMonthlyRevenue}%`}
@@ -90,45 +90,50 @@ const RevenueChart = () => {
           <RadioGroup
             value={range}
             onChange={setRange}
-            aria-label="Server size"
-            className="flex gap-3"
+            aria-label="Select range"
+            className="flex gap-4"
           >
-            {Object.keys(rangeConfig).map((date) => (
-              <Field
-                key={date}
-                className="flex flex-col md:flex-row justify-between md:items-center gap-2"
+            {Object.entries(revenueRangeConfig).map(([key, { label }]) => (
+              <RadioGroup.Option
+                as="div"
+                key={key}
+                value={key}
+                className={({ active, checked }) =>
+                  [
+                    "px-3 py-1.5 rounded-md text-sm text-center font-medium transition w-fit flex items-center justify-center",
+                    checked ? "bg-indigo-500 shadow" : "bg-gray-500/20",
+                    active ? "ring-2 ring-offset-2 ring-indigo-500" : "",
+                  ].join(" ")
+                }
               >
-                <Radio
-                  value={date}
-                  className={({ checked }) =>
-                    `px-3 py-1.5 rounded-md text-sm font-medium transition w-fit
-                      ${
-                        checked
-                          ? "bg-gray-700 dark:bg-white shadow text-gray-900"
-                          : "text-gray-500 hover:text-gray-700"
-                      }`
+                {({ checked }) => (
+                  <span
+                    className={`cursor-pointer text-sm font-medium 
+                  ${
+                    checked
+                      ? "text-indigo-50"
+                      : "text-gray-600 dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-200"
                   }
-                >
-                  <span className="invisible size-2 rounded-full bg-white group-data-checked:visible" />
-                </Radio>
-                <Label className="cursor-pointer text-sm font-medium text-gray-600 dark:text-gray-300">
-                  {rangeConfig[date].label}
-                </Label>
-              </Field>
+                  `}
+                  >
+                    {label}
+                  </span>
+                )}
+              </RadioGroup.Option>
             ))}
           </RadioGroup>
         </div>
       </div>
       <div className="flex-1 min-h-0">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rangeConfig[range].data}>
+          <LineChart data={revenueRangeConfig[range].data}>
             <CartesianGrid
               strokeDasharray="3 3"
               strokeOpacity={0.3}
               vertical={false}
             />
             <XAxis
-              dataKey={rangeConfig[range].xKey}
+              dataKey={revenueRangeConfig[range].xKey}
               tick={{ fill: "var(--color-chart-gray)", fontSize: 12 }}
               axisLine={false}
               tickLine={false}
@@ -152,7 +157,7 @@ const RevenueChart = () => {
             />
             <Line
               type="monotone"
-              dataKey={rangeConfig[range].yKey}
+              dataKey={revenueRangeConfig[range].yKey}
               stroke="#6366F1"
               strokeWidth={3}
               dot={false}

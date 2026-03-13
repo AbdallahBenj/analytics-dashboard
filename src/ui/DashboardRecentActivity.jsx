@@ -1,13 +1,20 @@
-import { subscriptionsData } from "../service/generateData.js";
+import {
+  usersData,
+  subscriptionsData,
+  paymentsData,
+} from "../service/generateData.js";
 
 const DashboardRecentActivity = () => {
+  console.log("usersData:", usersData);
   console.log("subscriptionsData:", subscriptionsData);
+  console.log("paymentsData:", paymentsData);
+
   const lastSubs5 = subscriptionsData.sort((a, b) => b.id - a.id).slice(-5);
   console.log("lastSubs5:", lastSubs5);
 
   return (
     <div
-      className="recent-activity-table h-fit
+      className="recent-activity-table h-fit overflow-auto
             rounded-2xl p-4 cursor-pointer
             col-span-4 lg:col-span-3
             
@@ -52,7 +59,7 @@ const DashboardRecentActivity = () => {
                 <td className="px-4 py-2 rounded-l-lg">
                   {new Date(sub.startDate).toDateString()}
                 </td>
-                <td className="px-4 py-2">{sub.userName}</td>
+                <td className="px-4 py-2">{sub.userName.split(" ")[0]}</td>
                 <td
                   className={`px-4 py-2
                   ${sub.plan === "basic" && "text-indigo-400"}
