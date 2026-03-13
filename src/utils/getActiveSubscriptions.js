@@ -1,6 +1,6 @@
 const getActiveSubscriptions = (subscriptions = []) => {
   const activeSubscriptions = subscriptions.filter(
-    (subscription) => subscription.subscriptionStatus === "active",
+    (subscription) => subscription.subsStatus === "active",
   );
 
   return activeSubscriptions;

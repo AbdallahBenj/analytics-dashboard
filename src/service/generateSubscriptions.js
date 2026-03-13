@@ -69,13 +69,14 @@ const generateSubscriptions = (users = []) => {
     return {
       id: `sub_${i}`,
       userId: user.id,
+      userName: user.name,
       createdAt: createdDate.toISOString(),
       startDate: startDate.toISOString(),
       endDate: endDate.toISOString(),
       duration: durationMonths,
       plan: plan.name,
       priceMonthly: plan.price,
-      subscriptionStatus: subStatus,
+      subsStatus: subStatus,
     };
   });
 
