@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { RadioGroup } from "@headlessui/react";
+import RadioGroupButtons from "./RadioGroupButtons.jsx";
 
 import {
   LineChart,
@@ -87,41 +87,11 @@ const RevenueChart = () => {
           </p>
         </div>
         <div className="Button date range ">
-          <RadioGroup
-            value={range}
-            onChange={setRange}
-            aria-label="Select range"
-            className="flex gap-4"
-          >
-            {Object.entries(revenueRangeConfig).map(([key, { label }]) => (
-              <RadioGroup.Option
-                as="div"
-                key={key}
-                value={key}
-                className={({ active, checked }) =>
-                  [
-                    "px-3 py-1.5 rounded-md text-sm text-center font-medium transition w-fit flex items-center justify-center",
-                    checked ? "bg-indigo-500 shadow" : "bg-gray-500/20",
-                    active ? "ring-2 ring-offset-2 ring-indigo-500" : "",
-                  ].join(" ")
-                }
-              >
-                {({ checked }) => (
-                  <span
-                    className={`cursor-pointer text-sm font-medium 
-                  ${
-                    checked
-                      ? "text-indigo-50"
-                      : "text-gray-600 dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-200"
-                  }
-                  `}
-                  >
-                    {label}
-                  </span>
-                )}
-              </RadioGroup.Option>
-            ))}
-          </RadioGroup>
+          <RadioGroupButtons
+            state={range}
+            setState={setRange}
+            stateConfig={revenueRangeConfig}
+          />
         </div>
       </div>
       <div className="flex-1 min-h-0">

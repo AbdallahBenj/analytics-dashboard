@@ -1,5 +1,5 @@
-const getMonthlyRevenue = (arr, months = 1) => {
-  const allRevenue = arr.map((obj) => obj.revenue);
+const getMonthlyRevenue = (revenueData, months = 1) => {
+  const allRevenue = revenueData.map((obj) => obj.revenue);
   const monthlyRevenue = allRevenue.reduce((acc, curr) => acc + curr) / months;
   return monthlyRevenue;
 };

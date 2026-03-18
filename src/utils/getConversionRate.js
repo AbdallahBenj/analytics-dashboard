@@ -12,8 +12,8 @@ const getConversionRate = (users = [], subscriptions = [], days = 0) => {
   );
 
   const subUsersAtStart = subscriptions.filter((sub) => {
-    const start = new Date(sub.startDate);
-    const end = new Date(sub.endDate);
+    const start = new Date(sub.subsStartDate);
+    const end = new Date(sub.subsEndDate);
 
     return start < startPeriod && end >= startPeriod;
   });
@@ -21,7 +21,7 @@ const getConversionRate = (users = [], subscriptions = [], days = 0) => {
   const freeAtStart = usersAtStart.length - subUsersAtStart.length;
 
   const activatedInPeriod = subscriptions.filter((sub) => {
-    const start = new Date(sub.startDate);
+    const start = new Date(sub.subsStartDate);
     return start >= startPeriod && start < endPeriod;
   });
 

@@ -1,7 +1,7 @@
 import DashboardMiniCardsIcons from "../ui/DashboardMiniCardsIcons.jsx";
 import DashboardRevenueChart from "../ui/DashboardRevenueChart.jsx";
 import DashboardPlansPieChart from "../ui/DashboardPlansPieChart.jsx";
-import DashboardRecentActivity from "../ui/DashboardRecentActivity.jsx";
+import DashboardRecentActivityTable from "../ui/DashboardRecentActivityTable.jsx";
 
 const DashboardPage = () => {
   return (
@@ -14,7 +14,7 @@ const DashboardPage = () => {
       <DashboardMiniCardsIcons />
       <DashboardRevenueChart />
       <DashboardPlansPieChart />
-      <DashboardRecentActivity />
+      <DashboardRecentActivityTable />
     </section>
   );
 };

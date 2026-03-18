@@ -6,13 +6,13 @@ const generatePayments = (subscriptions = []) => {
   // Generate monthly payment records for each subscription.
 
   const payments = subscriptions
-    .filter((sub) => sub.priceMonthly > 0 && sub.duration > 0)
+    .filter((sub) => sub.priceMonthly > 0 && sub.subsDuration > 0)
     .flatMap((sub) => {
-      const dateStart = new Date(sub.startDate);
+      const dateStart = new Date(sub.subsStartDate);
 
       // Create one invoice per billing cycle (monthly)
 
-      return Array.from({ length: sub.duration }, (_, index) => {
+      return Array.from({ length: sub.subsDuration }, (_, index) => {
         const invoiceNumber = index + 1;
 
         // Set invoice start and end dates for each month
@@ -43,9 +43,7 @@ const generatePayments = (subscriptions = []) => {
         let paidAt;
         if (paymentStatus === "paid") {
           paidAt =
-            paidDate < toDay
-              ? paidDate.toISOString().slice(0, 10)
-              : toDay.toISOString().slice(0, 10);
+            paidDate < toDay ? paidDate.toISOString() : toDay.toISOString();
         } else {
           paidAt = null;
         }
@@ -53,13 +51,13 @@ const generatePayments = (subscriptions = []) => {
         const payment = {
           id: `pay_${++id}`,
           userId: sub.userId,
-          subscriptionId: sub.id,
+          subscriptionId: sub.subsId,
           invoicePrice: sub.priceMonthly,
           invoiceNumber: invoiceNumber,
           paymentStatus: paymentStatus,
           paidAt: paidAt,
-          invoiceStart: invoiceStart.toISOString().slice(0, 10),
-          invoiceEnd: invoiceEnd.toISOString().slice(0, 10),
+          invoiceStart: invoiceStart.toISOString(),
+          invoiceEnd: invoiceEnd.toISOString(),
         };
 
         return payment;

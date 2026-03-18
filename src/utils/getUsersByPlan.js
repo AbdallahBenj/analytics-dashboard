@@ -11,7 +11,7 @@ const getUsersByPlan = (users = [], subscriptions = [], pieColors = {}) => {
   };
 
   activeSubs.forEach((sub) => {
-    totalUsersPlans[sub.plan] = (totalUsersPlans[sub.plan] ?? 0) + 1;
+    totalUsersPlans[sub.subsPlan] = (totalUsersPlans[sub.subsPlan] ?? 0) + 1;
   });
 
   const order = { free: 0, basic: 1, pro: 2 };

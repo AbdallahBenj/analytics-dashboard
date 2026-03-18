@@ -15,9 +15,9 @@ const generateUsers = (timeline = [], min = 1, max = 5) => {
     return Array.from({ length: Math.min(totalDailyUsers, max) }, () => {
       const userNameIndex = Math.floor(Math.random() * usersNames.length);
       const user = {
-        id: `u_${id}`,
-        name: `${usersNames[userNameIndex]}_${id}`,
-        email: `${usersNames[userNameIndex].split(" ").join("-")}_${id}@email.com`,
+        userId: `u_${id}`,
+        userName: `${usersNames[userNameIndex]}`,
+        userEmail: `${usersNames[userNameIndex].split(" ")[0]}_${id}@email.com`,
         createdAt: dateObj.date,
       };
       id++;
