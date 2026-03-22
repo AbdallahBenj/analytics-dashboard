@@ -49,7 +49,7 @@ const generatePayments = (subscriptions = []) => {
         }
 
         const payment = {
-          id: `pay_${++id}`,
+          paymentId: `pay_${++id}`,
           userId: sub.userId,
           subscriptionId: sub.subsId,
           invoicePrice: sub.priceMonthly,

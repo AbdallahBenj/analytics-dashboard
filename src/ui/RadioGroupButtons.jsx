@@ -6,7 +6,7 @@ const RadioGroupButtons = ({ state, setState, stateConfig }) => {
       value={state}
       onChange={setState}
       aria-label="Select range"
-      className="flex gap-4"
+      className="flex flex-wrap justify-end gap-4"
     >
       {Object.entries(stateConfig).map(([key, { label }]) => (
         <RadioGroup.Option

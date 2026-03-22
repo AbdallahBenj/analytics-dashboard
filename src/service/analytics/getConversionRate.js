@@ -8,7 +8,7 @@ const getConversionRate = (users = [], subscriptions = [], days = 0) => {
   startPeriod.setDate(startPeriod.getDate() - 30);
 
   const usersAtStart = users.filter(
-    (user) => new Date(user.createdAt) < startPeriod,
+    (user) => new Date(user.userCreatedAt) < startPeriod,
   );
 
   const subUsersAtStart = subscriptions.filter((sub) => {

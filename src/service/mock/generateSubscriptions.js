@@ -18,7 +18,7 @@ const generateSubscriptions = (users = []) => {
 
     // Compute how many days user existed before today
 
-    const createdDate = new Date(user.createdAt);
+    const createdDate = new Date(user.userCreatedAt);
     const startDelay = (toDay - createdDate) / (1000 * 60 * 60 * 24);
 
     // Random offset to simulate real subscription start timing
@@ -70,7 +70,7 @@ const generateSubscriptions = (users = []) => {
       subsId: `sub_${i}`,
       userId: user.userId,
       userName: user.userName,
-      createdAt: createdDate.toISOString(),
+      userCreatedAt: createdDate.toISOString(),
       subsStartDate: startDate.toISOString(),
       subsEndDate: endDate.toISOString(),
       subsDuration: durationMonths,

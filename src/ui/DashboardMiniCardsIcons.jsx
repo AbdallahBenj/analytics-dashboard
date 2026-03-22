@@ -7,23 +7,23 @@ import {
   ArrowDownIcon,
 } from "@heroicons/react/24/solid";
 
-import calculateRevenue from "../service/calculateRevenue.js";
+import calculateRevenue from "../service/analytics/calculateRevenue.js";
 import {
   timeData,
   usersData,
   subscriptionsData,
   paymentsData,
-} from "../service/generateData.js";
+} from "../service/mock/generateData.js";
 
-import getMonthlyRevenue from "../utils/getMonthlyRevenue.js";
+import getMonthlyRevenue from "../service/analytics/getMonthlyRevenue.js";
 import getPerCentValue from "../utils/getPerCentValue.js";
 import convertToKilo from "../utils/convertToKilo.js";
 
-import getActiveSubscriptions from "../utils/getActiveSubscriptions.js";
+import getActiveSubscriptions from "../service/analytics/getActiveSubscriptions.js";
 
-import getChurnRate from "../utils/getChurnRate.js";
+import getChurnRate from "../service/analytics/getChurnRate.js";
 
-import getConversionRate from "../utils/getConversionRate.js";
+import getConversionRate from "../service/analytics/getConversionRate.js";
 
 const MiniCards = () => {
   const dailyRevenueV2 = calculateRevenue(timeData, paymentsData);

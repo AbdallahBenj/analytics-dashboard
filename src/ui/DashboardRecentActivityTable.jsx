@@ -1,42 +1,84 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import RadioGroupButtons from "./RadioGroupButtons.jsx";
 
 import {
   lastUsersEvents,
   lastSubsEvents,
   lastPaymentsEvents,
-} from "../service/generateEvents.js";
+} from "../service/events/generateEvents.js";
 
 const allEvents = {
   usersEvents: {
-    data: lastUsersEvents,
     label: "Users",
+    data: lastUsersEvents,
+    config: {
+      id: "userId",
+      columns: [
+        { key: "eventTimeAgo" },
+        { key: "userName" },
+        { key: "userEmail" },
+        { key: "eventDate" },
+      ],
+    },
   },
   subsEvents: {
-    data: lastSubsEvents,
     label: "Subscriptions",
+    data: lastSubsEvents,
+    config: {
+      id: "subsId",
+      columns: [
+        { key: "eventTimeAgo" },
+        { key: "userName" },
+        { key: "subsPlan", colored: true },
+        { key: "subsStatus", colored: true },
+      ],
+    },
   },
   paymentsEvents: {
-    data: lastPaymentsEvents,
     label: "Payments",
+    data: lastPaymentsEvents,
+    config: {
+      id: "paymentId",
+      columns: [
+        { key: "paymentTimeAgo" },
+        { key: "paidDate" },
+        { key: "invoicePrice", colored: true },
+        { key: "paymentStatus", colored: true },
+      ],
+    },
   },
 };
 
+const EVENT_TYPES = {
+  USERS: "usersEvents",
+  SUBSCRIPTIONS: "subsEvents",
+  PAYMENTS: "paymentsEvents",
+};
+
+const spanColorMap = {
+  basic: "text-indigo-400",
+  pro: "text-indigo-500",
+
+  canceled: "text-red-500",
+  active: "text-emerald-500",
+
+  "5$": "text-indigo-400",
+  "10$": "text-indigo-500",
+
+  failed: "text-red-500",
+  pending: "text-yellow-500",
+  paid: "text-emerald-500",
+};
+
 const DashboardRecentActivity = () => {
-  //test start
+  const [tableContent, setTableContent] = useState(EVENT_TYPES.USERS);
 
-  const [tableContent, setTableContent] = useState("usersEvents");
+  const { eventsTitle, events } = allEvents[tableContent].data;
+  const headers = eventsTitle;
+  const rows = events;
 
-  const { eventsTitle: headRow, events: bodyRows } =
-    allEvents[tableContent]["data"];
-
-  useEffect(() => {
-    console.log("tableContent:", allEvents["usersEvents"]);
-    console.log("state:", tableContent);
-    console.log("TableState:", allEvents[tableContent]["data"]["events"]);
-  });
-
-  // test end
+  const { id } = allEvents[tableContent].config;
+  const tableColumns = allEvents[tableContent].config.columns;
 
   return (
     <div
@@ -53,13 +95,13 @@ const DashboardRecentActivity = () => {
             hover:shadow-xl hover:shadow-black/20
             transition-all duration-300"
     >
-      <div className="flex justify-between">
+      <div className="flex flex-col md:flex-row justify-between">
         <div className="Title-chart mb-3">
           <h3 className="text-md font-medium text-gray-600 dark:text-gray-300">
             Latest Events
           </h3>
         </div>
-        <div className="Button date range ">
+        <div className="Button date range mb-5">
           <RadioGroupButtons
             state={tableContent}
             setState={setTableContent}
@@ -74,45 +116,42 @@ const DashboardRecentActivity = () => {
             bg-indigo-500/10 
             "
           >
-            {headRow.map((span) => {
+            {headers.map((colTitle, i) => {
               return (
                 <th
-                  key={span}
-                  className={`px-4 py-2 ${span === headRow[0] && "rounded-l-lg"} 
-                ${span === headRow[headRow.length - 1] && "rounded-r-lg"}`}
+                  key={`${colTitle}-${i}`}
+                  className={`px-4 py-2 ${i === 0 && "rounded-l-lg"} 
+                ${i === headers.length - 1 && "rounded-r-lg"}`}
                 >
-                  {span}
+                  {colTitle}
                 </th>
               );
             })}
           </tr>
         </thead>
         <tbody>
-          {bodyRows.map((sub, i) => {
-            const { id, span1, span2, span3, span4 } = sub;
+          {rows.map((event) => {
             return (
               <tr
-                key={id}
-                className={`text-gray-600 dark:text-gray-400
+                key={event[id]}
+                className="text-gray-600 dark:text-gray-400
                 hover:bg-gray-500/10
-                ${i % 2 !== 0 && "bg-indigo-50 dark:bg-indigo-50/5"}`}
+                even:bg-indigo-50 even:dark:bg-indigo-50/5"
               >
-                <td className="px-4 py-2 rounded-l-lg">{span1}</td>
-                <td className="px-4 py-2">{span2}</td>
-                <td
-                  className={`px-4 py-2
-                  ${span3 === "basic" && "text-indigo-400"}
-                  ${span3 === "pro" && "text-indigo-500"}`}
-                >
-                  {span3}
-                </td>
-                <td
-                  className={`px-4 py-2 rounded-r-lg
-                  ${span4 === "active" && "text-emerald-500"}
-                  ${span4 === "canceled" && "text-red-500"}`}
-                >
-                  {span4}
-                </td>
+                {tableColumns.map((col, i) => {
+                  const value = event[col.key];
+                  return (
+                    <td
+                      key={`${col.key}-${i}`}
+                      className={`px-4 py-2 
+                      ${i === 0 && "rounded-l-lg"} 
+                      ${i === tableColumns.length - 1 && "rounded-r-lg"}
+                      ${col.colored ? spanColorMap[value] || "" : ""}`}
+                    >
+                      {value}
+                    </td>
+                  );
+                })}
               </tr>
             );
           })}

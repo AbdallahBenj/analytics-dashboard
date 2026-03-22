@@ -11,13 +11,13 @@ import {
   Tooltip,
 } from "recharts";
 
-import calculateRevenue from "../service/calculateRevenue.js";
-import { timeData, paymentsData } from "../service/generateData.js";
+import calculateRevenue from "../service/analytics/calculateRevenue.js";
+import { timeData, paymentsData } from "../service/mock/generateData.js";
 
 const dailyRevenue = calculateRevenue(timeData, paymentsData);
 const monthlyRevenue = calculateRevenue(timeData, paymentsData, "month");
 
-import getMonthlyRevenue from "../utils/getMonthlyRevenue.js";
+import getMonthlyRevenue from "../service/analytics/getMonthlyRevenue.js";
 import getPerCentValue from "../utils/getPerCentValue.js";
 import convertToKilo from "../utils/convertToKilo.js";
 
@@ -73,7 +73,7 @@ const RevenueChart = () => {
             hover:shadow-xl hover:shadow-black/20
             transition-all duration-300"
     >
-      <div className="flex justify-between">
+      <div className="flex flex-col md:flex-row justify-between">
         <div className="Title-chart mb-3">
           <h3 className="text-md font-medium text-gray-600 dark:text-gray-300">
             Monthly Revenue
@@ -86,7 +86,7 @@ const RevenueChart = () => {
             </span>
           </p>
         </div>
-        <div className="Button date range ">
+        <div className="Button date range mb-5">
           <RadioGroupButtons
             state={range}
             setState={setRange}

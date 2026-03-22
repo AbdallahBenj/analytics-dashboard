@@ -1,4 +1,4 @@
-import usersNames from "../data/usersNames";
+import usersNames from "../../data/usersNames";
 
 const generateUsers = (timeline = [], min = 1, max = 5) => {
   let id = 1;
@@ -18,7 +18,7 @@ const generateUsers = (timeline = [], min = 1, max = 5) => {
         userId: `u_${id}`,
         userName: `${usersNames[userNameIndex]}`,
         userEmail: `${usersNames[userNameIndex].split(" ")[0]}_${id}@email.com`,
-        createdAt: dateObj.date,
+        userCreatedAt: dateObj.date,
       };
       id++;
       return user;

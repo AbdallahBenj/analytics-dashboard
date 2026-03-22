@@ -1,7 +1,7 @@
 import { Pie, PieChart, Legend, Tooltip, ResponsiveContainer } from "recharts";
-import { usersData, subscriptionsData } from "../service/generateData.js";
+import { usersData, subscriptionsData } from "../service/mock/generateData.js";
 
-import getUsersByPlan from "../utils/getUsersByPlan.js";
+import getUsersByPlan from "../service/analytics/getUsersByPlan.js";
 
 const pieColors = {
   free: "var(--color-pie-free)",
