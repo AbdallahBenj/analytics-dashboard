@@ -1,7 +1,8 @@
+import convertToDynamicTime from "../analytics/convertToDynamicTime.js";
+
 const generatePayments = (subscriptions = []) => {
   let id = 0;
   const toDay = new Date();
-  toDay.setHours(0, 0, 0, 0);
 
   // Generate monthly payment records for each subscription.
 
@@ -27,7 +28,7 @@ const generatePayments = (subscriptions = []) => {
 
         // Determine payment status based on today's date
 
-        const paidDate = new Date(invoiceStart);
+        const paidDate = convertToDynamicTime(invoiceStart);
         paidDate.setDate(paidDate.getDate() + Math.floor(Math.random() * 3));
 
         if (invoiceStart > toDay) {
@@ -64,6 +65,7 @@ const generatePayments = (subscriptions = []) => {
       });
     });
 
+  console.log("payments:", payments);
   return payments;
 };
 

@@ -7,7 +7,6 @@ import {
   ArrowDownIcon,
 } from "@heroicons/react/24/solid";
 
-import calculateRevenue from "../service/analytics/calculateRevenue.js";
 import {
   timeData,
   usersData,
@@ -15,22 +14,23 @@ import {
   paymentsData,
 } from "../service/mock/generateData.js";
 
+import calculateRevenue from "../service/analytics/calculateRevenue.js";
 import getMonthlyRevenue from "../service/analytics/getMonthlyRevenue.js";
-import getPerCentValue from "../utils/getPerCentValue.js";
-import convertToKilo from "../utils/convertToKilo.js";
-
 import getActiveSubscriptions from "../service/analytics/getActiveSubscriptions.js";
 
 import getChurnRate from "../service/analytics/getChurnRate.js";
-
 import getConversionRate from "../service/analytics/getConversionRate.js";
 
-const MiniCards = () => {
-  const dailyRevenueV2 = calculateRevenue(timeData, paymentsData);
-  const dailyRevenueLast30daysV2 = dailyRevenueV2.slice(-30);
-  const dailyRevenuePrev30daysV2 = dailyRevenueV2.slice(-60, -30);
+import getPerCentValue from "../utils/getPerCentValue.js";
+import convertToKilo from "../utils/convertToKilo.js";
 
-  const LastMonthRevenueV2 = getMonthlyRevenue(dailyRevenueLast30daysV2);
+const MiniCards = () => {
+  const dailyRevenue = calculateRevenue(timeData, paymentsData);
+  const dailyRevenueLast30days = dailyRevenue.slice(-30);
+  const dailyRevenuePrev30days = dailyRevenue.slice(-60, -30);
+
+  const LastMonthRevenue = getMonthlyRevenue(dailyRevenueLast30days);
+  const prevMonthRevenue = getMonthlyRevenue(dailyRevenuePrev30days);
 
   const activeSubscriptions = getActiveSubscriptions(subscriptionsData);
   const totalActiveSubscriptions = activeSubscriptions.length;
@@ -51,8 +51,8 @@ const MiniCards = () => {
       id: 1,
       name: "MRR",
       title: "Monthly Revenue",
-      value: LastMonthRevenueV2 || 0.0, // 10.00
-      prevValue: getMonthlyRevenue(dailyRevenuePrev30daysV2) || 0.0, // 10.00
+      value: LastMonthRevenue || 0.0, // 10.00
+      prevValue: prevMonthRevenue || 0.0, // 10.00
       unit: "$",
       Icon: CurrencyDollarIcon,
     },
@@ -60,7 +60,7 @@ const MiniCards = () => {
       id: 2,
       name: "AS",
       title: "Active Subscriptions",
-      value: totalActiveSubscriptions || 1.12,
+      value: totalActiveSubscriptions || 0.0,
       unit: "user",
       Icon: UserIcon,
     },
@@ -69,8 +69,8 @@ const MiniCards = () => {
       name: "CR",
       title: "Churn Rate",
       type: "churn",
-      value: churnRate || 3.1,
-      prevValue: churnRateChange || 3.0,
+      value: churnRate || 0.0,
+      prevValue: churnRateChange || 0.0,
       unit: "%",
       Icon: ArrowTrendingDownIcon,
     },
@@ -78,7 +78,7 @@ const MiniCards = () => {
       id: 4,
       name: "CR",
       title: "Conversion Rate",
-      value: conversionRate || 6.4,
+      value: conversionRate || 0.0,
       unit: "%",
       Icon: ArrowPathIcon,
     },

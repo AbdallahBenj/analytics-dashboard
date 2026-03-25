@@ -29,6 +29,7 @@ const allEvents = {
       columns: [
         { key: "eventTimeAgo" },
         { key: "userName" },
+        { key: "eventDate" },
         { key: "subsPlan", colored: true },
         { key: "subsStatus", colored: true },
       ],
@@ -84,7 +85,7 @@ const DashboardRecentActivity = () => {
     <div
       className="recent-activity-table h-fit overflow-auto
             rounded-2xl p-4 cursor-pointer
-            col-span-4 lg:col-span-3
+            col-span-4
             
             bg-white/60 dark:bg-gray-900/40
             backdrop-blur-md
@@ -98,7 +99,7 @@ const DashboardRecentActivity = () => {
       <div className="flex flex-col md:flex-row justify-between">
         <div className="Title-chart mb-3">
           <h3 className="text-md font-medium text-gray-600 dark:text-gray-300">
-            Latest Events
+            Recent Activity
           </h3>
         </div>
         <div className="Button date range mb-5">

@@ -1,3 +1,5 @@
+import convertToDynamicTime from "../analytics/convertToDynamicTime.js";
+
 const generateSubscriptions = (users = []) => {
   const plans = [
     { id: "p-1", name: "free", price: 0, billing: null },
@@ -19,59 +21,55 @@ const generateSubscriptions = (users = []) => {
     // Compute how many days user existed before today
 
     const createdDate = new Date(user.userCreatedAt);
-    const startDelay = (toDay - createdDate) / (1000 * 60 * 60 * 24);
+    const userAgeInDays = Math.floor(
+      (toDay - createdDate) / (1000 * 60 * 60 * 24),
+    );
 
     // Random offset to simulate real subscription start timing
 
     const offsetDays =
-      startDelay > 0 ? Math.floor(Math.random() * startDelay) : 0;
+      userAgeInDays > 0 ? Math.floor(Math.random() * userAgeInDays) : 0;
 
+    // Subscription start date
     let startDate = new Date(createdDate);
     startDate.setDate(startDate.getDate() + offsetDays);
 
+    // Dynamic time for each date
+
+    let subStartDate = convertToDynamicTime(startDate);
+
     // Ensure start date never exceeds today
 
-    if (startDate > toDay) startDate = new Date(toDay);
+    if (subStartDate > toDay) subStartDate = new Date(toDay);
 
     // Calculate how many months subscription could have existed
 
     let months =
-      (toDay.getFullYear() - startDate.getFullYear()) * 12 +
-      (toDay.getMonth() - startDate.getMonth()) +
-      (toDay.getDate() >= startDate.getDate() ? 1 : 0);
+      (toDay.getFullYear() - subStartDate.getFullYear()) * 12 +
+      (toDay.getMonth() - subStartDate.getMonth()) +
+      (toDay.getDate() >= subStartDate.getDate() ? 1 : 0);
 
     const availableMonths = Math.max(0, months);
 
-    let randomlyDuration;
-    let durationMonths;
-    if (availableMonths === 0) {
-      durationMonths = 1;
-    } else {
-      randomlyDuration = Math.floor(Math.random() * availableMonths) + 1;
-      durationMonths = Math.max(1, randomlyDuration);
-    }
+    const durationMonths =
+      availableMonths === 0
+        ? 1
+        : Math.floor(Math.random() * availableMonths) + 1;
 
     // Compute subscription end date from duration
-
-    const endDate = new Date(startDate);
+    const endDate = new Date(subStartDate);
     endDate.setMonth(endDate.getMonth() + durationMonths);
 
     // Determine subscription status
 
-    let subStatus;
-
-    if (endDate < toDay) {
-      subStatus = "canceled";
-    } else {
-      subStatus = "active";
-    }
+    const subStatus = endDate < toDay ? "canceled" : "active";
 
     return {
       subsId: `sub_${i}`,
       userId: user.userId,
       userName: user.userName,
-      userCreatedAt: createdDate.toISOString(),
-      subsStartDate: startDate.toISOString(),
+      userCreatedAt: user.userCreatedAt,
+      subsStartDate: subStartDate.toISOString(),
       subsEndDate: endDate.toISOString(),
       subsDuration: durationMonths,
       subsPlan: plan.name,
@@ -80,6 +78,7 @@ const generateSubscriptions = (users = []) => {
     };
   });
 
+  console.log("subscriptions:", subscriptions.filter(Boolean));
   return subscriptions.filter(Boolean);
 };
 

@@ -1,29 +1,50 @@
 import usersNames from "../../data/usersNames";
+import convertToDynamicTime from "../analytics/convertToDynamicTime.js";
 
 const generateUsers = (timeline = [], min = 1, max = 5) => {
   let id = 1;
 
   const users = timeline.flatMap((dateObj, i) => {
-    const trend = i * 0.3;
-    const growlyFactor = Math.random() * min;
+    // --- Growth logic for users over time
+    const trend = Math.log(i + 1) * 2;
+    const growthFactor = Math.random() * min;
     const noisyFactor = (Math.random() - 0.5) * 2;
     const totalDailyUsers = Math.max(
       1,
-      Math.floor(min + trend + growlyFactor + noisyFactor),
+      Math.floor(min + trend + growthFactor + noisyFactor),
     );
 
-    return Array.from({ length: Math.min(totalDailyUsers, max) }, () => {
+    // Dynamic max users
+    const dynamicMax = max + Math.floor(i * 0.1);
+
+    return Array.from({ length: Math.min(totalDailyUsers, dynamicMax) }, () => {
       const userNameIndex = Math.floor(Math.random() * usersNames.length);
+
+      // Date generation for each day
+      const baseDate = new Date(dateObj.date);
+
+      // Dynamic time for each date
+      const userRandomCreatedAt = convertToDynamicTime(baseDate);
+
+      const domains = ["gmail.com", "yahoo.com", "outlook.com"];
+      const firstName = usersNames[userNameIndex]
+        .toLowerCase()
+        .trim()
+        .split(" ")[0];
+
       const user = {
         userId: `u_${id}`,
         userName: `${usersNames[userNameIndex]}`,
-        userEmail: `${usersNames[userNameIndex].split(" ")[0]}_${id}@email.com`,
-        userCreatedAt: dateObj.date,
+        userEmail: `${firstName}.${id}@${domains[Math.floor(Math.random() * domains.length)]}`,
+        userCreatedAt: userRandomCreatedAt.toISOString(),
       };
+
+      // increment ID
       id++;
       return user;
     });
   });
+  console.log("users:", users);
 
   return users;
 };

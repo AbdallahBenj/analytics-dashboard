@@ -1,37 +1,37 @@
 import getTimeAgo from "../../utils/getTimeAgo.js";
 
-const generateUsersEvents = (usersData = []) => {
+const generateUsersEvents = (usersData = [], limit = 10) => {
+  const eventsTitle = ["Time", "User", "Email", "Created At"];
+
   if (!usersData || usersData.length === 0) {
-    return {
-      eventsTitle: ["Time", "User", "Email", "Created At"],
-      events: [],
-    };
+    return { eventsTitle, events: [] };
   }
 
-  const lastEvents = (eventsData = [], num = 5) =>
+  const lastEvents = (eventsData = []) =>
     [...eventsData]
-      .sort((a, b) => new Date(b.userCreatedAt) - new Date(a.userCreatedAt))
-      .slice(0, num)
-      .map((event) => {
-        const eventDate = new Date(event.userCreatedAt);
-        return {
-          userId: event.userId,
-          userName: event.userName,
-          userEmail: event.userEmail,
-          eventDate: eventDate.toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "short",
-            day: "numeric",
-          }),
-          eventTimeAgo: getTimeAgo(eventDate),
-        };
-      });
+      .map((user) => {
+        const eventDate = user.userCreatedAt
+          ? new Date(user.userCreatedAt)
+          : null;
+        return { ...user, eventDateObj: eventDate };
+      })
+      .sort((a, b) => (b.eventDateObj || 0) - (a.eventDateObj || 0))
+      .slice(0, limit)
+      .map(({ eventDateObj, userId, userName, userEmail }) => ({
+        userId,
+        userName,
+        userEmail,
+        eventDate: eventDateObj
+          ? eventDateObj.toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            })
+          : "N/A",
+        eventTimeAgo: eventDateObj ? getTimeAgo(eventDateObj) : "N/A",
+      }));
 
-  const lastUsers = lastEvents(usersData, 10);
-  const lastUsersEvents = {
-    eventsTitle: ["Time", "User", "Email", "Created At"],
-    events: lastUsers,
-  };
+  const lastUsersEvents = { eventsTitle, events: lastEvents(usersData) };
   return lastUsersEvents;
 };
 
