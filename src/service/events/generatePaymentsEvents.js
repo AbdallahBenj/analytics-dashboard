@@ -1,7 +1,13 @@
 import getTimeAgo from "../../utils/getTimeAgo.js";
 
 const generatePaymentsEvents = (paymentsData = [], limit = 10) => {
-  const eventsTitle = ["time", "Paid At", "Invoice Price", "Invoice Status"];
+  const eventsTitle = [
+    "Time",
+    "User",
+    "Paid At",
+    "Invoice Price",
+    "Invoice Status",
+  ];
 
   if (!paymentsData || paymentsData.length === 0) {
     return { eventsTitle, events: [] };
@@ -25,9 +31,16 @@ const generatePaymentsEvents = (paymentsData = [], limit = 10) => {
       .sort((a, b) => (b.eventDateObj || 0) - (a.eventDateObj || 0))
       .slice(0, limit)
       .map(
-        ({ eventDateObj: date, paymentId, invoicePrice, paymentStatus }) => ({
+        ({
+          eventDateObj: date,
+          userName,
+          paymentId,
+          invoicePrice,
+          paymentStatus,
+        }) => ({
           paymentId,
           paymentStatus,
+          userName,
           paidDate: date
             ? date.toLocaleDateString("en-US", {
                 year: "numeric",

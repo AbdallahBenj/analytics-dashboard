@@ -9,10 +9,12 @@ import {
   Cog6ToothIcon,
 } from "@heroicons/react/24/outline";
 
+import DashboardLogo from "../assets/dashboard-logo.svg";
+
 const navContent = {
   brand: {
     name: "Analytics",
-    imageUrl: "analytics-dashboard-icon.svg",
+    imageUrl: DashboardLogo,
   },
   user: {
     name: "Tom Cook",

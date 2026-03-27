@@ -1,4 +1,4 @@
-import convertToDynamicTime from "../analytics/convertToDynamicTime.js";
+import convertToDynamicTime from "../utils/convertToDynamicTime.js";
 
 const generatePayments = (subscriptions = []) => {
   let id = 0;
@@ -52,6 +52,7 @@ const generatePayments = (subscriptions = []) => {
         const payment = {
           paymentId: `pay_${++id}`,
           userId: sub.userId,
+          userName: sub.userName,
           subscriptionId: sub.subsId,
           invoicePrice: sub.priceMonthly,
           invoiceNumber: invoiceNumber,

@@ -19,3 +19,89 @@ A modern analytics dashboard built with React, Vite, and Tailwind CSS.
 - React
 - Vite
 - Tailwind CSS
+
+## Project Stricture
+
+src/
+│
+├── assets/ # Logos favicon
+│   ├── dashboard-logo.svg
+│   └── react.svg
+│
+├── components/ # reusable UI components
+│   ├── SearchInput.jsx
+│   ├── SidebarToggle.jsx
+│   └── ThemeMode.jsx
+│
+├── data/ # Static Contents
+│   ├── dashboardData.js // Not used
+│   ├── navContent.jsx
+│   └── usersNames.jsx
+│
+├── features/ # feature
+│   └── dashboard/
+│   │   ├── components/
+│   │   │   ├── DashboardMiniCards.jsx
+│   │   │   ├── DashboardPlansPieChart.jsx
+│   │   │   ├── DashboardRecentActivity.jsx
+│   │   │   └── DashboardRevenueChart.jsx
+│   │   │
+│   │   └── hooks/
+│   │       ├── useDashboardPlansPieChartStats.js
+│   │       └── useDashboardMiniCardsStats.js
+│   │
+│   └── utils/ # features
+│       ├── calculateRevenue.js // getRevenue
+│       ├── getActiveSubscriptions.js
+│       ├── getChurnRate.js
+│       ├── getConversionRate.js
+│       ├── getMonthlyRevenue.js
+│       └── getUsersByPlan.js
+│
+├── hooks/ # global reusable hooks
+│   ├── useFetchData.js
+│   ├── useSystemMode.js
+│   └── useThemeMode.js
+│
+├── layout/ # layout
+│   ├── DashboardLayout.jsx
+│   ├── Header.jsx
+│   ├── Main.jsx
+│   ├── PageHeader.jsx
+│   └── Sidebar.jsx
+│
+├── pages/ # Pages
+│   ├── DashboardPage.jsx
+│   ├── AnalyticsPage.jsx
+│   ├── CustomersPage.jsx
+│   ├── SubscriptionsPage.jsx
+│   ├── FeaturesPage.jsx
+│   └── ReportsPage.jsx
+│
+├── services/ # data fetching / mock / API
+│   ├── api/ # (future real API)
+│   └── mock/
+│   │   ├── generateData.js
+│   │   ├── generateUsers.js
+│   │   ├── generatePayments.js
+│   │   ├── generateSubscriptions.js
+│   │   └── generateTimeline.js
+│   │
+│   └── events/ # event generators (optional keep separate)
+│   │   ├── generateEvents.js
+│   │   ├── generatePaymentsEvents.js
+│   │   ├── generateSubscriptionsEvents.js
+│   │   └── generateUsersEvents.js
+│   │
+│   └── utils/ # services
+│       └── convertToDynamicTime.js
+│
+├── utils/ # global utils
+│   ├── convertToKilo.js
+│   ├── getPercentValue.js
+│   └── getTimeAgo.js
+│
+├── App.jsx
+└── main.jsx
+
+layout

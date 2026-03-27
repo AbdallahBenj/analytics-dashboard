@@ -1,4 +1,4 @@
-import convertToDynamicTime from "../analytics/convertToDynamicTime.js";
+import convertToDynamicTime from "../utils/convertToDynamicTime.js";
 
 const generateSubscriptions = (users = []) => {
   const plans = [

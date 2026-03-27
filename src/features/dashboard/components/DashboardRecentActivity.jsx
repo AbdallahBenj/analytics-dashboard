@@ -1,11 +1,11 @@
 import { useState } from "react";
-import RadioGroupButtons from "./RadioGroupButtons.jsx";
+import RadioGroupButtons from "../../../components/RadioGroupButtons.jsx";
 
 import {
   lastUsersEvents,
   lastSubsEvents,
   lastPaymentsEvents,
-} from "../service/events/generateEvents.js";
+} from "../../../service/events/generateEvents.js";
 
 const allEvents = {
   usersEvents: {
@@ -42,6 +42,7 @@ const allEvents = {
       id: "paymentId",
       columns: [
         { key: "paymentTimeAgo" },
+        { key: "userName" },
         { key: "paidDate" },
         { key: "invoicePrice", colored: true },
         { key: "paymentStatus", colored: true },

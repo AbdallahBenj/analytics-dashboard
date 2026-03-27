@@ -1,4 +1,4 @@
-import convertToDynamicTime from "../analytics/convertToDynamicTime.js";
+import convertToDynamicTime from "../utils/convertToDynamicTime.js";
 
 const generateTimeLine = (days = 30) => {
   const toDay = new Date();

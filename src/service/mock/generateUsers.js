@@ -1,5 +1,5 @@
 import usersNames from "../../data/usersNames";
-import convertToDynamicTime from "../analytics/convertToDynamicTime.js";
+import convertToDynamicTime from "../utils/convertToDynamicTime.js";
 
 const generateUsers = (timeline = [], min = 1, max = 5) => {
   let id = 1;

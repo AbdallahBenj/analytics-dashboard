@@ -5,13 +5,12 @@ const useFetchData = (dataType) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  console.log({ data, loading, error });
-
   useEffect(() => {
     setLoading(true);
     setError(null);
 
-    const randomErr = Math.random() - 0.5;
+    let randomErr = Math.random() - 0.5;
+    randomErr = 1;
 
     const timer = setTimeout(() => {
       if (randomErr >= 0) {
@@ -21,7 +20,7 @@ const useFetchData = (dataType) => {
         setError("Data loading failed");
         setLoading(false);
       }
-    }, 5000);
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, [dataType]);

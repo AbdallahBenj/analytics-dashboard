@@ -1,3 +1,5 @@
+// rename it to "getDynamicDateTime"
+
 const convertToDynamicTime = (date) => {
   const newDate = new Date(date);
 

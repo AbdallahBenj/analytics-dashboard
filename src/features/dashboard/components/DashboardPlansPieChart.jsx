@@ -1,7 +1,4 @@
 import { Pie, PieChart, Legend, Tooltip, ResponsiveContainer } from "recharts";
-import { usersData, subscriptionsData } from "../service/mock/generateData.js";
-
-import getUsersByPlan from "../service/analytics/getUsersByPlan.js";
 
 const pieColors = {
   free: "var(--color-pie-free)",
@@ -9,10 +6,12 @@ const pieColors = {
   pro: "var(--color-pie-pro)",
 };
 
-const totalUsers = usersData.length;
-const usersByPlan = getUsersByPlan(usersData, subscriptionsData, pieColors);
+import useDashboardPlansPieChartStats from "../hooks/useDashboardPlansPieChartStats.js";
 
 const DashboardPlansPieChart = () => {
+  const { totalUsers, usersByPlan, isLoading } =
+    useDashboardPlansPieChartStats(pieColors);
+
   return (
     <div
       className="primary-chart h-96
@@ -43,9 +42,10 @@ const DashboardPlansPieChart = () => {
             pointerEvents="none"
             textAnchor="middle"
             dominantBaseline="middle"
-            className="text-2xl font-bold fill-gray-800 dark:fill-white"
+            className={`text-2xl font-bold
+              ${!isLoading ? "fill-gray-800 dark:fill-white" : "fill-gray-500 dark:fill-gray-500"}`}
           >
-            {totalUsers}
+            {isLoading ? "Loading.." : totalUsers}
           </text>
           <text
             x="50%"
@@ -58,9 +58,9 @@ const DashboardPlansPieChart = () => {
             Total Users
           </text>
           <Pie
-            data={usersByPlan}
+            data={usersByPlan || []}
             nameKey="name"
-            label={({ percent }) => `${(percent * 100).toFixed()}%`}
+            label={({ percent = 0 }) => `${(percent * 100).toFixed()}%`}
             dataKey="value"
             innerRadius={70}
             outerRadius={90}
@@ -70,7 +70,7 @@ const DashboardPlansPieChart = () => {
             isAnimationActive={true}
             animationDuration={500}
           ></Pie>
-          <Legend />
+          {usersByPlan && !isLoading && <Legend />}
           <Tooltip
             contentStyle={{
               backgroundColor: "rgba(17, 24, 39, 0.9)",

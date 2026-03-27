@@ -1,7 +1,7 @@
-import DashboardMiniCardsIcons from "../ui/DashboardMiniCardsIcons.jsx";
-import DashboardRevenueChart from "../ui/DashboardRevenueChart.jsx";
-import DashboardPlansPieChart from "../ui/DashboardPlansPieChart.jsx";
-import DashboardRecentActivityTable from "../ui/DashboardRecentActivityTable.jsx";
+import DashboardMiniCards from "../features/dashboard/components/DashboardMiniCards.jsx";
+import DashboardRevenueChart from "../features/dashboard/components/DashboardRevenueChart.jsx";
+import DashboardPlansPieChart from "../features/dashboard/components/DashboardPlansPieChart.jsx";
+import DashboardRecentActivity from "../features/dashboard/components/DashboardRecentActivity.jsx";
 
 const DashboardPage = () => {
   return (
@@ -11,10 +11,10 @@ const DashboardPage = () => {
       border border-gray-500/10"
     >
       {/* Your content */}
-      <DashboardMiniCardsIcons />
+      <DashboardMiniCards />
       <DashboardRevenueChart />
       <DashboardPlansPieChart />
-      <DashboardRecentActivityTable />
+      <DashboardRecentActivity />
     </section>
   );
 };

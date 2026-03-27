@@ -1,4 +1,7 @@
+// rename it to "getRevenue"
+
 const calculateRevenue = (timeData = [], payments = [], time = "day") => {
+  if (timeData.length === 0 || payments.length === 0) return [];
   const revenue = {};
 
   const slices = {
