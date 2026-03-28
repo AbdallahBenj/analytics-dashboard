@@ -3,10 +3,11 @@ import calculateRevenue from "../../utils/calculateRevenue.js";
 import getMonthlyRevenue from "../../utils/getMonthlyRevenue.js";
 import getPerCentValue from "../../../utils/getPerCentValue.js";
 
-import useGenerateData from "../../../service/mock/useGenerateData.js";
+import useFetchedGenerateData from "./useFetchedGenerateData.js";
 
 const useDashboardRevenueChartStats = () => {
-  const { isLoading, fetchedTimeData, fetchedPaymentsData } = useGenerateData();
+  const { isLoading, fetchedTimeData, fetchedPaymentsData } =
+    useFetchedGenerateData();
 
   const dailyRevenue = calculateRevenue(fetchedTimeData, fetchedPaymentsData);
   const monthlyRevenue = calculateRevenue(

@@ -1,55 +1,11 @@
 import { useState } from "react";
 import RadioGroupButtons from "../../../components/RadioGroupButtons.jsx";
 
-import {
-  lastUsersEvents,
-  lastSubsEvents,
-  lastPaymentsEvents,
-} from "../../../service/events/generateEvents.js";
+// Loading snipper icon
+import { Zoomies } from "ldrs/react";
+import "ldrs/react/Zoomies.css";
 
-const allEvents = {
-  usersEvents: {
-    label: "Users",
-    data: lastUsersEvents,
-    config: {
-      id: "userId",
-      columns: [
-        { key: "eventTimeAgo" },
-        { key: "userName" },
-        { key: "userEmail" },
-        { key: "eventDate" },
-      ],
-    },
-  },
-  subsEvents: {
-    label: "Subscriptions",
-    data: lastSubsEvents,
-    config: {
-      id: "subsId",
-      columns: [
-        { key: "eventTimeAgo" },
-        { key: "userName" },
-        { key: "eventDate" },
-        { key: "subsPlan", colored: true },
-        { key: "subsStatus", colored: true },
-      ],
-    },
-  },
-  paymentsEvents: {
-    label: "Payments",
-    data: lastPaymentsEvents,
-    config: {
-      id: "paymentId",
-      columns: [
-        { key: "paymentTimeAgo" },
-        { key: "userName" },
-        { key: "paidDate" },
-        { key: "invoicePrice", colored: true },
-        { key: "paymentStatus", colored: true },
-      ],
-    },
-  },
-};
+import useDashboardRecentActivity from "../hooks/useDashboardRecentActivity.js";
 
 const EVENT_TYPES = {
   USERS: "usersEvents",
@@ -73,11 +29,13 @@ const spanColorMap = {
 };
 
 const DashboardRecentActivity = () => {
+  const { isLoading, allEvents } = useDashboardRecentActivity();
+
   const [tableContent, setTableContent] = useState(EVENT_TYPES.USERS);
 
   const { eventsTitle, events } = allEvents[tableContent].data;
-  const headers = eventsTitle;
-  const rows = events;
+  const headers = eventsTitle || [];
+  const rows = events || [];
 
   const { id } = allEvents[tableContent].config;
   const tableColumns = allEvents[tableContent].config.columns;
@@ -114,49 +72,76 @@ const DashboardRecentActivity = () => {
       <table className="border-separate border-spacing-2 w-full">
         <thead>
           <tr
-            className="text-left text-gray-600 dark:text-gray-300
-            bg-indigo-500/10 
-            "
+            className={`${isLoading ? "text-center" : "text-left"}
+            text-gray-500 bg-indigo-500/10`}
           >
-            {headers.map((colTitle, i) => {
-              return (
-                <th
-                  key={`${colTitle}-${i}`}
-                  className={`px-4 py-2 ${i === 0 && "rounded-l-lg"} 
+            {isLoading ? (
+              // Loading snipper icon
+              <th className="text-2xl px-4 py-2 rounded-lg">
+                <Zoomies
+                  size="90"
+                  stroke="5"
+                  bgOpacity="0.1"
+                  speed="1.4"
+                  color="#615fff"
+                />
+              </th>
+            ) : (
+              headers.map((colTitle, i) => {
+                return (
+                  <th
+                    key={`${colTitle}-${i}`}
+                    className={`px-4 py-2 ${i === 0 && "rounded-l-lg"} 
                 ${i === headers.length - 1 && "rounded-r-lg"}`}
-                >
-                  {colTitle}
-                </th>
-              );
-            })}
+                  >
+                    {colTitle}
+                  </th>
+                );
+              })
+            )}
           </tr>
         </thead>
         <tbody>
-          {rows.map((event) => {
-            return (
-              <tr
-                key={event[id]}
-                className="text-gray-600 dark:text-gray-400
+          {isLoading ? (
+            // Loading snipper icon
+            <tr className={`${isLoading ? "text-center" : "text-left"}`}>
+              <td className="text-xl px-4 py-2 rounded-lg">
+                <Zoomies
+                  size="70"
+                  stroke="5"
+                  bgOpacity="0.1"
+                  speed="1.4"
+                  color="#615fff"
+                />{" "}
+              </td>
+            </tr>
+          ) : (
+            rows.map((event) => {
+              return (
+                <tr
+                  key={event[id]}
+                  className="text-gray-600 dark:text-gray-400
                 hover:bg-gray-500/10
                 even:bg-indigo-50 even:dark:bg-indigo-50/5"
-              >
-                {tableColumns.map((col, i) => {
-                  const value = event[col.key];
-                  return (
-                    <td
-                      key={`${col.key}-${i}`}
-                      className={`px-4 py-2 
+                >
+                  {tableColumns.map((col, i) => {
+                    const value = event[col.key];
+                    return (
+                      <td
+                        key={`${col.key}-${i}`}
+                        className={`px-4 py-2 
                       ${i === 0 && "rounded-l-lg"} 
                       ${i === tableColumns.length - 1 && "rounded-r-lg"}
                       ${col.colored ? spanColorMap[value] || "" : ""}`}
-                    >
-                      {value}
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })}
+                      >
+                        {value}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })
+          )}
         </tbody>
       </table>
     </div>

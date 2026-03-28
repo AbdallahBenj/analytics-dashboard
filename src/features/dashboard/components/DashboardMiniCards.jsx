@@ -1,5 +1,9 @@
 import { ArrowUpIcon, ArrowDownIcon } from "@heroicons/react/24/solid";
 
+// Loading snipper icon
+import { DotPulse } from "ldrs/react";
+import "ldrs/react/DotPulse.css";
+
 import convertToKilo from "../../../utils/convertToKilo.js";
 
 import useDashboardMiniCardsStats from "../hooks/useDashboardMiniCardsStats.js";
@@ -80,9 +84,9 @@ const MiniCards = () => {
                       )}
                     </p>
                   ) : (
-                    <span className="text-xl font-medium text-gray-500">
-                      Loading..
-                    </span>
+                    // Loading snipper icon
+
+                    <DotPulse size="43" speed="1.3" color="#615fff" />
                   )}
                 </div>
               </div>

@@ -10,7 +10,6 @@ const generateTimeLine = (days = 30) => {
     return { date: date.toISOString() };
   });
 
-  console.log("timeline:", timeline);
   return timeline;
 };
 

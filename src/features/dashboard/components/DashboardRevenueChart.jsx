@@ -1,6 +1,11 @@
 import { useState } from "react";
 import RadioGroupButtons from "../../../components/RadioGroupButtons.jsx";
 
+// Loading snipper icon
+import { DotPulse, Cardio } from "ldrs/react";
+import "ldrs/react/DotPulse.css";
+import "ldrs/react/Cardio.css";
+
 import useDashboardRevenueChartStats from "../hooks/useDashboardRevenueChartStats.js";
 
 import {
@@ -18,7 +23,7 @@ import convertToKilo from "../../../utils/convertToKilo.js";
 const RevenueChart = () => {
   const {
     isLoading,
-    LastMonthRevenue,
+    lastMonthRevenue,
     perCentMonthlyRevenue,
     revenueRangeConfig,
   } = useDashboardRevenueChartStats();
@@ -27,7 +32,7 @@ const RevenueChart = () => {
 
   return (
     <div
-      className="primary-chart h-96
+      className="relative primary-chart h-96
             rounded-2xl p-4 cursor-pointer 
             col-span-4 md:col-span-2 lg:col-span-3
             flex flex-col
@@ -47,10 +52,11 @@ const RevenueChart = () => {
             Monthly Revenue
           </h3>
           {isLoading ? (
-            <span className="text-lg font-medium text-gray-500">Loading..</span>
+            // Loading snipper icon
+            <DotPulse size="43" speed="1.3" color="#615fff" />
           ) : (
             <p className="text-xl font-semibold text-gray-900 dark:text-white">
-              ${convertToKilo(LastMonthRevenue)}
+              ${convertToKilo(lastMonthRevenue)}
               <span className="text-sm text-gray-500">
                 {" "}
                 {`${perCentMonthlyRevenue >= 0 ? "+" : ""}${perCentMonthlyRevenue}%`}
@@ -66,12 +72,11 @@ const RevenueChart = () => {
           />
         </div>
       </div>
-      <div className=" flex-1 min-h-0">
+      <div className="flex-1 min-h-0">
         {isLoading ? (
-          <div className="flex items-center justify-center w-full h-full">
-            <span className="text-4xl font-semibold text-gray-500">
-              Loading..
-            </span>
+          // Loading snipper icon
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <Cardio size="70" stroke="4" speed="2" color="#615fff" />
           </div>
         ) : (
           <ResponsiveContainer width="100%" height="100%">

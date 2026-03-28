@@ -25,7 +25,6 @@ const useFetchData = (dataType) => {
     return () => clearTimeout(timer);
   }, [dataType]);
 
-  console.log({ data, loading, error });
   return { data, loading, error };
 };
 

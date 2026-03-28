@@ -1,18 +1,13 @@
-import generateTimeLine from "./generateTimeLine.js";
-import generateUsers from "./generateUsers.js";
-import generateSubscriptions from "./generateSubscriptions.js";
-import generatePayments from "./generatePayments.js";
+import {
+  timeData,
+  usersData,
+  subscriptionsData,
+  paymentsData,
+} from "../../../service/mock/generateData.js";
 
-const timeData = generateTimeLine(180);
-const usersData = generateUsers(timeData);
-const subscriptionsData = generateSubscriptions(usersData);
-const paymentsData = generatePayments(subscriptionsData);
+import useFetchData from "../../../hooks/useFetchData.js";
 
-// test start
-
-import useFetchData from "../../hooks/useFetchData.js";
-
-const useGenerateData = () => {
+const useFetchedGenerateData = () => {
   const { data: fetchedTimeData, loading: timeDataLoading } =
     useFetchData(timeData);
 
@@ -26,6 +21,7 @@ const useGenerateData = () => {
     useFetchData(paymentsData);
 
   const isLoading =
+    // true;
     timeDataLoading ||
     usersDataLoading ||
     subsDataLoading ||
@@ -40,6 +36,4 @@ const useGenerateData = () => {
   };
 };
 
-export default useGenerateData;
-
-// test end
+export default useFetchedGenerateData;

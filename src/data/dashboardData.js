@@ -81,7 +81,6 @@ const getPerCentMonthlyRevenue = () => {
     100
   ).toFixed(2);
 
-  console.log("perCentRevenue:", perCentRevenue);
   return perCentRevenue;
 };
 

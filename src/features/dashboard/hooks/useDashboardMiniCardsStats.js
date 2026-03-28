@@ -16,7 +16,7 @@ import getConversionRate from "../../utils/getConversionRate.js";
 
 import getPerCentValue from "../../../utils/getPerCentValue.js";
 
-import useGenerateData from "../../../service/mock/useGenerateData.js";
+import useFetchedGenerateData from "./useFetchedGenerateData.js";
 
 const useDashboardMiniCardsStats = () => {
   const {
@@ -25,7 +25,7 @@ const useDashboardMiniCardsStats = () => {
     fetchedUsersData,
     fetchedSubsData,
     fetchedPaymentsData,
-  } = useGenerateData();
+  } = useFetchedGenerateData();
 
   const dailyRevenue = useMemo(() => {
     return calculateRevenue(fetchedTimeData, fetchedPaymentsData);

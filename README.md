@@ -29,6 +29,7 @@ src/
 │   └── react.svg
 │
 ├── components/ # reusable UI components
+│   ├── RadioGroupButtons.jsx
 │   ├── SearchInput.jsx
 │   ├── SidebarToggle.jsx
 │   └── ThemeMode.jsx
@@ -47,11 +48,15 @@ src/
 │   │   │   └── DashboardRevenueChart.jsx
 │   │   │
 │   │   └── hooks/
+│   │       ├── useDashboardMiniCardsStats.js
 │   │       ├── useDashboardPlansPieChartStats.js
-│   │       └── useDashboardMiniCardsStats.js
+│   │       ├── useDashboardRecentActivity.js
+│   │       ├── useDashboardRevenueChartStats.js
+│   │       ├── useFetchedGenerateData.js
+│   │       └── useFetchedGenerateEvents.js
 │   │
 │   └── utils/ # features
-│       ├── calculateRevenue.js // getRevenue
+│       ├── calculateRevenue.js
 │       ├── getActiveSubscriptions.js
 │       ├── getChurnRate.js
 │       ├── getConversionRate.js
@@ -103,5 +108,3 @@ src/
 │
 ├── App.jsx
 └── main.jsx
-
-layout

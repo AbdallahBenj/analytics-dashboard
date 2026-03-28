@@ -44,7 +44,6 @@ const generateUsers = (timeline = [], min = 1, max = 5) => {
       return user;
     });
   });
-  console.log("users:", users);
 
   return users;
 };

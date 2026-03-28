@@ -1,9 +1,10 @@
 import getUsersByPlan from "../../utils/getUsersByPlan.js";
 
-import useGenerateData from "../../../service/mock/useGenerateData.js";
+import useFetchedGenerateData from "./useFetchedGenerateData.js";
 
 const useDashboardPlansPieChartStats = (pieColors) => {
-  const { isLoading, fetchedUsersData, fetchedSubsData } = useGenerateData();
+  const { isLoading, fetchedUsersData, fetchedSubsData } =
+    useFetchedGenerateData();
 
   const totalUsers = fetchedUsersData?.length || 0;
 
@@ -14,9 +15,9 @@ const useDashboardPlansPieChartStats = (pieColors) => {
   );
 
   return {
+    isLoading,
     totalUsers: totalUsers,
     usersByPlan: usersByPlan,
-    isLoading,
   };
 };
 

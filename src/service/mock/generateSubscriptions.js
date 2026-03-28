@@ -78,7 +78,6 @@ const generateSubscriptions = (users = []) => {
     };
   });
 
-  console.log("subscriptions:", subscriptions.filter(Boolean));
   return subscriptions.filter(Boolean);
 };
 

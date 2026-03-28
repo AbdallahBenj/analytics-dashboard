@@ -66,7 +66,6 @@ const generatePayments = (subscriptions = []) => {
       });
     });
 
-  console.log("payments:", payments);
   return payments;
 };
 

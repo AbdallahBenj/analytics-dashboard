@@ -1,2 +1,10 @@
 1/ update Subs, Payments... mock returned objects
 2/ update limit to de parent components
+
+1/ generateData.js -- fetch --> useGenerateData.js
+
+2/ 
+{ timeData, usersData, subscriptionsData, paymentsData } 
+  -- fetch --> 
+{ fetchedTimeData, fetchedUsersData, fetchedSubscriptionsData, fetchedPaymentsData }
+
