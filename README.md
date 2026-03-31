@@ -53,7 +53,8 @@ src/
 │   │       ├── useDashboardRecentActivity.js
 │   │       ├── useDashboardRevenueChartStats.js
 │   │       ├── useFetchedGenerateData.js
-│   │       └── useFetchedGenerateEvents.js
+│   │       ├── useFetchedGenerateEvents.js
+│   │       └── useGlobalFetchedData.js              // Not used yet
 │   │
 │   └── utils/ # features
 │       ├── calculateRevenue.js
@@ -101,6 +102,9 @@ src/
 │   └── utils/ # services
 │       └── convertToDynamicTime.js
 │
+├── store/ # global state (zustand)              // Not used yet
+│   └── useFetchedDataStore.js
+│
 ├── utils/ # global utils
 │   ├── convertToKilo.js
 │   ├── getPercentValue.js
@@ -108,3 +112,29 @@ src/
 │
 ├── App.jsx
 └── main.jsx
+
+### Data Flow
+
+- Generate Data :
+     └─> generateTimeline.js
+            └─> generateUsers.js
+                   └─> generateSubscriptions.js
+                          └─> generatePayments.js
+                                 └─> generateData.js
+
+- Fetch Data:
+     └─>generateData.js
+           └─> useFetchData.js
+                  └─> useFetchedGenerateData.js
+                         └─> useFetchedDataStore.js
+                                └─> useGlobalFetchedData.js
+                                       └─> useComponents
+                                              └─> Components UI
+
+- graph TD
+  A[generateData.js] --> B[useFetchData.js]
+  B --> C[useFetchedGenerateData.js]
+  C --> D[useFetchedDataStore.js]
+  D --> E[useGlobalFetchedData.js]
+  E --> F[useComponents]
+  F --> G[Components UI]
