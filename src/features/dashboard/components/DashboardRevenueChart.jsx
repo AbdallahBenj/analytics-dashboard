@@ -23,6 +23,7 @@ import convertToKilo from "../../../utils/convertToKilo.js";
 const RevenueChart = () => {
   const {
     isLoading,
+    isErrors,
     lastMonthRevenue,
     perCentMonthlyRevenue,
     revenueRangeConfig,
@@ -54,6 +55,8 @@ const RevenueChart = () => {
           {isLoading ? (
             // Loading snipper icon
             <DotPulse size="43" speed="1.3" color="#615fff" />
+          ) : isErrors ? (
+            <span className="text-lg text-red-500">N/A</span>
           ) : (
             <p className="text-xl font-semibold text-gray-900 dark:text-white">
               ${convertToKilo(lastMonthRevenue)}

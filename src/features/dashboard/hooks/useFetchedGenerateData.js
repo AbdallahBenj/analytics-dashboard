@@ -8,32 +8,39 @@ import {
 import useFetchData from "../../../hooks/useFetchData.js";
 
 const useFetchedGenerateData = () => {
-  const { data: fetchedTimeData, loading: timeDataLoading } =
-    useFetchData(timeData);
-
-  const { data: fetchedUsersData, loading: usersDataLoading } =
-    useFetchData(usersData);
-
-  const { data: fetchedSubsData, loading: subsDataLoading } =
-    useFetchData(subscriptionsData);
-
-  const { data: fetchedPaymentsData, loading: paymentsDataLoading } =
-    useFetchData(paymentsData);
+  const time = useFetchData(timeData);
+  const users = useFetchData(usersData);
+  const subs = useFetchData(subscriptionsData);
+  const payments = useFetchData(paymentsData);
 
   const isLoading =
-    // true;
-    timeDataLoading ||
-    usersDataLoading ||
-    subsDataLoading ||
-    paymentsDataLoading;
+    time.loading || users.loading || subs.loading || payments.loading;
 
-  return {
-    isLoading,
-    fetchedTimeData,
-    fetchedUsersData,
-    fetchedSubsData,
-    fetchedPaymentsData,
+  const errors = [
+    time.error && `Time Data ${time.error}`,
+    users.error && `Users Data ${users.error}`,
+    subs.error && `Subscriptions Data ${subs.error}`,
+    payments.error && `Payments Data ${payments.error}`,
+  ].filter(Boolean);
+
+  const isErrors = errors.length !== 0;
+
+  const fetchedGenerateData = {
+    isLoading, // boolean
+    isErrors, // boolean
+    errors, // []
+    fetchedTimeData: time.data, // []
+    fetchedUsersData: users.data, // []
+    fetchedSubsData: subs.data, // []
+    fetchedPaymentsData: payments.data, // []
   };
+
+  if (import.meta.env.DEV) {
+    console.log("fetchedGenerateData:", fetchedGenerateData);
+    console.log("isErrors:", isErrors);
+  }
+
+  return fetchedGenerateData;
 };
 
 export default useFetchedGenerateData;

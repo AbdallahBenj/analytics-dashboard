@@ -20,6 +20,7 @@ const MiniCards = () => {
             title,
             type,
             loading,
+            isErrors,
             value,
             percentageValue,
             unit,
@@ -29,6 +30,10 @@ const MiniCards = () => {
           const isUp = percentageValue !== null && percentageValue > 0;
           const isGoodChange = type === "churn" ? !isUp : isUp;
           const hasChange = percentageValue !== null && percentageValue !== 0;
+
+          const unitClass = "text-md text-indigo-500";
+          const isGoodChangeClass = `text-[1rem] ml-1 inline-block
+                  ${isGoodChange ? "text-green-500" : "text-red-500"}`;
 
           return (
             <div
@@ -51,28 +56,29 @@ const MiniCards = () => {
               flex items-center justify-center
               h-12 w-12 bg-indigo-500"
               >
-                <Icon className="h-8 w-8 text-white" />
+                {Icon && <Icon className="h-8 w-8 text-white" />}
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-600 dark:text-gray-300">
                   {title}
                 </p>
                 <div className="text-2xl font-semibold text-gray-900 dark:text-white">
-                  {!loading ? (
+                  {loading ? (
+                    // Loading snipper icon
+                    <DotPulse size="43" speed="1.3" color="#615fff" />
+                  ) : isErrors ? (
+                    <span className="text-lg text-red-500">N/A</span>
+                  ) : (
                     <p>
                       {unit === "$" && (
-                        <span className="text-md text-indigo-500">{unit}</span>
+                        <span className={unitClass}>{unit}</span>
                       )}
                       {convertToKilo(value.toFixed(2))}
                       {unit !== "$" && (
-                        <span className="text-md text-indigo-500"> {unit}</span>
+                        <span className={unitClass}> {unit}</span>
                       )}{" "}
                       {hasChange && (
-                        <span
-                          className={`text-[1rem] ml-1 inline-block
-                  ${isGoodChange ? "text-green-500" : "text-red-500"}
-                    `}
-                        >
+                        <span className={isGoodChangeClass}>
                           {" "}
                           {isUp ? (
                             <ArrowUpIcon className="inline size-5" />
@@ -83,10 +89,6 @@ const MiniCards = () => {
                         </span>
                       )}
                     </p>
-                  ) : (
-                    // Loading snipper icon
-
-                    <DotPulse size="43" speed="1.3" color="#615fff" />
                   )}
                 </div>
               </div>

@@ -7,29 +7,35 @@ import {
 import useFetchData from "../../../hooks/useFetchData.js";
 
 const useFetchedGenerateEvents = () => {
-  const { data: fetchedLastUsersEvents, loading: lastUsersEventsLoading } =
-    useFetchData(lastUsersEvents);
+  const users = useFetchData(lastUsersEvents);
+  const subs = useFetchData(lastSubsEvents);
+  const payments = useFetchData(lastPaymentsEvents);
 
-  const { data: fetchedLastSubsEvents, loading: lastSubsEventsLoading } =
-    useFetchData(lastSubsEvents);
+  const isLoading = users.loading || subs.loading || payments.loading;
 
-  const {
-    data: fetchedLastPaymentsEvents,
-    loading: lastPaymentsEventsLoading,
-  } = useFetchData(lastPaymentsEvents);
+  const errors = [
+    users.error && `Users Events ${users.error}`,
+    subs.error && `Subscriptions Events ${subs.error}`,
+    payments.error && `Payments Events ${payments.error}`,
+  ].filter(Boolean);
 
-  const isLoading =
-    // true;
-    lastUsersEventsLoading ||
-    lastSubsEventsLoading ||
-    lastPaymentsEventsLoading;
+  const isErrors = errors.length !== 0;
 
-  return {
-    isLoading,
-    fetchedLastUsersEvents,
-    fetchedLastSubsEvents,
-    fetchedLastPaymentsEvents,
+  const fetchedGenerateEvents = {
+    isLoading, // boolean
+    isErrors, // boolean
+    errors, // []
+    fetchedLastUsersEvents: users.data, // []
+    fetchedLastSubsEvents: subs.data, // []
+    fetchedLastPaymentsEvents: payments.data, // []
   };
+
+  if (import.meta.env.DEV) {
+    console.log("fetchedGenerateEvents:", fetchedGenerateEvents);
+    console.log("isErrors:", isErrors);
+  }
+
+  return fetchedGenerateEvents;
 };
 
 export default useFetchedGenerateEvents;

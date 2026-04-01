@@ -6,7 +6,7 @@ import getPerCentValue from "../../../utils/getPerCentValue.js";
 import useFetchedGenerateData from "./useFetchedGenerateData.js";
 
 const useDashboardRevenueChartStats = () => {
-  const { isLoading, fetchedTimeData, fetchedPaymentsData } =
+  const { isLoading, isErrors, fetchedTimeData, fetchedPaymentsData } =
     useFetchedGenerateData();
 
   const dailyRevenue = calculateRevenue(fetchedTimeData, fetchedPaymentsData);
@@ -51,6 +51,7 @@ const useDashboardRevenueChartStats = () => {
 
   return {
     isLoading,
+    isErrors,
     lastMonthRevenue,
     perCentMonthlyRevenue,
     revenueRangeConfig,

@@ -6,23 +6,27 @@ const useFetchData = (dataType) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    let isMounted = true;
     setLoading(true);
     setError(null);
 
-    let randomErr = Math.random() - 0.5;
-    randomErr = 1;
+    const fetchData = async () => {
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        let randomErrV2 = Math.random() >= 0.25;
 
-    const timer = setTimeout(() => {
-      if (randomErr >= 0) {
-        setData(dataType);
-        setLoading(false);
-      } else {
-        setError("Data loading failed");
+        if (isMounted) {
+          if (randomErrV2) setData(dataType);
+          else setError("failed to load");
+        }
+      } finally {
         setLoading(false);
       }
-    }, 2000);
+    };
 
-    return () => clearTimeout(timer);
+    fetchData();
+
+    return () => (isMounted = false);
   }, [dataType]);
 
   return { data, loading, error };
