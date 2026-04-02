@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+
 import {
   timeData,
   usersData,
@@ -16,12 +18,14 @@ const useFetchedGenerateData = () => {
   const isLoading =
     time.loading || users.loading || subs.loading || payments.loading;
 
-  const errors = [
-    time.error && `Time Data ${time.error}`,
-    users.error && `Users Data ${users.error}`,
-    subs.error && `Subscriptions Data ${subs.error}`,
-    payments.error && `Payments Data ${payments.error}`,
-  ].filter(Boolean);
+  const errors = useMemo(() => {
+    return [
+      time.error && `Time Data ${time.error}`,
+      users.error && `Users Data ${users.error}`,
+      subs.error && `Subscriptions Data ${subs.error}`,
+      payments.error && `Payments Data ${payments.error}`,
+    ].filter(Boolean);
+  }, [time.error, users.error, subs.error, payments.error]);
 
   const isErrors = errors.length !== 0;
 
@@ -34,11 +38,6 @@ const useFetchedGenerateData = () => {
     fetchedSubsData: subs.data, // []
     fetchedPaymentsData: payments.data, // []
   };
-
-  if (import.meta.env.DEV) {
-    console.log("fetchedGenerateData:", fetchedGenerateData);
-    console.log("isErrors:", isErrors);
-  }
 
   return fetchedGenerateData;
 };

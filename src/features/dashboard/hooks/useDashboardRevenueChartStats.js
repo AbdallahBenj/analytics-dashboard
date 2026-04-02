@@ -3,11 +3,11 @@ import calculateRevenue from "../../utils/calculateRevenue.js";
 import getMonthlyRevenue from "../../utils/getMonthlyRevenue.js";
 import getPerCentValue from "../../../utils/getPerCentValue.js";
 
-import useFetchedGenerateData from "./useFetchedGenerateData.js";
+import useGlobalFetchedData from "./useGlobalFetchedData.js";
 
 const useDashboardRevenueChartStats = () => {
   const { isLoading, isErrors, fetchedTimeData, fetchedPaymentsData } =
-    useFetchedGenerateData();
+    useGlobalFetchedData();
 
   const dailyRevenue = calculateRevenue(fetchedTimeData, fetchedPaymentsData);
   const monthlyRevenue = calculateRevenue(

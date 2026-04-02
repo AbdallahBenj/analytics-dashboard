@@ -8,8 +8,18 @@ import convertToKilo from "../../../utils/convertToKilo.js";
 
 import useDashboardMiniCardsStats from "../hooks/useDashboardMiniCardsStats.js";
 
+// test start
+
+import useGlobalFetchedData from "../hooks/useGlobalFetchedData.js";
+
+// test end
+
 const MiniCards = () => {
   const { miniCardsData } = useDashboardMiniCardsStats();
+
+  // test start
+  useGlobalFetchedData();
+  // test end
 
   return (
     <div className="col-span-4">

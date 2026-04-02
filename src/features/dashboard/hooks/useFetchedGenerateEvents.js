@@ -30,11 +30,6 @@ const useFetchedGenerateEvents = () => {
     fetchedLastPaymentsEvents: payments.data, // []
   };
 
-  if (import.meta.env.DEV) {
-    console.log("fetchedGenerateEvents:", fetchedGenerateEvents);
-    console.log("isErrors:", isErrors);
-  }
-
   return fetchedGenerateEvents;
 };
 
