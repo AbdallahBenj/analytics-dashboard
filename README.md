@@ -65,7 +65,6 @@ src/
 │       └── getUsersByPlan.js
 │
 ├── hooks/ # global reusable hooks
-│   ├── useFetchData.js
 │   ├── useSystemMode.js
 │   └── useThemeMode.js
 │
@@ -99,11 +98,14 @@ src/
 │   │   ├── generateSubscriptionsEvents.js
 │   │   └── generateUsersEvents.js
 │   │
+│   └── hooks/ # services
+│   │   └── useFetchData.js
+│   │
 │   └── utils/ # services
 │       └── convertToDynamicTime.js
 │
 ├── store/ # global state (zustand)              // Not used yet
-│   └── useFetchedDataStore.js
+│   └── useStoreFetchedData.js
 │
 ├── utils/ # global utils
 │   ├── convertToKilo.js

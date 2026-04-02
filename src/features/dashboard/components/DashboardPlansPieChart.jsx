@@ -49,53 +49,55 @@ const DashboardPlansPieChart = () => {
       ) : isErrors ? (
         <span className="text-lg text-red-500">N/A</span>
       ) : (
-        <ResponsiveContainer width="100%" height={300}>
-          <PieChart>
-            <text
-              x="50%"
-              y="45%"
-              pointerEvents="none"
-              textAnchor="middle"
-              dominantBaseline="middle"
-              className="text-2xl font-bold fill-gray-800 dark:fill-white"
-            >
-              {totalUsers}
-            </text>
-            <text
-              x="50%"
-              y="55%"
-              pointerEvents="none"
-              textAnchor="middle"
-              dominantBaseline="middle"
-              className="text-sm fill-gray-500"
-            >
-              Total Users
-            </text>
-            <Pie
-              data={usersByPlan || []}
-              nameKey="name"
-              label={({ percent = 0 }) => `${(percent * 100).toFixed()}%`}
-              dataKey="value"
-              innerRadius={70}
-              outerRadius={90}
-              paddingAngle={3}
-              stroke="#99a1af"
-              labelLine={false}
-              isAnimationActive={true}
-              animationDuration={500}
-            ></Pie>
-            {usersByPlan && !isLoading && <Legend />}
-            <Tooltip
-              contentStyle={{
-                backgroundColor: "rgba(17, 24, 39, 0.9)",
-                borderRadius: "12px",
-                border: "1px solid rgba(255,255,255,0.1)",
-                color: "#ffffff",
-              }}
-              itemStyle={{ color: "#ffffff" }}
-            />{" "}
-          </PieChart>
-        </ResponsiveContainer>
+        !isErrors && (
+          <ResponsiveContainer width="100%" height={300}>
+            <PieChart>
+              <text
+                x="50%"
+                y="45%"
+                pointerEvents="none"
+                textAnchor="middle"
+                dominantBaseline="middle"
+                className="text-2xl font-bold fill-gray-800 dark:fill-white"
+              >
+                {totalUsers}
+              </text>
+              <text
+                x="50%"
+                y="55%"
+                pointerEvents="none"
+                textAnchor="middle"
+                dominantBaseline="middle"
+                className="text-sm fill-gray-500"
+              >
+                Total Users
+              </text>
+              <Pie
+                data={usersByPlan || []}
+                nameKey="name"
+                label={({ percent = 0 }) => `${(percent * 100).toFixed()}%`}
+                dataKey="value"
+                innerRadius={70}
+                outerRadius={90}
+                paddingAngle={3}
+                stroke="#99a1af"
+                labelLine={false}
+                isAnimationActive={true}
+                animationDuration={500}
+              ></Pie>
+              {usersByPlan && !isLoading && <Legend />}
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: "rgba(17, 24, 39, 0.9)",
+                  borderRadius: "12px",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  color: "#ffffff",
+                }}
+                itemStyle={{ color: "#ffffff" }}
+              />{" "}
+            </PieChart>
+          </ResponsiveContainer>
+        )
       )}
     </div>
   );

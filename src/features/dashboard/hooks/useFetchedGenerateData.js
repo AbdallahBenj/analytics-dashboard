@@ -5,7 +5,7 @@ import {
   paymentsData,
 } from "../../../service/mock/generateData.js";
 
-import useFetchData from "../../../hooks/useFetchData.js";
+import useFetchData from "../../../service/hooks/useFetchData.js";
 
 const useFetchedGenerateData = () => {
   const time = useFetchData(timeData);

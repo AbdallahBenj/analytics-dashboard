@@ -82,46 +82,48 @@ const RevenueChart = () => {
             <Cardio size="70" stroke="4" speed="2" color="#615fff" />
           </div>
         ) : (
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={revenueRangeConfig[range].data}>
-              <CartesianGrid
-                strokeDasharray="3 3"
-                strokeOpacity={0.3}
-                vertical={false}
-              />
-              <XAxis
-                dataKey={revenueRangeConfig[range].xKey}
-                tick={{ fill: "var(--color-chart-gray)", fontSize: 12 }}
-                axisLine={false}
-                tickLine={false}
-              />
-              <YAxis
-                tickFormatter={(value) => `$${convertToKilo(value)}`}
-                tick={{ fill: "var(--color-chart-gray)", fontSize: 12 }}
-                axisLine={false}
-                tickLine={false}
-              />
-              <Tooltip
-                formatter={(v) => [`$${convertToKilo(v)}`, "Revenue"]}
-                contentStyle={{
-                  backgroundColor: "rgba(17, 24, 39, 0.9)",
-                  borderRadius: "12px",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                  color: "#fff",
-                }}
-                labelStyle={{ color: "#9CA3AF" }}
-                cursor={{ stroke: "#6366F1", strokeWidth: 1 }}
-              />
-              <Line
-                type="monotone"
-                dataKey={revenueRangeConfig[range].yKey}
-                stroke="#6366F1"
-                strokeWidth={3}
-                dot={false}
-                activeDot={{ r: 6 }}
-              />
-            </LineChart>
-          </ResponsiveContainer>
+          !isErrors && (
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={revenueRangeConfig[range].data}>
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  strokeOpacity={0.3}
+                  vertical={false}
+                />
+                <XAxis
+                  dataKey={revenueRangeConfig[range].xKey}
+                  tick={{ fill: "var(--color-chart-gray)", fontSize: 12 }}
+                  axisLine={false}
+                  tickLine={false}
+                />
+                <YAxis
+                  tickFormatter={(value) => `$${convertToKilo(value)}`}
+                  tick={{ fill: "var(--color-chart-gray)", fontSize: 12 }}
+                  axisLine={false}
+                  tickLine={false}
+                />
+                <Tooltip
+                  formatter={(v) => [`$${convertToKilo(v)}`, "Revenue"]}
+                  contentStyle={{
+                    backgroundColor: "rgba(17, 24, 39, 0.9)",
+                    borderRadius: "12px",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    color: "#fff",
+                  }}
+                  labelStyle={{ color: "#9CA3AF" }}
+                  cursor={{ stroke: "#6366F1", strokeWidth: 1 }}
+                />
+                <Line
+                  type="monotone"
+                  dataKey={revenueRangeConfig[range].yKey}
+                  stroke="#6366F1"
+                  strokeWidth={3}
+                  dot={false}
+                  activeDot={{ r: 6 }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          )
         )}
       </div>
     </div>

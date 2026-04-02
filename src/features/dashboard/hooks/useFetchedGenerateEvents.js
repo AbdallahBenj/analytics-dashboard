@@ -4,7 +4,7 @@ import {
   lastPaymentsEvents,
 } from "../../../service/events/generateEvents.js";
 
-import useFetchData from "../../../hooks/useFetchData.js";
+import useFetchData from "../../../service/hooks/useFetchData.js";
 
 const useFetchedGenerateEvents = () => {
   const users = useFetchData(lastUsersEvents);

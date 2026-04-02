@@ -13,7 +13,7 @@ const useFetchData = (dataType) => {
     const fetchData = async () => {
       try {
         await new Promise((resolve) => setTimeout(resolve, 2000));
-        let randomErrV2 = Math.random() >= 0.25;
+        let randomErrV2 = Math.random() >= 0.1;
 
         if (isMounted) {
           if (randomErrV2) setData(dataType);
