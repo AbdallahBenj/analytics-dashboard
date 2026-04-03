@@ -6,15 +6,11 @@ import getPerCentValue from "../../../utils/getPerCentValue.js";
 import useGlobalFetchedData from "./useGlobalFetchedData.js";
 
 const useDashboardRevenueChartStats = () => {
-  const { isLoading, isErrors, fetchedTimeData, fetchedPaymentsData } =
-    useGlobalFetchedData();
+  const { fetchedData } = useGlobalFetchedData();
+  const { isDataLoading, isDataErrors, timeData, paymentsData } = fetchedData;
 
-  const dailyRevenue = calculateRevenue(fetchedTimeData, fetchedPaymentsData);
-  const monthlyRevenue = calculateRevenue(
-    fetchedTimeData,
-    fetchedPaymentsData,
-    "month",
-  );
+  const dailyRevenue = calculateRevenue(timeData, paymentsData);
+  const monthlyRevenue = calculateRevenue(timeData, paymentsData, "month");
 
   const dailyRevenueLast30days = dailyRevenue?.slice(-30) || [];
   const dailyRevenuePrev30days = dailyRevenue?.slice(-60, -30) || [];
@@ -50,8 +46,8 @@ const useDashboardRevenueChartStats = () => {
   };
 
   return {
-    isLoading,
-    isErrors,
+    isLoading: isDataLoading,
+    isErrors: isDataErrors,
     lastMonthRevenue,
     perCentMonthlyRevenue,
     revenueRangeConfig,

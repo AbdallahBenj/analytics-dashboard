@@ -1,47 +1,100 @@
 import { useEffect } from "react";
-import useFetchedGenerateData from "./useFetchedGenerateData";
-import useStoreFetchedData from "../../../store/useStoreFetchedData";
+import useFetchedGenerateData from "./useFetchedGenerateData.js";
+import fetchedGenerateEvents from "./useFetchedGenerateEvents.js";
+import useStoreFetchedData from "../../../store/useStoreFetchedData.js";
 
 const useGlobalFetchedData = () => {
+  // Data
   const {
-    isLoading, // boolean
-    isErrors, // boolean
-    errors, // []
-    fetchedTimeData, // []
-    fetchedUsersData, // []
-    fetchedSubsData, // []
-    fetchedPaymentsData, // []
+    isDataLoading, // boolean
+    dataErrors, // []
+    timeData, // []
+    usersData, // []
+    subsData, // []
+    paymentsData, // []
   } = useFetchedGenerateData();
 
-  const { fetchedData, setLoading, setErrors, setFetchedData } =
-    useStoreFetchedData();
+  // Events
+  const {
+    isEventsLoading, // boolean
+    eventsErrors, // []
+    usersEvents, // []
+    subsEvents, // []
+    paymentsEvents, // []
+  } = fetchedGenerateEvents();
+
+  // Data and Events
+
+  const fetchedData = useStoreFetchedData((state) => state.fetchedData);
+  const setFetchedData = useStoreFetchedData((state) => state.setFetchedData);
+  const fetchedEvents = useStoreFetchedData((state) => state.fetchedEvents);
+  const setFetchedEvents = useStoreFetchedData(
+    (state) => state.setFetchedEvents,
+  );
+
+  const hasErrors = (arr) => Array.isArray(arr) && arr.length > 0;
 
   useEffect(() => {
-    setLoading(isLoading);
-    setErrors(errors);
+    setFetchedData({
+      isDataLoading,
+      dataErrors,
+      timeData,
+      usersData,
+      subsData,
+      paymentsData,
+      isDataErrors: hasErrors(dataErrors),
+    });
 
-    setFetchedData({ key: "fetchedTimeData", value: fetchedTimeData });
-    setFetchedData({ key: "fetchedUsersData", value: fetchedUsersData });
-    setFetchedData({ key: "fetchedSubsData", value: fetchedSubsData });
-    setFetchedData({ key: "fetchedPaymentsData", value: fetchedPaymentsData });
+    setFetchedEvents({
+      isEventsLoading,
+      eventsErrors,
+      usersEvents,
+      subsEvents,
+      paymentsEvents,
+      isEventsErrors: hasErrors(eventsErrors),
+    });
   }, [
-    setLoading,
-    isLoading,
-    setErrors,
-    isErrors,
-    errors,
+    // Data
+    isDataLoading,
+    dataErrors,
     setFetchedData,
-    fetchedTimeData,
-    fetchedUsersData,
-    fetchedSubsData,
-    fetchedPaymentsData,
+    timeData,
+    usersData,
+    subsData,
+    paymentsData,
+    // Events
+    isEventsLoading,
+    eventsErrors,
+    setFetchedEvents,
+    usersEvents,
+    subsEvents,
+    paymentsEvents,
   ]);
+
+  const isDataAndEventsLoading =
+    fetchedData.isDataLoading || fetchedEvents.isEventsLoading;
+
+  const dataAndEventsErrors = [
+    ...fetchedData.dataErrors,
+    ...fetchedEvents.eventsErrors,
+  ];
+
+  const isDataAndEventsErrors =
+    Array.isArray(dataAndEventsErrors) && dataAndEventsErrors.length > 0;
+
+  const globalStatus = {
+    isDataAndEventsLoading,
+    isDataAndEventsErrors,
+    dataAndEventsErrors,
+  };
 
   if (import.meta.env.DEV) {
     console.log("fetchedData:", fetchedData);
+    console.log("fetchedEvents:", fetchedEvents);
+    console.log("globalStatus:", globalStatus);
   }
 
-  return fetchedData;
+  return { globalStatus, fetchedData, fetchedEvents };
 };
 
 export default useGlobalFetchedData;

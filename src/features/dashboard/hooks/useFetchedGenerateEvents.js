@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import {
   lastSubsEvents,
   lastUsersEvents,
@@ -11,23 +12,25 @@ const useFetchedGenerateEvents = () => {
   const subs = useFetchData(lastSubsEvents);
   const payments = useFetchData(lastPaymentsEvents);
 
-  const isLoading = users.loading || subs.loading || payments.loading;
+  const isEventsLoading = users.loading || subs.loading || payments.loading;
 
-  const errors = [
-    users.error && `Users Events ${users.error}`,
-    subs.error && `Subscriptions Events ${subs.error}`,
-    payments.error && `Payments Events ${payments.error}`,
-  ].filter(Boolean);
+  const eventsErrors = useMemo(() => {
+    return [
+      users.error && `Users Events ${users.error}`,
+      subs.error && `Subscriptions Events ${subs.error}`,
+      payments.error && `Payments Events ${payments.error}`,
+    ].filter(Boolean);
+  }, [users.error, subs.error, payments.error]);
 
-  const isErrors = errors.length !== 0;
+  const isEventsErrors = eventsErrors.length !== 0;
 
   const fetchedGenerateEvents = {
-    isLoading, // boolean
-    isErrors, // boolean
-    errors, // []
-    fetchedLastUsersEvents: users.data, // []
-    fetchedLastSubsEvents: subs.data, // []
-    fetchedLastPaymentsEvents: payments.data, // []
+    isEventsLoading, // boolean
+    isEventsErrors, // boolean
+    eventsErrors, // []
+    usersEvents: users.data, // []
+    subsEvents: subs.data, // []
+    paymentsEvents: payments.data, // []
   };
 
   return fetchedGenerateEvents;

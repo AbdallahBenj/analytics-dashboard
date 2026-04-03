@@ -8,18 +8,8 @@ import convertToKilo from "../../../utils/convertToKilo.js";
 
 import useDashboardMiniCardsStats from "../hooks/useDashboardMiniCardsStats.js";
 
-// test start
-
-import useGlobalFetchedData from "../hooks/useGlobalFetchedData.js";
-
-// test end
-
 const MiniCards = () => {
   const { miniCardsData } = useDashboardMiniCardsStats();
-
-  // test start
-  useGlobalFetchedData();
-  // test end
 
   return (
     <div className="col-span-4">
@@ -29,8 +19,8 @@ const MiniCards = () => {
             id,
             title,
             type,
-            loading,
-            isErrors,
+            isDataLoading,
+            isDataErrors,
             value,
             percentageValue,
             unit,
@@ -73,10 +63,10 @@ const MiniCards = () => {
                   {title}
                 </p>
                 <div className="text-2xl font-semibold text-gray-900 dark:text-white">
-                  {loading ? (
+                  {isDataLoading ? (
                     // Loading snipper icon
                     <DotPulse size="43" speed="1.3" color="#615fff" />
-                  ) : isErrors ? (
+                  ) : isDataErrors ? (
                     <span className="text-lg text-red-500">N/A</span>
                   ) : (
                     <p>

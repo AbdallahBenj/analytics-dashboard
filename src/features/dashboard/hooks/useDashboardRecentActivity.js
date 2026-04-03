@@ -1,17 +1,21 @@
-import useFetchedGenerateEvents from "../hooks/useFetchedGenerateEvents.js";
+// import useFetchedGenerateEvents from "../hooks/useFetchedGenerateEvents.js";
+import useGlobalFetchedData from "./useGlobalFetchedData.js";
 
 const useDashboardRecentActivity = () => {
+  const { fetchedEvents } = useGlobalFetchedData();
   const {
-    isLoading,
-    fetchedLastUsersEvents,
-    fetchedLastSubsEvents,
-    fetchedLastPaymentsEvents,
-  } = useFetchedGenerateEvents();
+    isEventsLoading,
+    isEventsErrors,
+    eventsErrors,
+    usersEvents,
+    subsEvents,
+    paymentsEvents,
+  } = fetchedEvents;
 
   const allEvents = {
     usersEvents: {
       label: "Users",
-      data: fetchedLastUsersEvents,
+      data: usersEvents,
       config: {
         id: "userId",
         columns: [
@@ -24,7 +28,7 @@ const useDashboardRecentActivity = () => {
     },
     subsEvents: {
       label: "Subscriptions",
-      data: fetchedLastSubsEvents,
+      data: subsEvents,
       config: {
         id: "subsId",
         columns: [
@@ -38,7 +42,7 @@ const useDashboardRecentActivity = () => {
     },
     paymentsEvents: {
       label: "Payments",
-      data: fetchedLastPaymentsEvents,
+      data: paymentsEvents,
       config: {
         id: "paymentId",
         columns: [
@@ -53,7 +57,9 @@ const useDashboardRecentActivity = () => {
   };
 
   return {
-    isLoading,
+    isEventsLoading,
+    isEventsErrors,
+    eventsErrors,
     allEvents,
   };
 };

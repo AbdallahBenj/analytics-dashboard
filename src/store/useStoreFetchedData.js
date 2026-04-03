@@ -1,33 +1,34 @@
 import { create } from "zustand";
 
 const useStoreFetchedData = create((set) => ({
+  // Data
   fetchedData: {
-    isLoading: false, // boolean
-    isErrors: false, // boolean
-    errors: [], // []
-    fetchedTimeData: [], // []
-    fetchedUsersData: [], // []
-    fetchedSubsData: [], // []
-    fetchedPaymentsData: [], // []
+    isDataLoading: false, // boolean
+    isDataErrors: false, // boolean
+    dataErrors: [], // []
+    timeData: [], // []
+    usersData: [], // []
+    subsData: [], // []
+    paymentsData: [], // []
   },
 
-  setLoading: (value) =>
+  fetchedEvents: {
+    isEventsLoading: false, // boolean
+    isEventsErrors: false, // boolean
+    eventsErrors: [], // []
+    usersEvents: [], // []
+    subsEvents: [], // []
+    paymentsEvents: [], // []
+  },
+
+  setFetchedData: (data) =>
     set((state) => ({
-      fetchedData: { ...state.fetchedData, isLoading: value },
+      fetchedData: { ...state.fetchedData, ...data },
     })),
 
-  setErrors: (value) =>
+  setFetchedEvents: (events) =>
     set((state) => ({
-      fetchedData: {
-        ...state.fetchedData,
-        errors: value,
-        isErrors: value.length > 0,
-      },
-    })),
-
-  setFetchedData: ({ key, value }) =>
-    set((state) => ({
-      fetchedData: { ...state.fetchedData, [key]: value },
+      fetchedEvents: { ...state.fetchedEvents, ...events },
     })),
 }));
 

@@ -125,13 +125,25 @@ src/
                                  └─> generateData.js
 
 - Fetch Data:
-     └─>generateData.js
-           └─> useFetchData.js
-                  └─> useFetchedGenerateData.js
-                         └─> useFetchedDataStore.js
-                                └─> useGlobalFetchedData.js
-                                       └─> useComponents
-                                              └─> Components UI
+     └─> generateData.js
+            └─> useFetchData.js
+                   └─> useFetchedGenerateData.js
+                          └─> useStoreFetchedData.js
+                                 └─> useGlobalFetchedData.js
+                                        └─> useComponents
+                                               └─> Components UI
+
+- Fetch Events:
+     └─> generateData.js
+            └─> generateEvents.js
+                   └─> useFetchData.js
+                          └─> useFetchedGenerateEvents.js
+                                 └─> useStoreFetchedData.js
+                                        └─> useGlobalFetchedData.js
+                                               └─> useComponents
+                                                      └─> Components UI
+
+                                              
 
 - graph TD
   A[generateData.js] --> B[useFetchData.js]

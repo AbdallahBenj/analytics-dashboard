@@ -17,7 +17,7 @@ const pieColors = {
 import useDashboardPlansPieChartStats from "../hooks/useDashboardPlansPieChartStats.js";
 
 const DashboardPlansPieChart = () => {
-  const { isLoading, isErrors, totalUsers, usersByPlan } =
+  const { isDataLoading, isDataErrors, totalUsers, usersByPlan } =
     useDashboardPlansPieChartStats(pieColors);
 
   return (
@@ -42,14 +42,14 @@ const DashboardPlansPieChart = () => {
       >
         Subscription Plans
       </h3>
-      {isLoading ? ( // Loading snipper icon
+      {isDataLoading ? ( // Loading snipper icon
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
           <LineSpinner size="70" stroke="4" speed="1" color="#615fff" />
         </div>
-      ) : isErrors ? (
+      ) : isDataErrors ? (
         <span className="text-lg text-red-500">N/A</span>
       ) : (
-        !isErrors && (
+        !isDataErrors && (
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <text
@@ -85,7 +85,7 @@ const DashboardPlansPieChart = () => {
                 isAnimationActive={true}
                 animationDuration={500}
               ></Pie>
-              {usersByPlan && !isLoading && <Legend />}
+              {usersByPlan && !isDataLoading && <Legend />}
               <Tooltip
                 contentStyle={{
                   backgroundColor: "rgba(17, 24, 39, 0.9)",

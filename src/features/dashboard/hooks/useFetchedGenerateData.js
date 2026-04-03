@@ -15,10 +15,10 @@ const useFetchedGenerateData = () => {
   const subs = useFetchData(subscriptionsData);
   const payments = useFetchData(paymentsData);
 
-  const isLoading =
+  const isDataLoading =
     time.loading || users.loading || subs.loading || payments.loading;
 
-  const errors = useMemo(() => {
+  const dataErrors = useMemo(() => {
     return [
       time.error && `Time Data ${time.error}`,
       users.error && `Users Data ${users.error}`,
@@ -27,16 +27,16 @@ const useFetchedGenerateData = () => {
     ].filter(Boolean);
   }, [time.error, users.error, subs.error, payments.error]);
 
-  const isErrors = errors.length !== 0;
+  const isDataErrors = dataErrors.length !== 0;
 
   const fetchedGenerateData = {
-    isLoading, // boolean
-    isErrors, // boolean
-    errors, // []
-    fetchedTimeData: time.data, // []
-    fetchedUsersData: users.data, // []
-    fetchedSubsData: subs.data, // []
-    fetchedPaymentsData: payments.data, // []
+    isDataLoading, // boolean
+    isDataErrors, // boolean
+    dataErrors, // []
+    timeData: time.data, // []
+    usersData: users.data, // []
+    subsData: subs.data, // []
+    paymentsData: payments.data, // []
   };
 
   return fetchedGenerateData;

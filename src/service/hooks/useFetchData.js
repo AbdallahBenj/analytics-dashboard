@@ -12,11 +12,11 @@ const useFetchData = (dataType) => {
 
     const fetchData = async () => {
       try {
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-        let randomErrV2 = Math.random() >= 0.1;
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        let randomError = Math.random() >= 0.1;
 
         if (isMounted) {
-          if (randomErrV2) setData(dataType);
+          if (randomError) setData(dataType);
           else setError("failed to load");
         }
       } finally {
