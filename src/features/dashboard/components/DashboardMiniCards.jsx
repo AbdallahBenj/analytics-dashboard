@@ -19,8 +19,8 @@ const MiniCards = () => {
             id,
             title,
             type,
-            isDataLoading,
-            isDataErrors,
+            isDataAndEventsLoading,
+            isDataAndEventsErrors,
             value,
             percentageValue,
             unit,
@@ -34,6 +34,33 @@ const MiniCards = () => {
           const unitClass = "text-md text-indigo-500";
           const isGoodChangeClass = `text-[1rem] ml-1 inline-block
                   ${isGoodChange ? "text-green-500" : "text-red-500"}`;
+
+          const loadingContent = (
+            <DotPulse size="43" speed="1.3" color="#615fff" />
+          );
+          const errorsContent = (
+            <span className="text-lg font-semibold text-red-500">N/A</span>
+          );
+          const valueContent = !value ? (
+            "-"
+          ) : (
+            <p className="text-gray-900 dark:text-white">
+              {unit === "$" && <span className={unitClass}>{unit}</span>}{" "}
+              {convertToKilo(value.toFixed(2))}
+              {unit !== "$" && <span className={unitClass}> {unit}</span>}{" "}
+              {hasChange && (
+                <span className={isGoodChangeClass}>
+                  {" "}
+                  {isUp ? (
+                    <ArrowUpIcon className="inline size-5" />
+                  ) : (
+                    <ArrowDownIcon className="inline size-5" />
+                  )}
+                  {`${Math.abs(percentageValue).toFixed(2)} %`}
+                </span>
+              )}
+            </p>
+          );
 
           return (
             <div
@@ -62,34 +89,12 @@ const MiniCards = () => {
                 <p className="text-sm font-medium text-gray-600 dark:text-gray-300">
                   {title}
                 </p>
-                <div className="text-2xl font-semibold text-gray-900 dark:text-white">
-                  {isDataLoading ? (
-                    // Loading snipper icon
-                    <DotPulse size="43" speed="1.3" color="#615fff" />
-                  ) : isDataErrors ? (
-                    <span className="text-lg text-red-500">N/A</span>
-                  ) : (
-                    <p>
-                      {unit === "$" && (
-                        <span className={unitClass}>{unit}</span>
-                      )}
-                      {convertToKilo(value.toFixed(2))}
-                      {unit !== "$" && (
-                        <span className={unitClass}> {unit}</span>
-                      )}{" "}
-                      {hasChange && (
-                        <span className={isGoodChangeClass}>
-                          {" "}
-                          {isUp ? (
-                            <ArrowUpIcon className="inline size-5" />
-                          ) : (
-                            <ArrowDownIcon className="inline size-5" />
-                          )}
-                          {`${Math.abs(percentageValue).toFixed(2)} %`}
-                        </span>
-                      )}
-                    </p>
-                  )}
+                <div className="text-2xl font-semibold text-gray-500">
+                  {isDataAndEventsLoading
+                    ? loadingContent
+                    : isDataAndEventsErrors
+                      ? errorsContent
+                      : valueContent}
                 </div>
               </div>
             </div>

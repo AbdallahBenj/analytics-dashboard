@@ -22,14 +22,30 @@ import convertToKilo from "../../../utils/convertToKilo.js";
 
 const RevenueChart = () => {
   const {
-    isLoading,
-    isErrors,
+    isDataAndEventsLoading,
+    isDataAndEventsErrors,
     lastMonthRevenue,
     perCentMonthlyRevenue,
     revenueRangeConfig,
   } = useDashboardRevenueChartStats();
 
   const [range, setRange] = useState("d30");
+
+  const loadingContent = <DotPulse size="43" speed="1.3" color="#615fff" />;
+  const errorsContent = (
+    <span className="text-lg font-semibold text-red-500">N/A</span>
+  );
+  const valueContent = !lastMonthRevenue ? (
+    <span className="text-gray-500">-</span>
+  ) : (
+    <p className="text-xl font-semibold text-gray-900 dark:text-white">
+      {`$ ${convertToKilo(lastMonthRevenue)}`}
+      <span className="text-sm text-gray-500">
+        {" "}
+        {`${perCentMonthlyRevenue >= 0 ? "+" : ""}${perCentMonthlyRevenue}%`}
+      </span>
+    </p>
+  );
 
   return (
     <div
@@ -52,20 +68,11 @@ const RevenueChart = () => {
           <h3 className="text-md font-medium text-gray-600 dark:text-gray-300">
             Monthly Revenue
           </h3>
-          {isLoading ? (
-            // Loading snipper icon
-            <DotPulse size="43" speed="1.3" color="#615fff" />
-          ) : isErrors ? (
-            <span className="text-lg text-red-500">N/A</span>
-          ) : (
-            <p className="text-xl font-semibold text-gray-900 dark:text-white">
-              ${convertToKilo(lastMonthRevenue)}
-              <span className="text-sm text-gray-500">
-                {" "}
-                {`${perCentMonthlyRevenue >= 0 ? "+" : ""}${perCentMonthlyRevenue}%`}
-              </span>
-            </p>
-          )}
+          {isDataAndEventsLoading
+            ? loadingContent
+            : isDataAndEventsErrors
+              ? errorsContent
+              : valueContent}
         </div>
         <div className="Button date range mb-5">
           <RadioGroupButtons
@@ -76,13 +83,13 @@ const RevenueChart = () => {
         </div>
       </div>
       <div className="flex-1 min-h-0">
-        {isLoading ? (
+        {isDataAndEventsLoading ? (
           // Loading snipper icon
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <Cardio size="70" stroke="4" speed="2" color="#615fff" />
           </div>
         ) : (
-          !isErrors && (
+          !isDataAndEventsErrors && (
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={revenueRangeConfig[range].data}>
                 <CartesianGrid

@@ -19,15 +19,11 @@ import getPerCentValue from "../../../utils/getPerCentValue.js";
 import useGlobalFetchedData from "./useGlobalFetchedData.js";
 
 const useDashboardMiniCardsStats = () => {
-  const { fetchedData } = useGlobalFetchedData();
-  const {
-    isDataLoading,
-    isDataErrors,
-    timeData,
-    usersData,
-    subsData,
-    paymentsData,
-  } = fetchedData;
+  const { globalStatus, fetchedData } = useGlobalFetchedData();
+
+  const { isDataAndEventsLoading, isDataAndEventsErrors } = globalStatus;
+
+  const { timeData, usersData, subsData, paymentsData } = fetchedData;
 
   const dailyRevenue = useMemo(() => {
     return calculateRevenue(timeData, paymentsData);
@@ -67,8 +63,8 @@ const useDashboardMiniCardsStats = () => {
         id: 1,
         name: "MRR",
         title: "Monthly Revenue",
-        isDataLoading,
-        isDataErrors,
+        isDataAndEventsLoading,
+        isDataAndEventsErrors,
         value: LastMonthRevenue,
         prevValue: previousMonthRevenue || 0.0,
         percentageValue: monthlyRevenuePerCent,
@@ -79,8 +75,8 @@ const useDashboardMiniCardsStats = () => {
         id: 2,
         name: "AS",
         title: "Active Subscriptions",
-        isDataLoading,
-        isDataErrors,
+        isDataAndEventsLoading,
+        isDataAndEventsErrors,
         value: totalActiveSubscriptions,
         percentageValue: null,
         unit: "user",
@@ -91,8 +87,8 @@ const useDashboardMiniCardsStats = () => {
         name: "ChurnR",
         title: "Churn Rate",
         type: "churn",
-        isDataLoading,
-        isDataErrors,
+        isDataAndEventsLoading,
+        isDataAndEventsErrors,
         value: churnRate,
         prevValue: prevChurnRate || 0.0,
         percentageValue: monthlyChurnRatePerCent,
@@ -103,8 +99,8 @@ const useDashboardMiniCardsStats = () => {
         id: 4,
         name: "ConversionR",
         title: "Conversion Rate",
-        isDataLoading,
-        isDataErrors,
+        isDataAndEventsLoading,
+        isDataAndEventsErrors,
         value: conversionRate,
         percentageValue: null,
         unit: "%",

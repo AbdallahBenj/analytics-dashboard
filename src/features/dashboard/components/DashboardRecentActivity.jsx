@@ -43,7 +43,7 @@ const DashboardRecentActivity = () => {
 
   return (
     <div
-      className="recent-activity-table h-fit overflow-auto
+      className="recent-activity-table h-fit
             rounded-2xl p-4 cursor-pointer
             col-span-4
             
@@ -70,86 +70,90 @@ const DashboardRecentActivity = () => {
           />
         </div>
       </div>
-      <table className="border-separate border-spacing-2 w-full">
-        <thead>
-          <tr
-            className={`${isEventsLoading ? "text-center" : "text-left"}
+      <div className="overflow-auto">
+        <table className="border-separate border-spacing-2 w-full">
+          <thead>
+            <tr
+              className={`${isEventsLoading ? "text-center" : "text-left"}
             text-gray-500 bg-indigo-500/10`}
-          >
+            >
+              {isEventsLoading ? (
+                // Loading snipper icon
+                <th className="text-2xl px-4 py-2 rounded-lg">
+                  <Zoomies
+                    size="90"
+                    stroke="5"
+                    bgOpacity="0.1"
+                    speed="1.4"
+                    color="#615fff"
+                  />
+                </th>
+              ) : isEventsErrors ? (
+                <th className="flex justify-center px-4 py-2 rounded-lg">
+                  <span className="text-xl text-red-500">N/A</span>
+                </th>
+              ) : (
+                headers.map((colTitle, i) => {
+                  return (
+                    <th
+                      key={`${colTitle}-${i}`}
+                      className={`px-4 py-2 ${i === 0 && "rounded-l-lg"} 
+                ${i === headers.length - 1 && "rounded-r-lg"}`}
+                    >
+                      {colTitle}
+                    </th>
+                  );
+                })
+              )}
+            </tr>
+          </thead>
+          <tbody>
             {isEventsLoading ? (
               // Loading snipper icon
-              <th className="text-2xl px-4 py-2 rounded-lg">
-                <Zoomies
-                  size="90"
-                  stroke="5"
-                  bgOpacity="0.1"
-                  speed="1.4"
-                  color="#615fff"
-                />
-              </th>
-            ) : isEventsErrors ? (
-              <th className="flex justify-center px-4 py-2 rounded-lg">
-                <span className="text-xl text-red-500">N/A</span>
-              </th>
+              <tr
+                className={`${isEventsLoading ? "text-center" : "text-left"}`}
+              >
+                <td className="text-xl px-4 py-2 rounded-lg">
+                  <Zoomies
+                    size="70"
+                    stroke="5"
+                    bgOpacity="0.1"
+                    speed="1.4"
+                    color="#615fff"
+                  />{" "}
+                </td>
+              </tr>
             ) : (
-              headers.map((colTitle, i) => {
+              !isEventsErrors &&
+              rows.map((event) => {
                 return (
-                  <th
-                    key={`${colTitle}-${i}`}
-                    className={`px-4 py-2 ${i === 0 && "rounded-l-lg"} 
-                ${i === headers.length - 1 && "rounded-r-lg"}`}
-                  >
-                    {colTitle}
-                  </th>
-                );
-              })
-            )}
-          </tr>
-        </thead>
-        <tbody>
-          {isEventsLoading ? (
-            // Loading snipper icon
-            <tr className={`${isEventsLoading ? "text-center" : "text-left"}`}>
-              <td className="text-xl px-4 py-2 rounded-lg">
-                <Zoomies
-                  size="70"
-                  stroke="5"
-                  bgOpacity="0.1"
-                  speed="1.4"
-                  color="#615fff"
-                />{" "}
-              </td>
-            </tr>
-          ) : (
-            !isEventsErrors &&
-            rows.map((event) => {
-              return (
-                <tr
-                  key={event[id]}
-                  className="text-gray-600 dark:text-gray-400
+                  <tr
+                    key={event[id]}
+                    className="text-gray-600 dark:text-gray-400
                 hover:bg-gray-500/10
                 even:bg-indigo-50 even:dark:bg-indigo-50/5"
-                >
-                  {tableColumns.map((col, i) => {
-                    const value = event[col.key];
-                    return (
-                      <td
-                        key={`${col.key}-${i}`}
-                        className={`px-4 py-2 
+                  >
+                    {tableColumns.map((col, i) => {
+                      const value = event[col.key];
+                      return (
+                        <td
+                          key={`${col.key}-${i}`}
+                          className={`px-4 py-2 
                       ${i === 0 && "rounded-l-lg"} 
                       ${i === tableColumns.length - 1 && "rounded-r-lg"}
                       ${col.colored ? spanColorMap[value] || "" : ""}`}
-                      >
-                        {value}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })
-          )}
-        </tbody>
-      </table>
+                        >
+                          {value}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                );
+              })
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

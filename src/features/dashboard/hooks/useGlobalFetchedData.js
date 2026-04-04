@@ -79,20 +79,13 @@ const useGlobalFetchedData = () => {
     ...fetchedEvents.eventsErrors,
   ];
 
-  const isDataAndEventsErrors =
-    Array.isArray(dataAndEventsErrors) && dataAndEventsErrors.length > 0;
+  const isDataAndEventsErrors = hasErrors(dataAndEventsErrors);
 
   const globalStatus = {
     isDataAndEventsLoading,
     isDataAndEventsErrors,
     dataAndEventsErrors,
   };
-
-  if (import.meta.env.DEV) {
-    console.log("fetchedData:", fetchedData);
-    console.log("fetchedEvents:", fetchedEvents);
-    console.log("globalStatus:", globalStatus);
-  }
 
   return { globalStatus, fetchedData, fetchedEvents };
 };
