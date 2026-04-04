@@ -29,7 +29,7 @@ const spanColorMap = {
 };
 
 const DashboardRecentActivity = () => {
-  const { isEventsLoading, isEventsErrors, allEvents } =
+  const { isDataAndEventsLoading, isDataAndEventsErrors, allEvents } =
     useDashboardRecentActivity();
 
   const [tableContent, setTableContent] = useState(EVENT_TYPES.USERS);
@@ -74,10 +74,10 @@ const DashboardRecentActivity = () => {
         <table className="border-separate border-spacing-2 w-full">
           <thead>
             <tr
-              className={`${isEventsLoading ? "text-center" : "text-left"}
+              className={`${isDataAndEventsLoading ? "text-center" : "text-left"}
             text-gray-500 bg-indigo-500/10`}
             >
-              {isEventsLoading ? (
+              {isDataAndEventsLoading ? (
                 // Loading snipper icon
                 <th className="text-2xl px-4 py-2 rounded-lg">
                   <Zoomies
@@ -88,7 +88,7 @@ const DashboardRecentActivity = () => {
                     color="#615fff"
                   />
                 </th>
-              ) : isEventsErrors ? (
+              ) : isDataAndEventsErrors ? (
                 <th className="flex justify-center px-4 py-2 rounded-lg">
                   <span className="text-xl text-red-500">N/A</span>
                 </th>
@@ -108,10 +108,10 @@ const DashboardRecentActivity = () => {
             </tr>
           </thead>
           <tbody>
-            {isEventsLoading ? (
+            {isDataAndEventsLoading ? (
               // Loading snipper icon
               <tr
-                className={`${isEventsLoading ? "text-center" : "text-left"}`}
+                className={`${isDataAndEventsLoading ? "text-center" : "text-left"}`}
               >
                 <td className="text-xl px-4 py-2 rounded-lg">
                   <Zoomies
@@ -124,7 +124,7 @@ const DashboardRecentActivity = () => {
                 </td>
               </tr>
             ) : (
-              !isEventsErrors &&
+              !isDataAndEventsErrors &&
               rows.map((event) => {
                 return (
                   <tr
