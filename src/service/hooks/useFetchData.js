@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
+import useStoreRetryState from "../../store/useStoreRetryState";
 
 const useFetchData = (dataType) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const { retryCount } = useStoreRetryState();
 
   useEffect(() => {
     let isMounted = true;
@@ -13,10 +16,10 @@ const useFetchData = (dataType) => {
     const fetchData = async () => {
       try {
         await new Promise((resolve) => setTimeout(resolve, 1000));
-        let randomError = Math.random() >= 0.1;
+        let isSuccess = Math.random() >= 0.1;
 
         if (isMounted) {
-          if (randomError) setData(dataType);
+          if (isSuccess) setData(dataType);
           else setError("failed to load");
         }
       } finally {
@@ -27,7 +30,7 @@ const useFetchData = (dataType) => {
     fetchData();
 
     return () => (isMounted = false);
-  }, [dataType]);
+  }, [dataType, retryCount]);
 
   return { data, loading, error };
 };

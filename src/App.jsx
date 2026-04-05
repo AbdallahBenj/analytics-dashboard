@@ -7,10 +7,12 @@ import CustomersPage from "./pages/CustomersPage";
 import SubscriptionsPage from "./pages/SubscriptionsPage";
 import FeaturesPage from "./pages/FeaturesPage";
 import ReportsPage from "./pages/ReportsPage";
+import ErrorsDialog from "./components/errorsDialog"
 
 function App() {
   return (
     <HashRouter>
+      <ErrorsDialog/>
       <Routes>
         <Route path="/" element={<DashboardLayout />}>
           <Route index element={<DashboardPage />} />

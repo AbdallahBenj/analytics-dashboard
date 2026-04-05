@@ -12,3 +12,9 @@
 feat: add global status of loading and errors to dashboard ui components
 fix: display of value ui  after loading
 fix: table overflow auto on mobile
+
+
+4/
+
+useReloadData
+useFetch --> useStoreRetryState --> errorsDialog
