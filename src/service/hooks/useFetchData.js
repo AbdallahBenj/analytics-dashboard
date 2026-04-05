@@ -23,7 +23,9 @@ const useFetchData = (dataType) => {
           else setError("failed to load");
         }
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     };
 

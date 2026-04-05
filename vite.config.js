@@ -6,4 +6,15 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   base: "/analytics-dashboard/",
   plugins: [react(), tailwindcss()],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          recharts: ["recharts"],
+          "ui-lib": ["@headlessui/react", "@heroicons/react"],
+          router: ["react-router-dom"],
+        },
+      },
+    },
+  },
 });

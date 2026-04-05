@@ -25,17 +25,16 @@ const ErrorsDialog = () => {
       {/* <button className="bg-indigo-500" onClick={() => setIsOpen(true)}>
         Open dialog
       </button> */}
+
       <Dialog
         open={isOpen}
         onClose={() => setIsOpen(false)}
         className="relative z-50"
       >
+        {/* Overlay */}
+        <div className="fixed inset-0 bg-black/30 backdrop-blur-sm" />
 
-
-          {/* Overlay */}
-  <div className="fixed inset-0 bg-black/30 backdrop-blur-sm" />
-
-  {/* Dialog container */}
+        {/* Dialog container */}
         <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
           <DialogPanel
             className="max-w-lg space-y-4 border p-12 rounded-2xl
