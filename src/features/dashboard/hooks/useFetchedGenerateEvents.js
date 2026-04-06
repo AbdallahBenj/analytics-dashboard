@@ -15,11 +15,14 @@ const useFetchedGenerateEvents = () => {
   const isEventsLoading = users.loading || subs.loading || payments.loading;
 
   const eventsErrors = useMemo(() => {
-    return [
-      users.error && `Users Events ${users.error}`,
-      subs.error && `Subscriptions Events ${subs.error}`,
-      payments.error && `Payments Events ${payments.error}`,
-    ].filter(Boolean);
+    const errors = [];
+    if (users.error)
+      errors.push({ id: "users", message: users.error, label: "Users Events" });
+    if (subs.error)
+      errors.push({ id: "subscriptions", message: subs.error, label: "Subscriptions Events" });
+    if (payments.error)
+      errors.push({ id: "payments", message: payments.error, label: "Payments Events" });
+    return errors;
   }, [users.error, subs.error, payments.error]);
 
   const fetchedGenerateEvents = {

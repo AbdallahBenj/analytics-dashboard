@@ -19,12 +19,28 @@ const useFetchedGenerateData = () => {
     time.loading || users.loading || subs.loading || payments.loading;
 
   const dataErrors = useMemo(() => {
-    return [
-      time.error && `Time Data ${time.error}`,
-      users.error && `Users Data ${users.error}`,
-      subs.error && `Subscriptions Data ${subs.error}`,
-      payments.error && `Payments Data ${payments.error}`,
-    ].filter(Boolean);
+    const errors = [];
+    if (time.error)
+      errors.push({ id: "time", message: time.error, label: "Time Data" });
+    if (users.error)
+      errors.push({
+        id: "users",
+        message: users.error,
+        label: "Users Data",
+      });
+    if (subs.error)
+      errors.push({
+        id: "subscriptions",
+        message: subs.error,
+        label: "Subscriptions Data",
+      });
+    if (payments.error)
+      errors.push({
+        id: "payments",
+        message: payments.error,
+        label: "Payments Data",
+      });
+    return errors;
   }, [time.error, users.error, subs.error, payments.error]);
 
   const fetchedGenerateData = {

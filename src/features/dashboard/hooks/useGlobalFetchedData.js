@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import useFetchedGenerateData from "./useFetchedGenerateData.js";
-import fetchedGenerateEvents from "./useFetchedGenerateEvents.js";
+import useFetchedGenerateEvents from "./useFetchedGenerateEvents.js";
 import useStoreFetchedData from "../../../store/useStoreFetchedData.js";
 
 const useGlobalFetchedData = () => {
@@ -21,7 +21,7 @@ const useGlobalFetchedData = () => {
     usersEvents, // []
     subsEvents, // []
     paymentsEvents, // []
-  } = fetchedGenerateEvents();
+  } = useFetchedGenerateEvents();
 
   // Data and Events
 
@@ -55,7 +55,6 @@ const useGlobalFetchedData = () => {
     // Data
     isDataLoading,
     dataErrors,
-    setFetchedData,
     timeData,
     usersData,
     subsData,
@@ -63,7 +62,6 @@ const useGlobalFetchedData = () => {
     // Events
     isEventsLoading,
     eventsErrors,
-    setFetchedEvents,
     usersEvents,
     subsEvents,
     paymentsEvents,

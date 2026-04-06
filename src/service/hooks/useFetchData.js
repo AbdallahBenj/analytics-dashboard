@@ -13,9 +13,10 @@ const useFetchData = (dataType) => {
     setLoading(true);
     setError(null);
 
+    const FETCH_DELAY = 500;
     const fetchData = async () => {
       try {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, FETCH_DELAY));
         let isSuccess = Math.random() >= 0.1;
 
         if (isMounted) {

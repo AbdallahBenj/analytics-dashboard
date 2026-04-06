@@ -58,14 +58,14 @@ const ErrorsDialog = () => {
               review the details below.
             </Description>
 
-            {dataAndEventsErrors && dataAndEventsErrors.length > 0 && (
+            {dataAndEventsErrors && isDataAndEventsErrors && (
               <div className="mt-4 space-y-2">
                 {dataAndEventsErrors.map((error) => (
                   <p
-                    key={error}
+                    key={error.id}
                     className="text-sm text-red-500 bg-gray-500/20 px-3 py-2 rounded-md"
                   >
-                    &#9679; {error}
+                    &#9679; {error.label}: {error.message}
                   </p>
                 ))}
               </div>
