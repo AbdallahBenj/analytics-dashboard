@@ -27,11 +27,8 @@ const useFetchedGenerateData = () => {
     ].filter(Boolean);
   }, [time.error, users.error, subs.error, payments.error]);
 
-  const isDataErrors = dataErrors.length !== 0;
-
   const fetchedGenerateData = {
     isDataLoading, // boolean
-    isDataErrors, // boolean
     dataErrors, // []
     timeData: time.data, // []
     usersData: users.data, // []

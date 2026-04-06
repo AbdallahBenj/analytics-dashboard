@@ -22,11 +22,8 @@ const useFetchedGenerateEvents = () => {
     ].filter(Boolean);
   }, [users.error, subs.error, payments.error]);
 
-  const isEventsErrors = eventsErrors.length !== 0;
-
   const fetchedGenerateEvents = {
     isEventsLoading, // boolean
-    isEventsErrors, // boolean
     eventsErrors, // []
     usersEvents: users.data, // []
     subsEvents: subs.data, // []

@@ -42,7 +42,6 @@ const useGlobalFetchedData = () => {
       usersData,
       subsData,
       paymentsData,
-      isDataErrors: hasErrors(dataErrors),
     });
 
     setFetchedEvents({
@@ -51,7 +50,6 @@ const useGlobalFetchedData = () => {
       usersEvents,
       subsEvents,
       paymentsEvents,
-      isEventsErrors: hasErrors(eventsErrors),
     });
   }, [
     // Data

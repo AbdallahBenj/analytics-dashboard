@@ -4,7 +4,6 @@ const useStoreFetchedData = create((set) => ({
   // Data
   fetchedData: {
     isDataLoading: false, // boolean
-    isDataErrors: false, // boolean
     dataErrors: [], // []
     timeData: [], // []
     usersData: [], // []
@@ -14,7 +13,6 @@ const useStoreFetchedData = create((set) => ({
 
   fetchedEvents: {
     isEventsLoading: false, // boolean
-    isEventsErrors: false, // boolean
     eventsErrors: [], // []
     usersEvents: [], // []
     subsEvents: [], // []
