@@ -21,7 +21,7 @@ const useFetchData = (dataType) => {
 
         if (isMounted) {
           if (isSuccess) setData(dataType);
-          else setError("failed to load");
+          else setError("Failed to load");
         }
       } finally {
         if (isMounted) {

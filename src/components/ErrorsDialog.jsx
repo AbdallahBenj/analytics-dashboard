@@ -54,8 +54,8 @@ const ErrorsDialog = () => {
             </DialogTitle>
 
             <Description className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-              We encountered some issues while processing your request. Please
-              review the details below.
+              We encountered some issues while processing your request.
+              <p className="font-semibold text-emerald-500">Please try again</p>
             </Description>
 
             {dataAndEventsErrors && isDataAndEventsErrors && (
@@ -65,7 +65,7 @@ const ErrorsDialog = () => {
                     key={error.id}
                     className="text-sm text-red-500 bg-gray-500/20 px-3 py-2 rounded-md"
                   >
-                    &#9679; {error.label}: {error.message}
+                    &#9679; {error.message} {error.label}.
                   </p>
                 ))}
               </div>

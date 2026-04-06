@@ -17,11 +17,19 @@ const useFetchedGenerateEvents = () => {
   const eventsErrors = useMemo(() => {
     const errors = [];
     if (users.error)
-      errors.push({ id: "users", message: users.error, label: "Users Events" });
+      errors.push({ id: "users", message: users.error, label: "Users events" });
     if (subs.error)
-      errors.push({ id: "subscriptions", message: subs.error, label: "Subscriptions Events" });
+      errors.push({
+        id: "subscriptions",
+        message: subs.error,
+        label: "Subscriptions events",
+      });
     if (payments.error)
-      errors.push({ id: "payments", message: payments.error, label: "Payments Events" });
+      errors.push({
+        id: "payments",
+        message: payments.error,
+        label: "Payments events",
+      });
     return errors;
   }, [users.error, subs.error, payments.error]);
 

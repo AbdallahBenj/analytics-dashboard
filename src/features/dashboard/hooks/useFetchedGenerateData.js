@@ -26,19 +26,19 @@ const useFetchedGenerateData = () => {
       errors.push({
         id: "users",
         message: users.error,
-        label: "Users Data",
+        label: "Users data",
       });
     if (subs.error)
       errors.push({
         id: "subscriptions",
         message: subs.error,
-        label: "Subscriptions Data",
+        label: "Subscriptions data",
       });
     if (payments.error)
       errors.push({
         id: "payments",
         message: payments.error,
-        label: "Payments Data",
+        label: "Payments data",
       });
     return errors;
   }, [time.error, users.error, subs.error, payments.error]);

@@ -4,7 +4,7 @@ import SearchInput from "../components/SearchInput";
 import navContent from "../data/navContent";
 const { navigation } = navContent;
 
-const PageHeader = ({ layoutType }) => {
+const PageHeader = () => {
   const location = useLocation();
 
   const page = navigation.find((page) => page.href === location.pathname);
@@ -19,13 +19,9 @@ const PageHeader = ({ layoutType }) => {
       dark:after:border-y dark:after:border-white/10"
     >
       <div
-        className={`mx-auto px-4 py-6 sm:px-6 lg:px-8
-          md:flex md:flex-row md:justify-between md:items-center
-          ${
-            layoutType === "sidebar"
-              ? "max-w-(--main-width) md:mr-(--content-margin)"
-              : "max-w-7xl"
-          }`}
+        className="mx-auto px-4 py-6 sm:px-6 lg:px-8
+        md:flex md:flex-row md:justify-between md:items-center
+        max-w-(--main-width) md:mr-(--content-margin)"
       >
         {pageName === "Dashboard" ? (
           <h1

@@ -35,7 +35,6 @@ src/
 │   └── ThemeMode.jsx
 │
 ├── data/ # Static Contents
-│   ├── dashboardData.js // Not used
 │   ├── navContent.jsx
 │   └── usersNames.jsx
 │
@@ -54,7 +53,7 @@ src/
 │   │       ├── useDashboardRevenueChartStats.js
 │   │       ├── useFetchedGenerateData.js
 │   │       ├── useFetchedGenerateEvents.js
-│   │       └── useGlobalFetchedData.js              // Not used yet
+│   │       └── useGlobalFetchedData.js           
 │   │
 │   └── utils/ # features
 │       ├── calculateRevenue.js
@@ -71,7 +70,6 @@ src/
 ├── layout/ # layout
 │   ├── DashboardLayout.jsx
 │   ├── Header.jsx
-│   ├── Main.jsx
 │   ├── PageHeader.jsx
 │   └── Sidebar.jsx
 │
@@ -104,8 +102,9 @@ src/
 │   └── utils/ # services
 │       └── convertToDynamicTime.js
 │
-├── store/ # global state (zustand)              // Not used yet
-│   └── useStoreFetchedData.js
+├── store/ # global state (zustand)
+│   ├── useStoreFetchedData.js
+│   └── useStoreRetryState.js
 │
 ├── utils/ # global utils
 │   ├── convertToKilo.js

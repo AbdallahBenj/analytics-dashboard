@@ -20,27 +20,17 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const Header = ({ layoutType }) => {
+const Header = () => {
   return (
     <header>
       <Disclosure
         as="nav"
         className="bg-gray-800 md:bg-gray-100 dark:bg-gray-800/25"
       >
-        <div
-          className={`
-            mx-auto px-4 sm:px-6 lg:px-8
-          ${
-            layoutType === "sidebar"
-              ? "max-w-(--main-width) md:mr-(--content-margin)"
-              : "max-w-7xl"
-          }`}
-        >
+        <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-(--main-width) md:mr-(--content-margin)">
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center">
-              <div
-                className={`shrink-0 ${layoutType === "sidebar" ? "md:hidden" : ""}`}
-              >
+              <div className="shrink-0 md:hidden">
                 <a
                   href="./"
                   aria-label="Go to homepage"
@@ -60,31 +50,6 @@ const Header = ({ layoutType }) => {
                   )}
                 </a>
               </div>
-              {layoutType === "header" && (
-                <div className="hidden md:block">
-                  <div className="ml-10 flex items-baseline space-x-4">
-                    {navigation.map((item) => (
-                      <NavLink
-                        key={item.name}
-                        to={item.href}
-                        aria-current={item.current ? "page" : undefined}
-                        className={({ isActive }) =>
-                          classNames(
-                            "rounded-md px-3 py-2 text-md font-medium w-full",
-                            isActive
-                              ? "text-indigo-600 dark:text-indigo-500 bg-gray-200 dark:bg-gray-950/50"
-                              : item.current
-                                ? "text-indigo-500 hover:text-indigo-600 dark:text-white dark:hover:text-indigo-500 bg-gray-200 dark:bg-gray-950/50"
-                                : "text-gray-500 hover:text-gray-600 hover:bg-gray-200/70 dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-white/5",
-                          )
-                        }
-                      >
-                        {item.name}
-                      </NavLink>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
             <div className="hidden md:block">
               <div className="ml-4 flex items-center md:ml-6">
