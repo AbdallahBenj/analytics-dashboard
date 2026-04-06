@@ -54,8 +54,8 @@ const ErrorsDialog = () => {
             </DialogTitle>
 
             <Description className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-              We encountered some issues while processing your request.
-              <p className="font-semibold text-emerald-500">Please try again</p>
+              We encountered some issues while processing your request.<br/>
+              <span className="font-semibold text-emerald-500">Please try again</span>
             </Description>
 
             {dataAndEventsErrors && isDataAndEventsErrors && (
