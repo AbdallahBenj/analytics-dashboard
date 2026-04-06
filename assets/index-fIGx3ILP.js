@@ -209,7 +209,7 @@ Error generating stack: `+a.message+`
             
             shadow-md shadow-black/10
             hover:shadow-lg hover:shadow-black/20
-            transition-all duration-300`,children:[o.jsx(km,{className:"font-bold text-lg text-red-600",children:"Something went wrong"}),o.jsxs($m,{className:"text-sm text-gray-600 dark:text-gray-400 mt-1",children:["We encountered some issues while processing your request.",o.jsx("p",{className:"font-semibold text-emerald-500",children:"Please try again"})]}),x&&f&&o.jsx("div",{className:"mt-4 space-y-2",children:x.map(j=>o.jsxs("p",{className:"text-sm text-red-500 bg-gray-500/20 px-3 py-2 rounded-md",children:["● ",j.message," ",j.label,"."]},j.id))}),o.jsxs("div",{className:"flex gap-4",children:[o.jsx("button",{onClick:()=>r(!1),className:`px-3 py-1.5 rounded-md 
+            transition-all duration-300`,children:[o.jsx(km,{className:"font-bold text-lg text-red-600",children:"Something went wrong"}),o.jsxs($m,{className:"text-sm text-gray-600 dark:text-gray-400 mt-1",children:["We encountered some issues while processing your request.",o.jsx("br",{}),o.jsx("span",{className:"font-semibold text-emerald-500",children:"Please try again"})]}),x&&f&&o.jsx("div",{className:"mt-4 space-y-2",children:x.map(j=>o.jsxs("p",{className:"text-sm text-red-500 bg-gray-500/20 px-3 py-2 rounded-md",children:["● ",j.message," ",j.label,"."]},j.id))}),o.jsxs("div",{className:"flex gap-4",children:[o.jsx("button",{onClick:()=>r(!1),className:`px-3 py-1.5 rounded-md 
                 text-sm text-center font-medium
                 text-gray-600 dark:text-gray-300 
                 bg-gray-500/20 dark:bg-gray-500/20 
