@@ -5,8 +5,7 @@ import generatePayments from "./generatePayments.js";
 
 const timeData = generateTimeLine(180);
 const usersData = generateUsers(timeData);
-const subscriptionsData = generateSubscriptions(usersData);
-const paymentsData = generatePayments(subscriptionsData);
+const subsData = generateSubscriptions(usersData);
+const paymentsData = generatePayments(subsData);
 
-export { timeData, usersData, subscriptionsData, paymentsData };
-
+export { timeData, usersData, subsData, paymentsData };

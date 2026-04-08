@@ -3,10 +3,10 @@ import getUsersByPlan from "../../utils/getUsersByPlan.js";
 import useGlobalFetchedData from "./useGlobalFetchedData.js";
 
 const useDashboardPlansPieChartStats = (pieColors) => {
-  const { globalStatus, fetchedData } = useGlobalFetchedData();
+  const { globalStatus, data } = useGlobalFetchedData();
 
   const { isDataAndEventsLoading, isDataAndEventsErrors } = globalStatus;
-  const { usersData, subsData } = fetchedData;
+  const { usersData, subsData } = data;
 
   const totalUsers = usersData?.length || 0;
 

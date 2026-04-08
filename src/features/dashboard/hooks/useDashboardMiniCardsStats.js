@@ -19,11 +19,11 @@ import getPerCentValue from "../../../utils/getPerCentValue.js";
 import useGlobalFetchedData from "./useGlobalFetchedData.js";
 
 const useDashboardMiniCardsStats = () => {
-  const { globalStatus, fetchedData } = useGlobalFetchedData();
+  const { globalStatus, data } = useGlobalFetchedData();
 
   const { isDataAndEventsLoading, isDataAndEventsErrors } = globalStatus;
 
-  const { timeData, usersData, subsData, paymentsData } = fetchedData;
+  const { timeData, usersData, subsData, paymentsData } = data;
 
   const dailyRevenue = useMemo(() => {
     return calculateRevenue(timeData, paymentsData);

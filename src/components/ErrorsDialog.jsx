@@ -26,11 +26,7 @@ const ErrorsDialog = () => {
         Open dialog
       </button> */}
 
-      <Dialog
-        open={isOpen}
-        onClose={() => setIsOpen(false)}
-        className="relative z-50"
-      >
+      <Dialog open={isOpen} onClose={() => {}} className="relative z-50">
         {/* Overlay */}
         <div className="fixed inset-0 bg-black/30 backdrop-blur-sm" />
 
@@ -54,8 +50,11 @@ const ErrorsDialog = () => {
             </DialogTitle>
 
             <Description className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-              We encountered some issues while processing your request.<br/>
-              <span className="font-semibold text-emerald-500">Please try again</span>
+              We encountered some issues while processing your request.
+              <br />
+              <span className="font-semibold text-emerald-500">
+                Please try again
+              </span>
             </Description>
 
             {dataAndEventsErrors && isDataAndEventsErrors && (
@@ -65,7 +64,7 @@ const ErrorsDialog = () => {
                     key={error.id}
                     className="text-sm text-red-500 bg-gray-500/20 px-3 py-2 rounded-md"
                   >
-                    &#9679; {error.message} {error.label}.
+                    &#9679; {error.label} : {error.message}.
                   </p>
                 ))}
               </div>
@@ -73,7 +72,8 @@ const ErrorsDialog = () => {
             <div className="flex gap-4">
               <button
                 onClick={() => setIsOpen(false)}
-                className="px-3 py-1.5 rounded-md 
+                className="cursor-pointer
+                px-3 py-1.5 rounded-md 
                 text-sm text-center font-medium
                 text-gray-600 dark:text-gray-300 
                 bg-gray-500/20 dark:bg-gray-500/20 
@@ -84,7 +84,8 @@ const ErrorsDialog = () => {
               </button>
               <button
                 onClick={incrementRetry}
-                className="px-3 py-1.5 rounded-md 
+                className="cursor-pointer
+                px-3 py-1.5 rounded-md 
                 text-sm text-center font-medium 
                 text-gray-300 bg-indigo-500 hover:bg-indigo-600 
                 transition flex items-center justify-center shadow"

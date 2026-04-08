@@ -6,10 +6,10 @@ import getPerCentValue from "../../../utils/getPerCentValue.js";
 import useGlobalFetchedData from "./useGlobalFetchedData.js";
 
 const useDashboardRevenueChartStats = () => {
-  const { globalStatus, fetchedData } = useGlobalFetchedData();
+  const { globalStatus, data } = useGlobalFetchedData();
 
   const { isDataAndEventsLoading, isDataAndEventsErrors } = globalStatus;
-  const { timeData, paymentsData } = fetchedData;
+  const { timeData, paymentsData } = data;
 
   const dailyRevenue = calculateRevenue(timeData, paymentsData);
   const monthlyRevenue = calculateRevenue(timeData, paymentsData, "month");

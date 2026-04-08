@@ -2,12 +2,11 @@
 import useGlobalFetchedData from "./useGlobalFetchedData.js";
 
 const useDashboardRecentActivity = () => {
-  const { globalStatus, fetchedEvents } = useGlobalFetchedData();
+  const { globalStatus, events } = useGlobalFetchedData();
 
   const { isDataAndEventsLoading, isDataAndEventsErrors } = globalStatus;
 
-  const { eventsErrors, usersEvents, subsEvents, paymentsEvents } =
-    fetchedEvents;
+  const { usersEvents, subsEvents, paymentsEvents } = events;
 
   const allEvents = {
     usersEvents: {
@@ -56,7 +55,6 @@ const useDashboardRecentActivity = () => {
   return {
     isDataAndEventsLoading,
     isDataAndEventsErrors,
-    eventsErrors,
     allEvents,
   };
 };

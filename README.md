@@ -29,6 +29,7 @@ src/
 │   └── react.svg
 │
 ├── components/ # reusable UI components
+│   ├── ErrorsDialog.jsx
 │   ├── RadioGroupButtons.jsx
 │   ├── SearchInput.jsx
 │   ├── SidebarToggle.jsx
@@ -51,8 +52,8 @@ src/
 │   │       ├── useDashboardPlansPieChartStats.js
 │   │       ├── useDashboardRecentActivity.js
 │   │       ├── useDashboardRevenueChartStats.js
-│   │       ├── useFetchedGenerateData.js
-│   │       ├── useFetchedGenerateEvents.js
+│   │       ├── useFetchedGenerateData.js                       // Not used
+│   │       ├── useFetchedGenerateEvents.js                     // Not used
 │   │       └── useGlobalFetchedData.js           
 │   │
 │   └── utils/ # features
@@ -97,7 +98,7 @@ src/
 │   │   └── generateUsersEvents.js
 │   │
 │   └── hooks/ # services
-│   │   └── useFetchData.js
+│   │   └── useFetchData.js                       // Not used
 │   │
 │   └── utils/ # services
 │       └── convertToDynamicTime.js
@@ -125,8 +126,8 @@ src/
 
 - Fetch Data:
      └─> generateData.js
-            └─> useFetchData.js
-                   └─> useFetchedGenerateData.js
+            └─> useFetchData.js                      // Not used
+                   └─> useFetchedGenerateData.js                       // Not used
                           └─> useStoreFetchedData.js
                                  └─> useGlobalFetchedData.js
                                         └─> useComponents
@@ -135,8 +136,8 @@ src/
 - Fetch Events:
      └─> generateData.js
             └─> generateEvents.js
-                   └─> useFetchData.js
-                          └─> useFetchedGenerateEvents.js
+                   └─> useFetchData.js                       // Not used
+                          └─> useFetchedGenerateEvents.js                       // Not used
                                  └─> useStoreFetchedData.js
                                         └─> useGlobalFetchedData.js
                                                └─> useComponents
@@ -146,7 +147,7 @@ src/
 
 - graph TD
   A[generateData.js] --> B[useFetchData.js]
-  B --> C[useFetchedGenerateData.js]
+  B --> C[useFetchedGenerateData.js]                       // Not used
   C --> D[useFetchedDataStore.js]
   D --> E[useGlobalFetchedData.js]
   E --> F[useComponents]

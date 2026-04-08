@@ -1,79 +1,81 @@
 import { useEffect } from "react";
-import useFetchedGenerateData from "./useFetchedGenerateData.js";
-import useFetchedGenerateEvents from "./useFetchedGenerateEvents.js";
 import useStoreFetchedData from "../../../store/useStoreFetchedData.js";
 
+import {
+  timeData,
+  usersData,
+  subsData,
+  paymentsData,
+} from "../../../service/mock/generateData.js";
+
+import {
+  lastSubsEvents,
+  lastUsersEvents,
+  lastPaymentsEvents,
+} from "../../../service/events/generateEvents.js";
+
 const useGlobalFetchedData = () => {
-  // Data
-  const {
-    isDataLoading, // boolean
-    dataErrors, // []
-    timeData, // []
-    usersData, // []
-    subsData, // []
-    paymentsData, // []
-  } = useFetchedGenerateData();
-
-  // Events
-  const {
-    isEventsLoading, // boolean
-    eventsErrors, // []
-    usersEvents, // []
-    subsEvents, // []
-    paymentsEvents, // []
-  } = useFetchedGenerateEvents();
-
   // Data and Events
 
-  const fetchedData = useStoreFetchedData((state) => state.fetchedData);
-  const setFetchedData = useStoreFetchedData((state) => state.setFetchedData);
-  const fetchedEvents = useStoreFetchedData((state) => state.fetchedEvents);
-  const setFetchedEvents = useStoreFetchedData(
-    (state) => state.setFetchedEvents,
-  );
+  const dataStore = useStoreFetchedData((state) => state.data);
+  const eventsStore = useStoreFetchedData((state) => state.events);
+
+  const fetchData = useStoreFetchedData((state) => state.fetchData);
+  const fetchEvents = useStoreFetchedData((state) => state.fetchEvents);
 
   const hasErrors = (arr) => Array.isArray(arr) && arr.length > 0;
 
   useEffect(() => {
-    setFetchedData({
-      isDataLoading,
-      dataErrors,
-      timeData,
-      usersData,
-      subsData,
-      paymentsData,
-    });
+    fetchData("timeData", timeData, "Time data");
+    fetchData("usersData", usersData, "Users data");
+    fetchData("subsData", subsData, "Subscriptions data");
+    fetchData("paymentsData", paymentsData, "Payments data");
 
-    setFetchedEvents({
-      isEventsLoading,
-      eventsErrors,
-      usersEvents,
-      subsEvents,
-      paymentsEvents,
-    });
-  }, [
-    // Data
-    isDataLoading,
-    dataErrors,
-    timeData,
-    usersData,
-    subsData,
-    paymentsData,
-    // Events
-    isEventsLoading,
-    eventsErrors,
-    usersEvents,
-    subsEvents,
-    paymentsEvents,
-  ]);
+    fetchEvents("lastUsersEvents", lastUsersEvents, "Users events");
+    fetchEvents("lastSubsEvents", lastSubsEvents, "Subscriptions events");
+    fetchEvents("lastPaymentsEvents", lastPaymentsEvents, "Payments events");
+  }, [fetchData, fetchEvents]);
 
-  const isDataAndEventsLoading =
-    fetchedData.isDataLoading || fetchedEvents.isEventsLoading;
+  const data = {
+    timeData: dataStore.timeData?.dataValue || [],
+    usersData: dataStore.usersData?.dataValue || [],
+    subsData: dataStore.subsData?.dataValue || [],
+    paymentsData: dataStore.paymentsData?.dataValue || [],
+  };
 
-  const dataAndEventsErrors = [
-    ...fetchedData.dataErrors,
-    ...fetchedEvents.eventsErrors,
+  const events = {
+    usersEvents: eventsStore.lastUsersEvents?.eventsValue || [],
+    subsEvents: eventsStore.lastSubsEvents?.eventsValue || [],
+    paymentsEvents: eventsStore.lastPaymentsEvents?.eventsValue || [],
+  };
+
+  const isDataLoading =
+    dataStore.timeData?.loading ||
+    dataStore.usersData?.loading ||
+    dataStore.subsData?.loading ||
+    dataStore.paymentsData?.loading;
+
+  const isEventsLoading =
+    eventsStore.lastUsersEvents?.loading ||
+    eventsStore.lastSubsEvents?.loading ||
+    eventsStore.lastPaymentsEvents?.loading;
+
+  const isDataAndEventsLoading = isDataLoading || isEventsLoading;
+
+  const dataErrors = [
+    ...(dataStore?.timeData?.errors || []),
+    ...(dataStore?.usersData?.errors || []),
+    ...(dataStore?.subsData?.errors || []),
+    ...(dataStore?.paymentsData?.errors || []),
   ];
+
+  const eventsErrors = [
+    ...(eventsStore?.lastUsersEvents?.errors || []),
+    ...(eventsStore?.lastSubsEvents?.errors || []),
+    ...(eventsStore?.lastPaymentsEvents?.errors || []),
+  ];
+
+  const dataAndEventsErrors = [...dataErrors, ...eventsErrors];
 
   const isDataAndEventsErrors = hasErrors(dataAndEventsErrors);
 
@@ -83,7 +85,7 @@ const useGlobalFetchedData = () => {
     dataAndEventsErrors,
   };
 
-  return { globalStatus, fetchedData, fetchedEvents };
+  return { globalStatus, data, events };
 };
 
 export default useGlobalFetchedData;
