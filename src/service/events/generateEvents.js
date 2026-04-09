@@ -6,8 +6,8 @@ import generatePaymentsEvents from "./generatePaymentsEvents.js";
 
 const limit = 10;
 
-const lastUsersEvents = generateUsersEvents(usersData, limit);
-const lastSubsEvents = generateSubscriptionsEvents(subsData, limit);
-const lastPaymentsEvents = generatePaymentsEvents(paymentsData, limit);
+const usersEvents = generateUsersEvents(usersData, limit);
+const subsEvents = generateSubscriptionsEvents(subsData, limit);
+const paymentsEvents = generatePaymentsEvents(paymentsData, limit);
 
-export { lastSubsEvents, lastUsersEvents, lastPaymentsEvents };
+export { usersEvents, subsEvents, paymentsEvents };

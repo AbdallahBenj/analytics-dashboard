@@ -34,8 +34,8 @@ const generateSubscriptionsEvents = (subsData = [], limit = 10) => {
         }),
       );
 
-  const lastSubsEvents = { eventsTitle, events: lastEvents(subsData) };
-  return lastSubsEvents;
+  const subsEvents = { eventsTitle, events: lastEvents(subsData) };
+  return subsEvents;
 };
 
 export default generateSubscriptionsEvents;

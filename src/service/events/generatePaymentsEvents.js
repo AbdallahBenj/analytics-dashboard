@@ -53,8 +53,8 @@ const generatePaymentsEvents = (paymentsData = [], limit = 10) => {
         }),
       );
 
-  const lastPaymentsEvents = { eventsTitle, events: lastEvents(paymentsData) };
-  return lastPaymentsEvents;
+  const paymentsEvents = { eventsTitle, events: lastEvents(paymentsData) };
+  return paymentsEvents;
 };
 
 export default generatePaymentsEvents;

@@ -7,14 +7,11 @@ import {
 } from "@headlessui/react";
 
 import useGlobalFetchedData from "../features/dashboard/hooks/useGlobalFetchedData";
-import useStoreRetryState from "../store/useStoreRetryState";
 
 const ErrorsDialog = () => {
   let [isOpen, setIsOpen] = useState(false);
-  const { globalStatus } = useGlobalFetchedData();
+  const { globalStatus, retryDataAndEvents } = useGlobalFetchedData();
   const { isDataAndEventsErrors, dataAndEventsErrors } = globalStatus;
-
-  const { incrementRetry } = useStoreRetryState();
 
   useEffect(() => {
     setIsOpen(isDataAndEventsErrors);
@@ -22,11 +19,13 @@ const ErrorsDialog = () => {
 
   return (
     <>
-      {/* <button className="bg-indigo-500" onClick={() => setIsOpen(true)}>
-        Open dialog
-      </button> */}
-
-      <Dialog open={isOpen} onClose={() => {}} className="relative z-50">
+      <Dialog
+        open={isOpen}
+        onClose={() => {
+          setIsOpen(false);
+        }}
+        className="relative z-50"
+      >
         {/* Overlay */}
         <div className="fixed inset-0 bg-black/30 backdrop-blur-sm" />
 
@@ -57,7 +56,7 @@ const ErrorsDialog = () => {
               </span>
             </Description>
 
-            {dataAndEventsErrors && isDataAndEventsErrors && (
+            {isDataAndEventsErrors && (
               <div className="mt-4 space-y-2">
                 {dataAndEventsErrors.map((error) => (
                   <p
@@ -83,8 +82,8 @@ const ErrorsDialog = () => {
                 Cancel
               </button>
               <button
-                onClick={incrementRetry}
-                className="cursor-pointer
+                onClick={retryDataAndEvents}
+                className="cursor-pointer flex-1
                 px-3 py-1.5 rounded-md 
                 text-sm text-center font-medium 
                 text-gray-300 bg-indigo-500 hover:bg-indigo-600 

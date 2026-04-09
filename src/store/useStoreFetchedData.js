@@ -56,7 +56,7 @@ const useStoreFetchedData = create((set, get) => ({
           [dataType]: {
             ...state.data[dataType],
             loading: false,
-            errors: [{ id: Date.now(), message: err.message }],
+            errors: [{ id: Date.now(), label, message: err.message }],
             dataValue: [],
           },
         },
@@ -116,12 +116,20 @@ const useStoreFetchedData = create((set, get) => ({
           [eventsType]: {
             ...state.events[eventsType],
             loading: false,
-            errors: [{ id: Date.now(), message: err.message }],
+            errors: [{ id: Date.now(), label, message: err.message }],
             eventsValue: [],
           },
         },
       }));
     }
+  },
+
+  retryFetchData: (dataType, realData, label) => {
+    get().fetchData(dataType, realData, label);
+  },
+
+  retryFetchEvents: (eventsType, realEvents, label) => {
+    get().fetchEvents(eventsType, realEvents, label);
   },
 }));
 

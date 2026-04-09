@@ -105,7 +105,7 @@ src/
 │
 ├── store/ # global state (zustand)
 │   ├── useStoreFetchedData.js
-│   └── useStoreRetryState.js
+│   └── useStoreRetryState.js                       // Not used
 │
 ├── utils/ # global utils
 │   ├── convertToKilo.js

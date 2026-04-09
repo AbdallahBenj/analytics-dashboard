@@ -31,8 +31,8 @@ const generateUsersEvents = (usersData = [], limit = 10) => {
         eventTimeAgo: eventDateObj ? getTimeAgo(eventDateObj) : "N/A",
       }));
 
-  const lastUsersEvents = { eventsTitle, events: lastEvents(usersData) };
-  return lastUsersEvents;
+  const usersEvents = { eventsTitle, events: lastEvents(usersData) };
+  return usersEvents;
 };
 
 export default generateUsersEvents;

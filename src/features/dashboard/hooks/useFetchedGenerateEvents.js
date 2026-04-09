@@ -2,17 +2,17 @@
 
 import { useMemo } from "react";
 import {
-  lastSubsEvents,
-  lastUsersEvents,
-  lastPaymentsEvents,
+  usersEvents,
+  subsEvents,
+  paymentsEvents,
 } from "../../../service/events/generateEvents.js";
 
 import useFetchData from "../../../service/hooks/useFetchData.js";
 
 const useFetchedGenerateEvents = () => {
-  const users = useFetchData(lastUsersEvents);
-  const subs = useFetchData(lastSubsEvents);
-  const payments = useFetchData(lastPaymentsEvents);
+  const users = useFetchData(usersEvents);
+  const subs = useFetchData(subsEvents);
+  const payments = useFetchData(paymentsEvents);
 
   const isEventsLoading = users.loading || subs.loading || payments.loading;
 
