@@ -1,11 +1,13 @@
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 
-import { ChevronUpDownIcon } from "@heroicons/react/20/solid";
+import { ChevronUpDownIcon, ArrowPathIcon } from "@heroicons/react/20/solid";
 
 import navContent from "../data/navContent";
 const { brand, navigation, settings } = navContent;
 const { name, Icon } = settings;
+
+import useGlobalFetchedData from "../features/dashboard/hooks/useGlobalFetchedData";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -16,6 +18,8 @@ const Sidebar = () => {
   const handleOpen = () => {
     setIsSidebarOpen((prev) => !prev);
   };
+
+  const { retryDataAndEvents } = useGlobalFetchedData();
 
   return (
     <div
@@ -112,8 +116,7 @@ const Sidebar = () => {
             </div>
             <div className="flex flex-col space-y-2">
               {/* Setting Button Sidebar */}
-
-              <NavLink to="/">
+              {/* <NavLink to="/">
                 <div
                   className="rounded-md mx-0
               px-3 py-2 text-md w-full
@@ -147,7 +150,44 @@ const Sidebar = () => {
                     </span>
                   </div>
                 </div>
-              </NavLink>
+              </NavLink> */}
+
+              {/* Refresh Data And Event button */}
+              <button
+                type="button"
+                onClick={retryDataAndEvents}
+                aria-label="Refresh data and events"
+                className="cursor-pointer group
+                rounded-md
+                px-3 py-2 text-md w-full
+                text-indigo-600 hover:text-indigo-500 
+                dark:text-indigo-500 dark:hover:text-gray-300 
+                hover:bg-gray-200/70 dark:hover:bg-white/5"
+              >
+                <div className="flex items-center">
+                  <span>
+                    <ArrowPathIcon
+                      aria-hidden="true"
+                      className="size-7
+                      transition-transform duration-200 group-checked:rotate-180"
+                    />
+                  </span>
+                  <span
+                    aria-hidden={!isSidebarOpen}
+                    className={`
+                      overflow-hidden
+                      whitespace-nowrap ml-2
+                      transition-[opacity,max-width] duration-300 ease-in-out
+                      ${
+                        isSidebarOpen
+                          ? "opacity-100 max-w-50 "
+                          : "opacity-0 max-w-0"
+                      }`}
+                  >
+                    Refresh
+                  </span>
+                </div>
+              </button>
               {/* Toggle Button Sidebar */}
               <button
                 type="button"

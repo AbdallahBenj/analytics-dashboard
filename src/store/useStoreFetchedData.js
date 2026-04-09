@@ -22,7 +22,7 @@ const useStoreFetchedData = create((set, get) => ({
 
     try {
       await new Promise((res) => setTimeout(res, 500));
-      const isSuccess = Math.random() >= 0.1;
+      const isSuccess = Math.random() >= 0.05;
 
       if (isSuccess) {
         set((state) => ({
@@ -82,7 +82,7 @@ const useStoreFetchedData = create((set, get) => ({
 
     try {
       await new Promise((res) => setTimeout(res, 500));
-      const isSuccess = Math.random() >= 0.1;
+      const isSuccess = Math.random() >= 0.05;
 
       if (isSuccess) {
         set((state) => ({
