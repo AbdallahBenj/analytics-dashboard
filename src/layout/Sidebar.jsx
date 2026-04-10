@@ -14,12 +14,13 @@ function classNames(...classes) {
 }
 
 const Sidebar = () => {
+  const { globalStatus, retryDataAndEvents } = useGlobalFetchedData();
+  const isLoading = globalStatus.isDataAndEventsLoading;
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const handleOpen = () => {
     setIsSidebarOpen((prev) => !prev);
   };
-
-  const { retryDataAndEvents } = useGlobalFetchedData();
 
   return (
     <div
@@ -156,20 +157,23 @@ const Sidebar = () => {
               <button
                 type="button"
                 onClick={retryDataAndEvents}
+                disabled={isLoading}
                 aria-label="Refresh data and events"
                 className="cursor-pointer group
                 rounded-md
                 px-3 py-2 text-md w-full
                 text-indigo-600 hover:text-indigo-500 
                 dark:text-indigo-500 dark:hover:text-gray-300 
-                hover:bg-gray-200/70 dark:hover:bg-white/5"
+                hover:bg-gray-200/70 dark:hover:bg-white/5
+                disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <div className="flex items-center">
                   <span>
                     <ArrowPathIcon
                       aria-hidden="true"
                       className="size-7
-                      transition-transform duration-200 group-checked:rotate-180"
+                      transition-transform duration-200
+                      group-active:rotate-180 group-disabled:rotate-0"
                     />
                   </span>
                   <span
