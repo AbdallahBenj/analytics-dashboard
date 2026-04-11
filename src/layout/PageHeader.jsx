@@ -1,5 +1,4 @@
 import { useLocation } from "react-router-dom";
-
 import { ArrowPathIcon } from "@heroicons/react/20/solid";
 
 import useGlobalFetchedData from "../features/dashboard/hooks/useGlobalFetchedData";
@@ -11,7 +10,7 @@ const { navigation } = navContent;
 const PageHeader = () => {
   const { globalStatus, retryDataAndEvents } = useGlobalFetchedData();
   const isLoading = globalStatus.isDataAndEventsLoading;
-  
+
   const location = useLocation();
 
   const currentPage = navigation.find(
@@ -49,19 +48,20 @@ const PageHeader = () => {
           disabled={isLoading}
           aria-label="Refresh data and events"
           className="md:hidden
-          cursor-pointer group
+          cursor-pointer
           px-3 py-1.5 rounded-md
           text-sm text-center font-medium
           w-fit flex items-center justify-center
           text-indigo-50 bg-indigo-500 shadow
-          active:ring-2 ring-offset-2 active:ring-indigo-500
+          active:ring-2 active:ring-offset-2 active:ring-indigo-500
           disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <div className="flex items-center">
             <span>
               <ArrowPathIcon
                 aria-hidden="true"
-                className="size-7 transition-transform duration-200 group-active:rotate-180 group-disabled:rotate-0"
+                className={`size-7 transition-transform duration-500 
+                ${isLoading ? "rotate-180" : ""}`}
               />
             </span>
             <span

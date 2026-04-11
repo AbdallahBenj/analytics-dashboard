@@ -159,7 +159,7 @@ const Sidebar = () => {
                 onClick={retryDataAndEvents}
                 disabled={isLoading}
                 aria-label="Refresh data and events"
-                className="cursor-pointer group
+                className="cursor-pointer
                 rounded-md
                 px-3 py-2 text-md w-full
                 text-indigo-600 hover:text-indigo-500 
@@ -171,9 +171,9 @@ const Sidebar = () => {
                   <span>
                     <ArrowPathIcon
                       aria-hidden="true"
-                      className="size-7
-                      transition-transform duration-200
-                      group-active:rotate-180 group-disabled:rotate-0"
+                      className={`size-7
+                      transition-transform duration-500
+                      ${isLoading ? "rotate-180" : ""}`}
                     />
                   </span>
                   <span
