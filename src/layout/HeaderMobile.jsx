@@ -87,7 +87,7 @@ const HeaderMobile = () => {
             <div className="shrink-0">
               {user.imageUrl ? (
                 <img
-                  alt=""
+                  alt={user.name || "User avatar"}
                   src={user.imageUrl}
                   className="size-8 rounded-full outline -outline-offset-1 outline-white/10"
                 />

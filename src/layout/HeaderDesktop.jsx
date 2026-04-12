@@ -41,24 +41,37 @@ const HeaderDesktop = () => {
               <span className="sr-only">Open user menu</span>
               {user.imageUrl ? (
                 <img
-                  alt=""
+                  alt={user.name || "User avatar"}
                   src={user.imageUrl}
                   className="size-8 rounded-full outline -outline-offset-1 outline-white/10"
                 />
-              ) : (
+              ) : user.profileIcon ? (
                 <user.profileIcon
                   className="size-8 rounded-full 
                         text-gray-400 
                         group-hover:text-gray-500 dark:group-hover:text-white 
                         outline -outline-offset-1 outline-white/10"
                 />
-              )}
+              ) : null}
             </MenuButton>
 
             <MenuItems
               transition
               className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white dark:bg-gray-800 py-1 shadow-lg outline-1 outline-black/5 dark:outline-white/10 transition data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
             >
+              {/* // test start // User Name and email */}
+              <div
+                className="px-4 py-2
+              border-b border-gray-200 dark:border-white/10"
+              >
+                <div className="text-base/5 font-medium text-gray-700 dark:text-gray-200">
+                  {user ? user.name : "Guest"}
+                </div>
+                <div className="text-sm font-medium dark:text-gray-400">
+                  {user.email}
+                </div>
+              </div>
+              {/* // test end // User Name and email */}
               {userNavigation.map((item) => (
                 <MenuItem key={item.name}>
                   <NavLink
