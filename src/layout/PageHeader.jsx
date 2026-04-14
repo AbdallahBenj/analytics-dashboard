@@ -36,7 +36,11 @@ const PageHeader = () => {
           <HeadingTag
             className={`text-3xl 
           font-bold tracking-tight
-          ${pageName === "Dashboard" ? "text-gray-800 dark:text-white" : "text-gray-700 dark:text-gray-100"}
+          ${
+            pageName === "Dashboard"
+              ? "text-gray-700 dark:text-gray-100"
+              : "text-gray-600 dark:text-gray-200"
+          }
           `}
           >
             {pageName}
