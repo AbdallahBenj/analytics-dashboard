@@ -4,14 +4,29 @@ import { persist } from "zustand/middleware";
 const useStoreLogin = create(
   persist(
     (set) => ({
+      isLoading: false,
       loginOpen: false,
+      userLogin: null,
+
+      setLoading: (value) => set({ isLoading: value }),
+
       setLoginOpen: (value) => set({ loginOpen: value }),
 
-      userLogin: null,
-      setUserLogin: (user) =>
-        set(() => ({
-          userLogin: user,
-        })),
+      setUserLogin: async (user) => {
+        set({ isLoading: true });
+        try {
+          await new Promise((res) => setTimeout(res, 1000));
+          set(() => ({
+            userLogin: user,
+          }));
+        } catch (err) {
+          console.err(err);
+        } finally {
+          set({ isLoading: false });
+          set({ loginOpen: false });
+        }
+      },
+
       resetLogin: () => set({ userLogin: null }),
     }),
     { name: "user-storage" },
