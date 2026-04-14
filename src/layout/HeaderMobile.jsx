@@ -8,16 +8,28 @@ import {
 import ThemeMode from "../components/ThemeMode";
 import SearchInput from "../components/SearchInput";
 
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  Bars3Icon,
+  BellIcon,
+  XMarkIcon,
+  UserCircleIcon,
+} from "@heroicons/react/24/outline";
 
 import navContent from "../data/navContent";
-const { brand, user, navigation, userNavigation } = navContent;
+const { brand, navigation, userNavigation } = navContent;
+
+import useStoreLogin from "../store/useStoreLogin";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 const HeaderMobile = () => {
+  const userLogin = useStoreLogin((state) => state.userLogin);
+  const setLoginOpen = useStoreLogin((state) => state.setLoginOpen);
+  const resetLogin = useStoreLogin((state) => state.resetLogin);
+  const isUserLogin = !!userLogin?.name;
+
   return (
     <Disclosure
       as="nav"
@@ -84,24 +96,28 @@ const HeaderMobile = () => {
         </div>
         <div className="border-t border-white/10 pt-4 pb-3">
           <div className="flex items-center px-5">
-            <div className="shrink-0">
-              {user.imageUrl ? (
-                <img
-                  alt={user.name || "User avatar"}
-                  src={user.imageUrl}
-                  className="size-8 rounded-full outline -outline-offset-1 outline-white/10"
-                />
-              ) : (
-                <user.profileIcon className="size-8 rounded-full text-gray-400 outline -outline-offset-1 outline-white/10" />
+            <div className="relative shrink-0">
+              <UserCircleIcon
+                className="size-8 rounded-full
+              text-gray-400 outline -outline-offset-1 outline-white/10"
+              />
+              {isUserLogin && (
+                //  Login Notification
+                <span className="absolute left-0 bottom-0 flex size-3">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-400 opacity-75"></span>
+                  <span className="relative inline-flex size-3 rounded-full bg-indigo-500"></span>
+                </span>
               )}
             </div>
             <div className="ml-3">
               <div className="text-base/5 font-medium text-white">
-                {user.name}
+                {userLogin?.name || "Guest"}
               </div>
-              <div className="text-sm font-medium text-gray-400">
-                {user.email}
-              </div>
+              {userLogin?.email ? (
+                <div className="text-sm font-medium text-gray-400">
+                  {userLogin.email}
+                </div>
+              ) : null}
             </div>
             <button
               type="button"
@@ -113,16 +129,46 @@ const HeaderMobile = () => {
             </button>
           </div>
           <div className="mt-3 space-y-1 px-2">
-            {userNavigation.map((item) => (
+            {!isUserLogin ? (
               <DisclosureButton
-                key={item.name}
-                as={NavLink}
-                to={item.href}
-                className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-white/5 hover:text-white"
+                as="button"
+                onClick={() => setLoginOpen(true)}
+                className="block rounded-md
+                px-3 py-2 text-base font-medium 
+                text-gray-400 hover:bg-white/5 hover:text-white"
               >
-                {item.name}
+                Login
               </DisclosureButton>
-            ))}
+            ) : (
+              userNavigation.map((item) =>
+                item.name === "Sign out" ? (
+                  <DisclosureButton
+                    key={item.name}
+                    as="button"
+                    onClick={() => {
+                      resetLogin();
+                      setLoginOpen(false);
+                    }}
+                    className="block rounded-md
+                  px-3 py-2 text-base font-medium
+                  text-gray-400 hover:bg-white/5 hover:text-white"
+                  >
+                    {item.name}
+                  </DisclosureButton>
+                ) : (
+                  <DisclosureButton
+                    key={item.name}
+                    as={NavLink}
+                    to={item.href}
+                    className="block rounded-md
+                  px-3 py-2 text-base font-medium
+                  text-gray-400 hover:bg-white/5 hover:text-white"
+                  >
+                    {item.name}
+                  </DisclosureButton>
+                ),
+              )
+            )}
           </div>
         </div>
       </DisclosurePanel>

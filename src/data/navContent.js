@@ -16,12 +16,6 @@ const navContent = {
     name: "Analytics",
     imageUrl: DashboardLogo,
   },
-  user: {
-    name: "Tom Cook",
-    email: "tom@example.com",
-    profileIcon: UserCircleIcon,
-    imageUrl: "",
-  },
   navigation: [
     {
       name: "Dashboard",
@@ -61,6 +55,12 @@ const navContent = {
       current: false,
     },
   ],
+  user: {
+    name: "Tom Cook",
+    email: "tom@example.com",
+    profileIcon: UserCircleIcon,
+    imageUrl: "",
+  },
   userNavigation: [
     { name: "Your profile", href: "#" },
     { name: "Settings", href: "#" },
