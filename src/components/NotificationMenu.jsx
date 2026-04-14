@@ -1,18 +1,10 @@
 import {
-  Menu,
-  MenuButton,
-  MenuItems,
   Disclosure,
   DisclosureButton,
   DisclosurePanel,
 } from "@headlessui/react";
 
-import {
-  Bars3Icon,
-  BellIcon,
-  XMarkIcon,
-  UserCircleIcon,
-} from "@heroicons/react/24/outline";
+import { BellIcon } from "@heroicons/react/24/outline";
 
 import useStoreLogin from "../store/useStoreLogin";
 
