@@ -50,15 +50,15 @@ Error generating stack: `+a.message+`
                     cursor-pointer px-4 py-2 text-sm 
                     data-focus:bg-gray-100 dark:data-focus:bg-white/5 
                     text-gray-700 dark:text-gray-300
-                    data-focus:outline-hidden`,children:"Login"})})]})]})]})})})};function K1({title:f,titleId:d,...r},s){return D.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 16 16",fill:"currentColor","aria-hidden":"true","data-slot":"icon",ref:s,"aria-labelledby":d},r),f?D.createElement("title",{id:d},f):null,D.createElement("path",{fillRule:"evenodd",d:"M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z",clipRule:"evenodd"}))}const k1=D.forwardRef(K1),i0=()=>o.jsxs("div",{className:"",children:[o.jsx("label",{htmlFor:"search",className:"sr-only",children:"Search"}),o.jsx("div",{className:"",children:o.jsxs("div",{className:`
+                    data-focus:outline-hidden`,children:"Login"})})]})]})]})})})};function K1({title:f,titleId:d,...r},s){return D.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 16 16",fill:"currentColor","aria-hidden":"true","data-slot":"icon",ref:s,"aria-labelledby":d},r),f?D.createElement("title",{id:d},f):null,D.createElement("path",{fillRule:"evenodd",d:"M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z",clipRule:"evenodd"}))}const k1=D.forwardRef(K1),i0=()=>o.jsxs("div",{className:"",children:[o.jsx("label",{htmlFor:"search",className:"sr-only",children:"Search"}),o.jsx("div",{className:"opacity-70 cursor-not-allowed",children:o.jsxs("div",{className:`
         flex items-center rounded-md pl-3
         bg-white/5 md:bg-gray-100 dark:bg-white/5  
         outline-1 -outline-offset-1 
         outline-gray-600 md:outline-gray-300 dark:outline-gray-600 
         has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 
         has-[input:focus-within]:outline-indigo-500 md:has-[input:focus-within]:outline-indigo-600 dark:has-[input:focus-within]:outline-indigo-500`,children:[o.jsx("div",{className:`shrink-0 select-none pr-1 
-            text-gray-400 md:text-gray-500 dark:text-gray-400`,children:o.jsx(k1,{className:"size-5"})}),o.jsx("input",{id:"search",name:"search",type:"text",placeholder:"Search",className:`block min-w-0 w-0 grow
-            py-1.5 pr-3 pl-1 
+            text-gray-400 md:text-gray-500 dark:text-gray-400`,children:o.jsx(k1,{className:"size-5"})}),o.jsx("input",{disabled:!0,id:"search",name:"search",type:"text",placeholder:"Search (coming soon 🚧)",className:`block min-w-0 w-0 grow
+            py-1.5 pr-3 pl-1.5 
             text-base sm:text-sm/6
             focus:outline-none
             bg-gray-800 md:bg-white dark:bg-gray-800 
