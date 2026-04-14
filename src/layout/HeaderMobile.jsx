@@ -7,16 +7,16 @@ import {
 
 import ThemeMode from "../components/ThemeMode";
 import SearchInput from "../components/SearchInput";
+import NotificationMenu from "../components/NotificationMenu";
 
 import {
   Bars3Icon,
-  BellIcon,
   XMarkIcon,
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
 
 import navContent from "../data/navContent";
-const { brand, navigation, userNavigation } = navContent;
+const { brand, navigation } = navContent;
 
 import useStoreLogin from "../store/useStoreLogin";
 
@@ -28,7 +28,8 @@ const HeaderMobile = () => {
   const userLogin = useStoreLogin((state) => state.userLogin);
   const setLoginOpen = useStoreLogin((state) => state.setLoginOpen);
   const resetLogin = useStoreLogin((state) => state.resetLogin);
-  const isUserLogin = !!userLogin?.name;
+
+  const isUserLogin = !!userLogin;
 
   return (
     <Disclosure
@@ -102,10 +103,10 @@ const HeaderMobile = () => {
               text-gray-400 outline -outline-offset-1 outline-white/10"
               />
               {isUserLogin && (
-                //  Login Notification
+                // Show badge when there's the user Login in
                 <span className="absolute left-0 bottom-0 flex size-3">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-400 opacity-75"></span>
-                  <span className="relative inline-flex size-3 rounded-full bg-indigo-500"></span>
+                  <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex size-3 rounded-full bg-emerald-500"></span>
                 </span>
               )}
             </div>
@@ -119,55 +120,33 @@ const HeaderMobile = () => {
                 </div>
               ) : null}
             </div>
-            <button
-              type="button"
-              className="relative ml-auto shrink-0 rounded-full p-1 text-gray-400 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500"
-            >
-              <span className="absolute -inset-1.5" />
-              <span className="sr-only">View notifications</span>
-              <BellIcon aria-hidden="true" className="size-6" />
-            </button>
+            {/* Notification */}
+            <NotificationMenu />
           </div>
           <div className="mt-3 space-y-1 px-2">
             {!isUserLogin ? (
               <DisclosureButton
                 as="button"
                 onClick={() => setLoginOpen(true)}
-                className="block rounded-md
+                className="block rounded-md w-full
                 px-3 py-2 text-base font-medium 
-                text-gray-400 hover:bg-white/5 hover:text-white"
+                text-gray-400 bg-white/5 hover:bg-white/10 hover:text-white"
               >
                 Login
               </DisclosureButton>
             ) : (
-              userNavigation.map((item) =>
-                item.name === "Sign out" ? (
-                  <DisclosureButton
-                    key={item.name}
-                    as="button"
-                    onClick={() => {
-                      resetLogin();
-                      setLoginOpen(false);
-                    }}
-                    className="block rounded-md
-                  px-3 py-2 text-base font-medium
-                  text-gray-400 hover:bg-white/5 hover:text-white"
-                  >
-                    {item.name}
-                  </DisclosureButton>
-                ) : (
-                  <DisclosureButton
-                    key={item.name}
-                    as={NavLink}
-                    to={item.href}
-                    className="block rounded-md
-                  px-3 py-2 text-base font-medium
-                  text-gray-400 hover:bg-white/5 hover:text-white"
-                  >
-                    {item.name}
-                  </DisclosureButton>
-                ),
-              )
+              <DisclosureButton
+                as="button"
+                onClick={() => {
+                  resetLogin();
+                  setLoginOpen(false);
+                }}
+                className="block rounded-md
+                  px-3 py-2 text-base font-medium w-full
+                  text-gray-400 bg-white/5 hover:bg-white/10 hover:text-white"
+              >
+                Sign out
+              </DisclosureButton>
             )}
           </div>
         </div>

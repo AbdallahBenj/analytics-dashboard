@@ -62,8 +62,8 @@ const navContent = {
     imageUrl: "",
   },
   userNavigation: [
-    { name: "Your profile", href: "#" },
-    { name: "Settings", href: "#" },
+    // { name: "Your profile", href: "#" },
+    // { name: "Settings", href: "#" },
     { name: "Sign out", href: "#" },
   ],
   settings: {
