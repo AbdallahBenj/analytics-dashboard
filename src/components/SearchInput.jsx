@@ -6,7 +6,7 @@ const SearchInput = () => {
       <label htmlFor="search" className="sr-only">
         Search
       </label>
-      <div className="">
+      <div className="opacity-70 cursor-not-allowed">
         <div
           className="
         flex items-center rounded-md pl-3
@@ -23,12 +23,13 @@ const SearchInput = () => {
             <MagnifyingGlassIcon className="size-5" />
           </div>
           <input
+            disabled
             id="search"
             name="search"
             type="text"
-            placeholder="Search"
+            placeholder="Search (coming soon 🚧)"
             className="block min-w-0 w-0 grow
-            py-1.5 pr-3 pl-1 
+            py-1.5 pr-3 pl-1.5 
             text-base sm:text-sm/6
             focus:outline-none
             bg-gray-800 md:bg-white dark:bg-gray-800 
