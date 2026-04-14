@@ -1,4 +1,3 @@
-// import useFetchedGenerateEvents from "../hooks/useFetchedGenerateEvents.js";
 import useGlobalFetchedData from "./useGlobalFetchedData.js";
 
 const useDashboardRecentActivity = () => {

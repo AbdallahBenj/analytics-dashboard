@@ -1,12 +1,10 @@
 import {
-  UserCircleIcon,
   HomeIcon,
   UsersIcon,
   ChartBarIcon,
   CreditCardIcon,
   SparklesIcon,
   ChartPieIcon,
-  Cog6ToothIcon,
 } from "@heroicons/react/24/outline";
 
 import DashboardLogo from "../assets/dashboard-logo.svg";
@@ -55,21 +53,6 @@ const navContent = {
       current: false,
     },
   ],
-  user: {
-    name: "Tom Cook",
-    email: "tom@example.com",
-    profileIcon: UserCircleIcon,
-    imageUrl: "",
-  },
-  userNavigation: [
-    // { name: "Your profile", href: "#" },
-    // { name: "Settings", href: "#" },
-    { name: "Sign out", href: "#" },
-  ],
-  settings: {
-    name: "Settings",
-    Icon: Cog6ToothIcon,
-  },
 };
 
 export default navContent;
