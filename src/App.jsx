@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import DashboardLayout from "./layout/DashboardLayout";
 import DashboardPage from "./pages/DashboardPage";
@@ -12,7 +12,7 @@ import LoginDialog from "./components/LoginDialog";
 
 function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <ErrorsDialog />
       <LoginDialog />
       <Routes>
@@ -25,7 +25,7 @@ function App() {
           <Route path="reports" element={<ReportsPage />} />
         </Route>
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 
