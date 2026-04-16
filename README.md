@@ -152,40 +152,14 @@ src/
 
 - Data Generation Flow:
 
-generateTimeline.js
-        ↓
-generateUsers.js
-        ↓
-generateSubscriptions.js
-        ↓
-generatePayments.js
-        ↓
-generateData.js
+generateTimeline.js ➡️ generateUsers.js ➡️ generateSubscriptions.js ➡️ generatePayments.js ➡️ generateData.js
 
 - Data Fetch Flow:
 
-generateData.js
-        ↓
-useStoreFetchedData.js
-        ↓
-useGlobalFetchedData.js
-        ↓
-Components
-        ↓
-UI Rendering
+generateData.js ➡️ useStoreFetchedData.js ➡️ useGlobalFetchedData.js ➡️ Components ➡️ UI Rendering
 
 - Events Flow:
 
-generateData.js
-        ↓
-generateEvents.js
-        ↓
-useStoreFetchedData.js
-        ↓
-useGlobalFetchedData.js
-        ↓
-Components
-        ↓
-UI Rendering
+ generateData.js ➡️ generateEvents.js➡️ useStoreFetchedData.js ➡️ useGlobalFetchedData.js ➡️ Components ➡️ UI Rendering
 
                                           
