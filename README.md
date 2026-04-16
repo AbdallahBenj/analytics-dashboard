@@ -1,24 +1,59 @@
-# Analytics Dashboard
+# SaaS Analytics Dashboard
 
-A modern analytics dashboard built with React, Vite, and Tailwind CSS.
-
-## Live Demo
-
-🔗 **[Analytics Dashboard](https://anadash.vercel.app/)**
+A modern responsive dashboard built with React and Vite for monitoring SaaS business metrics through interactive charts, generated timeline data, and a clean user experience.
 
 ## Features
 
-- Responsive SaaS-style layout
-- KPI metric cards (MRR, ARR, Churn, ARPU, etc.)
-- Clean admin dashboard UI
-- Modular React components
-- Tailwind CSS styling
+* Responsive layout for desktop, tablet, and mobile
+* Interactive charts and KPI analytics
+* Custom timeline data generators
+* Users activity analytics
+* Subscriptions growth tracking
+* Payments and revenue metrics
+* User / subscription / payment events history
+* Frontend authentication flow using Zustand Persist
+* Protected routes and conditional rendering
+* Dark / Light mode support
+* Reusable components architecture
+* Optimized performance with Vite
 
 ## Tech Stack
 
-- React
-- Vite
-- Tailwind CSS
+* React
+* Vite
+* JavaScript
+* Tailwind CSS
+* Zustand
+* React Router
+* Headless UI
+* Recharts
+
+## Project Goals
+
+This project was built to simulate a real SaaS analytics product, including dashboard UI, dynamic business metrics, timeline reporting, state management, and scalable frontend architecture.
+
+## What I Learned
+
+* Creating dashboard systems with dynamic data
+* Structuring mock business analytics datasets
+* Managing global state with Zustand
+* Building reusable UI architecture
+* Designing responsive data dashboards
+* Improving frontend performance
+
+## Live Demo
+
+🔗 **[Analytics Dashboard Demo](https://anadash.vercel.app/)**
+
+## GitHub Repository
+
+🔗 **[Analytics Dashboard Repository](https://github.com/AbdallahBenj/analytics-dashboard)**
+
+## Installation
+
+npm install
+npm run dev
+
 
 ## Project Stricture
 
@@ -30,9 +65,10 @@ src/
 │
 ├── components/ # reusable UI components
 │   ├── ErrorsDialog.jsx
+│   ├── LoginDialog.jsx
+│   ├── NotificationMenu.jsx
 │   ├── RadioGroupButtons.jsx
 │   ├── SearchInput.jsx
-│   ├── SidebarToggle.jsx
 │   └── ThemeMode.jsx
 │
 ├── data/ # Static Contents
@@ -52,8 +88,6 @@ src/
 │   │       ├── useDashboardPlansPieChartStats.js
 │   │       ├── useDashboardRecentActivity.js
 │   │       ├── useDashboardRevenueChartStats.js
-│   │       ├── useFetchedGenerateData.js                       // Not used
-│   │       ├── useFetchedGenerateEvents.js                     // Not used
 │   │       └── useGlobalFetchedData.js           
 │   │
 │   └── utils/ # features
@@ -71,6 +105,8 @@ src/
 ├── layout/ # layout
 │   ├── DashboardLayout.jsx
 │   ├── Header.jsx
+│   ├── HeaderDesktop.jsx
+│   ├── HeaderMobile.jsx
 │   ├── PageHeader.jsx
 │   └── Sidebar.jsx
 │
@@ -97,15 +133,12 @@ src/
 │   │   ├── generateSubscriptionsEvents.js
 │   │   └── generateUsersEvents.js
 │   │
-│   └── hooks/ # services
-│   │   └── useFetchData.js                       // Not used
-│   │
 │   └── utils/ # services
 │       └── convertToDynamicTime.js
 │
 ├── store/ # global state (zustand)
 │   ├── useStoreFetchedData.js
-│   └── useStoreRetryState.js                       // Not used
+│   └── useStoreLogin.js
 │
 ├── utils/ # global utils
 │   ├── convertToKilo.js
@@ -126,29 +159,17 @@ src/
 
 - Fetch Data:
      └─> generateData.js
-            └─> useFetchData.js                      // Not used
-                   └─> useFetchedGenerateData.js                       // Not used
-                          └─> useStoreFetchedData.js
-                                 └─> useGlobalFetchedData.js
-                                        └─> useComponents
-                                               └─> Components UI
+            └─> useStoreFetchedData.js
+                   └─> useGlobalFetchedData.js
+                          └─> useComponents
+                                 └─> Components UI
 
 - Fetch Events:
      └─> generateData.js
             └─> generateEvents.js
-                   └─> useFetchData.js                       // Not used
-                          └─> useFetchedGenerateEvents.js                       // Not used
-                                 └─> useStoreFetchedData.js
-                                        └─> useGlobalFetchedData.js
-                                               └─> useComponents
-                                                      └─> Components UI
+                   └─> useStoreFetchedData.js
+                          └─> useGlobalFetchedData.js
+                                 └─> useComponents
+                                        └─> Components UI
 
-                                              
-
-- graph TD
-  A[generateData.js] --> B[useFetchData.js]
-  B --> C[useFetchedGenerateData.js]                       // Not used
-  C --> D[useFetchedDataStore.js]
-  D --> E[useGlobalFetchedData.js]
-  E --> F[useComponents]
-  F --> G[Components UI]
+                                          
