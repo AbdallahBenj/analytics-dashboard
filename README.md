@@ -58,12 +58,11 @@ npm run dev
 ## Project Stricture
 
 src/
-│
-├── assets/ # Logos favicon
+├── assets/                 # Logos, favicon
 │   ├── dashboard-logo.svg
 │   └── react.svg
 │
-├── components/ # reusable UI components
+├── components/            # Reusable UI components
 │   ├── ErrorsDialog.jsx
 │   ├── LoginDialog.jsx
 │   ├── NotificationMenu.jsx
@@ -71,38 +70,38 @@ src/
 │   ├── SearchInput.jsx
 │   └── ThemeMode.jsx
 │
-├── data/ # Static Contents
+├── data/                  # Static content
 │   ├── navContent.jsx
 │   └── usersNames.jsx
 │
-├── features/ # feature
+├── features/              # Feature-based modules
 │   └── dashboard/
-│   │   ├── components/
-│   │   │   ├── DashboardMiniCards.jsx
-│   │   │   ├── DashboardPlansPieChart.jsx
-│   │   │   ├── DashboardRecentActivity.jsx
-│   │   │   └── DashboardRevenueChart.jsx
-│   │   │
-│   │   └── hooks/
-│   │       ├── useDashboardMiniCardsStats.js
-│   │       ├── useDashboardPlansPieChartStats.js
-│   │       ├── useDashboardRecentActivity.js
-│   │       ├── useDashboardRevenueChartStats.js
-│   │       └── useGlobalFetchedData.js           
-│   │
-│   └── utils/ # features
-│       ├── calculateRevenue.js
-│       ├── getActiveSubscriptions.js
-│       ├── getChurnRate.js
-│       ├── getConversionRate.js
-│       ├── getMonthlyRevenue.js
-│       └── getUsersByPlan.js
+│       ├── components/
+│       │   ├── DashboardMiniCards.jsx
+│       │   ├── DashboardPlansPieChart.jsx
+│       │   ├── DashboardRecentActivity.jsx
+│       │   └── DashboardRevenueChart.jsx
+│       │
+│       ├── hooks/
+│       │   ├── useDashboardMiniCardsStats.js
+│       │   ├── useDashboardPlansPieChartStats.js
+│       │   ├── useDashboardRecentActivity.js
+│       │   ├── useDashboardRevenueChartStats.js
+│       │   └── useGlobalFetchedData.js
+│       │
+│       └── utils/
+│           ├── calculateRevenue.js
+│           ├── getActiveSubscriptions.js
+│           ├── getChurnRate.js
+│           ├── getConversionRate.js
+│           ├── getMonthlyRevenue.js
+│           └── getUsersByPlan.js
 │
-├── hooks/ # global reusable hooks
+├── hooks/                 # Global reusable hooks
 │   ├── useSystemMode.js
 │   └── useThemeMode.js
 │
-├── layout/ # layout
+├── layout/
 │   ├── DashboardLayout.jsx
 │   ├── Header.jsx
 │   ├── HeaderDesktop.jsx
@@ -110,7 +109,7 @@ src/
 │   ├── PageHeader.jsx
 │   └── Sidebar.jsx
 │
-├── pages/ # Pages
+├── pages/
 │   ├── DashboardPage.jsx
 │   ├── AnalyticsPage.jsx
 │   ├── CustomersPage.jsx
@@ -118,29 +117,29 @@ src/
 │   ├── FeaturesPage.jsx
 │   └── ReportsPage.jsx
 │
-├── services/ # data fetching / mock / API
-│   ├── api/ # (future real API)
-│   └── mock/
+├── services/
+│   ├── api/              # Future real API
+│   ├── mock/
 │   │   ├── generateData.js
 │   │   ├── generateUsers.js
 │   │   ├── generatePayments.js
 │   │   ├── generateSubscriptions.js
 │   │   └── generateTimeline.js
 │   │
-│   └── events/ # event generators (optional keep separate)
+│   ├── events/
 │   │   ├── generateEvents.js
 │   │   ├── generatePaymentsEvents.js
 │   │   ├── generateSubscriptionsEvents.js
 │   │   └── generateUsersEvents.js
 │   │
-│   └── utils/ # services
+│   └── utils/
 │       └── convertToDynamicTime.js
 │
-├── store/ # global state (zustand)
+├── store/                # Zustand global state
 │   ├── useStoreFetchedData.js
 │   └── useStoreLogin.js
 │
-├── utils/ # global utils
+├── utils/                # Global utilities
 │   ├── convertToKilo.js
 │   ├── getPercentValue.js
 │   └── getTimeAgo.js
@@ -148,28 +147,45 @@ src/
 ├── App.jsx
 └── main.jsx
 
+
 ### Data Flow
 
-- Generate Data :
-     └─> generateTimeline.js
-            └─> generateUsers.js
-                   └─> generateSubscriptions.js
-                          └─> generatePayments.js
-                                 └─> generateData.js
+- Data Generation Flow:
 
-- Fetch Data:
-     └─> generateData.js
-            └─> useStoreFetchedData.js
-                   └─> useGlobalFetchedData.js
-                          └─> useComponents
-                                 └─> Components UI
+generateTimeline.js
+        ↓
+generateUsers.js
+        ↓
+generateSubscriptions.js
+        ↓
+generatePayments.js
+        ↓
+generateData.js
 
-- Fetch Events:
-     └─> generateData.js
-            └─> generateEvents.js
-                   └─> useStoreFetchedData.js
-                          └─> useGlobalFetchedData.js
-                                 └─> useComponents
-                                        └─> Components UI
+- Data Fetch Flow:
+
+generateData.js
+        ↓
+useStoreFetchedData.js
+        ↓
+useGlobalFetchedData.js
+        ↓
+Components
+        ↓
+UI Rendering
+
+- Events Flow:
+
+generateData.js
+        ↓
+generateEvents.js
+        ↓
+useStoreFetchedData.js
+        ↓
+useGlobalFetchedData.js
+        ↓
+Components
+        ↓
+UI Rendering
 
                                           
