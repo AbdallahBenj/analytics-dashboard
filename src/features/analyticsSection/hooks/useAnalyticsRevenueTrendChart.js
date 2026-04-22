@@ -54,10 +54,6 @@ const useAnalyticsRevenueTrendChart = () => {
     prev6MonthsRevenue,
   );
 
-  console.log("last6MonthsRevenue", last6MonthsRevenue);
-  console.log("prev6MonthsRevenue", prev6MonthsRevenue);
-  console.log("perCent6MonthsRevenue", perCent6MonthsRevenue);
-
   const monthlyRevenueLast12Months = monthlyRevenue?.slice(-12) || [];
   const last12MonthsRevenue = getMonthlyRevenue(monthlyRevenueLast12Months);
 
