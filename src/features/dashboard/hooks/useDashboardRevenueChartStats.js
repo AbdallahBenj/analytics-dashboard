@@ -18,12 +18,14 @@ const useDashboardRevenueChartStats = () => {
   const dailyRevenuePrev30days = dailyRevenue?.slice(-60, -30) || [];
   const dailyRevenueLast90days = dailyRevenue?.slice(-90) || [];
 
-  const lastMonthRevenue = getMonthlyRevenue(dailyRevenueLast30days); // used
-  const prevMonthRevenue = getMonthlyRevenue(dailyRevenuePrev30days);
+  const monthlyRevenueLast6Months = monthlyRevenue?.slice(-6) || [];
 
-  const perCentMonthlyRevenue = getPerCentValue(
-    lastMonthRevenue,
-    prevMonthRevenue,
+  const last30daysRevenue = getMonthlyRevenue(dailyRevenueLast30days); // used
+  const prev30daysRevenue = getMonthlyRevenue(dailyRevenuePrev30days);
+
+  const perCent30daysRevenue = getPerCentValue(
+    last30daysRevenue,
+    prev30daysRevenue,
   );
 
   const revenueRangeConfig = {
@@ -40,7 +42,7 @@ const useDashboardRevenueChartStats = () => {
       label: "90 Days",
     },
     m6: {
-      data: monthlyRevenue,
+      data: monthlyRevenueLast6Months,
       xKey: "date",
       yKey: "revenue",
       label: "6 Months",
@@ -50,8 +52,8 @@ const useDashboardRevenueChartStats = () => {
   return {
     isDataAndEventsLoading,
     isDataAndEventsErrors,
-    lastMonthRevenue,
-    perCentMonthlyRevenue,
+    last30daysRevenue,
+    perCent30daysRevenue,
     revenueRangeConfig,
   };
 };

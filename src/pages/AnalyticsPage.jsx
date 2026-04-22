@@ -1,3 +1,5 @@
+import AnalyticsRevenueTrend from "../features/analyticsSection/components/AnalyticsRevenueTrend";
+
 const AnalyticsPage = () => {
   return (
     <section
@@ -10,6 +12,7 @@ const AnalyticsPage = () => {
       <p className="text-lg mt-4 mb-12 text-gray-700 dark:text-gray-300">
         We’re working on this feature.
       </p>
+      <AnalyticsRevenueTrend />
     </section>
   );
 };

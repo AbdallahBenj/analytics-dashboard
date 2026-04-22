@@ -24,8 +24,8 @@ const RevenueChart = () => {
   const {
     isDataAndEventsLoading,
     isDataAndEventsErrors,
-    lastMonthRevenue,
-    perCentMonthlyRevenue,
+    last30daysRevenue,
+    perCent30daysRevenue,
     revenueRangeConfig,
   } = useDashboardRevenueChartStats();
 
@@ -35,14 +35,14 @@ const RevenueChart = () => {
   const errorsContent = (
     <span className="text-lg font-semibold text-red-500">N/A</span>
   );
-  const valueContent = !lastMonthRevenue ? (
+  const valueContent = !last30daysRevenue ? (
     <span className="text-gray-500">-</span>
   ) : (
     <p className="text-xl font-semibold text-gray-900 dark:text-white">
-      {`$ ${convertToKilo(lastMonthRevenue)}`}
+      {`$ ${convertToKilo(last30daysRevenue)}`}
       <span className="text-sm text-gray-500">
         {" "}
-        {`${perCentMonthlyRevenue >= 0 ? "+" : ""}${perCentMonthlyRevenue}%`}
+        {`${perCent30daysRevenue >= 0 ? "+" : ""}${perCent30daysRevenue}%`}
       </span>
     </p>
   );

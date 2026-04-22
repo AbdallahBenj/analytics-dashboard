@@ -1,4 +1,5 @@
 import usersNames from "../../data/usersNames";
+import countries from "../../data/countries";
 import convertToDynamicTime from "../utils/convertToDynamicTime.js";
 
 const generateUsers = (timeline = [], min = 1, max = 5) => {
@@ -19,6 +20,7 @@ const generateUsers = (timeline = [], min = 1, max = 5) => {
 
     return Array.from({ length: Math.min(totalDailyUsers, dynamicMax) }, () => {
       const userNameIndex = Math.floor(Math.random() * usersNames.length);
+      const countryIndex = Math.floor(Math.random() * countries.length);
 
       // Date generation for each day
       const baseDate = new Date(dateObj.date);
@@ -35,6 +37,7 @@ const generateUsers = (timeline = [], min = 1, max = 5) => {
       const user = {
         userId: `u_${id}`,
         userName: `${usersNames[userNameIndex]}`,
+        userCountry: countries[countryIndex],
         userEmail: `${firstName}.${id}@${domains[Math.floor(Math.random() * domains.length)]}`,
         userCreatedAt: userRandomCreatedAt.toISOString(),
       };

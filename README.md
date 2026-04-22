@@ -51,7 +51,7 @@ This project was built to simulate a real SaaS analytics product, including dash
 
 ## Installation
 
-npm install
+npm install  
 npm run dev
 
 
