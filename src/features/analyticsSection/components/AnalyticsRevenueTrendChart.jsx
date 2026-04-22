@@ -6,7 +6,7 @@ import { DotPulse, Cardio } from "ldrs/react";
 import "ldrs/react/DotPulse.css";
 import "ldrs/react/Cardio.css";
 
-import useDashboardRevenueChartStats from "../hooks/useDashboardRevenueChartStats.js";
+import useAnalyticsRevenueTrendChart from "../hooks/useAnalyticsRevenueTrendChart.js";
 
 import {
   LineChart,
@@ -20,38 +20,42 @@ import {
 
 import convertToKilo from "../../../utils/convertToKilo.js";
 
-const RevenueChart = () => {
+const AnalyticsRevenueTrendChart = () => {
   const {
     isDataAndEventsLoading,
     isDataAndEventsErrors,
-    last30daysRevenue,
-    perCent30daysRevenue,
+    // last30daysRevenue,
+    // perCent30daysRevenue,
     revenueRangeConfig,
-  } = useDashboardRevenueChartStats();
+  } = useAnalyticsRevenueTrendChart();
 
   const [range, setRange] = useState("d30");
 
   const loadingContent = <DotPulse size="43" speed="1.3" color="#615fff" />;
   const errorsContent = (
-    <span className="text-lg font-semibold text-red-500 mb-2 md:mb-4">N/A</span>
+    <span className="text-lg font-semibold text-red-500">N/A</span>
   );
-  const valueContent = !last30daysRevenue ? (
+  const valueContent = !revenueRangeConfig[range].revenueValue ? (
     <span className="text-gray-500">-</span>
   ) : (
-    <p className="text-xl font-semibold text-gray-900 dark:text-white">
-      {`$ ${convertToKilo(last30daysRevenue)}`}
+    <p className="text-xl font-semibold mb-2 md:mb-4 text-gray-900 dark:text-white">
+      {`$ ${convertToKilo(revenueRangeConfig[range].revenueValue)}`}
       <span className="text-sm text-gray-500">
         {" "}
-        {`${perCent30daysRevenue >= 0 ? "+" : ""}${perCent30daysRevenue}%`}
+        {!revenueRangeConfig[range].perCentRevenue
+          ? ""
+          : `${
+              revenueRangeConfig[range].perCentRevenue >= 0 ? "+" : ""
+            }${revenueRangeConfig[range].perCentRevenue}%`}
       </span>
     </p>
   );
 
   return (
     <div
-      className="relative primary-chart h-96
+      className="analytics-chart-revenue h-120
             rounded-2xl p-4 cursor-pointer 
-            col-span-4 md:col-span-2 lg:col-span-3
+            col-span-4 md:col-span-4 lg:col-span-4
             flex flex-col
 
             bg-white/60 dark:bg-gray-900/40
@@ -63,23 +67,29 @@ const RevenueChart = () => {
             hover:shadow-xl hover:shadow-black/20
             transition-all duration-300"
     >
-      <div className="flex flex-col md:flex-row justify-between">
-        <div className="Title-chart mb-2 md:mb-4">
-          <h3 className="text-md font-medium text-gray-600 dark:text-gray-300">
-            Monthly Revenue
-          </h3>
-          {isDataAndEventsLoading
-            ? loadingContent
-            : isDataAndEventsErrors
-              ? errorsContent
-              : valueContent}
-        </div>
-        <div className="Button date range mb-6">
-          <RadioGroupButtons
-            state={range}
-            setState={setRange}
-            stateConfig={revenueRangeConfig}
-          />
+      <div className="">
+        <h3 className="text-lg font-bold mb-2 md:mb-4 text-gray-700 dark:text-gray-200">
+          Revenue Trend Chart By Plan
+        </h3>
+        <div className="flex flex-col md:flex-row justify-between">
+          <div className="Title-chart mb-2 md:mb-4">
+            <p className="text-md font-semibold text-indigo-500 dark:text-indigo-400">
+              {revenueRangeConfig[range].label}{" "}
+              <span className="text-gray-600 dark:text-gray-300">Revenue</span>
+            </p>
+            {isDataAndEventsLoading
+              ? loadingContent
+              : isDataAndEventsErrors
+                ? errorsContent
+                : valueContent}
+          </div>
+          <div className="Button date range mb-6">
+            <RadioGroupButtons
+              state={range}
+              setState={setRange}
+              stateConfig={revenueRangeConfig}
+            />
+          </div>
         </div>
       </div>
       <div className="flex-1 min-h-0">
@@ -90,7 +100,7 @@ const RevenueChart = () => {
           </div>
         ) : (
           !isDataAndEventsErrors && (
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer width="96%" height="100%">
               <LineChart data={revenueRangeConfig[range].data}>
                 <CartesianGrid
                   strokeDasharray="3 3"
@@ -137,4 +147,4 @@ const RevenueChart = () => {
   );
 };
 
-export default RevenueChart;
+export default AnalyticsRevenueTrendChart;

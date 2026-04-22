@@ -1,15 +1,13 @@
+import ComingSoon from "../components/ComingSoon";
+
 const FeaturesPage = () => {
   return (
     <section
-      className={`h-full px-4
-        flex flex-col justify-center items-center text-center
-        border border-gray-200 dark:border-gray-700`}
+      className="rounded-lg h-full
+      grid grid-cols-4 gap-4
+      border border-gray-500/10"
     >
-      {/* Your content */}
-      <h1 className="text-4xl font-bold text-indigo-500">Coming soon 🚧</h1>
-      <p className="text-lg mt-4 mb-12 text-gray-700 dark:text-gray-300">
-        We’re working on this feature.
-      </p>
+      <ComingSoon />
     </section>
   );
 };
