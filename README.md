@@ -90,7 +90,7 @@ src/
 │       │   └── useGlobalFetchedData.js
 │       │
 │       └── utils/
-│           ├── calculateRevenue.js
+│           ├── .js
 │           ├── getActiveSubscriptions.js
 │           ├── getChurnRate.js
 │           ├── getConversionRate.js

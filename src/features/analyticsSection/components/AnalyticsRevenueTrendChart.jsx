@@ -13,6 +13,7 @@ import {
   XAxis,
   YAxis,
   Line,
+  Legend,
   ResponsiveContainer,
   CartesianGrid,
   Tooltip,
@@ -21,13 +22,8 @@ import {
 import convertToKilo from "../../../utils/convertToKilo.js";
 
 const AnalyticsRevenueTrendChart = () => {
-  const {
-    isDataAndEventsLoading,
-    isDataAndEventsErrors,
-    // last30daysRevenue,
-    // perCent30daysRevenue,
-    revenueRangeConfig,
-  } = useAnalyticsRevenueTrendChart();
+  const { isDataAndEventsLoading, isDataAndEventsErrors, revenueRangeConfig } =
+    useAnalyticsRevenueTrendChart();
 
   const [range, setRange] = useState("d30");
 
@@ -120,7 +116,10 @@ const AnalyticsRevenueTrendChart = () => {
                   tickLine={false}
                 />
                 <Tooltip
-                  formatter={(v) => [`$${convertToKilo(v)}`, "Revenue"]}
+                  formatter={(value, name) => [
+                    `$${convertToKilo(value)}`,
+                    name,
+                  ]}
                   contentStyle={{
                     backgroundColor: "rgba(17, 24, 39, 0.9)",
                     borderRadius: "12px",
@@ -130,10 +129,30 @@ const AnalyticsRevenueTrendChart = () => {
                   labelStyle={{ color: "#9CA3AF" }}
                   cursor={{ stroke: "#6366F1", strokeWidth: 1 }}
                 />
+                <Legend />
                 <Line
                   type="monotone"
+                  name="Total Revenue"
                   dataKey={revenueRangeConfig[range].yKey}
                   stroke="#6366F1"
+                  strokeWidth={3}
+                  dot={false}
+                  activeDot={{ r: 6 }}
+                />
+                <Line
+                  type="monotone"
+                  name="Basic Revenue"
+                  dataKey={revenueRangeConfig[range].basicKey}
+                  stroke="#fe9a00"
+                  strokeWidth={3}
+                  dot={false}
+                  activeDot={{ r: 6 }}
+                />
+                <Line
+                  type="monotone"
+                  name="Pro Revenue"
+                  dataKey={revenueRangeConfig[range].proKey}
+                  stroke="#00bc7d"
                   strokeWidth={3}
                   dot={false}
                   activeDot={{ r: 6 }}

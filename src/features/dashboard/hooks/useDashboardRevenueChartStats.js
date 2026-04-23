@@ -1,4 +1,4 @@
-import calculateRevenue from "../../utils/calculateRevenue.js";
+import getRevenue from "../../utils/getRevenue.js";
 
 import getMonthlyRevenue from "../../utils/getMonthlyRevenue.js";
 import getPerCentValue from "../../../utils/getPerCentValue.js";
@@ -11,8 +11,8 @@ const useDashboardRevenueChartStats = () => {
   const { isDataAndEventsLoading, isDataAndEventsErrors } = globalStatus;
   const { timeData, paymentsData } = data;
 
-  const dailyRevenue = calculateRevenue(timeData, paymentsData);
-  const monthlyRevenue = calculateRevenue(timeData, paymentsData, "month");
+  const dailyRevenue = getRevenue(timeData, paymentsData);
+  const monthlyRevenue = getRevenue(timeData, paymentsData, "month");
 
   const dailyRevenueLast30days = dailyRevenue?.slice(-30) || [];
   const dailyRevenuePrev30days = dailyRevenue?.slice(-60, -30) || [];

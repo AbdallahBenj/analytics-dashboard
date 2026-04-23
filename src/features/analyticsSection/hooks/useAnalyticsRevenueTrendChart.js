@@ -1,4 +1,6 @@
-import calculateRevenue from "../../utils/calculateRevenue.js";
+import { useEffect } from "react";
+
+import getRevenue from "../../utils/getRevenue.js";
 
 import getMonthlyRevenue from "../../utils/getMonthlyRevenue.js";
 import getPerCentValue from "../../../utils/getPerCentValue.js";
@@ -11,13 +13,13 @@ const useAnalyticsRevenueTrendChart = () => {
   const { isDataAndEventsLoading, isDataAndEventsErrors } = globalStatus;
   const { timeData, paymentsData } = data;
 
-  const dailyRevenue = calculateRevenue(timeData, paymentsData);
-  const monthlyRevenue = calculateRevenue(timeData, paymentsData, "month");
+  const dailyRevenue = getRevenue(timeData, paymentsData);
+  const monthlyRevenue = getRevenue(timeData, paymentsData, "month");
 
-  const dailyRevenueLast7days = dailyRevenue?.slice(-7) || [];
-  const dailyRevenuePrev7days = dailyRevenue?.slice(-14, -7) || [];
-  const last7daysRevenue = getMonthlyRevenue(dailyRevenueLast7days);
-  const prev7daysRevenue = getMonthlyRevenue(dailyRevenuePrev7days);
+  const last7DaysDailyRevenue = dailyRevenue?.slice(-7) || [];
+  const prev7DaysDailyRevenue = dailyRevenue?.slice(-14, -7) || [];
+  const last7daysRevenue = getMonthlyRevenue(last7DaysDailyRevenue);
+  const prev7daysRevenue = getMonthlyRevenue(prev7DaysDailyRevenue);
 
   const perCent7daysRevenue = getPerCentValue(
     last7daysRevenue,
@@ -59,9 +61,11 @@ const useAnalyticsRevenueTrendChart = () => {
 
   const revenueRangeConfig = {
     d7: {
-      data: dailyRevenueLast7days,
+      data: last7DaysDailyRevenue,
       xKey: "date",
       yKey: "revenue",
+      basicKey: "basicRevenue",
+      proKey: "proRevenue",
       label: "7 Days",
       revenueValue: last7daysRevenue,
       perCentRevenue: perCent7daysRevenue,
@@ -70,6 +74,8 @@ const useAnalyticsRevenueTrendChart = () => {
       data: dailyRevenueLast30days,
       xKey: "date",
       yKey: "revenue",
+      basicKey: "basicRevenue",
+      proKey: "proRevenue",
       label: "30 Days",
       revenueValue: last30daysRevenue,
       perCentRevenue: perCent30daysRevenue,
@@ -78,6 +84,8 @@ const useAnalyticsRevenueTrendChart = () => {
       data: dailyRevenueLast90days,
       xKey: "date",
       yKey: "revenue",
+      basicKey: "basicRevenue",
+      proKey: "proRevenue",
       label: "90 Days",
       revenueValue: last90daysRevenue,
       perCentRevenue: perCent90daysRevenue,
@@ -86,6 +94,8 @@ const useAnalyticsRevenueTrendChart = () => {
       data: monthlyRevenueLast6Months,
       xKey: "date",
       yKey: "revenue",
+      basicKey: "basicRevenue",
+      proKey: "proRevenue",
       label: "6 Months",
       revenueValue: last6MonthsRevenue,
       perCentRevenue: perCent6MonthsRevenue,
@@ -94,6 +104,8 @@ const useAnalyticsRevenueTrendChart = () => {
       data: monthlyRevenueLast12Months,
       xKey: "date",
       yKey: "revenue",
+      basicKey: "basicRevenue",
+      proKey: "proRevenue",
       label: "12 Months",
       revenueValue: last12MonthsRevenue,
       perCentRevenue: null,
@@ -103,10 +115,6 @@ const useAnalyticsRevenueTrendChart = () => {
   return {
     isDataAndEventsLoading,
     isDataAndEventsErrors,
-
-    last30daysRevenue,
-    perCent30daysRevenue,
-
     revenueRangeConfig,
   };
 };

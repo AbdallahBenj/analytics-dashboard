@@ -54,6 +54,7 @@ const generatePayments = (subscriptions = []) => {
           userId: sub.userId,
           userName: sub.userName,
           subscriptionId: sub.subsId,
+          subscriptionPlan: sub.subsPlan,
           invoicePrice: sub.priceMonthly,
           invoiceNumber: invoiceNumber,
           paymentStatus: paymentStatus,

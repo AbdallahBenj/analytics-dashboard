@@ -7,7 +7,7 @@ import {
   ArrowPathIcon,
 } from "@heroicons/react/24/solid";
 
-import calculateRevenue from "../../utils/calculateRevenue.js";
+import getRevenue from "../../utils/getRevenue.js";
 import getMonthlyRevenue from "../../utils/getMonthlyRevenue.js";
 import getActiveSubscriptions from "../../utils/getActiveSubscriptions.js";
 
@@ -26,7 +26,7 @@ const useDashboardMiniCardsStats = () => {
   const { timeData, usersData, subsData, paymentsData } = data;
 
   const dailyRevenue = useMemo(() => {
-    return calculateRevenue(timeData, paymentsData);
+    return getRevenue(timeData, paymentsData);
   }, [timeData, paymentsData]);
 
   const dailyRevenueLast30days = dailyRevenue?.slice(-30);
