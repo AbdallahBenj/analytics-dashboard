@@ -88,7 +88,7 @@ const AnalyticsRevenueTrendChart = () => {
           </div>
         </div>
       </div>
-      <div className="flex-1 min-h-0">
+      <div className="flex-1 min-h-0 overflow-hidden">
         {isDataAndEventsLoading ? (
           // Loading snipper icon
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -96,7 +96,7 @@ const AnalyticsRevenueTrendChart = () => {
           </div>
         ) : (
           !isDataAndEventsErrors && (
-            <ResponsiveContainer width="96%" height="100%">
+            <ResponsiveContainer width="100%" height="100%">
               <LineChart data={revenueRangeConfig[range].data}>
                 <CartesianGrid
                   strokeDasharray="3 3"

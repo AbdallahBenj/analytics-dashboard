@@ -41,6 +41,9 @@ This project was built to simulate a real SaaS analytics product, including dash
 * Designing responsive data dashboards
 * Improving frontend performance
 
+--- 
+
+
 ## Live Demo
 
 🔗 **[Analytics Dashboard Demo](https://anadash.vercel.app/)**
@@ -53,6 +56,8 @@ This project was built to simulate a real SaaS analytics product, including dash
 
 npm install  
 npm run dev
+
+---
 
 
 ## Project Stricture
@@ -173,6 +178,7 @@ src/
 ### Data Flow Architecture
 
 ---
+
 
 ##  1. Data Generation Flow
 
