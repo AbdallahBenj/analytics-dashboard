@@ -1,6 +1,9 @@
 import { create } from "zustand";
 
 const useStoreFetchedData = create((set, get) => ({
+  // Initialization flag to prevent duplicate fetches
+  hasFetched: false,
+
   data: {}, // data: {dataType: {isLoading, error, dataValue}}
   events: {}, // events: {eventType: {isLoading, error, eventValue}}
 
@@ -130,6 +133,11 @@ const useStoreFetchedData = create((set, get) => ({
 
   retryFetchEvents: (eventsType, realEvents, label) => {
     get().fetchEvents(eventsType, realEvents, label);
+  },
+
+  // Mark that initial fetch has been completed
+  setHasFetched: (value) => {
+    set({ hasFetched: value });
   },
 }));
 

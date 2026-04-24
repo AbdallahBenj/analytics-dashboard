@@ -57,6 +57,7 @@ npm run dev
 
 ## Project Stricture
 
+```bash
 src/
 ├── assets/                 # Logos, favicon
 │   ├── dashboard-logo.svg
@@ -166,20 +167,59 @@ src/
 │
 ├── App.jsx
 └── main.jsx
+```
 
 
-### Data Flow
+### Data Flow Architecture
 
-- Data Generation Flow:
+---
 
-generateTimeline.js ➡️ generateUsers.js ➡️ generateSubscriptions.js ➡️ generatePayments.js ➡️ generateData.js
+##  1. Data Generation Flow
 
-- Data Fetch Flow:
+```txt
+generateTimeline.js
+        ↓
+generateUsers.js
+        ↓
+generateSubscriptions.js
+        ↓
+generatePayments.js
+        ↓
+generateData.js
+```
 
-generateData.js ➡️ useStoreFetchedData.js ➡️ useGlobalFetchedData.js ➡️ Components ➡️ UI Rendering
+---
 
-- Events Flow:
+##  2. Data Fetch Flow
 
- generateData.js ➡️ generateEvents.js➡️ useStoreFetchedData.js ➡️ useGlobalFetchedData.js ➡️ Components ➡️ UI Rendering
+```txt
+generateData.js
+        ↓
+useStoreFetchedData.js (Zustand Store)
+        ↓
+useGlobalFetchedData.js (Hook Layer)
+        ↓
+Components (Dashboard / Analytics / Sidebar / Header)
+        ↓
+UI Rendering
+```
+
+---
+
+##  3. Events Flow
+
+```txt
+generateData.js
+        ↓
+generateEvents.js
+        ↓
+useStoreFetchedData.js (State Update)
+        ↓
+useGlobalFetchedData.js
+        ↓
+Components
+        ↓
+UI Rendering (Reactive Updates)
+```
 
                                           

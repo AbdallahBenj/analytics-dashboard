@@ -20,9 +20,11 @@ const useGlobalFetchedData = () => {
   const dataStore = useStoreFetchedData((state) => state.data);
   const eventsStore = useStoreFetchedData((state) => state.events);
 
+  // Get the fetch functions and initialization flag
   const fetchData = useStoreFetchedData((state) => state.fetchData);
   const fetchEvents = useStoreFetchedData((state) => state.fetchEvents);
-
+  const setHasFetched = useStoreFetchedData((state) => state.setHasFetched);
+  const hasFetched = useStoreFetchedData((state) => state.hasFetched);
   const retryFetchData = useStoreFetchedData((state) => state.retryFetchData);
   const retryFetchEvents = useStoreFetchedData(
     (state) => state.retryFetchEvents,
@@ -54,8 +56,11 @@ const useGlobalFetchedData = () => {
     paymentsEvents: "Payments events",
   };
 
-  // Fetch data and events on mount:
+  // Fetch data and events on mount (only once):
   useEffect(() => {
+    // Only fetch if we haven't already fetched
+    if (hasFetched) return;
+
     Object.entries(dataMap).forEach(([key, value]) => {
       fetchData(key, value, LabelDataMap[key]);
     });
@@ -63,7 +68,10 @@ const useGlobalFetchedData = () => {
     Object.entries(eventsMap).forEach(([key, value]) => {
       fetchEvents(key, value, LabelEventsMap[key]);
     });
-  }, [fetchData, fetchEvents]);
+
+    // Mark that initial fetch has been done
+    setHasFetched(true);
+  }, []); // Empty dependency array - runs only once on mount
 
   // Get data and events values:
   const data = {
