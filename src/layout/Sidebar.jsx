@@ -6,7 +6,7 @@ import { ChevronUpDownIcon, ArrowPathIcon } from "@heroicons/react/20/solid";
 import navContent from "../data/navContent";
 const { brand, navigation } = navContent;
 
-import useGlobalFetchedData from "../features/dashboard/hooks/useGlobalFetchedData";
+import useGlobalFetchedData from "../hooks/useGlobalFetchedData";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");

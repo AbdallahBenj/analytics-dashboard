@@ -6,7 +6,7 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 
-import useGlobalFetchedData from "../features/dashboard/hooks/useGlobalFetchedData";
+import useGlobalFetchedData from "../hooks/useGlobalFetchedData";
 
 const ErrorsDialog = () => {
   const [isOpen, setIsOpen] = useState(false);

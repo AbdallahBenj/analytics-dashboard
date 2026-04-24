@@ -1,6 +1,6 @@
 import getUsersByPlan from "../../utils/getUsersByPlan.js";
 
-import useGlobalFetchedData from "./useGlobalFetchedData.js";
+import useGlobalFetchedData from "../../../hooks/useGlobalFetchedData.js";
 
 const useDashboardPlansPieChartStats = (pieColors) => {
   const { globalStatus, data } = useGlobalFetchedData();

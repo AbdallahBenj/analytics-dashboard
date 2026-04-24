@@ -63,6 +63,7 @@ src/
 │   └── react.svg
 │
 ├── components/            # Reusable UI components
+│   ├── ComingSoon.jsx
 │   ├── ErrorsDialog.jsx
 │   ├── LoginDialog.jsx
 │   ├── NotificationMenu.jsx
@@ -71,33 +72,52 @@ src/
 │   └── ThemeMode.jsx
 │
 ├── data/                  # Static content
+│   ├── countries.jsx
 │   ├── navContent.jsx
 │   └── usersNames.jsx
 │
 ├── features/              # Feature-based modules
-│   └── dashboard/
-│       ├── components/
-│       │   ├── DashboardMiniCards.jsx
-│       │   ├── DashboardPlansPieChart.jsx
-│       │   ├── DashboardRecentActivity.jsx
-│       │   └── DashboardRevenueChart.jsx
-│       │
-│       ├── hooks/
-│       │   ├── useDashboardMiniCardsStats.js
-│       │   ├── useDashboardPlansPieChartStats.js
-│       │   ├── useDashboardRecentActivity.js
-│       │   ├── useDashboardRevenueChartStats.js
-│       │   └── useGlobalFetchedData.js
-│       │
-│       └── utils/
-│           ├── .js
-│           ├── getActiveSubscriptions.js
-│           ├── getChurnRate.js
-│           ├── getConversionRate.js
-│           ├── getMonthlyRevenue.js
-│           └── getUsersByPlan.js
-│
+│   ├── dashboard/
+│   │   ├── components/
+│   │   │   ├── DashboardMiniCards.jsx
+│   │   │   ├── DashboardPlansPieChart.jsx
+│   │   │   ├── DashboardRecentActivity.jsx
+│   │   │   └── DashboardRevenueChart.jsx
+│   │   │
+│   │   ├── hooks/
+│   │   │   ├── useDashboardMiniCardsStats.js
+│   │   │   ├── useDashboardPlansPieChartStats.js
+│   │   │   ├── useDashboardRecentActivity.js
+│   │   │   └── useDashboardRevenueChartStats.js
+│   │   │
+│   │   └── utils/
+│   │       ├── getActiveSubscriptions.js
+│   │       ├── getChurnRate.js
+│   │       ├── getConversionRate.js
+│   │       ├── getMonthlyRevenue.js
+│   │       ├── getRevenue.js
+│   │       └── getUsersByPlan.js
+│   │
+│   ├── analytics/
+│   │   ├── components/
+│   │   │   ├── AnalyticsRevenueTrendChart.jsx
+│   │   │   ├── .jsx
+│   │   │   └── .jsx
+│   │   │
+│   │   ├── hooks/
+│   │   │   ├── useAnalyticsRevenueTrendChart.js
+│   │   │   ├── .js
+│   │   │   └── .js
+│   │   │
+│   │   └── utils/
+│   │       ├── .js
+│   │       ├── .js
+│   │       └── .js
+│   │
+│   ├──
+│   
 ├── hooks/                 # Global reusable hooks
+│   ├── useGlobalFetchedData.js
 │   ├── useSystemMode.js
 │   └── useThemeMode.js
 │
@@ -110,12 +130,12 @@ src/
 │   └── Sidebar.jsx
 │
 ├── pages/
-│   ├── DashboardPage.jsx
 │   ├── AnalyticsPage.jsx
 │   ├── CustomersPage.jsx
-│   ├── SubscriptionsPage.jsx
+│   ├── DashboardPage.jsx
 │   ├── FeaturesPage.jsx
-│   └── ReportsPage.jsx
+│   ├── ReportsPage.jsx
+│   └── SubscriptionsPage.jsx
 │
 ├── services/
 │   ├── api/              # Future real API

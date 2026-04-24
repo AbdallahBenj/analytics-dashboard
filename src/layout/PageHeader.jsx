@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { ArrowPathIcon } from "@heroicons/react/20/solid";
 
-import useGlobalFetchedData from "../features/dashboard/hooks/useGlobalFetchedData";
+import useGlobalFetchedData from "../hooks/useGlobalFetchedData";
 
 import SearchInput from "../components/SearchInput";
 import navContent from "../data/navContent";

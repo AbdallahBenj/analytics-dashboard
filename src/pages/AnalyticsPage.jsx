@@ -1,6 +1,6 @@
 import ComingSoon from "../components/ComingSoon";
 
-import AnalyticsRevenueTrendChart from "../features/analyticsSection/components/AnalyticsRevenueTrendChart";
+import AnalyticsRevenueTrendChart from "../features/analytics/components/AnalyticsRevenueTrendChart";
 
 const AnalyticsPage = () => {
   return (

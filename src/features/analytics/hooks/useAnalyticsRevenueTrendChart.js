@@ -1,11 +1,9 @@
-import { useEffect } from "react";
-
 import getRevenue from "../../utils/getRevenue.js";
 
 import getMonthlyRevenue from "../../utils/getMonthlyRevenue.js";
 import getPerCentValue from "../../../utils/getPerCentValue.js";
 
-import useGlobalFetchedData from "../../dashboard/hooks/useGlobalFetchedData.js";
+import useGlobalFetchedData from "../../../hooks/useGlobalFetchedData.js";
 
 const useAnalyticsRevenueTrendChart = () => {
   const { globalStatus, data } = useGlobalFetchedData();

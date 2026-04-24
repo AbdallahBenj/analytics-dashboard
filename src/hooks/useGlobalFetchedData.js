@@ -1,18 +1,18 @@
 import { useEffect } from "react";
-import useStoreFetchedData from "../../../store/useStoreFetchedData.js";
+import useStoreFetchedData from "../store/useStoreFetchedData.js";
 
 import {
   timeData,
   usersData,
   subsData,
   paymentsData,
-} from "../../../service/mock/generateData.js";
+} from "../service/mock/generateData.js";
 
 import {
   usersEvents,
   subsEvents,
   paymentsEvents,
-} from "../../../service/events/generateEvents.js";
+} from "../service/events/generateEvents.js";
 
 const useGlobalFetchedData = () => {
   // Data and Events
