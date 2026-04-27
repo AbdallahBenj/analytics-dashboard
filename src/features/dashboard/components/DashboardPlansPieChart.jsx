@@ -35,7 +35,7 @@ const DashboardPlansPieChart = () => {
 
   return (
     <div
-      className="relative primary-chart h-96
+      className="relative primary-chart h-96 md:h-auto
             rounded-2xl p-4 cursor-pointer
             col-span-4 md:col-span-2 lg:col-span-1 
 

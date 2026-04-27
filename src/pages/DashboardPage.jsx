@@ -7,8 +7,7 @@ const DashboardPage = () => {
   return (
     <section
       className="rounded-lg
-      grid grid-cols-4 gap-4
-      border border-gray-500/10"
+      grid grid-cols-4 gap-4"
     >
       {/* Your content */}
       <DashboardMiniCards />

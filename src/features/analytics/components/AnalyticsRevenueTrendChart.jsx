@@ -49,7 +49,7 @@ const AnalyticsRevenueTrendChart = () => {
 
   return (
     <div
-      className="analytics-chart-revenue h-120
+      className="analytics-chart-revenue h-125
             rounded-2xl p-4 cursor-pointer 
             col-span-4 md:col-span-4 lg:col-span-4
             flex flex-col
