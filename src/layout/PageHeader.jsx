@@ -1,9 +1,9 @@
 import { useLocation } from "react-router-dom";
 import { ArrowPathIcon } from "@heroicons/react/20/solid";
 
-import useGlobalFetchedData from "../hooks/useGlobalFetchedData";
+import useGlobalFetchedData from "../hooks/useGlobalFetchedData.ts";
 
-import SearchInput from "../components/SearchInput";
+import SearchInput from "../components/SearchInput.tsx";
 import navContent from "../data/navContent";
 const { navigation } = navContent;
 

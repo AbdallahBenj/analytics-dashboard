@@ -7,8 +7,8 @@ import CustomersPage from "./pages/CustomersPage";
 import SubscriptionsPage from "./pages/SubscriptionsPage";
 import FeaturesPage from "./pages/FeaturesPage";
 import ReportsPage from "./pages/ReportsPage";
-import ErrorsDialog from "./components/ErrorsDialog";
-import LoginDialog from "./components/LoginDialog";
+import ErrorsDialog from "./components/ErrorsDialog.tsx";
+import LoginDialog from "./components/LoginDialog.tsx";
 
 function App() {
   return (

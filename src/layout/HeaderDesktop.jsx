@@ -1,8 +1,8 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
 
-import ThemeMode from "../components/ThemeMode";
-import NotificationMenu from "../components/NotificationMenu";
+import ThemeMode from "../components/ThemeMode.tsx";
+import NotificationMenu from "../components/NotificationMenu.tsx";
 
 import useStoreLogin from "../store/useStoreLogin";
 

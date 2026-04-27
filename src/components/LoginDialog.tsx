@@ -9,7 +9,7 @@ import {
 import { Waveform } from "ldrs/react";
 import "ldrs/react/Waveform.css";
 
-import useStoreLogin from "../store/useStoreLogin";
+import useStoreLogin from "../store/useStoreLogin.js";
 
 const LoginDialog = () => {
   const isLoading = useStoreLogin((state) => state.isLoading);
@@ -17,17 +17,28 @@ const LoginDialog = () => {
   const setLoginOpen = useStoreLogin((state) => state.setLoginOpen);
   const setUserLogin = useStoreLogin((state) => state.setUserLogin);
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-  });
-  const [errors, setErrors] = useState({
+  type FormData = {
+    name: string;
+    email: string;
+  };
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
   });
 
-  const handleChange = (e) => {
+  type Errors = {
+    name: string;
+    email: string;
+  };
+
+  const [errors, setErrors] = useState<Errors>({
+    name: "",
+    email: "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -56,7 +67,7 @@ const LoginDialog = () => {
   const isEmailValid = /^\S+@\S+\.\S+$/.test(formData.email);
   const isFormValid = formData.name.trim() && isEmailValid;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!formData.name.trim()) {

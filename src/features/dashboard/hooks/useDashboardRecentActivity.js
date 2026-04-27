@@ -1,4 +1,4 @@
-import useGlobalFetchedData from "../../../hooks/useGlobalFetchedData.js";
+import useGlobalFetchedData from "../../../hooks/useGlobalFetchedData.ts";
 
 const useDashboardRecentActivity = () => {
   const { globalStatus, events } = useGlobalFetchedData();

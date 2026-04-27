@@ -1,13 +1,50 @@
 import { create } from "zustand";
 
-const useStoreFetchedData = create((set, get) => ({
+type StoreType = {
+  hasFetched: boolean;
+  data: {
+    [key: string]: {
+      loading: boolean;
+      errors: { id: number; label: string; message: string }[];
+      dataValue: any[];
+    };
+  };
+  events: {
+    [key: string]: {
+      loading: boolean;
+      errors: { id: number; label: string; message: string }[];
+      eventsValue: { events: any[]; eventsTitle: string[] };
+    };
+  };
+  fetchData: (dataType: string, realData: unknown[], label: string) => void;
+  fetchEvents: (
+    eventsType: string,
+    realEvents: { events: any[]; eventsTitle: string[] },
+    label: string,
+  ) => void;
+
+  retryFetchData: (
+    dataType: string,
+    realData: unknown[],
+    label: string,
+  ) => void;
+  retryFetchEvents: (
+    eventsType: string,
+    realEvents: { events: any[]; eventsTitle: string[] },
+    label: string,
+  ) => void;
+
+  setHasFetched: (value: boolean) => void;
+};
+
+const useStoreFetchedData = create<StoreType>((set, get) => ({
   // Initialization flag to prevent duplicate fetches
   hasFetched: false,
 
   data: {}, // data: {dataType: {isLoading, error, dataValue}}
   events: {}, // events: {eventType: {isLoading, error, eventValue}}
 
-  fetchData: async (dataType, realData, label = "") => {
+  fetchData: async (dataType, realData, label) => {
     const state = get();
     if (state.data[dataType]?.loading) return;
 
@@ -59,7 +96,13 @@ const useStoreFetchedData = create((set, get) => ({
           [dataType]: {
             ...state.data[dataType],
             loading: false,
-            errors: [{ id: Date.now(), label, message: err.message }],
+            errors: [
+              {
+                id: Date.now(),
+                label,
+                message: err instanceof Error ? err.message : "Unknown error",
+              },
+            ],
             dataValue: [],
           },
         },
@@ -67,7 +110,7 @@ const useStoreFetchedData = create((set, get) => ({
     }
   },
 
-  fetchEvents: async (eventsType, realEvents, label = "") => {
+  fetchEvents: async (eventsType, realEvents, label) => {
     const state = get();
 
     if (state.events[eventsType]?.loading) return;
@@ -78,7 +121,10 @@ const useStoreFetchedData = create((set, get) => ({
           ...state.events[eventsType],
           loading: true,
           errors: [],
-          eventsValue: [],
+          eventsValue: {
+            events: [],
+            eventsTitle: [],
+          },
         },
       },
     });
@@ -107,7 +153,10 @@ const useStoreFetchedData = create((set, get) => ({
               ...state.events[eventsType],
               loading: false,
               errors: [{ id: Date.now(), label, message: "Failed to load" }],
-              eventsValue: [],
+              eventsValue: {
+                events: [],
+                eventsTitle: [],
+              },
             },
           },
         }));
@@ -119,8 +168,17 @@ const useStoreFetchedData = create((set, get) => ({
           [eventsType]: {
             ...state.events[eventsType],
             loading: false,
-            errors: [{ id: Date.now(), label, message: err.message }],
-            eventsValue: [],
+            errors: [
+              {
+                id: Date.now(),
+                label,
+                message: err instanceof Error ? err.message : "Unknown error",
+              },
+            ],
+            eventsValue: {
+              events: [],
+              eventsTitle: [],
+            },
           },
         },
       }));

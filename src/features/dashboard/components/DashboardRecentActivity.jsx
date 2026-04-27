@@ -1,5 +1,5 @@
 import { useState } from "react";
-import RadioGroupButtons from "../../../components/RadioGroupButtons.jsx";
+import RadioGroupButtons from "../../../components/RadioGroupButtons.tsx";
 
 // Loading snipper icon
 import { Zoomies } from "ldrs/react";

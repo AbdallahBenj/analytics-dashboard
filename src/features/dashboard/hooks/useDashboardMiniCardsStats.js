@@ -16,7 +16,7 @@ import getConversionRate from "../../utils/getConversionRate.js";
 
 import getPerCentValue from "../../../utils/getPerCentValue.js";
 
-import useGlobalFetchedData from "../../../hooks/useGlobalFetchedData.js";
+import useGlobalFetchedData from "../../../hooks/useGlobalFetchedData.ts";
 
 const useDashboardMiniCardsStats = () => {
   const { globalStatus, data } = useGlobalFetchedData();

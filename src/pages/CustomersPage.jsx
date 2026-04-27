@@ -1,4 +1,4 @@
-import ComingSoon from "../components/ComingSoon.jsx";
+import ComingSoon from "../components/ComingSoon";
 
 const CustomersPage = () => {
   return (

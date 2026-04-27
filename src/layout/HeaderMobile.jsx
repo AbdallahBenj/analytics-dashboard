@@ -5,9 +5,9 @@ import {
   DisclosurePanel,
 } from "@headlessui/react";
 
-import ThemeMode from "../components/ThemeMode";
-import SearchInput from "../components/SearchInput";
-import NotificationMenu from "../components/NotificationMenu";
+import ThemeMode from "../components/ThemeMode.tsx";
+import SearchInput from "../components/SearchInput.tsx";
+import NotificationMenu from "../components/NotificationMenu.tsx";
 
 import {
   Bars3Icon,
