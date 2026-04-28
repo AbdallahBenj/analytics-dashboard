@@ -1,13 +1,23 @@
 import getTimeAgo from "../../utils/getTimeAgo.js";
 
-const generateUsersEvents = (usersData = [], limit = 10) => {
-  const eventsTitle = ["Time", "User", "Email", "Created At"];
+import type { User } from "../../types/dataTypes.js";
+import type {
+  EventsTitle,
+  Events,
+  UsersEvents,
+} from "../../types/eventsTypes.js";
+
+const generateUsersEvents = (
+  usersData: User[] = [],
+  limit: number = 10,
+): UsersEvents => {
+  const eventsTitle: EventsTitle[] = ["Time", "User", "Email", "Created At"];
 
   if (!usersData || usersData.length === 0) {
     return { eventsTitle, events: [] };
   }
 
-  const lastEvents = (eventsData = []) =>
+  const lastEvents = (eventsData: User[] = []) =>
     [...eventsData]
       .map((user) => {
         const eventDate = user.userCreatedAt
@@ -15,7 +25,10 @@ const generateUsersEvents = (usersData = [], limit = 10) => {
           : null;
         return { ...user, eventDateObj: eventDate };
       })
-      .sort((a, b) => (b.eventDateObj || 0) - (a.eventDateObj || 0))
+      .sort(
+        (a, b) =>
+          (b.eventDateObj?.getTime() || 0) - (a.eventDateObj?.getTime() || 0),
+      )
       .slice(0, limit)
       .map(({ eventDateObj, userId, userName, userEmail }) => ({
         userId,
@@ -32,6 +45,7 @@ const generateUsersEvents = (usersData = [], limit = 10) => {
       }));
 
   const usersEvents = { eventsTitle, events: lastEvents(usersData) };
+
   return usersEvents;
 };
 

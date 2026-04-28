@@ -69,18 +69,18 @@ src/
 │   └── react.svg
 │
 ├── components/            # Reusable UI components
-│   ├── ComingSoon.jsx
-│   ├── ErrorsDialog.jsx
-│   ├── LoginDialog.jsx
-│   ├── NotificationMenu.jsx
-│   ├── RadioGroupButtons.jsx
-│   ├── SearchInput.jsx
-│   └── ThemeMode.jsx
+│   ├── ComingSoon.tsx
+│   ├── ErrorsDialog.tsx
+│   ├── LoginDialog.tsx
+│   ├── NotificationMenu.tsx
+│   ├── RadioGroupButtons.tsx
+│   ├── SearchInput.tsx
+│   └── ThemeMode.tsx
 │
 ├── data/                  # Static content
-│   ├── countries.jsx
-│   ├── navContent.jsx
-│   └── usersNames.jsx
+│   ├── countries.ts
+│   ├── navContent.ts
+│   └── usersNames.ts
 │
 ├── features/              # Feature-based modules
 │   ├── dashboard/
@@ -123,7 +123,7 @@ src/
 │   ├──
 │   
 ├── hooks/                 # Global reusable hooks
-│   ├── useGlobalFetchedData.js
+│   ├── useGlobalFetchedData.ts
 │   ├── useSystemMode.js
 │   └── useThemeMode.js
 │
@@ -146,29 +146,34 @@ src/
 ├── services/
 │   ├── api/              # Future real API
 │   ├── mock/
-│   │   ├── generateData.js
-│   │   ├── generateUsers.js
-│   │   ├── generatePayments.js
-│   │   ├── generateSubscriptions.js
-│   │   └── generateTimeline.js
+│   │   ├── generateData.ts
+│   │   ├── generateUsers.ts
+│   │   ├── generatePayments.ts
+│   │   ├── generateSubscriptions.ts
+│   │   └── generateTimeline.ts
 │   │
 │   ├── events/
 │   │   ├── generateEvents.js
 │   │   ├── generatePaymentsEvents.js
 │   │   ├── generateSubscriptionsEvents.js
-│   │   └── generateUsersEvents.js
+│   │   └── generateUsersEvents.ts
 │   │
 │   └── utils/
-│       └── convertToDynamicTime.js
+│       └── convertToDynamicTime.ts
 │
 ├── store/                # Zustand global state
-│   ├── useStoreFetchedData.js
-│   └── useStoreLogin.js
+│   ├── useStoreFetchedData.ts
+│   └── useStoreLogin.ts
 │
 ├── utils/                # Global utilities
-│   ├── convertToKilo.js
-│   ├── getPercentValue.js
-│   └── getTimeAgo.js
+│   ├── convertToKilo.ts
+│   ├── getPercentValue.ts
+│   └── getTimeAgo.ts
+│    
+├── types/                # Global utilities
+│   ├── dataTypes.ts
+│   ├── eventTypes.ts
+│   └── .ts
 │
 ├── App.jsx
 └── main.jsx

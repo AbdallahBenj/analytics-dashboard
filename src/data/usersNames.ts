@@ -1,4 +1,4 @@
-const usersNames = [
+const usersNames : string[] = [
   "Alice Johnson",
   "Bob Smith",
   "Carla Davis",

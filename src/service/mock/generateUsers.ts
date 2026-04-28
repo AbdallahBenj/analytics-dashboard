@@ -1,9 +1,15 @@
-import usersNames from "../../data/usersNames";
-import countries from "../../data/countries";
+import usersNames from "../../data/usersNames.js";
+import countries from "../../data/countries.js";
 import convertToDynamicTime from "../utils/convertToDynamicTime.js";
 
-const generateUsers = (timeline = [], min = 1, max = 5) => {
-  let id = 1;
+import type { Timeline, User } from "../../types/dataTypes.ts";
+
+const generateUsers = (
+  timeline: Timeline[] = [],
+  min: number = 1,
+  max: number = 5,
+): User[] => {
+  let id: number = 1;
 
   const users = timeline.flatMap((dateObj, i) => {
     // --- Growth logic for users over time
@@ -29,15 +35,15 @@ const generateUsers = (timeline = [], min = 1, max = 5) => {
       const userRandomCreatedAt = convertToDynamicTime(baseDate);
 
       const domains = ["gmail.com", "yahoo.com", "outlook.com"];
-      const firstName = usersNames[userNameIndex]
+      const firstName = usersNames[userNameIndex]!
         .toLowerCase()
         .trim()
         .split(" ")[0];
 
-      const user = {
+      const user: User = {
         userId: `u_${id}`,
         userName: `${usersNames[userNameIndex]}`,
-        userCountry: countries[countryIndex],
+        userCountry: countries[countryIndex]!,
         userEmail: `${firstName}.${id}@${domains[Math.floor(Math.random() * domains.length)]}`,
         userCreatedAt: userRandomCreatedAt.toISOString(),
       };

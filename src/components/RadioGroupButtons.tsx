@@ -1,6 +1,12 @@
 import { RadioGroup } from "@headlessui/react";
 
-const RadioGroupButtons = ({ state, setState, stateConfig }) => {
+type Props = {
+  state: string;
+  setState: (value: string) => void;
+  stateConfig: Record<string, { label: string }>;
+};
+
+const RadioGroupButtons = ({ state, setState, stateConfig }: Props) => {
   return (
     <RadioGroup
       value={state}

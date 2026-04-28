@@ -6,7 +6,7 @@ import {
   usersData,
   subsData,
   paymentsData,
-} from "../service/mock/generateData.js";
+} from "../service/mock/generateData.ts";
 
 import {
   usersEvents,

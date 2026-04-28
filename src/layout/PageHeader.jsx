@@ -4,7 +4,7 @@ import { ArrowPathIcon } from "@heroicons/react/20/solid";
 import useGlobalFetchedData from "../hooks/useGlobalFetchedData.ts";
 
 import SearchInput from "../components/SearchInput.tsx";
-import navContent from "../data/navContent";
+import navContent from "../data/navContent.ts";
 const { navigation } = navContent;
 
 const PageHeader = () => {

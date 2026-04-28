@@ -4,7 +4,7 @@ import { UserCircleIcon } from "@heroicons/react/24/outline";
 import ThemeMode from "../components/ThemeMode.tsx";
 import NotificationMenu from "../components/NotificationMenu.tsx";
 
-import useStoreLogin from "../store/useStoreLogin";
+import useStoreLogin from "../store/useStoreLogin.js";
 
 const HeaderDesktop = () => {
   const userLogin = useStoreLogin((state) => state.userLogin);

@@ -15,10 +15,10 @@ import {
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
 
-import navContent from "../data/navContent";
+import navContent from "../data/navContent.ts";
 const { brand, navigation } = navContent;
 
-import useStoreLogin from "../store/useStoreLogin";
+import useStoreLogin from "../store/useStoreLogin.js";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");

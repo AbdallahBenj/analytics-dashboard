@@ -1,4 +1,4 @@
-import getTimeAgo from "../../utils/getTimeAgo.js";
+import getTimeAgo from "../../utils/getTimeAgo.ts";
 
 const generatePaymentsEvents = (paymentsData = [], limit = 10) => {
   const eventsTitle = [

@@ -19,7 +19,7 @@ import {
   Tooltip,
 } from "recharts";
 
-import convertToKilo from "../../../utils/convertToKilo.js";
+import convertToKilo from "../../../utils/convertToKilo.ts";
 
 const AnalyticsRevenueTrendChart = () => {
   const { isDataAndEventsLoading, isDataAndEventsErrors, revenueRangeConfig } =

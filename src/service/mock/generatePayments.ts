@@ -1,6 +1,8 @@
 import convertToDynamicTime from "../utils/convertToDynamicTime.js";
 
-const generatePayments = (subscriptions = []) => {
+import type { Subscription, Payment } from "../../types/dataTypes.ts";
+
+const generatePayments = (subscriptions: Subscription[] = []): Payment[] => {
   let id = 0;
   const toDay = new Date();
 
@@ -49,7 +51,7 @@ const generatePayments = (subscriptions = []) => {
           paidAt = null;
         }
 
-        const payment = {
+        const payment: Payment = {
           paymentId: `pay_${++id}`,
           userId: sub.userId,
           userName: sub.userName,

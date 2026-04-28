@@ -4,7 +4,7 @@ import { ArrowUpIcon, ArrowDownIcon } from "@heroicons/react/24/solid";
 import { DotPulse } from "ldrs/react";
 import "ldrs/react/DotPulse.css";
 
-import convertToKilo from "../../../utils/convertToKilo.js";
+import convertToKilo from "../../../utils/convertToKilo.ts";
 
 import useDashboardMiniCardsStats from "../hooks/useDashboardMiniCardsStats.js";
 
@@ -46,7 +46,7 @@ const MiniCards = () => {
           ) : (
             <p className="text-gray-900 dark:text-white">
               {unit === "$" && <span className={unitClass}>{unit}</span>}{" "}
-              {convertToKilo(value.toFixed(2))}
+              {convertToKilo(Number(value.toFixed(2)))}
               {unit !== "$" && <span className={unitClass}> {unit}</span>}{" "}
               {hasChange && (
                 <span className={isGoodChangeClass}>

@@ -1,6 +1,7 @@
-const getTimeAgo = (date) => {
-  const now = new Date();
-  const period = now - new Date(date);
+const getTimeAgo = (date: Date): string => {
+  const now = Date.now();
+  const past = new Date(date).getTime();
+  const period = now - past;
 
   const second = 1000;
   const minute = second * 60;
@@ -9,7 +10,7 @@ const getTimeAgo = (date) => {
   const month = day * 30;
   const year = month * 12;
 
-  const plural = (value) => (value > 1 ? "s" : "");
+  const plural = (value: number): string => (value > 1 ? "s" : "");
 
   if (period >= year) {
     const value = Math.floor(period / year);

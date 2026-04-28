@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import { ChevronUpDownIcon, ArrowPathIcon } from "@heroicons/react/20/solid";
 
-import navContent from "../data/navContent";
+import navContent from "../data/navContent.ts";
 const { brand, navigation } = navContent;
 
 import useGlobalFetchedData from "../hooks/useGlobalFetchedData.ts";

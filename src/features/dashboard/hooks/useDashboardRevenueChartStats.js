@@ -1,7 +1,7 @@
 import getRevenue from "../../utils/getRevenue.js";
 
 import getMonthlyRevenue from "../../utils/getMonthlyRevenue.js";
-import getPerCentValue from "../../../utils/getPerCentValue.js";
+import getPerCentValue from "../../../utils/getPerCentValue.ts";
 
 import useGlobalFetchedData from "../../../hooks/useGlobalFetchedData.ts";
 

@@ -1,7 +1,16 @@
 import convertToDynamicTime from "../utils/convertToDynamicTime.js";
 
-const generateSubscriptions = (users = []) => {
-  const plans = [
+import type { User, Subscription } from "../../types/dataTypes.ts";
+
+const generateSubscriptions = (users: User[] = []): Subscription[] => {
+  type Plan = {
+    id: string;
+    name: string;
+    price: number;
+    billing: string | null;
+  };
+
+  const plans: Plan[] = [
     { id: "p-1", name: "free", price: 0, billing: null },
     { id: "p-2", name: "basic", price: 5, billing: "monthly" },
     { id: "p-3", name: "pro", price: 10, billing: "monthly" },
@@ -11,18 +20,18 @@ const generateSubscriptions = (users = []) => {
 
   // Generate subscription record for each user
 
-  const subscriptions = users.map((user, i) => {
+  const subscriptions: Subscription[] = users.flatMap((user, i) => {
     const plansIndex = Math.floor(Math.random() * plans.length);
-    const plan = plans[plansIndex];
+    const plan = plans[plansIndex]!;
     const isFreePlan = plan.price === 0;
 
-    if (isFreePlan) return;
+    if (isFreePlan) return[];
 
     // Compute how many days user existed before today
 
     const createdDate = new Date(user.userCreatedAt);
     const userAgeInDays = Math.floor(
-      (toDay - createdDate) / (1000 * 60 * 60 * 24),
+      (toDay.getTime() - createdDate.getTime()) / (1000 * 60 * 60 * 24),
     );
 
     // Random offset to simulate real subscription start timing

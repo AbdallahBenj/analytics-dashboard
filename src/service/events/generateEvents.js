@@ -1,7 +1,7 @@
-import { usersData, subsData, paymentsData } from "../mock/generateData.js";
+import { usersData, subsData, paymentsData } from "../mock/generateData.ts";
 
 import generateSubscriptionsEvents from "./generateSubscriptionsEvents.js";
-import generateUsersEvents from "./generateUsersEvents.js";
+import generateUsersEvents from "./generateUsersEvents.ts";
 import generatePaymentsEvents from "./generatePaymentsEvents.js";
 
 const limit = 10;

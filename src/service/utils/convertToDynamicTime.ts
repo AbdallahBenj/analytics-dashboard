@@ -1,6 +1,6 @@
 // rename it to "getDynamicDateTime"
 
-const convertToDynamicTime = (date) => {
+const convertToDynamicTime = (date: Date): Date => {
   const newDate = new Date(date);
 
   newDate.setHours(Math.floor(Math.random() * 24));

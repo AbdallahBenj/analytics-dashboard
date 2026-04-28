@@ -1,9 +1,26 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-const useStoreLogin = create(
+type StoreLogin = {
+  isLoading: boolean;
+  loginOpen: boolean;
+  userLogin: { name: string; email: string } | null;
+  notification: string | null;
+
+  setLoading: (value: boolean) => void;
+  setLoginOpen: (value: boolean) => void;
+  resetNotification: () => void;
+  setUserLogin: (user: { name: string; email: string }) => void;
+  resetLogin: () => void;
+};
+
+type PersistedState = {
+  userLogin: { name: string; email: string } | null;
+};
+
+const useStoreLogin = create<StoreLogin>()(
   // Persist only user session (userLogin) to keep login after refresh
-  persist(
+  persist<StoreLogin>(
     (set) => ({
       isLoading: false,
       loginOpen: false,
@@ -37,7 +54,7 @@ const useStoreLogin = create(
     {
       name: "user-storage",
       // Exclude notification  (should reset on reload)
-      partialize: (state) => ({
+      partialize: (state): any => ({
         userLogin: state.userLogin,
       }),
     },

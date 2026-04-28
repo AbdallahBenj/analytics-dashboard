@@ -1,4 +1,4 @@
-import getTimeAgo from "../../utils/getTimeAgo.js";
+import getTimeAgo from "../../utils/getTimeAgo.ts";
 
 const generateSubscriptionsEvents = (subsData = [], limit = 10) => {
   const eventsTitle = ["Time", "User", "Date", "Plan", "Status"];

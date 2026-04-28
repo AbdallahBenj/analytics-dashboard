@@ -6,7 +6,7 @@ import {
 
 import { BellIcon } from "@heroicons/react/24/outline";
 
-import useStoreLogin from "../store/useStoreLogin";
+import useStoreLogin from "../store/useStoreLogin.js";
 
 const NotificationMenu = () => {
   const notification = useStoreLogin((state) => state.notification);
