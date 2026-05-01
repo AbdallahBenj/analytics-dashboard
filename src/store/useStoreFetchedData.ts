@@ -1,12 +1,19 @@
 import { create } from "zustand";
 
+import type {
+  Timeline,
+  User,
+  Subscription,
+  Payment,
+} from "../types/dataTypes.js";
+
 type StoreType = {
   hasFetched: boolean;
   data: {
     [key: string]: {
       loading: boolean;
       errors: { id: number; label: string; message: string }[];
-      dataValue: any[];
+      dataValue: (Timeline | User | Subscription | Payment)[];
     };
   };
   events: {
@@ -16,7 +23,11 @@ type StoreType = {
       eventsValue: { events: any[]; eventsTitle: string[] };
     };
   };
-  fetchData: (dataType: string, realData: unknown[], label: string) => void;
+  fetchData: (
+    dataType: string,
+    realData: (Timeline | User | Subscription | Payment)[],
+    label: string,
+  ) => void;
   fetchEvents: (
     eventsType: string,
     realEvents: { events: any[]; eventsTitle: string[] },
@@ -25,7 +36,7 @@ type StoreType = {
 
   retryFetchData: (
     dataType: string,
-    realData: unknown[],
+    realData: (Timeline | User | Subscription | Payment)[],
     label: string,
   ) => void;
   retryFetchEvents: (

@@ -1,6 +1,6 @@
 type EventsTitle = string;
 
-type Events = {
+type UsersEvents = {
   userId: string;
   userName: string;
   userEmail: string;
@@ -8,9 +8,27 @@ type Events = {
   eventTimeAgo: string;
 };
 
-type UsersEvents = {
-  eventsTitle: EventsTitle[];
-  events: Events[];
+type SubsEvents = {
+  subsId: string;
+  userName: string;
+  subsPlan: string;
+  subsStatus: string;
+  eventDate: string;
+  eventTimeAgo: string;
 };
 
-export type { EventsTitle, Events, UsersEvents };
+type PaymentsEvents = {
+  paymentId: string;
+  paymentStatus: string;
+  userName: string;
+  paidDate: string;
+  invoicePrice: string;
+  paymentTimeAgo: string;
+};
+
+// type UsersEvents = {
+//   eventsTitle: EventsTitle[];
+//   events: Events[];
+// };
+
+export type { EventsTitle, UsersEvents, SubsEvents, PaymentsEvents };

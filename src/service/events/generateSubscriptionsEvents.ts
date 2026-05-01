@@ -1,21 +1,30 @@
-import getTimeAgo from "../../utils/getTimeAgo.ts";
+import getTimeAgo from "../../utils/getTimeAgo.js";
 
-const generateSubscriptionsEvents = (subsData = [], limit = 10) => {
-  const eventsTitle = ["Time", "User", "Date", "Plan", "Status"];
+import type { Subscription } from "../../types/dataTypes.js";
+import type { EventsTitle, SubsEvents } from "../../types/eventsTypes.js";
+
+const generateSubscriptionsEvents = (
+  subsData: Subscription[] = [],
+  limit: number = 10,
+): { eventsTitle: EventsTitle[]; events: SubsEvents[] } => {
+  const eventsTitle: EventsTitle[] = ["Time", "User", "Date", "Plan", "Status"];
   if (!subsData || subsData.length === 0) {
     return { eventsTitle, events: [] };
   }
 
-  const getEventDate = (sub) => {
+  const getEventDate = (sub: Subscription): Date | null => {
     const eventDate =
       sub.subsStatus === "active" ? sub.subsStartDate : sub.subsEndDate;
     return eventDate ? new Date(eventDate) : null;
   };
 
-  const lastEvents = (eventsData = []) =>
+  const getLatestSubsEvents = (eventsData: Subscription[] = []) =>
     [...eventsData]
       .map((sub) => ({ ...sub, eventDateObj: getEventDate(sub) }))
-      .sort((a, b) => (b.eventDateObj || 0) - (a.eventDateObj || 0))
+      .sort(
+        (a, b) =>
+          (b.eventDateObj?.getTime() || 0) - (a.eventDateObj?.getTime() || 0),
+      )
       .slice(0, limit)
       .map(
         ({ eventDateObj: date, subsId, userName, subsPlan, subsStatus }) => ({
@@ -34,7 +43,11 @@ const generateSubscriptionsEvents = (subsData = [], limit = 10) => {
         }),
       );
 
-  const subsEvents = { eventsTitle, events: lastEvents(subsData) };
+  const subsEvents = {
+    eventsTitle,
+    events: getLatestSubsEvents(subsData),
+  };
+
   return subsEvents;
 };
 

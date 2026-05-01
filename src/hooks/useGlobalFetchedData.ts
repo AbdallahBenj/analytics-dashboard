@@ -6,7 +6,7 @@ import {
   usersData,
   subsData,
   paymentsData,
-} from "../service/mock/generateData.ts";
+} from "../service/mock/generateData.js";
 
 import {
   usersEvents,
@@ -62,16 +62,20 @@ const useGlobalFetchedData = () => {
     if (hasFetched) return;
 
     Object.entries(dataMap).forEach(([key, value]) => {
-      fetchData(key, value, LabelDataMap[key]);
+      fetchData(key, value, LabelDataMap[key as keyof typeof LabelDataMap]);
     });
 
     Object.entries(eventsMap).forEach(([key, value]) => {
-      fetchEvents(key, value, LabelEventsMap[key]);
+      fetchEvents(
+        key,
+        value,
+        LabelEventsMap[key as keyof typeof LabelEventsMap],
+      );
     });
 
     // Mark that initial fetch has been done
     setHasFetched(true);
-  }, []); // Empty dependency array - runs only once on mount
+  }, [hasFetched]); // Empty dependency array - runs only once on mount
 
   // Get data and events values:
   const data = {
@@ -90,13 +94,21 @@ const useGlobalFetchedData = () => {
   // Retry fetch data and events functions:
   const retryData = () => {
     Object.entries(dataMap).forEach(([key, value]) => {
-      retryFetchData(key, value, LabelDataMap[key]);
+      retryFetchData(
+        key,
+        value,
+        LabelDataMap[key as keyof typeof LabelDataMap],
+      );
     });
   };
 
   const retryEvents = () => {
     Object.entries(eventsMap).forEach(([key, value]) => {
-      retryFetchEvents(key, value, LabelEventsMap[key]);
+      retryFetchEvents(
+        key,
+        value,
+        LabelEventsMap[key as keyof typeof LabelEventsMap],
+      );
     });
   };
 
