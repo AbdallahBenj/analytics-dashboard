@@ -13,16 +13,13 @@ import getActiveSubscriptions from "../../utils/getActiveSubscriptions.js";
 
 import getChurnRate from "../../utils/getChurnRate.js";
 import getConversionRate from "../../utils/getConversionRate.js";
-
-import getPerCentValue from "../../../utils/getPerCentValue.ts";
+import getGrowthRate from "../../utils/getGrowthRate.js";
 
 import useGlobalFetchedData from "../../../hooks/useGlobalFetchedData.ts";
 
 const useDashboardMiniCardsStats = () => {
   const { globalStatus, data } = useGlobalFetchedData();
-
   const { isDataAndEventsLoading, isDataAndEventsErrors } = globalStatus;
-
   const { timeData, usersData, subsData, paymentsData } = data;
 
   const dailyRevenue = useMemo(() => {
@@ -34,7 +31,8 @@ const useDashboardMiniCardsStats = () => {
 
   const LastMonthRevenue = getMonthlyRevenue(dailyRevenueLast30days);
   const previousMonthRevenue = getMonthlyRevenue(dailyRevenuePrev30days);
-  const monthlyRevenuePerCent = getPerCentValue(
+
+  const monthlyRevenueGrowthRate = getGrowthRate(
     LastMonthRevenue,
     previousMonthRevenue,
   );
@@ -43,19 +41,16 @@ const useDashboardMiniCardsStats = () => {
   const totalActiveSubscriptions = activeSubscriptions.length;
 
   const lastMonthChurnRate = getChurnRate(subsData);
-
   const prevMonthChurnRate = getChurnRate(subsData, 30);
-  const churnRate = lastMonthChurnRate * 100;
-  const prevChurnRate = prevMonthChurnRate * 100;
 
-  const monthlyChurnRatePerCent = getPerCentValue(
+  const churnRate = lastMonthChurnRate;
+  const prevChurnRate = prevMonthChurnRate;
+  const monthlyChurnRateGrowthRate = getGrowthRate(
     lastMonthChurnRate,
     prevMonthChurnRate,
   );
 
-  const currentConversionRate = getConversionRate(usersData, subsData);
-
-  const conversionRate = currentConversionRate * 100;
+  const conversionRate = getConversionRate(usersData, subsData);
 
   return {
     miniCardsData: [
@@ -67,7 +62,7 @@ const useDashboardMiniCardsStats = () => {
         isDataAndEventsErrors,
         value: LastMonthRevenue,
         prevValue: previousMonthRevenue || 0.0,
-        percentageValue: monthlyRevenuePerCent,
+        growthRateValue: monthlyRevenueGrowthRate,
         unit: "$",
         Icon: CurrencyDollarIcon,
       },
@@ -78,7 +73,7 @@ const useDashboardMiniCardsStats = () => {
         isDataAndEventsLoading,
         isDataAndEventsErrors,
         value: totalActiveSubscriptions,
-        percentageValue: null,
+        growthRateValue: null,
         unit: "user",
         Icon: UserIcon,
       },
@@ -89,9 +84,9 @@ const useDashboardMiniCardsStats = () => {
         type: "churn",
         isDataAndEventsLoading,
         isDataAndEventsErrors,
-        value: churnRate,
+        value: churnRate, // churnRate,
         prevValue: prevChurnRate || 0.0,
-        percentageValue: monthlyChurnRatePerCent,
+        growthRateValue: monthlyChurnRateGrowthRate,
         unit: "%",
         Icon: ArrowTrendingDownIcon,
       },
@@ -102,7 +97,7 @@ const useDashboardMiniCardsStats = () => {
         isDataAndEventsLoading,
         isDataAndEventsErrors,
         value: conversionRate,
-        percentageValue: null,
+        growthRateValue: null,
         unit: "%",
         Icon: ArrowPathIcon,
       },

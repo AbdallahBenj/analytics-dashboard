@@ -153,9 +153,9 @@ src/
 │   │   └── generateTimeline.ts
 │   │
 │   ├── events/
-│   │   ├── generateEvents.js
-│   │   ├── generatePaymentsEvents.js
-│   │   ├── generateSubscriptionsEvents.js
+│   │   ├── generateEvents.ts
+│   │   ├── generatePaymentsEvents.ts
+│   │   ├── generateSubscriptionsEvents.ts
 │   │   └── generateUsersEvents.ts
 │   │
 │   └── utils/

@@ -31,7 +31,7 @@ const navContent: NavContent = {
   },
   navigation: [
     {
-      name: "Dashboard",
+      name: "Overview",
       href: "/",
       Icon: HomeIcon,
       current: true,

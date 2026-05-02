@@ -4,7 +4,9 @@ import { ArrowUpIcon, ArrowDownIcon } from "@heroicons/react/24/solid";
 import { DotPulse } from "ldrs/react";
 import "ldrs/react/DotPulse.css";
 
-import convertToKilo from "../../../utils/convertToKilo.ts";
+import formatCurrencyCompact from "../../../utils/formatCurrencyCompact.ts";
+import formatCompact from "../../../utils/formatCompact.ts";
+import formatPercent from "../../../utils/formatPercent.ts";
 
 import useDashboardMiniCardsStats from "../hooks/useDashboardMiniCardsStats.js";
 
@@ -22,16 +24,15 @@ const MiniCards = () => {
             isDataAndEventsLoading,
             isDataAndEventsErrors,
             value,
-            percentageValue,
+            growthRateValue,
             unit,
             Icon,
           } = card;
 
-          const isUp = percentageValue !== null && percentageValue > 0;
+          const isUp = growthRateValue !== null && growthRateValue > 0;
           const isGoodChange = type === "churn" ? !isUp : isUp;
-          const hasChange = percentageValue !== null && percentageValue !== 0;
+          const hasChange = growthRateValue !== null && growthRateValue !== 0;
 
-          const unitClass = "text-md text-indigo-500";
           const isGoodChangeClass = `text-[1rem] ml-1 inline-block
                   ${isGoodChange ? "text-green-500" : "text-red-500"}`;
 
@@ -45,9 +46,11 @@ const MiniCards = () => {
             "-"
           ) : (
             <p className="text-gray-900 dark:text-white">
-              {unit === "$" && <span className={unitClass}>{unit}</span>}{" "}
-              {convertToKilo(Number(value.toFixed(2)))}
-              {unit !== "$" && <span className={unitClass}> {unit}</span>}{" "}
+              {/* // test start */}
+              {unit === "$" && formatCurrencyCompact(value)} {/*test*/}
+              {unit === "user" && formatCompact(value)} {/*test*/}
+              {unit === "%" && formatPercent(value)} {/*test*/}
+              {/* // test end */}
               {hasChange && (
                 <span className={isGoodChangeClass}>
                   {" "}
@@ -56,7 +59,7 @@ const MiniCards = () => {
                   ) : (
                     <ArrowDownIcon className="inline size-5" />
                   )}
-                  {`${Math.abs(percentageValue).toFixed(2)} %`}
+                  {formatPercent(growthRateValue)}
                 </span>
               )}
             </p>

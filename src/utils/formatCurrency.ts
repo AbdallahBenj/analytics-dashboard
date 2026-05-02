@@ -1,6 +1,6 @@
 // NOT USED YET
 
-const toNumberCurrency = (number: number): string => {
+const formatCurrency = (number: number): string => {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
@@ -9,4 +9,4 @@ const toNumberCurrency = (number: number): string => {
   }).format(number);
 };
 
-export default toNumberCurrency;
+export default formatCurrency;

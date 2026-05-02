@@ -1,5 +1,5 @@
 import getTimeAgo from "../../utils/getTimeAgo.js";
-import toNumberCurrency from "../../utils/toNumberCurrency.js";
+import formatCurrency from "../../utils/formatCurrency.js";
 
 import type { Payment } from "../../types/dataTypes.js";
 import type { EventsTitle, PaymentsEvents } from "../../types/eventsTypes.js";
@@ -59,7 +59,7 @@ const generatePaymentsEvents = (
                 day: "numeric",
               })
             : "N/A",
-          invoicePrice: toNumberCurrency(invoicePrice), //`${invoicePrice}$`
+          invoicePrice: formatCurrency(invoicePrice), //`${invoicePrice}$`
           paymentTimeAgo: date ? getTimeAgo(date) : "N/A",
         }),
       );
