@@ -1,11 +1,11 @@
 // NOT USED YET
 
-const formatCurrency = (number: number): string => {
+const formatCurrency = (number: number, fractionDigits = 0): string => {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
+    minimumFractionDigits: fractionDigits,
+    maximumFractionDigits: fractionDigits,
   }).format(number);
 };
 

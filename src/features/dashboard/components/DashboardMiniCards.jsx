@@ -4,8 +4,7 @@ import { ArrowUpIcon, ArrowDownIcon } from "@heroicons/react/24/solid";
 import { DotPulse } from "ldrs/react";
 import "ldrs/react/DotPulse.css";
 
-import useDashboardMiniCardsStats from "../hooks/useDashboardMiniCardsStats.js";
-
+import useDashboardMiniCardsStats from "../hooks/useDashboardMiniCardsStats.ts";
 import formatPercent from "../../../utils/formatPercent.js";
 
 const MiniCards = () => {
@@ -29,40 +28,48 @@ const MiniCards = () => {
           const hasChange =
             growthRateValue != null && Math.abs(growthRateValue) > 0.01;
 
-          const isGoodChangeClass = `text-[1rem] ml-1 inline-block
-                  ${
-                    isGoodChange === true
-                      ? "text-green-500"
-                      : isGoodChange === false
-                        ? "text-red-500"
-                        : "text-gray-400 dark:text-gray-500"
-                  }`;
+          const changeColorClass =
+            isGoodChange === true
+              ? "text-green-500"
+              : isGoodChange === false
+                ? "text-red-500"
+                : "text-gray-400 dark:text-gray-500";
 
           const loadingContent = (
             <DotPulse size="43" speed="1.3" color="#615fff" />
           );
+
           const errorsContent = (
             <span className="text-lg font-semibold text-red-500">N/A</span>
           );
-          const valueContent =
-            value === null || value === undefined ? (
-              "-"
-            ) : (
-              <p className="text-gray-900 dark:text-white">
-                {value}
-                {hasChange && (
-                  <span className={isGoodChangeClass}>
-                    {" "}
-                    {isGoodChange === true ? (
-                      <ArrowUpIcon className="inline size-5" />
-                    ) : isGoodChange === false ? (
-                      <ArrowDownIcon className="inline size-5" />
-                    ) : null}
-                    {formatPercent(growthRateValue, 2)}
-                  </span>
-                )}
-              </p>
-            );
+
+          const valueContent = (
+            <p className="text-gray-900 dark:text-white">
+              {value ?? "-"}
+              {hasChange && (
+                <span
+                  className={`text-[1rem] ml-1 inline-block ${changeColorClass}`}
+                >
+                  {" "}
+                  {isGoodChange === true ? (
+                    <ArrowUpIcon className="inline size-5" />
+                  ) : isGoodChange === false ? (
+                    <ArrowDownIcon className="inline size-5" />
+                  ) : null}
+                  {formatPercent(growthRateValue, 2)}
+                </span>
+              )}
+            </p>
+          );
+
+          let content;
+          if (isDataAndEventsLoading) {
+            content = loadingContent;
+          } else if (isDataAndEventsErrors) {
+            content = errorsContent;
+          } else {
+            content = valueContent;
+          }
 
           return (
             <div
@@ -92,11 +99,7 @@ const MiniCards = () => {
                   {title}
                 </p>
                 <div className="text-2xl font-semibold text-gray-500">
-                  {isDataAndEventsLoading
-                    ? loadingContent
-                    : isDataAndEventsErrors
-                      ? errorsContent
-                      : valueContent}
+                  {content}
                 </div>
               </div>
             </div>

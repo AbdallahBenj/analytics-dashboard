@@ -1,4 +1,10 @@
-const getConversionRate = (users = [], subscriptions = [], days = 0) => {
+import type { User, Subscription } from "../../types/dataTypes.js";
+
+const getConversionRate = (
+  users: User[] = [],
+  subscriptions: Subscription[] = [],
+  days: number = 0,
+): number => {
   if (days < 0) return 0;
   const toDay = new Date();
 

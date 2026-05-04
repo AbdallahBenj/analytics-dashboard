@@ -42,7 +42,6 @@ const generateUsersEvents = (
 
   const usersEvents = { eventsTitle, events: getLatestUsersEvents(usersData) };
 
-  console.log("usersEvents", usersEvents);
   return usersEvents;
 };
 

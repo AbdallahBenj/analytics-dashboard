@@ -1,4 +1,9 @@
-const getChurnRate = (subscriptions = [], days = 0) => {
+import type { Subscription } from "../../types/dataTypes.js";
+
+const getChurnRate = (
+  subscriptions: Subscription[] = [],
+  days: number = 0,
+): number => {
   if (days < 0) return 0;
 
   const toDay = new Date();

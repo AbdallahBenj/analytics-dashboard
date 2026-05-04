@@ -7,6 +7,14 @@ import {
   ArrowPathIcon,
 } from "@heroicons/react/24/solid";
 
+import type { MiniCardsDataType } from "../../../types/featuresTypes.js";
+import type {
+  Timeline,
+  User,
+  Subscription,
+  Payment,
+} from "../../../types/dataTypes.js";
+
 import getRevenue from "../../utils/getRevenue.js";
 import getMonthlyRevenue from "../../utils/getMonthlyRevenue.js";
 import getActiveSubscriptions from "../../utils/getActiveSubscriptions.js";
@@ -21,44 +29,53 @@ import formatPercent from "../../../utils/formatPercent.js";
 
 import useGlobalFetchedData from "../../../hooks/useGlobalFetchedData.js";
 
-const useDashboardMiniCardsStats = () => {
+const useDashboardMiniCardsStats = (): {
+  miniCardsData: MiniCardsDataType[];
+} => {
   const { globalStatus, data } = useGlobalFetchedData();
   const { isDataAndEventsLoading, isDataAndEventsErrors } = globalStatus;
   const { timeData, usersData, subsData, paymentsData } = data;
 
+  // Revenue calculation (memoized)
   const dailyRevenue = useMemo(() => {
-    return getRevenue(timeData, paymentsData);
+    return getRevenue(timeData as Timeline[], paymentsData as Payment[]);
   }, [timeData, paymentsData]);
 
-  const dailyRevenueLast30days = (dailyRevenue || [])?.slice(-30);
-  const dailyRevenuePrev30days = (dailyRevenue || [])?.slice(-60, -30);
+  const dailyRevenueLast30days = dailyRevenue?.slice(-30) ?? [];
+  const dailyRevenuePrev30days = dailyRevenue?.slice(-60, -30) ?? [];
 
   const lastMonthRevenue = getMonthlyRevenue(dailyRevenueLast30days);
   const previousMonthRevenue = getMonthlyRevenue(dailyRevenuePrev30days);
 
-  const growthRateMonthlyRevenue = getGrowthRate(
+  const revenueGrowthRate = getGrowthRate(
     lastMonthRevenue,
     previousMonthRevenue,
   );
 
-  const isRevenueGrowing = lastMonthRevenue > previousMonthRevenue;
+  const isRevenueGrowing =
+    lastMonthRevenue != null &&
+    previousMonthRevenue != null &&
+    lastMonthRevenue > previousMonthRevenue;
 
-  const activeSubscriptions = getActiveSubscriptions(subsData);
-  const totalActiveSubscriptions = activeSubscriptions.length;
-
-  const lastMonthChurnRate = getChurnRate(subsData);
-  const prevMonthChurnRate = getChurnRate(subsData, 30);
-
-  const churnRate = lastMonthChurnRate;
-  const prevChurnRate = prevMonthChurnRate;
-  const growthRateMonthlyChurnRate = getGrowthRate(
-    lastMonthChurnRate,
-    prevMonthChurnRate,
+  // Subscriptions
+  const activeSubscriptions = getActiveSubscriptions(
+    subsData as Subscription[],
   );
+  const totalActiveSubscriptions = activeSubscriptions?.length || 0;
+
+  // Churn
+  const lastMonthChurnRate = getChurnRate(subsData as Subscription[]);
+  const prevMonthChurnRate = getChurnRate(subsData as Subscription[], 30);
+
+  const churnGrowthRate = getGrowthRate(lastMonthChurnRate, prevMonthChurnRate);
 
   const isChurnImproving = lastMonthChurnRate < prevMonthChurnRate;
 
-  const conversionRate = getConversionRate(usersData, subsData);
+  // Conversion
+  const conversionRate = getConversionRate(
+    usersData as User[],
+    subsData as Subscription[],
+  );
 
   return {
     miniCardsData: [
@@ -68,9 +85,9 @@ const useDashboardMiniCardsStats = () => {
         title: "Monthly Revenue",
         isDataAndEventsLoading,
         isDataAndEventsErrors,
-        value: formatCurrencyCompact(lastMonthRevenue || 0), // LastMonthRevenue,
-        prevValue: previousMonthRevenue || 0.0,
-        growthRateValue: growthRateMonthlyRevenue, // monthlyRevenueGrowthRate, // formatPercent(growthRateValue, 2)
+        value: formatCurrencyCompact(lastMonthRevenue ?? 0, 2),
+        prevValue: previousMonthRevenue ?? 0,
+        growthRateValue: revenueGrowthRate,
         isGoodChange: isRevenueGrowing,
         Icon: CurrencyDollarIcon,
       },
@@ -80,7 +97,8 @@ const useDashboardMiniCardsStats = () => {
         title: "Active Subscriptions",
         isDataAndEventsLoading,
         isDataAndEventsErrors,
-        value: formatCompact(totalActiveSubscriptions), // totalActiveSubscriptions,
+        value: formatCompact(totalActiveSubscriptions, 2),
+        prevValue: null,
         growthRateValue: null,
         isGoodChange: null,
         Icon: UserIcon,
@@ -89,12 +107,11 @@ const useDashboardMiniCardsStats = () => {
         id: 3,
         name: "ChurnR", // %
         title: "Churn Rate",
-        type: "churn",
         isDataAndEventsLoading,
         isDataAndEventsErrors,
-        value: formatPercent(churnRate || 0), // churnRate,
-        prevValue: prevChurnRate || 0.0,
-        growthRateValue: growthRateMonthlyChurnRate, // monthlyChurnRateGrowthRate, // formatPercent(growthRateMonthlyChurnRate, 2)
+        value: formatPercent(lastMonthChurnRate ?? 0),
+        prevValue: prevMonthChurnRate ?? 0,
+        growthRateValue: churnGrowthRate,
         isGoodChange: isChurnImproving,
         Icon: ArrowTrendingDownIcon,
       },
@@ -104,7 +121,8 @@ const useDashboardMiniCardsStats = () => {
         title: "Conversion Rate",
         isDataAndEventsLoading,
         isDataAndEventsErrors,
-        value: formatPercent(conversionRate), // conversionRate,
+        value: formatPercent(conversionRate ?? 0),
+        prevValue: null,
         growthRateValue: null,
         isGoodChange: null,
         Icon: ArrowPathIcon,

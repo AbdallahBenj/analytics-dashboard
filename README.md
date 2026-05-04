@@ -91,18 +91,19 @@ src/
 │   │   │   └── DashboardRevenueChart.jsx
 │   │   │
 │   │   ├── hooks/
-│   │   │   ├── useDashboardMiniCardsStats.js
+│   │   │   ├── useDashboardMiniCardsStats.ts
 │   │   │   ├── useDashboardPlansPieChartStats.js
 │   │   │   ├── useDashboardRecentActivity.js
 │   │   │   └── useDashboardRevenueChartStats.js
 │   │   │
 │   │   └── utils/
-│   │       ├── getActiveSubscriptions.js
-│   │       ├── getChurnRate.js
-│   │       ├── getConversionRate.js
-│   │       ├── getMonthlyRevenue.js
-│   │       ├── getRevenue.js
-│   │       └── getUsersByPlan.js
+│   │       ├── getActiveSubscriptions.ts
+│   │       ├── getChurnRate.ts
+│   │       ├── getConversionRate.ts
+│   │       ├── getGrowthRate.ts
+│   │       ├── getMonthlyRevenue.ts
+│   │       ├── getRevenue.ts
+│   │       └── getUsersByPlan.ts
 │   │
 │   ├── analytics/
 │   │   ├── components/
@@ -167,6 +168,10 @@ src/
 │
 ├── utils/                # Global utilities
 │   ├── convertToKilo.ts
+│   ├── formatCompact.ts
+│   ├── formatCurrency.ts
+│   ├── formatCurrencyCompact.ts
+│   ├── formatPercent.ts
 │   ├── getPercentValue.ts
 │   └── getTimeAgo.ts
 │    

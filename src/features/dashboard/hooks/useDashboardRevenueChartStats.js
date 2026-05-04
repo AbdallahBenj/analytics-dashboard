@@ -1,72 +1,70 @@
-import getRevenue from "../../utils/getRevenue.js";
+import getRevenue from "../../utils/getRevenue.ts";
 
 import getMonthlyRevenue from "../../utils/getMonthlyRevenue.js";
 import getGrowthRate from "../../utils/getGrowthRate.js";
-
-import formatPercent from "../../../utils/formatPercent.js";
 
 import useGlobalFetchedData from "../../../hooks/useGlobalFetchedData.ts";
 
 const useDashboardRevenueChartStats = () => {
   const { globalStatus, data } = useGlobalFetchedData();
-
   const { isDataAndEventsLoading, isDataAndEventsErrors } = globalStatus;
   const { timeData, paymentsData } = data;
 
   const dailyRevenue = getRevenue(timeData, paymentsData);
   const monthlyRevenue = getRevenue(timeData, paymentsData, "month");
 
-  const dailyRevenueLast30days = dailyRevenue?.slice(-30) || [];
-  const dailyRevenuePrev30days = dailyRevenue?.slice(-60, -30) || [];
-  const dailyRevenueLast90days = dailyRevenue?.slice(-90) || [];
+  const getLast = (arr, n) => arr?.slice(-n) || [];
+  const getPrev = (arr, n) => arr?.slice(-n * 2, -n) || [];
 
-  const monthlyRevenueLast6Months = monthlyRevenue?.slice(-6) || [];
+  const last30days = getLast(dailyRevenue, 30); // dailyRevenue?.slice(-30) || [];
+  const prev30days = getPrev(dailyRevenue, 30); // dailyRevenue?.slice(-60, -30) || [];
+  const last90days = getLast(dailyRevenue, 90); // dailyRevenue?.slice(-90) || [];
 
-  const last30daysRevenue = getMonthlyRevenue(dailyRevenueLast30days); // used
-  const prev30daysRevenue = getMonthlyRevenue(dailyRevenuePrev30days);
+  const last6Months = getLast(monthlyRevenue, 6); // monthlyRevenue?.slice(-6) || [];
 
-  const GrowthRate30daysRevenue = getGrowthRate(
+  const last30daysRevenue = getMonthlyRevenue(last30days); // used
+  const prev30daysRevenue = getMonthlyRevenue(prev30days);
+
+  const growthRate30daysRevenue = getGrowthRate(
     last30daysRevenue,
     prev30daysRevenue,
   );
 
-  const isPositiveGrowthRate30daysRevenue =
+  const isRevenueGrowing =
+    last30daysRevenue != null &&
+    prev30daysRevenue != null &&
     last30daysRevenue > prev30daysRevenue;
 
-  const perCent30daysRevenue = formatPercent(GrowthRate30daysRevenue, 2);
-
-  const revenueRangeConfig = {
+  const revenueChartConfig = {
     d30: {
-      data: dailyRevenueLast30days,
+      data: last30days,
       xKey: "date",
       yKey: "revenue",
       label: "30 Days",
     },
     d90: {
-      data: dailyRevenueLast90days,
+      data: last90days,
       xKey: "date",
       yKey: "revenue",
       label: "90 Days",
     },
     m6: {
-      data: monthlyRevenueLast6Months,
+      data: last6Months,
       xKey: "date",
       yKey: "revenue",
       label: "6 Months",
     },
   };
 
-  console.log("last30daysRevenue", last30daysRevenue);
-  console.log("prev30daysRevenue", prev30daysRevenue);
-
   return {
     isDataAndEventsLoading,
     isDataAndEventsErrors,
-    last30daysRevenue,
 
-    perCent30daysRevenue,
-    isPositiveGrowthRate30daysRevenue,
-    revenueRangeConfig,
+    last30daysRevenue,
+    growthRate30daysRevenue,
+
+    isRevenueGrowing,
+    revenueChartConfig,
   };
 };
 

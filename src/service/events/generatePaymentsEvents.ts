@@ -59,7 +59,7 @@ const generatePaymentsEvents = (
                 day: "numeric",
               })
             : "N/A",
-          invoicePrice: formatCurrency(invoicePrice), //`${invoicePrice}$`
+          invoicePrice: formatCurrency(invoicePrice, 2), //`${invoicePrice}$`
           paymentTimeAgo: date ? getTimeAgo(date) : "N/A",
         }),
       );

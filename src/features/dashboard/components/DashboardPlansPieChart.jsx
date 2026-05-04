@@ -15,6 +15,7 @@ const pieColors = {
 };
 
 import useDashboardPlansPieChartStats from "../hooks/useDashboardPlansPieChartStats.js";
+import formatPercent from "../../../utils/formatPercent.js";
 
 const loadingContent = (
   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -89,7 +90,7 @@ const DashboardPlansPieChart = () => {
                   <Pie
                     data={usersByPlan || []}
                     nameKey="name"
-                    label={({ percent = 0 }) => `${(percent * 100).toFixed()}%`}
+                    label={({ percent = 0 }) => formatPercent(percent)}
                     dataKey="value"
                     innerRadius={70}
                     outerRadius={90}

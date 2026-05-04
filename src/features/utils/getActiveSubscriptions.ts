@@ -1,4 +1,8 @@
-const getActiveSubscriptions = (subscriptions = []) => {
+import type { Subscription } from "../../types/dataTypes.js";
+
+const getActiveSubscriptions = (
+  subscriptions: Subscription[] = [],
+): Subscription[] => {
   const activeSubscriptions = subscriptions.filter(
     (subscription) => subscription.subsStatus === "active",
   );

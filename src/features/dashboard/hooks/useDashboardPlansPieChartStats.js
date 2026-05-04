@@ -1,4 +1,4 @@
-import getUsersByPlan from "../../utils/getUsersByPlan.js";
+import getUsersByPlan from "../../utils/getUsersByPlan.ts";
 
 import useGlobalFetchedData from "../../../hooks/useGlobalFetchedData.ts";
 

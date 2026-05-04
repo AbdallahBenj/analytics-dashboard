@@ -18,37 +18,58 @@ import {
   Tooltip,
 } from "recharts";
 
-import convertToKilo from "../../../utils/convertToKilo.ts";
+import formatCurrencyCompact from "../../../utils/formatCurrencyCompact.js";
+import formatPercent from "../../../utils/formatPercent.js";
 
 const RevenueChart = () => {
   const {
     isDataAndEventsLoading,
     isDataAndEventsErrors,
+
+    // raw values (better design)
     last30daysRevenue,
-    perCent30daysRevenue,
-    isPositiveGrowthRate30daysRevenue,
-    revenueRangeConfig,
+    growthRate30daysRevenue,
+
+    isRevenueGrowing,
+
+    revenueChartConfig,
   } = useDashboardRevenueChartStats();
 
   const [range, setRange] = useState("d30");
+
+  // ✅ safe access
+  const activeRange = revenueChartConfig?.[range];
+
+  // ✅ formatting Currency Compact 30 days Revenue
+  const formattedRevenue =
+    last30daysRevenue != null
+      ? formatCurrencyCompact(last30daysRevenue, 2)
+      : null;
+
+  // ✅ formatting Percent Growth Rate 30 days Revenue
+  const formattedPercentGrowthRate =
+    growthRate30daysRevenue != null
+      ? formatPercent(growthRate30daysRevenue, 2)
+      : null;
 
   const loadingContent = <DotPulse size="43" speed="1.3" color="#615fff" />;
   const errorsContent = (
     <span className="text-lg font-semibold text-red-500 mb-2 md:mb-4">N/A</span>
   );
-  const valueContent = !last30daysRevenue ? (
+
+  const hasRevenue = last30daysRevenue != null;
+  const valueContent = !hasRevenue ? (
     <span className="text-gray-500">-</span>
   ) : (
     <p className="text-xl font-semibold text-gray-900 dark:text-white">
-      {`$ ${convertToKilo(last30daysRevenue)}`}
+      {formattedRevenue}
       <span
         className={`text-sm
-        ${
-          isPositiveGrowthRate30daysRevenue ? "text-green-500" : "text-red-500"
-        }`}
+        ${isRevenueGrowing ? "text-green-500" : "text-red-500"}`}
       >
         {" "}
-        {`${isPositiveGrowthRate30daysRevenue ? "+" : ""}${perCent30daysRevenue}`}
+        {formattedPercentGrowthRate != null &&
+          `${isRevenueGrowing ? "+" : ""}${formattedPercentGrowthRate}`}
       </span>
     </p>
   );
@@ -69,6 +90,7 @@ const RevenueChart = () => {
             hover:shadow-xl hover:shadow-black/20
             transition-all duration-300"
     >
+      {/* Header */}
       <div className="flex flex-col md:flex-row justify-between">
         <div className="Title-chart mb-2 md:mb-4">
           <h3 className="text-md font-medium text-gray-600 dark:text-gray-300">
@@ -80,11 +102,13 @@ const RevenueChart = () => {
               ? errorsContent
               : valueContent}
         </div>
+
+        {/* Chart */}
         <div className="Button date range mb-6">
           <RadioGroupButtons
             state={range}
             setState={setRange}
-            stateConfig={revenueRangeConfig}
+            stateConfig={revenueChartConfig}
           />
         </div>
       </div>
@@ -97,26 +121,29 @@ const RevenueChart = () => {
         ) : (
           !isDataAndEventsErrors && (
             <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={revenueRangeConfig[range].data}>
+              <LineChart data={activeRange?.data || []}>
                 <CartesianGrid
                   strokeDasharray="3 3"
                   strokeOpacity={0.3}
                   vertical={false}
                 />
                 <XAxis
-                  dataKey={revenueRangeConfig[range].xKey}
+                  dataKey={activeRange?.xKey}
                   tick={{ fill: "var(--color-chart-gray)", fontSize: 12 }}
                   axisLine={false}
                   tickLine={false}
                 />
                 <YAxis
-                  tickFormatter={(value) => `$${convertToKilo(value)}`}
+                  tickFormatter={(value) => formatCurrencyCompact(value)}
                   tick={{ fill: "var(--color-chart-gray)", fontSize: 12 }}
                   axisLine={false}
                   tickLine={false}
                 />
                 <Tooltip
-                  formatter={(v) => [`$${convertToKilo(v)}`, "Revenue"]}
+                  formatter={(value) => [
+                    formatCurrencyCompact(value, 2),
+                    "Revenue",
+                  ]}
                   contentStyle={{
                     backgroundColor: "rgba(17, 24, 39, 0.9)",
                     borderRadius: "12px",
@@ -128,7 +155,7 @@ const RevenueChart = () => {
                 />
                 <Line
                   type="monotone"
-                  dataKey={revenueRangeConfig[range].yKey}
+                  dataKey={activeRange?.yKey}
                   stroke="#6366F1"
                   strokeWidth={3}
                   dot={false}

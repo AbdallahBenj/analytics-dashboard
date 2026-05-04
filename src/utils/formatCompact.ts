@@ -1,11 +1,11 @@
 // NOT USED YET
 
-const formatCompact = (number: number): string => {
+const formatCompact = (number: number, fractionDigits = 0): string => {
   return new Intl.NumberFormat("en-US", {
     notation: "compact",
     compactDisplay: "short",
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
+    minimumFractionDigits: fractionDigits,
+    maximumFractionDigits: fractionDigits,
   }).format(number);
 };
 
