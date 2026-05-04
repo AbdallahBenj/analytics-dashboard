@@ -1,7 +1,9 @@
 import getRevenue from "../../utils/getRevenue.js";
 
 import getMonthlyRevenue from "../../utils/getMonthlyRevenue.js";
-import getPerCentValue from "../../../utils/getPerCentValue.ts";
+import getGrowthRate from "../../utils/getGrowthRate.js";
+
+import formatPercent from "../../../utils/formatPercent.js";
 
 import useGlobalFetchedData from "../../../hooks/useGlobalFetchedData.ts";
 
@@ -23,10 +25,15 @@ const useDashboardRevenueChartStats = () => {
   const last30daysRevenue = getMonthlyRevenue(dailyRevenueLast30days); // used
   const prev30daysRevenue = getMonthlyRevenue(dailyRevenuePrev30days);
 
-  const perCent30daysRevenue = getPerCentValue(
+  const GrowthRate30daysRevenue = getGrowthRate(
     last30daysRevenue,
     prev30daysRevenue,
   );
+
+  const isPositiveGrowthRate30daysRevenue =
+    last30daysRevenue > prev30daysRevenue;
+
+  const perCent30daysRevenue = formatPercent(GrowthRate30daysRevenue, 2);
 
   const revenueRangeConfig = {
     d30: {
@@ -49,11 +56,16 @@ const useDashboardRevenueChartStats = () => {
     },
   };
 
+  console.log("last30daysRevenue", last30daysRevenue);
+  console.log("prev30daysRevenue", prev30daysRevenue);
+
   return {
     isDataAndEventsLoading,
     isDataAndEventsErrors,
     last30daysRevenue,
+
     perCent30daysRevenue,
+    isPositiveGrowthRate30daysRevenue,
     revenueRangeConfig,
   };
 };

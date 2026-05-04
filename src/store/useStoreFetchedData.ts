@@ -7,6 +7,13 @@ import type {
   Payment,
 } from "../types/dataTypes.js";
 
+import type {
+  EventsTitle,
+  UsersEvents,
+  SubsEvents,
+  PaymentsEvents,
+} from "../types/eventsTypes.js";
+
 type StoreType = {
   hasFetched: boolean;
   data: {
@@ -20,7 +27,10 @@ type StoreType = {
     [key: string]: {
       loading: boolean;
       errors: { id: number; label: string; message: string }[];
-      eventsValue: { events: any[]; eventsTitle: string[] };
+      eventsValue: {
+        events: (UsersEvents | SubsEvents | PaymentsEvents)[];
+        eventsTitle: EventsTitle[];
+      };
     };
   };
   fetchData: (
@@ -30,7 +40,10 @@ type StoreType = {
   ) => void;
   fetchEvents: (
     eventsType: string,
-    realEvents: { events: any[]; eventsTitle: string[] },
+    realEvents: {
+      events: (UsersEvents | SubsEvents | PaymentsEvents)[];
+      eventsTitle: EventsTitle[];
+    },
     label: string,
   ) => void;
 
@@ -41,7 +54,10 @@ type StoreType = {
   ) => void;
   retryFetchEvents: (
     eventsType: string,
-    realEvents: { events: any[]; eventsTitle: string[] },
+    realEvents: {
+      events: (UsersEvents | SubsEvents | PaymentsEvents)[];
+      eventsTitle: EventsTitle[];
+    },
     label: string,
   ) => void;
 
@@ -53,7 +69,7 @@ const useStoreFetchedData = create<StoreType>((set, get) => ({
   hasFetched: false,
 
   data: {}, // data: {dataType: {isLoading, error, dataValue}}
-  events: {}, // events: {eventType: {isLoading, error, eventValue}}
+  events: {}, // events: {eventType: {isLoading, error, {eventsTitle, eventValue}}}
 
   fetchData: async (dataType, realData, label) => {
     const state = get();

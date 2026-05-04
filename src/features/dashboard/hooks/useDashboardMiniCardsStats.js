@@ -15,7 +15,11 @@ import getChurnRate from "../../utils/getChurnRate.js";
 import getConversionRate from "../../utils/getConversionRate.js";
 import getGrowthRate from "../../utils/getGrowthRate.js";
 
-import useGlobalFetchedData from "../../../hooks/useGlobalFetchedData.ts";
+import formatCurrencyCompact from "../../../utils/formatCurrencyCompact.js";
+import formatCompact from "../../../utils/formatCompact.js";
+import formatPercent from "../../../utils/formatPercent.js";
+
+import useGlobalFetchedData from "../../../hooks/useGlobalFetchedData.js";
 
 const useDashboardMiniCardsStats = () => {
   const { globalStatus, data } = useGlobalFetchedData();
@@ -26,16 +30,18 @@ const useDashboardMiniCardsStats = () => {
     return getRevenue(timeData, paymentsData);
   }, [timeData, paymentsData]);
 
-  const dailyRevenueLast30days = dailyRevenue?.slice(-30);
-  const dailyRevenuePrev30days = dailyRevenue?.slice(-60, -30);
+  const dailyRevenueLast30days = (dailyRevenue || [])?.slice(-30);
+  const dailyRevenuePrev30days = (dailyRevenue || [])?.slice(-60, -30);
 
-  const LastMonthRevenue = getMonthlyRevenue(dailyRevenueLast30days);
+  const lastMonthRevenue = getMonthlyRevenue(dailyRevenueLast30days);
   const previousMonthRevenue = getMonthlyRevenue(dailyRevenuePrev30days);
 
-  const monthlyRevenueGrowthRate = getGrowthRate(
-    LastMonthRevenue,
+  const growthRateMonthlyRevenue = getGrowthRate(
+    lastMonthRevenue,
     previousMonthRevenue,
   );
+
+  const isRevenueGrowing = lastMonthRevenue > previousMonthRevenue;
 
   const activeSubscriptions = getActiveSubscriptions(subsData);
   const totalActiveSubscriptions = activeSubscriptions.length;
@@ -45,10 +51,12 @@ const useDashboardMiniCardsStats = () => {
 
   const churnRate = lastMonthChurnRate;
   const prevChurnRate = prevMonthChurnRate;
-  const monthlyChurnRateGrowthRate = getGrowthRate(
+  const growthRateMonthlyChurnRate = getGrowthRate(
     lastMonthChurnRate,
     prevMonthChurnRate,
   );
+
+  const isChurnImproving = lastMonthChurnRate < prevMonthChurnRate;
 
   const conversionRate = getConversionRate(usersData, subsData);
 
@@ -56,49 +64,49 @@ const useDashboardMiniCardsStats = () => {
     miniCardsData: [
       {
         id: 1,
-        name: "MRR",
+        name: "MRR", // $
         title: "Monthly Revenue",
         isDataAndEventsLoading,
         isDataAndEventsErrors,
-        value: LastMonthRevenue,
+        value: formatCurrencyCompact(lastMonthRevenue || 0), // LastMonthRevenue,
         prevValue: previousMonthRevenue || 0.0,
-        growthRateValue: monthlyRevenueGrowthRate,
-        unit: "$",
+        growthRateValue: growthRateMonthlyRevenue, // monthlyRevenueGrowthRate, // formatPercent(growthRateValue, 2)
+        isGoodChange: isRevenueGrowing,
         Icon: CurrencyDollarIcon,
       },
       {
         id: 2,
-        name: "AS",
+        name: "AS", // user
         title: "Active Subscriptions",
         isDataAndEventsLoading,
         isDataAndEventsErrors,
-        value: totalActiveSubscriptions,
+        value: formatCompact(totalActiveSubscriptions), // totalActiveSubscriptions,
         growthRateValue: null,
-        unit: "user",
+        isGoodChange: null,
         Icon: UserIcon,
       },
       {
         id: 3,
-        name: "ChurnR",
+        name: "ChurnR", // %
         title: "Churn Rate",
         type: "churn",
         isDataAndEventsLoading,
         isDataAndEventsErrors,
-        value: churnRate, // churnRate,
+        value: formatPercent(churnRate || 0), // churnRate,
         prevValue: prevChurnRate || 0.0,
-        growthRateValue: monthlyChurnRateGrowthRate,
-        unit: "%",
+        growthRateValue: growthRateMonthlyChurnRate, // monthlyChurnRateGrowthRate, // formatPercent(growthRateMonthlyChurnRate, 2)
+        isGoodChange: isChurnImproving,
         Icon: ArrowTrendingDownIcon,
       },
       {
         id: 4,
-        name: "ConversionR",
+        name: "ConversionR", // %
         title: "Conversion Rate",
         isDataAndEventsLoading,
         isDataAndEventsErrors,
-        value: conversionRate,
+        value: formatPercent(conversionRate), // conversionRate,
         growthRateValue: null,
-        unit: "%",
+        isGoodChange: null,
         Icon: ArrowPathIcon,
       },
     ],

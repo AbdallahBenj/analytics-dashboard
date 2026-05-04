@@ -26,6 +26,7 @@ const RevenueChart = () => {
     isDataAndEventsErrors,
     last30daysRevenue,
     perCent30daysRevenue,
+    isPositiveGrowthRate30daysRevenue,
     revenueRangeConfig,
   } = useDashboardRevenueChartStats();
 
@@ -40,9 +41,14 @@ const RevenueChart = () => {
   ) : (
     <p className="text-xl font-semibold text-gray-900 dark:text-white">
       {`$ ${convertToKilo(last30daysRevenue)}`}
-      <span className="text-sm text-gray-500">
+      <span
+        className={`text-sm
+        ${
+          isPositiveGrowthRate30daysRevenue ? "text-green-500" : "text-red-500"
+        }`}
+      >
         {" "}
-        {`${perCent30daysRevenue >= 0 ? "+" : ""}${perCent30daysRevenue}%`}
+        {`${isPositiveGrowthRate30daysRevenue ? "+" : ""}${perCent30daysRevenue}`}
       </span>
     </p>
   );
