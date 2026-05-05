@@ -5,7 +5,7 @@ import RadioGroupButtons from "../../../components/RadioGroupButtons.tsx";
 import { Zoomies } from "ldrs/react";
 import "ldrs/react/Zoomies.css";
 
-import useDashboardRecentActivity from "../hooks/useDashboardRecentActivity.js";
+import useDashboardRecentActivity from "../hooks/useOverviewRecentActivity.js";
 
 const EVENT_TYPES = {
   USERS: "usersEvents",

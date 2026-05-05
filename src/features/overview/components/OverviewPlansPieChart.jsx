@@ -14,7 +14,7 @@ const pieColors = {
   pro: "var(--color-pie-pro)",
 };
 
-import useDashboardPlansPieChartStats from "../hooks/useDashboardPlansPieChartStats.js";
+import useDashboardPlansPieChartStats from "../hooks/useOverviewPlansPieChartStats.js";
 import formatPercent from "../../../utils/formatPercent.js";
 
 const loadingContent = (

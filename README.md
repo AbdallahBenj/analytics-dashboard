@@ -83,18 +83,18 @@ src/
 │   └── usersNames.ts
 │
 ├── features/              # Feature-based modules
-│   ├── dashboard/
+│   ├── overview/
 │   │   ├── components/
-│   │   │   ├── DashboardMiniCards.jsx
-│   │   │   ├── DashboardPlansPieChart.jsx
-│   │   │   ├── DashboardRecentActivity.jsx
-│   │   │   └── DashboardRevenueChart.jsx
+│   │   │   ├── OverviewMiniCards.jsx
+│   │   │   ├── OverviewPlansPieChart.jsx
+│   │   │   ├── OverviewRecentActivity.jsx
+│   │   │   └── OverviewRevenueChart.jsx
 │   │   │
 │   │   ├── hooks/
-│   │   │   ├── useDashboardMiniCardsStats.ts
-│   │   │   ├── useDashboardPlansPieChartStats.js
-│   │   │   ├── useDashboardRecentActivity.js
-│   │   │   └── useDashboardRevenueChartStats.js
+│   │   │   ├── useOverviewMiniCardsStats.ts
+│   │   │   ├── useOverviewPlansPieChartStats.js
+│   │   │   ├── useOverviewRecentActivity.js
+│   │   │   └── useOverviewRevenueChartStats.js
 │   │   │
 │   │   └── utils/
 │   │       ├── getActiveSubscriptions.ts
@@ -139,7 +139,7 @@ src/
 ├── pages/
 │   ├── AnalyticsPage.jsx
 │   ├── CustomersPage.jsx
-│   ├── DashboardPage.jsx
+│   ├── OverviewPage.jsx
 │   ├── FeaturesPage.jsx
 │   ├── ReportsPage.jsx
 │   └── SubscriptionsPage.jsx

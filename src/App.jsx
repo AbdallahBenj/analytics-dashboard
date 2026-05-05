@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import DashboardLayout from "./layout/DashboardLayout";
-import DashboardPage from "./pages/DashboardPage";
+import OverviewPage from "./pages/OverviewPage";
 import AnalyticsPage from "./pages/AnalyticsPage";
 import CustomersPage from "./pages/CustomersPage";
 import SubscriptionsPage from "./pages/SubscriptionsPage";
@@ -17,7 +17,7 @@ function App() {
       <LoginDialog />
       <Routes>
         <Route path="/" element={<DashboardLayout />}>
-          <Route index element={<DashboardPage />} />
+          <Route index element={<OverviewPage />} />
           <Route path="analytics" element={<AnalyticsPage />} />
           <Route path="customers" element={<CustomersPage />} />
           <Route path="subscriptions" element={<SubscriptionsPage />} />

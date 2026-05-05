@@ -6,7 +6,7 @@ import { DotPulse, Cardio } from "ldrs/react";
 import "ldrs/react/DotPulse.css";
 import "ldrs/react/Cardio.css";
 
-import useDashboardRevenueChartStats from "../hooks/useDashboardRevenueChartStats.js";
+import useDashboardRevenueChartStats from "../hooks/useOverviewRevenueChartStats.js";
 
 import {
   LineChart,

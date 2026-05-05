@@ -1,10 +1,12 @@
 import { ArrowUpIcon, ArrowDownIcon } from "@heroicons/react/24/solid";
 
+import type { ReactNode } from "react";
+
 // Loading snipper icon
 import { DotPulse } from "ldrs/react";
 import "ldrs/react/DotPulse.css";
 
-import useDashboardMiniCardsStats from "../hooks/useDashboardMiniCardsStats.ts";
+import useDashboardMiniCardsStats from "../hooks/useOverviewMiniCardsStats.js";
 import formatPercent from "../../../utils/formatPercent.js";
 
 const MiniCards = () => {
@@ -62,7 +64,7 @@ const MiniCards = () => {
             </p>
           );
 
-          let content;
+          let content: ReactNode;
           if (isDataAndEventsLoading) {
             content = loadingContent;
           } else if (isDataAndEventsErrors) {
