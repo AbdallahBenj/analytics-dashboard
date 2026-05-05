@@ -1,6 +1,6 @@
 import useGlobalFetchedData from "../../../hooks/useGlobalFetchedData.ts";
 
-const useDashboardRecentActivity = () => {
+const useOverviewRecentActivity = () => {
   const { globalStatus, events } = useGlobalFetchedData();
 
   const { isDataAndEventsLoading, isDataAndEventsErrors } = globalStatus;
@@ -58,4 +58,4 @@ const useDashboardRecentActivity = () => {
   };
 };
 
-export default useDashboardRecentActivity;
+export default useOverviewRecentActivity;

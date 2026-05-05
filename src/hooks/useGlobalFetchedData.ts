@@ -14,6 +14,8 @@ import {
   paymentsEvents,
 } from "../service/events/generateEvents.js";
 
+import type { DataTypesMap, EventsTypesMap } from "../types/storeTypes.js";
+
 const useGlobalFetchedData = () => {
   // Data and Events
 
@@ -61,16 +63,12 @@ const useGlobalFetchedData = () => {
     // Only fetch if we haven't already fetched
     if (hasFetched) return;
 
-    Object.entries(dataMap).forEach(([key, value]) => {
-      fetchData(key, value, LabelDataMap[key as keyof typeof LabelDataMap]);
+    (Object.keys(dataMap) as (keyof DataTypesMap)[]).forEach((key) => {
+      fetchData(key, dataMap[key], LabelDataMap[key]);
     });
 
-    Object.entries(eventsMap).forEach(([key, value]) => {
-      fetchEvents(
-        key,
-        value,
-        LabelEventsMap[key as keyof typeof LabelEventsMap],
-      );
+    (Object.keys(eventsMap) as (keyof EventsTypesMap)[]).forEach((key) => {
+      fetchEvents(key, eventsMap[key], LabelEventsMap[key]);
     });
 
     // Mark that initial fetch has been done
@@ -93,22 +91,14 @@ const useGlobalFetchedData = () => {
 
   // Retry fetch data and events functions:
   const retryData = () => {
-    Object.entries(dataMap).forEach(([key, value]) => {
-      retryFetchData(
-        key,
-        value,
-        LabelDataMap[key as keyof typeof LabelDataMap],
-      );
+    (Object.keys(dataMap) as (keyof DataTypesMap)[]).forEach((key) => {
+      retryFetchData(key, dataMap[key], LabelDataMap[key]);
     });
   };
 
   const retryEvents = () => {
-    Object.entries(eventsMap).forEach(([key, value]) => {
-      retryFetchEvents(
-        key,
-        value,
-        LabelEventsMap[key as keyof typeof LabelEventsMap],
-      );
+    (Object.keys(eventsMap) as (keyof EventsTypesMap)[]).forEach((key) => {
+      retryFetchEvents(key, eventsMap[key], LabelEventsMap[key]);
     });
   };
 

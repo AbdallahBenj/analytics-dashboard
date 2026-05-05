@@ -2,7 +2,7 @@ import getUsersByPlan from "../../utils/getUsersByPlan.ts";
 
 import useGlobalFetchedData from "../../../hooks/useGlobalFetchedData.ts";
 
-const useDashboardPlansPieChartStats = (pieColors) => {
+const useOverviewPlansPieChartStats = (pieColors) => {
   const { globalStatus, data } = useGlobalFetchedData();
 
   const { isDataAndEventsLoading, isDataAndEventsErrors } = globalStatus;
@@ -20,4 +20,4 @@ const useDashboardPlansPieChartStats = (pieColors) => {
   };
 };
 
-export default useDashboardPlansPieChartStats;
+export default useOverviewPlansPieChartStats;

@@ -1,75 +1,64 @@
 import { create } from "zustand";
 
-import type {
-  Timeline,
-  User,
-  Subscription,
-  Payment,
-} from "../types/dataTypes.js";
-
-import type {
-  EventsTitle,
-  UsersEvents,
-  SubsEvents,
-  PaymentsEvents,
-} from "../types/eventsTypes.js";
-
-type StoreType = {
-  hasFetched: boolean;
-  data: {
-    [key: string]: {
-      loading: boolean;
-      errors: { id: number; label: string; message: string }[];
-      dataValue: (Timeline | User | Subscription | Payment)[];
-    };
-  };
-  events: {
-    [key: string]: {
-      loading: boolean;
-      errors: { id: number; label: string; message: string }[];
-      eventsValue: {
-        events: (UsersEvents | SubsEvents | PaymentsEvents)[];
-        eventsTitle: EventsTitle[];
-      };
-    };
-  };
-  fetchData: (
-    dataType: string,
-    realData: (Timeline | User | Subscription | Payment)[],
-    label: string,
-  ) => void;
-  fetchEvents: (
-    eventsType: string,
-    realEvents: {
-      events: (UsersEvents | SubsEvents | PaymentsEvents)[];
-      eventsTitle: EventsTitle[];
-    },
-    label: string,
-  ) => void;
-
-  retryFetchData: (
-    dataType: string,
-    realData: (Timeline | User | Subscription | Payment)[],
-    label: string,
-  ) => void;
-  retryFetchEvents: (
-    eventsType: string,
-    realEvents: {
-      events: (UsersEvents | SubsEvents | PaymentsEvents)[];
-      eventsTitle: EventsTitle[];
-    },
-    label: string,
-  ) => void;
-
-  setHasFetched: (value: boolean) => void;
-};
+import type { StoreType } from "../types/storeTypes.js";
 
 const useStoreFetchedData = create<StoreType>((set, get) => ({
   // Initialization flag to prevent duplicate fetches
   hasFetched: false,
 
-  data: {}, // data: {dataType: {isLoading, error, dataValue}}
-  events: {}, // events: {eventType: {isLoading, error, {eventsTitle, eventValue}}}
+  // Initial Data Object // data: {dataType: {isLoading, error, dataValue}}
+  data: {
+    timeData: {
+      loading: false,
+      errors: [],
+      dataValue: [],
+    },
+    usersData: {
+      loading: false,
+      errors: [],
+      dataValue: [],
+    },
+    subsData: {
+      loading: false,
+      errors: [],
+      dataValue: [],
+    },
+    paymentsData: {
+      loading: false,
+      errors: [],
+      dataValue: [],
+    },
+  },
+
+  // Initial Events Object // events: {eventType: {isLoading, error, {eventsTitle, eventValue}}}
+
+  events: {
+    paymentsEvents: {
+      loading: false,
+      errors: [],
+      eventsValue: {
+        events: [],
+        eventsTitle: [],
+      },
+    },
+
+    subsEvents: {
+      loading: false,
+      errors: [],
+      eventsValue: {
+        events: [],
+        eventsTitle: [],
+      },
+    },
+    usersEvents: {
+      loading: false,
+      errors: [],
+      eventsValue: {
+        events: [],
+        eventsTitle: [],
+      },
+    },
+  },
 
   fetchData: async (dataType, realData, label) => {
     const state = get();

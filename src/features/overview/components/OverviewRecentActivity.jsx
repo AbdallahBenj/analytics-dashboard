@@ -5,7 +5,7 @@ import RadioGroupButtons from "../../../components/RadioGroupButtons.tsx";
 import { Zoomies } from "ldrs/react";
 import "ldrs/react/Zoomies.css";
 
-import useDashboardRecentActivity from "../hooks/useOverviewRecentActivity.js";
+import useOverviewRecentActivity from "../hooks/useOverviewRecentActivity.js";
 
 const EVENT_TYPES = {
   USERS: "usersEvents",
@@ -28,9 +28,9 @@ const spanColorMap = {
   paid: "text-emerald-500",
 };
 
-const DashboardRecentActivity = () => {
+const OverviewRecentActivity = () => {
   const { isDataAndEventsLoading, isDataAndEventsErrors, allEvents } =
-    useDashboardRecentActivity();
+    useOverviewRecentActivity();
 
   const [tableContent, setTableContent] = useState(EVENT_TYPES.USERS);
 
@@ -158,4 +158,4 @@ const DashboardRecentActivity = () => {
   );
 };
 
-export default DashboardRecentActivity;
+export default OverviewRecentActivity;

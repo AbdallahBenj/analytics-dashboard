@@ -7,7 +7,7 @@ import {
   ArrowPathIcon,
 } from "@heroicons/react/24/solid";
 
-import type { MiniCardsDataType } from "../../../types/featuresTypes.js";
+import type { OverviewMiniCardsDataType } from "../../../types/featuresTypes.js";
 import type {
   Timeline,
   User,
@@ -29,8 +29,8 @@ import formatPercent from "../../../utils/formatPercent.js";
 
 import useGlobalFetchedData from "../../../hooks/useGlobalFetchedData.js";
 
-const useDashboardMiniCardsStats = (): {
-  miniCardsData: MiniCardsDataType[];
+const useOverviewMiniCardsStats = (): {
+  miniCardsData: OverviewMiniCardsDataType[];
 } => {
   const { globalStatus, data } = useGlobalFetchedData();
   const { isDataAndEventsLoading, isDataAndEventsErrors } = globalStatus;
@@ -38,7 +38,7 @@ const useDashboardMiniCardsStats = (): {
 
   // Revenue calculation (memoized)
   const dailyRevenue = useMemo(() => {
-    return getRevenue(timeData as Timeline[], paymentsData as Payment[]);
+    return getRevenue(timeData, paymentsData);
   }, [timeData, paymentsData]);
 
   const dailyRevenueLast30days = dailyRevenue?.slice(-30) ?? [];
@@ -58,24 +58,19 @@ const useDashboardMiniCardsStats = (): {
     lastMonthRevenue > previousMonthRevenue;
 
   // Subscriptions
-  const activeSubscriptions = getActiveSubscriptions(
-    subsData as Subscription[],
-  );
+  const activeSubscriptions = getActiveSubscriptions(subsData);
   const totalActiveSubscriptions = activeSubscriptions?.length || 0;
 
   // Churn
-  const lastMonthChurnRate = getChurnRate(subsData as Subscription[]);
-  const prevMonthChurnRate = getChurnRate(subsData as Subscription[], 30);
+  const lastMonthChurnRate = getChurnRate(subsData);
+  const prevMonthChurnRate = getChurnRate(subsData, 30);
 
   const churnGrowthRate = getGrowthRate(lastMonthChurnRate, prevMonthChurnRate);
 
   const isChurnImproving = lastMonthChurnRate < prevMonthChurnRate;
 
   // Conversion
-  const conversionRate = getConversionRate(
-    usersData as User[],
-    subsData as Subscription[],
-  );
+  const conversionRate = getConversionRate(usersData, subsData);
 
   return {
     miniCardsData: [
@@ -131,4 +126,4 @@ const useDashboardMiniCardsStats = (): {
   };
 };
 
-export default useDashboardMiniCardsStats;
+export default useOverviewMiniCardsStats;

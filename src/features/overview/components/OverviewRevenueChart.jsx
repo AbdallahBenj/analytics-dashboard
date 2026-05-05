@@ -6,7 +6,7 @@ import { DotPulse, Cardio } from "ldrs/react";
 import "ldrs/react/DotPulse.css";
 import "ldrs/react/Cardio.css";
 
-import useDashboardRevenueChartStats from "../hooks/useOverviewRevenueChartStats.js";
+import useOverviewRevenueChartStats from "../hooks/useOverviewRevenueChart.js";
 
 import {
   LineChart,
@@ -21,7 +21,7 @@ import {
 import formatCurrencyCompact from "../../../utils/formatCurrencyCompact.js";
 import formatPercent from "../../../utils/formatPercent.js";
 
-const RevenueChart = () => {
+const OverviewRevenueChart = () => {
   const {
     isDataAndEventsLoading,
     isDataAndEventsErrors,
@@ -33,7 +33,7 @@ const RevenueChart = () => {
     isRevenueGrowing,
 
     revenueChartConfig,
-  } = useDashboardRevenueChartStats();
+  } = useOverviewRevenueChartStats();
 
   const [range, setRange] = useState("d30");
 
@@ -170,4 +170,4 @@ const RevenueChart = () => {
   );
 };
 
-export default RevenueChart;
+export default OverviewRevenueChart;

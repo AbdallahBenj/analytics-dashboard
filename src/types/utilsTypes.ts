@@ -1,6 +1,6 @@
 type Revenue = {
-  basicRevenue: number;
   date: string;
+  basicRevenue: number;
   proRevenue: number;
   revenue: number;
 };

@@ -14,7 +14,7 @@ const pieColors = {
   pro: "var(--color-pie-pro)",
 };
 
-import useDashboardPlansPieChartStats from "../hooks/useOverviewPlansPieChartStats.js";
+import useOverviewPlansPieChartStats from "../hooks/useOverviewPlansPieChart.js";
 import formatPercent from "../../../utils/formatPercent.js";
 
 const loadingContent = (
@@ -26,13 +26,13 @@ const errorsContent = (
   <span className="text-lg font-semibold text-red-500">N/A</span>
 );
 
-const DashboardPlansPieChart = () => {
+const OverviewPlansPieChart = () => {
   const {
     isDataAndEventsLoading,
     isDataAndEventsErrors,
     totalUsers,
     usersByPlan,
-  } = useDashboardPlansPieChartStats(pieColors);
+  } = useOverviewPlansPieChartStats(pieColors);
 
   return (
     <div
@@ -119,4 +119,4 @@ const DashboardPlansPieChart = () => {
   );
 };
 
-export default DashboardPlansPieChart;
+export default OverviewPlansPieChart;

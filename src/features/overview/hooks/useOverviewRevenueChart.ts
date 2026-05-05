@@ -1,20 +1,31 @@
-import getRevenue from "../../utils/getRevenue.ts";
+import getRevenue from "../../utils/getRevenue.js";
 
 import getMonthlyRevenue from "../../utils/getMonthlyRevenue.js";
 import getGrowthRate from "../../utils/getGrowthRate.js";
 
-import useGlobalFetchedData from "../../../hooks/useGlobalFetchedData.ts";
+import useGlobalFetchedData from "../../../hooks/useGlobalFetchedData.js";
 
-const useDashboardRevenueChartStats = () => {
+import type { Timeline, Payment } from "../../../types/dataTypes.js";
+import type {
+  OverviewRevenueChartType,
+  OverviewRevenueChartConfigType,
+} from "../../../types/featuresTypes.js";
+import type { Revenue } from "../../../types/utilsTypes.js";
+
+const useOverviewRevenueChartStats = (): OverviewRevenueChartType => {
   const { globalStatus, data } = useGlobalFetchedData();
   const { isDataAndEventsLoading, isDataAndEventsErrors } = globalStatus;
   const { timeData, paymentsData } = data;
 
-  const dailyRevenue = getRevenue(timeData, paymentsData);
-  const monthlyRevenue = getRevenue(timeData, paymentsData, "month");
+  const dailyRevenue = getRevenue(timeData ?? [], paymentsData ?? []);
+  const monthlyRevenue = getRevenue(
+    timeData ?? [],
+    paymentsData ?? [],
+    "month",
+  );
 
-  const getLast = (arr, n) => arr?.slice(-n) || [];
-  const getPrev = (arr, n) => arr?.slice(-n * 2, -n) || [];
+  const getLast = (arr: Revenue[], n: number) => arr.slice(-n) || [];
+  const getPrev = (arr: Revenue[], n: number) => arr.slice(-n * 2, -n) || [];
 
   const last30days = getLast(dailyRevenue, 30); // dailyRevenue?.slice(-30) || [];
   const prev30days = getPrev(dailyRevenue, 30); // dailyRevenue?.slice(-60, -30) || [];
@@ -35,7 +46,7 @@ const useDashboardRevenueChartStats = () => {
     prev30daysRevenue != null &&
     last30daysRevenue > prev30daysRevenue;
 
-  const revenueChartConfig = {
+  const revenueChartConfig: OverviewRevenueChartConfigType = {
     d30: {
       data: last30days,
       xKey: "date",
@@ -68,4 +79,4 @@ const useDashboardRevenueChartStats = () => {
   };
 };
 
-export default useDashboardRevenueChartStats;
+export default useOverviewRevenueChartStats;
