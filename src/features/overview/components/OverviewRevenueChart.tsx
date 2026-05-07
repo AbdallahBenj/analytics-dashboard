@@ -79,7 +79,7 @@ const OverviewRevenueChart = () => {
 
   return (
     <div
-      className="relative primary-chart min-h-96
+      className="relative primary-chart h-auto
             rounded-2xl p-4 cursor-pointer 
             col-span-4 md:col-span-2 lg:col-span-3
             flex flex-col
@@ -115,7 +115,7 @@ const OverviewRevenueChart = () => {
           />
         </div>
       </div>
-      <div className="w-full h-75 min-w-0">
+      <div className="w-full h-70 min-w-0">
         {isDataAndEventsLoading ? (
           // Loading snipper icon
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -123,7 +123,7 @@ const OverviewRevenueChart = () => {
           </div>
         ) : (
           !isDataAndEventsErrors && (
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={280}>
               <LineChart
                 width={500}
                 height={300}

@@ -49,7 +49,7 @@ const AnalyticsRevenueTrendChart = () => {
 
   return (
     <div
-      className="analytics-chart-revenue h-150 lg:h-130
+      className="analytics-chart-revenue h-auto
             rounded-2xl p-4 cursor-pointer 
             col-span-4 md:col-span-4 lg:col-span-4
             flex flex-col
@@ -67,6 +67,7 @@ const AnalyticsRevenueTrendChart = () => {
         <h3 className="text-lg font-bold mb-2 md:mb-4 text-gray-700 dark:text-gray-200">
           Revenue Trend Chart By Plan
         </h3>
+
         <div className="flex flex-col md:flex-row justify-between">
           <div className="Title-chart mb-2 md:mb-4">
             <p className="text-md font-semibold text-indigo-500 dark:text-indigo-400">
@@ -88,7 +89,7 @@ const AnalyticsRevenueTrendChart = () => {
           </div>
         </div>
       </div>
-      <div className="w-full h-100 min-w-0 overflow-hidden">
+      <div className="w-full h-70 min-w-0 overflow-hidden">
         {isDataAndEventsLoading ? (
           // Loading snipper icon
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -96,7 +97,7 @@ const AnalyticsRevenueTrendChart = () => {
           </div>
         ) : (
           !isDataAndEventsErrors && (
-            <ResponsiveContainer width="100%" height={350}>
+            <ResponsiveContainer width="100%" height={280}>
               <LineChart data={revenueRangeConfig[range].data}>
                 <CartesianGrid
                   strokeDasharray="3 3"
@@ -129,7 +130,7 @@ const AnalyticsRevenueTrendChart = () => {
                   labelStyle={{ color: "#9CA3AF" }}
                   cursor={{ stroke: "#6366F1", strokeWidth: 1 }}
                 />
-                <Legend />
+                <Legend verticalAlign="bottom" />
                 <Line
                   type="monotone"
                   name="Total Revenue"
