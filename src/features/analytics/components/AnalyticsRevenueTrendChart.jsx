@@ -49,7 +49,7 @@ const AnalyticsRevenueTrendChart = () => {
 
   return (
     <div
-      className="analytics-chart-revenue h-125
+      className="analytics-chart-revenue h-150 lg:h-130
             rounded-2xl p-4 cursor-pointer 
             col-span-4 md:col-span-4 lg:col-span-4
             flex flex-col
@@ -63,7 +63,7 @@ const AnalyticsRevenueTrendChart = () => {
             hover:shadow-xl hover:shadow-black/20
             transition-all duration-300"
     >
-      <div className="">
+      <div className="mb-4">
         <h3 className="text-lg font-bold mb-2 md:mb-4 text-gray-700 dark:text-gray-200">
           Revenue Trend Chart By Plan
         </h3>
@@ -88,7 +88,7 @@ const AnalyticsRevenueTrendChart = () => {
           </div>
         </div>
       </div>
-      <div className="flex-1 min-h-0 overflow-hidden">
+      <div className="w-full h-100 min-w-0 overflow-hidden">
         {isDataAndEventsLoading ? (
           // Loading snipper icon
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -96,7 +96,7 @@ const AnalyticsRevenueTrendChart = () => {
           </div>
         ) : (
           !isDataAndEventsErrors && (
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer width="100%" height={350}>
               <LineChart data={revenueRangeConfig[range].data}>
                 <CartesianGrid
                   strokeDasharray="3 3"

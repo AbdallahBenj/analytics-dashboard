@@ -85,16 +85,16 @@ src/
 ├── features/              # Feature-based modules
 │   ├── overview/
 │   │   ├── components/
-│   │   │   ├── OverviewMiniCards.jsx
-│   │   │   ├── OverviewPlansPieChart.jsx
-│   │   │   ├── OverviewRecentActivity.jsx
-│   │   │   └── OverviewRevenueChart.jsx
+│   │   │   ├── OverviewMiniCards.tsx
+│   │   │   ├── OverviewPlansPieChart.tsx
+│   │   │   ├── OverviewRecentActivity.tsx
+│   │   │   └── OverviewRevenueChart.tsx
 │   │   │
 │   │   ├── hooks/
 │   │   │   ├── useOverviewMiniCardsStats.ts
-│   │   │   ├── useOverviewPlansPieChartStats.js
-│   │   │   ├── useOverviewRecentActivity.js
-│   │   │   └── useOverviewRevenueChartStats.js
+│   │   │   ├── useOverviewPlansPieChartStats.ts
+│   │   │   ├── useOverviewRecentActivity.ts
+│   │   │   └── useOverviewRevenueChartStats.ts
 │   │   │
 │   │   └── utils/
 │   │       ├── getActiveSubscriptions.ts

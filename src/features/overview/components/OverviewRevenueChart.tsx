@@ -79,7 +79,7 @@ const OverviewRevenueChart = () => {
 
   return (
     <div
-      className="relative primary-chart h-100
+      className="relative primary-chart min-h-96
             rounded-2xl p-4 cursor-pointer 
             col-span-4 md:col-span-2 lg:col-span-3
             flex flex-col
@@ -94,7 +94,7 @@ const OverviewRevenueChart = () => {
             transition-all duration-300"
     >
       {/* Header */}
-      <div className="flex flex-col md:flex-row justify-between">
+      <div className="flex flex-col md:flex-row justify-between mb-4">
         <div className="Title-chart mb-2 md:mb-4">
           <h3 className="text-md font-medium text-gray-600 dark:text-gray-300">
             Monthly Revenue
@@ -115,7 +115,7 @@ const OverviewRevenueChart = () => {
           />
         </div>
       </div>
-      <div className="flex-1 min-h-0">
+      <div className="w-full h-75 min-w-0">
         {isDataAndEventsLoading ? (
           // Loading snipper icon
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -123,8 +123,12 @@ const OverviewRevenueChart = () => {
           </div>
         ) : (
           !isDataAndEventsErrors && (
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={activeRange?.data || []}>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart
+                width={500}
+                height={300}
+                data={activeRange?.data || []}
+              >
                 <CartesianGrid
                   strokeDasharray="3 3"
                   strokeOpacity={0.3}
