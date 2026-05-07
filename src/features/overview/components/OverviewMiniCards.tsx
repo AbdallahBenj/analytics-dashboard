@@ -6,11 +6,11 @@ import type { ReactNode } from "react";
 import { DotPulse } from "ldrs/react";
 import "ldrs/react/DotPulse.css";
 
-import useOverviewMiniCardsStats from "../hooks/useOverviewMiniCards.js";
+import useOverviewMiniCards from "../hooks/useOverviewMiniCards.js";
 import formatPercent from "../../../utils/formatPercent.js";
 
 const OverviewMiniCards = () => {
-  const { miniCardsData } = useOverviewMiniCardsStats();
+  const { miniCardsData } = useOverviewMiniCards();
 
   return (
     <div className="col-span-4">

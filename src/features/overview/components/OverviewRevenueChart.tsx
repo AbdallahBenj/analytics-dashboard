@@ -1,12 +1,13 @@
 import { useState } from "react";
-import RadioGroupButtons from "../../../components/RadioGroupButtons.tsx";
+import RadioGroupButtons from "../../../components/RadioGroupButtons.js";
 
 // Loading snipper icon
 import { DotPulse, Cardio } from "ldrs/react";
 import "ldrs/react/DotPulse.css";
 import "ldrs/react/Cardio.css";
 
-import useOverviewRevenueChartStats from "../hooks/useOverviewRevenueChart.js";
+import useOverviewRevenueChart from "../hooks/useOverviewRevenueChart.js";
+import type { OverviewRevenueChartConfigType } from "../../../types/featuresTypes.js";
 
 import {
   LineChart,
@@ -33,9 +34,11 @@ const OverviewRevenueChart = () => {
     isRevenueGrowing,
 
     revenueChartConfig,
-  } = useOverviewRevenueChartStats();
+  } = useOverviewRevenueChart();
 
-  const [range, setRange] = useState("d30");
+  type Range = keyof OverviewRevenueChartConfigType;
+
+  const [range, setRange] = useState<Range>("d30");
 
   // ✅ safe access
   const activeRange = revenueChartConfig?.[range];
@@ -140,10 +143,10 @@ const OverviewRevenueChart = () => {
                   tickLine={false}
                 />
                 <Tooltip
-                  formatter={(value) => [
-                    formatCurrencyCompact(value, 2),
-                    "Revenue",
-                  ]}
+                  formatter={(value) => {
+                    if (typeof value !== "number") return ["N/A", "Revenue"];
+                    return [formatCurrencyCompact(value, 2), "Revenue"];
+                  }}
                   contentStyle={{
                     backgroundColor: "rgba(17, 24, 39, 0.9)",
                     borderRadius: "12px",

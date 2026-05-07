@@ -12,7 +12,7 @@ import type {
 } from "../../../types/featuresTypes.js";
 import type { Revenue } from "../../../types/utilsTypes.js";
 
-const useOverviewRevenueChartStats = (): OverviewRevenueChartType => {
+const useOverviewRevenueChart = (): OverviewRevenueChartType => {
   const { globalStatus, data } = useGlobalFetchedData();
   const { isDataAndEventsLoading, isDataAndEventsErrors } = globalStatus;
   const { timeData, paymentsData } = data;
@@ -79,4 +79,4 @@ const useOverviewRevenueChartStats = (): OverviewRevenueChartType => {
   };
 };
 
-export default useOverviewRevenueChartStats;
+export default useOverviewRevenueChart;

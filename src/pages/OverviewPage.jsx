@@ -1,7 +1,7 @@
 import OverviewMiniCards from "../features/overview/components/OverviewMiniCards.tsx";
-import OverviewRevenueChart from "../features/overview/components/OverviewRevenueChart.jsx";
-import OverviewPlansPieChart from "../features/overview/components/OverviewPlansPieChart.jsx";
-import OverviewRecentActivity from "../features/overview/components/OverviewRecentActivity.jsx";
+import OverviewRevenueChart from "../features/overview/components/OverviewRevenueChart.tsx";
+import OverviewPlansPieChart from "../features/overview/components/OverviewPlansPieChart.tsx";
+import OverviewActivityTable from "../features/overview/components/OverviewActivityTable.tsx";
 
 const OverviewPage = () => {
   return (
@@ -13,7 +13,7 @@ const OverviewPage = () => {
       <OverviewMiniCards />
       <OverviewRevenueChart />
       <OverviewPlansPieChart />
-      <OverviewRecentActivity />
+      <OverviewActivityTable />
     </section>
   );
 };

@@ -1,17 +1,12 @@
 import { useState } from "react";
-import RadioGroupButtons from "../../../components/RadioGroupButtons.tsx";
+import RadioGroupButtons from "../../../components/RadioGroupButtons.js";
 
 // Loading snipper icon
 import { Zoomies } from "ldrs/react";
 import "ldrs/react/Zoomies.css";
 
-import useOverviewRecentActivity from "../hooks/useOverviewRecentActivity.js";
-
-const EVENT_TYPES = {
-  USERS: "usersEvents",
-  SUBSCRIPTIONS: "subsEvents",
-  PAYMENTS: "paymentsEvents",
-};
+import useOverviewActivityTable from "../hooks/useOverviewActivityTable.js";
+import type { AllEventsMap } from "../../../types/featuresTypes.js";
 
 const spanColorMap = {
   basic: "text-indigo-400",
@@ -28,13 +23,17 @@ const spanColorMap = {
   paid: "text-emerald-500",
 };
 
-const OverviewRecentActivity = () => {
+const OverviewActivityTable = () => {
   const { isDataAndEventsLoading, isDataAndEventsErrors, allEvents } =
-    useOverviewRecentActivity();
+    useOverviewActivityTable();
 
-  const [tableContent, setTableContent] = useState(EVENT_TYPES.USERS);
+  console.log("allEvents", allEvents["usersEvents"]["data"]["events"]);
+
+  type EventKey = keyof AllEventsMap;
+  const [tableContent, setTableContent] = useState<EventKey>("usersEvents");
 
   const { eventsTitle, events } = allEvents[tableContent].data;
+
   const headers = eventsTitle || [];
   const rows = events || [];
 
@@ -126,22 +125,23 @@ const OverviewRecentActivity = () => {
             ) : (
               !isDataAndEventsErrors &&
               rows.map((event) => {
+                console.log("event", event);
                 return (
                   <tr
-                    key={event[id]}
+                    key={event[id as keyof typeof event]}
                     className="text-gray-600 dark:text-gray-400
                 hover:bg-gray-500/10
                 even:bg-indigo-50 even:dark:bg-indigo-50/5"
                   >
                     {tableColumns.map((col, i) => {
-                      const value = event[col.key];
+                      const value = event[col.key as keyof typeof event];
                       return (
                         <td
                           key={`${col.key}-${i}`}
                           className={`px-4 py-2 
                       ${i === 0 && "rounded-l-lg"} 
                       ${i === tableColumns.length - 1 && "rounded-r-lg"}
-                      ${col.colored ? spanColorMap[value] || "" : ""}`}
+                      ${col.colored ? spanColorMap[value as keyof typeof spanColorMap] || "" : ""}`}
                         >
                           {value}
                         </td>
@@ -158,4 +158,4 @@ const OverviewRecentActivity = () => {
   );
 };
 
-export default OverviewRecentActivity;
+export default OverviewActivityTable;

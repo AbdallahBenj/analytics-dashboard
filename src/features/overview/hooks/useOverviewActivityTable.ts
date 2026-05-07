@@ -1,6 +1,14 @@
-import useGlobalFetchedData from "../../../hooks/useGlobalFetchedData.ts";
+import useGlobalFetchedData from "../../../hooks/useGlobalFetchedData.js";
 
-const useOverviewRecentActivity = () => {
+import type { OverviewActivityTableAllEventsType } from "../../../types/featuresTypes.js";
+
+type AllEventsTypes = {
+  isDataAndEventsLoading: boolean;
+  isDataAndEventsErrors: boolean;
+  allEvents: OverviewActivityTableAllEventsType;
+};
+
+const useOverviewActivityTable = (): AllEventsTypes => {
   const { globalStatus, events } = useGlobalFetchedData();
 
   const { isDataAndEventsLoading, isDataAndEventsErrors } = globalStatus;
@@ -49,7 +57,7 @@ const useOverviewRecentActivity = () => {
         ],
       },
     },
-  };
+  } satisfies OverviewActivityTableAllEventsType;
 
   return {
     isDataAndEventsLoading,
@@ -58,4 +66,4 @@ const useOverviewRecentActivity = () => {
   };
 };
 
-export default useOverviewRecentActivity;
+export default useOverviewActivityTable;

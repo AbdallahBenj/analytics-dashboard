@@ -29,7 +29,7 @@ import formatPercent from "../../../utils/formatPercent.js";
 
 import useGlobalFetchedData from "../../../hooks/useGlobalFetchedData.js";
 
-const useOverviewMiniCardsStats = (): {
+const useOverviewMiniCards = (): {
   miniCardsData: OverviewMiniCardsDataType[];
 } => {
   const { globalStatus, data } = useGlobalFetchedData();
@@ -126,4 +126,4 @@ const useOverviewMiniCardsStats = (): {
   };
 };
 
-export default useOverviewMiniCardsStats;
+export default useOverviewMiniCards;
