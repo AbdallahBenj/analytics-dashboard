@@ -48,12 +48,12 @@ const Sidebar = () => {
                 <img
                   alt={`${brand.name} logo`}
                   src={brand.imageUrl}
-                  className="size-9 max-w-fit rounded-full text-indigo-500"
+                  className="size-12 max-w-fit rounded-full text-indigo-500"
                 />
               )}
               <span
                 aria-hidden={!isSidebarOpen}
-                className={`text-4xl font-semibold tracking-tight text-indigo-500 ml-2
+                className={`text-3xl font-semibold tracking-tight text-indigo-500
                   overflow-hidden
                   whitespace-nowrap
                   transition-[opacity,max-width] duration-300 ease-in-out 

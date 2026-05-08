@@ -10,10 +10,10 @@ import useOverviewRevenueChart from "../hooks/useOverviewRevenueChart.js";
 import type { OverviewRevenueChartConfigType } from "../../../types/featuresTypes.js";
 
 import {
-  LineChart,
+  AreaChart,
+  Area,
   XAxis,
   YAxis,
-  Line,
   ResponsiveContainer,
   CartesianGrid,
   Tooltip,
@@ -124,11 +124,18 @@ const OverviewRevenueChart = () => {
         ) : (
           !isDataAndEventsErrors && (
             <ResponsiveContainer width="100%" height={280}>
-              <LineChart
+              <AreaChart
+                responsive
                 width={500}
                 height={300}
                 data={activeRange?.data || []}
               >
+                <defs>
+                  <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+                    <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+                  </linearGradient>
+                </defs>
                 <CartesianGrid
                   strokeDasharray="3 3"
                   strokeOpacity={0.3}
@@ -160,15 +167,17 @@ const OverviewRevenueChart = () => {
                   labelStyle={{ color: "#9CA3AF" }}
                   cursor={{ stroke: "#6366F1", strokeWidth: 1 }}
                 />
-                <Line
+                <Area
                   type="monotone"
+                  fillOpacity={1}
+                  fill="url(#colorPv)"
                   dataKey={activeRange?.yKey}
                   stroke="#6366F1"
                   strokeWidth={3}
                   dot={false}
                   activeDot={{ r: 6 }}
                 />
-              </LineChart>
+              </AreaChart>
             </ResponsiveContainer>
           )
         )}

@@ -47,7 +47,7 @@ const HeaderMobile = () => {
             />
           )}
           {brand.name && (
-            <span className="text-3xl ml-2 font-bold tracking-tight text-indigo-500">
+            <span className="text-2xl font-bold tracking-tight text-indigo-500">
               {brand.name}
             </span>
           )}

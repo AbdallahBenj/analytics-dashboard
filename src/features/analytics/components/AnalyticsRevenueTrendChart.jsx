@@ -9,6 +9,8 @@ import "ldrs/react/Cardio.css";
 import useAnalyticsRevenueTrendChart from "../hooks/useAnalyticsRevenueTrendChart.js";
 
 import {
+  AreaChart,
+  Area,
   LineChart,
   XAxis,
   YAxis,
@@ -98,7 +100,26 @@ const AnalyticsRevenueTrendChart = () => {
         ) : (
           !isDataAndEventsErrors && (
             <ResponsiveContainer width="100%" height={280}>
-              <LineChart data={revenueRangeConfig[range].data}>
+              <AreaChart responsive data={revenueRangeConfig[range].data}>
+                <defs>
+                  {/* Total Revenue (Primary - Indigo) */}
+                  <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#6366F1" stopOpacity={0.4} />
+                    <stop offset="95%" stopColor="#6366F1" stopOpacity={0} />
+                  </linearGradient>
+
+                  {/* Basic Revenue (Orange) */}
+                  <linearGradient id="colorBasic" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#fe9a00" stopOpacity={0.4} />
+                    <stop offset="95%" stopColor="#fe9a00" stopOpacity={0} />
+                  </linearGradient>
+
+                  {/* Pro Revenue (Green) */}
+                  <linearGradient id="colorPro" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#00bc7d" stopOpacity={0.4} />
+                    <stop offset="95%" stopColor="#00bc7d" stopOpacity={0} />
+                  </linearGradient>
+                </defs>
                 <CartesianGrid
                   strokeDasharray="3 3"
                   strokeOpacity={0.3}
@@ -131,34 +152,40 @@ const AnalyticsRevenueTrendChart = () => {
                   cursor={{ stroke: "#6366F1", strokeWidth: 1 }}
                 />
                 <Legend verticalAlign="bottom" />
-                <Line
+                <Area
                   type="monotone"
                   name="Total Revenue"
                   dataKey={revenueRangeConfig[range].yKey}
+                  fillOpacity={1}
+                  fill="url(#colorPv)"
                   stroke="#6366F1"
                   strokeWidth={3}
                   dot={false}
                   activeDot={{ r: 6 }}
                 />
-                <Line
+                <Area
                   type="monotone"
                   name="Basic Revenue"
                   dataKey={revenueRangeConfig[range].basicKey}
+                  fillOpacity={1}
+                  fill="url(#colorBasic)"
                   stroke="#fe9a00"
                   strokeWidth={3}
                   dot={false}
                   activeDot={{ r: 6 }}
                 />
-                <Line
+                <Area
                   type="monotone"
                   name="Pro Revenue"
                   dataKey={revenueRangeConfig[range].proKey}
+                  fillOpacity={1}
+                  fill="url(#colorPro)"
                   stroke="#00bc7d"
                   strokeWidth={3}
                   dot={false}
                   activeDot={{ r: 6 }}
                 />
-              </LineChart>
+              </AreaChart>
             </ResponsiveContainer>
           )
         )}

@@ -7,21 +7,26 @@ import SearchInput from "../components/SearchInput.tsx";
 import navContent from "../data/navContent.ts";
 const { navigation } = navContent;
 
+const isActive = true;
+
 const PageHeader = () => {
   const { globalStatus, retryDataAndEvents } = useGlobalFetchedData();
   const isLoading = globalStatus.isDataAndEventsLoading;
 
   const location = useLocation();
 
+  // Activate or deactivate page header
+  if (!isActive) return;
+
   const currentPage = navigation.find(
     (page) => page.href === location.pathname,
   );
-  const pageName = currentPage ? currentPage.name : "Unknown Page";
-  const HeadingTag = pageName === "Dashboard" ? "h1" : "h2";
+  const pageName = currentPage.name || "Unknown Page";
+  const HeadingTag = pageName === "Overview" ? "h1" : "h2";
 
   return (
     <header
-      className="relative shadow-sm
+      className="relative shadow-sm md:hidden
       bg-gray-50 dark:bg-gray-800
       dark:after:pointer-events-none dark:after:absolute 
       dark:after:inset-x-0 dark:after:inset-y-0 
@@ -37,7 +42,7 @@ const PageHeader = () => {
             className={`text-3xl 
           font-bold tracking-tight
           ${
-            pageName === "Dashboard"
+            pageName === "Overview"
               ? "text-gray-700 dark:text-gray-100"
               : "text-gray-600 dark:text-gray-200"
           }
@@ -76,9 +81,6 @@ const PageHeader = () => {
             </span>
           </div>
         </button>
-        <div className="hidden md:block w-full max-w-90 ml-6">
-          <SearchInput />
-        </div>
       </div>
     </header>
   );

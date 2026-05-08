@@ -8,6 +8,9 @@ import {
 } from "@heroicons/react/24/outline";
 
 import DashboardLogo from "../assets/dashboard-logo.svg";
+import InsightFlowIcon from "../assets/insightFlow-icon.svg";
+import InsightFlowLogo from "../assets/insightFlow-logo.svg";
+import insightFlow3DLogo from "../assets/insightFlow-3DLogo.webp";
 
 import type { ComponentType, SVGProps } from "react";
 
@@ -26,8 +29,8 @@ type NavContent = {
 
 const navContent: NavContent = {
   brand: {
-    name: "Analytics",
-    imageUrl: DashboardLogo,
+    name: "InsightFlow",
+    imageUrl: InsightFlowIcon,
   },
   navigation: [
     {
