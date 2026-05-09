@@ -3,13 +3,25 @@ import OverviewRevenueChart from "../features/overview/components/OverviewRevenu
 import OverviewPlansPieChart from "../features/overview/components/OverviewPlansPieChart.tsx";
 import OverviewActivityTable from "../features/overview/components/OverviewActivityTable.tsx";
 
+// import Errors Dialog
+import useGlobalFetchedData from "../hooks/useGlobalFetchedData.js";
+import ErrorsDialog from "../components/ErrorsDialog.tsx";
+import LoginDialog from "../components/LoginDialog.tsx";
+
 const OverviewPage = () => {
+  // Check  isErrors
+  const { globalStatus } = useGlobalFetchedData();
+  const { isDataAndEventsErrors } = globalStatus;
+
   return (
     <section
       className="rounded-lg
       grid grid-cols-4 gap-4"
     >
-      {/* Your content */}
+      {/* Errors Dialog */}
+      {isDataAndEventsErrors && <ErrorsDialog />}
+
+      {/* The content */}
       <OverviewMiniCards />
       <OverviewRevenueChart />
       <OverviewPlansPieChart />

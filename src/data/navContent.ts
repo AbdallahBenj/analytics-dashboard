@@ -34,39 +34,45 @@ const navContent: NavContent = {
   },
   navigation: [
     {
-      name: "Overview",
+      name: "Home",
       href: "/",
+      Icon: HomeIcon,
+      current: false,
+    },
+    {
+      name: "Overview",
+      href: "/dashboard/overview",
       Icon: HomeIcon,
       current: true,
     },
     {
       name: "Analytics",
-      href: "/analytics",
+      href: "/dashboard/analytics",
       Icon: ChartBarIcon,
       current: false,
     },
     {
       name: "Customers",
-      href: "/customers",
+      href: "/dashboard/customers",
       Icon: UsersIcon,
       current: false,
     },
 
     {
       name: "Subscriptions",
-      href: "/subscriptions",
+      href: "/dashboard/subscriptions",
       Icon: CreditCardIcon,
       current: false,
     },
     {
       name: "Features",
-      href: "/features",
+      href: "/dashboard/features",
       Icon: SparklesIcon,
       current: false,
     },
     {
       name: "Reports",
-      href: "/reports",
+      href: "/dashboard/reports",
       Icon: ChartPieIcon,
       current: false,
     },
