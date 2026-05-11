@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import useStoreFetchedData from "../store/useStoreFetchedData.js";
+import useMockDataStore from "../store/useMockDataStore.js";
 
 import {
   timeData,
@@ -19,18 +19,16 @@ import type { DataTypesMap, EventsTypesMap } from "../types/storeTypes.js";
 const useGlobalFetchedData = () => {
   // Data and Events
 
-  const dataStore = useStoreFetchedData((state) => state.data);
-  const eventsStore = useStoreFetchedData((state) => state.events);
+  const dataStore = useMockDataStore((state) => state.data);
+  const eventsStore = useMockDataStore((state) => state.events);
 
   // Get the fetch functions and initialization flag
-  const fetchData = useStoreFetchedData((state) => state.fetchData);
-  const fetchEvents = useStoreFetchedData((state) => state.fetchEvents);
-  const setHasFetched = useStoreFetchedData((state) => state.setHasFetched);
-  const hasFetched = useStoreFetchedData((state) => state.hasFetched);
-  const retryFetchData = useStoreFetchedData((state) => state.retryFetchData);
-  const retryFetchEvents = useStoreFetchedData(
-    (state) => state.retryFetchEvents,
-  );
+  const fetchData = useMockDataStore((state) => state.fetchData);
+  const fetchEvents = useMockDataStore((state) => state.fetchEvents);
+  const setHasFetched = useMockDataStore((state) => state.setHasFetched);
+  const hasFetched = useMockDataStore((state) => state.hasFetched);
+  const retryFetchData = useMockDataStore((state) => state.retryFetchData);
+  const retryFetchEvents = useMockDataStore((state) => state.retryFetchEvents);
 
   const dataMap = {
     timeData,

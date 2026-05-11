@@ -51,6 +51,7 @@ const OverviewActivityTable = () => {
             
             shadow-md shadow-black/10
             hover:shadow-xl hover:shadow-black/20
+            hover:-translate-y-0.5
             transition-all duration-300"
     >
       <div className="flex flex-col md:flex-row justify-between">

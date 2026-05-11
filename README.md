@@ -124,7 +124,7 @@ src/
 │   ├──
 │   
 ├── hooks/                 # Global reusable hooks
-│   ├── useGlobalFetchedData.ts
+│   ├── useGlobalMockData.ts // useGlobalFetchedData.ts
 │   ├── useSystemMode.js
 │   └── useThemeMode.js
 │
@@ -146,6 +146,8 @@ src/
 │
 ├── services/
 │   ├── api/              # Future real API
+│   │   ├── fetchUsers.js
+│   │   ├── addData.js
 │   ├── mock/
 │   │   ├── generateData.ts
 │   │   ├── generateUsers.ts
@@ -163,7 +165,8 @@ src/
 │       └── convertToDynamicTime.ts
 │
 ├── store/                # Zustand global state
-│   ├── useStoreFetchedData.ts
+│   ├── useMockDataStore.ts // useStoreFetchedData.ts
+│   ├── useSupabaseDataStore.js
 │   └── useStoreLogin.ts
 │
 ├── utils/                # Global utilities
@@ -211,9 +214,9 @@ generateData.js
 ```txt
 generateData.js
         ↓
-useStoreFetchedData.js (Zustand Store)
+useMockDataStore.js (Zustand Store)
         ↓
-useGlobalFetchedData.js (Hook Layer)
+useGlobalMockData.ts.js (Hook Layer)
         ↓
 Components (Dashboard / Analytics / Sidebar / Header)
         ↓
@@ -229,9 +232,9 @@ generateData.js
         ↓
 generateEvents.js
         ↓
-useStoreFetchedData.js (State Update)
+useMockDataStore.js (State Update)
         ↓
-useGlobalFetchedData.js
+useGlobalMockData.ts.js
         ↓
 Components
         ↓

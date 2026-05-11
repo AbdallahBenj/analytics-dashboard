@@ -3,7 +3,7 @@ import getRevenue from "../../utils/getRevenue.js";
 import getMonthlyRevenue from "../../utils/getMonthlyRevenue.js";
 import getGrowthRate from "../../utils/getGrowthRate.js";
 
-import useGlobalFetchedData from "../../../hooks/useGlobalFetchedData.js";
+import useGlobalMockData from "../../../hooks/useGlobalMockData.js";
 
 import type { Timeline, Payment } from "../../../types/dataTypes.js";
 import type {
@@ -13,7 +13,7 @@ import type {
 import type { Revenue } from "../../../types/utilsTypes.js";
 
 const useOverviewRevenueChart = (): OverviewRevenueChartType => {
-  const { globalStatus, data } = useGlobalFetchedData();
+  const { globalStatus, data } = useGlobalMockData();
   const { isDataAndEventsLoading, isDataAndEventsErrors } = globalStatus;
   const { timeData, paymentsData } = data;
 

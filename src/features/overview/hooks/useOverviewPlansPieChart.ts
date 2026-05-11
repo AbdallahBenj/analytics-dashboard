@@ -1,6 +1,6 @@
 import getUsersByPlan from "../../utils/getUsersByPlan.js";
 
-import useGlobalFetchedData from "../../../hooks/useGlobalFetchedData.js";
+import useGlobalMockData from "../../../hooks/useGlobalMockData.js";
 
 import type { OverviewPlansPieChartType } from "../../../types/featuresTypes.tsx";
 
@@ -13,7 +13,7 @@ type PieColors = {
 const useOverviewPlansPieChart = (
   pieColors: PieColors,
 ): OverviewPlansPieChartType => {
-  const { globalStatus, data } = useGlobalFetchedData();
+  const { globalStatus, data } = useGlobalMockData();
 
   const { isDataAndEventsLoading, isDataAndEventsErrors } = globalStatus;
   const { usersData, subsData } = data;

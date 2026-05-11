@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { ArrowPathIcon } from "@heroicons/react/20/solid";
 
-import useGlobalFetchedData from "../hooks/useGlobalFetchedData.ts";
+import useGlobalMockData from "../hooks/useGlobalMockData.ts";
 
 import SearchInput from "../components/SearchInput.tsx";
 import navContent from "../data/navContent.ts";
@@ -10,7 +10,7 @@ const { navigation } = navContent;
 const isActive = true;
 
 const PageHeader = () => {
-  const { globalStatus, retryDataAndEvents } = useGlobalFetchedData();
+  const { globalStatus, retryDataAndEvents } = useGlobalMockData();
   const isLoading = globalStatus.isDataAndEventsLoading;
 
   const location = useLocation();

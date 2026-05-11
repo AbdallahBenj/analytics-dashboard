@@ -2,7 +2,7 @@ import { create } from "zustand";
 
 import type { StoreType } from "../types/storeTypes.js";
 
-const useStoreFetchedData = create<StoreType>((set, get) => ({
+const useMockDataStore = create<StoreType>((set, get) => ({
   // Initialization flag to prevent duplicate fetches
   hasFetched: false,
 
@@ -215,4 +215,4 @@ const useStoreFetchedData = create<StoreType>((set, get) => ({
   },
 }));
 
-export default useStoreFetchedData;
+export default useMockDataStore;

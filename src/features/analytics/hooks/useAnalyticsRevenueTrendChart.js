@@ -3,10 +3,10 @@ import getRevenue from "../../utils/getRevenue.ts";
 import getMonthlyRevenue from "../../utils/getMonthlyRevenue.ts";
 import getPerCentValue from "../../../utils/getPerCentValue.ts";
 
-import useGlobalFetchedData from "../../../hooks/useGlobalFetchedData.ts";
+import useGlobalMockData from "../../../hooks/useGlobalMockData.ts";
 
 const useAnalyticsRevenueTrendChart = () => {
-  const { globalStatus, data } = useGlobalFetchedData();
+  const { globalStatus, data } = useGlobalMockData();
 
   const { isDataAndEventsLoading, isDataAndEventsErrors } = globalStatus;
   const { timeData, paymentsData } = data;

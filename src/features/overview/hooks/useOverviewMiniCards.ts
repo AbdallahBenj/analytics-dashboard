@@ -8,12 +8,6 @@ import {
 } from "@heroicons/react/24/solid";
 
 import type { OverviewMiniCardsDataType } from "../../../types/featuresTypes.js";
-import type {
-  Timeline,
-  User,
-  Subscription,
-  Payment,
-} from "../../../types/dataTypes.js";
 
 import getRevenue from "../../utils/getRevenue.js";
 import getMonthlyRevenue from "../../utils/getMonthlyRevenue.js";
@@ -27,12 +21,12 @@ import formatCurrencyCompact from "../../../utils/formatCurrencyCompact.js";
 import formatCompact from "../../../utils/formatCompact.js";
 import formatPercent from "../../../utils/formatPercent.js";
 
-import useGlobalFetchedData from "../../../hooks/useGlobalFetchedData.js";
+import useGlobalMockData from "../../../hooks/useGlobalMockData.js";
 
 const useOverviewMiniCards = (): {
   miniCardsData: OverviewMiniCardsDataType[];
 } => {
-  const { globalStatus, data } = useGlobalFetchedData();
+  const { globalStatus, data } = useGlobalMockData();
   const { isDataAndEventsLoading, isDataAndEventsErrors } = globalStatus;
   const { timeData, usersData, subsData, paymentsData } = data;
 

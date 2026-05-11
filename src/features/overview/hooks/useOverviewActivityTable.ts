@@ -1,4 +1,4 @@
-import useGlobalFetchedData from "../../../hooks/useGlobalFetchedData.js";
+import useGlobalMockData from "../../../hooks/useGlobalMockData.js";
 
 import type { OverviewActivityTableAllEventsType } from "../../../types/featuresTypes.js";
 
@@ -9,7 +9,7 @@ type AllEventsTypes = {
 };
 
 const useOverviewActivityTable = (): AllEventsTypes => {
-  const { globalStatus, events } = useGlobalFetchedData();
+  const { globalStatus, events } = useGlobalMockData();
 
   const { isDataAndEventsLoading, isDataAndEventsErrors } = globalStatus;
 

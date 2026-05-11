@@ -6,11 +6,11 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 
-import useGlobalFetchedData from "../hooks/useGlobalFetchedData.js";
+import useGlobalMockData from "../hooks/useGlobalMockData.js";
 
 const ErrorsDialog = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { globalStatus, retryDataAndEvents } = useGlobalFetchedData();
+  const { globalStatus, retryDataAndEvents } = useGlobalMockData();
   const { isDataAndEventsErrors, dataAndEventsErrors } = globalStatus;
 
   useEffect(() => {

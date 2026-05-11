@@ -6,14 +6,14 @@ import { ChevronUpDownIcon, ArrowPathIcon } from "@heroicons/react/20/solid";
 import navContent from "../data/navContent.ts";
 const { brand, navigation } = navContent;
 
-import useGlobalFetchedData from "../hooks/useGlobalFetchedData.ts";
+import useGlobalMockData from "../hooks/useGlobalMockData.ts";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 const Sidebar = () => {
-  const { globalStatus, retryDataAndEvents } = useGlobalFetchedData();
+  const { globalStatus, retryDataAndEvents } = useGlobalMockData();
   const isLoading = globalStatus.isDataAndEventsLoading;
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);

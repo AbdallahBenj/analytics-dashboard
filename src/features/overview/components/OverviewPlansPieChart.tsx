@@ -47,6 +47,7 @@ const OverviewPlansPieChart = () => {
             
             shadow-md shadow-black/10
             hover:shadow-xl hover:shadow-black/20
+            hover:-translate-y-0.5
             transition-all duration-300"
     >
       <h3

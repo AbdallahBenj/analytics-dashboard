@@ -1,8 +1,8 @@
 import convertToDynamicTime from "../utils/convertToDynamicTime.js";
 
-import type { Timeline } from "../../types/dataTypes.ts";
+import type { Timeline } from "../../types/dataTypes.js";
 
-const generateTimeLine = (days: number = 30): Timeline[] => {
+const generateTimeline = (days: number = 30): Timeline[] => {
   const toDay = new Date();
 
   const timeline = Array.from({ length: days }, (_, i) => {
@@ -15,4 +15,4 @@ const generateTimeLine = (days: number = 30): Timeline[] => {
   return timeline;
 };
 
-export default generateTimeLine;
+export default generateTimeline;

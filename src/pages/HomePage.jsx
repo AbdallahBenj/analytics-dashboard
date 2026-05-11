@@ -3,7 +3,22 @@ import insightFlowImageDark from "../images/insight-flow-dark-screenshot.png";
 
 import MainHeader from "../layout/MainHeader";
 
+// test SupabaseData
+import fetchSupabaseData from "../service/api/fetchSupabaseData.js";
+import insertSupabaseData from "../service/api/insertSupabaseData.js";
+import { useEffect, useRef } from "react";
+
 const HomePage = () => {
+  //test SupabaseData
+  const homeRef = useRef(false);
+  useEffect(() => {
+    if (homeRef.current) return;
+
+    homeRef.current = true;
+    insertSupabaseData();
+    fetchSupabaseData();
+  }, []);
+
   return (
     <>
       <main
