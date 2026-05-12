@@ -29,15 +29,15 @@ const fetchAllSupabaseData = async () => {
     ...dataStore.paymentsData.errors,
   ];
 
-  console.log("dataStore", dataStore);
+  // console.log("dataStore", dataStore);
 
-  console.log("isLoading", isLoading);
-  console.log("isError", errors);
+  // console.log("isLoading", isLoading);
+  // console.log("isError", errors);
 
-  console.log("fetchedUsersData", fetchedUsers);
-  console.log("fetchedTimeline", fetchedTimeline);
-  console.log("fetchedSubscriptions", fetchedSubscriptions);
-  console.log("fetchedPayments", fetchedPayments);
+  // console.log("fetchedUsersData", fetchedUsers);
+  // console.log("fetchedTimeline", fetchedTimeline);
+  // console.log("fetchedSubscriptions", fetchedSubscriptions);
+  // console.log("fetchedPayments", fetchedPayments);
 
   return {
     isLoading,
