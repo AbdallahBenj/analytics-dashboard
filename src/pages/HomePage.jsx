@@ -4,19 +4,20 @@ import insightFlowImageDark from "../images/insight-flow-dark-screenshot.png";
 import MainHeader from "../layout/MainHeader";
 
 // test SupabaseData
-import fetchSupabaseData from "../service/api/fetchSupabaseData.js";
+import fetchAllSupabaseData from "../service/api/fetchAllSupabaseData.js";
 import insertSupabaseData from "../service/api/insertSupabaseData.js";
 import { useEffect, useRef } from "react";
 
 const HomePage = () => {
   //test SupabaseData
   const homeRef = useRef(false);
+
   useEffect(() => {
     if (homeRef.current) return;
 
     homeRef.current = true;
     insertSupabaseData();
-    fetchSupabaseData();
+    fetchAllSupabaseData();
   }, []);
 
   return (
@@ -28,11 +29,11 @@ const HomePage = () => {
       >
         <div
           className="text-center md:text-left 
-          flex flex-col-reverse 
-          md:grid md:grid-cols-2 gap-4
+          flex flex-col-reverse items-center
+          md:grid md:grid-cols-2 gap-6
           max-w-7xl"
         >
-          <div className="flex flex-col justify-center">
+          <div className="flex flex-col justify-center max-w-lg">
             <h1
               className="mt-4 text-5xl 
             font-semibold tracking-tight text-balance 
@@ -50,7 +51,8 @@ const HomePage = () => {
             </h2>
 
             <p
-              className="mt-8 md:mt-10 text-lg sm:text-xl/8
+              className="
+              mt-8 md:mt-10 text-lg sm:text-xl/8
             text-pretty text-gray-500 dark:text-gray-400"
             >
               InsightFlow is an analytics platform that helps you track
@@ -59,28 +61,34 @@ const HomePage = () => {
 
             <div
               className="mt-10 md:mt-12 w-full
-            flex flex-col md:flex-row items-center justify-center md:justify-start gap-6"
+            flex flex-col md:flex-row items-center justify-center md:justify-start gap-4"
             >
               <a
                 href="/dashboard/overview"
-                className="rounded-md px-12 py-2.5
+                className="rounded-md px-12 py-3
                 flex justify-center items-center
-                w-full max-w-md 
+                w-full max-w-md md:w-1/2
                 text-sm font-semibold text-white 
                 bg-indigo-500 shadow-xs hover:bg-indigo-400
-                focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                focus-visible:outline-2 focus-visible:outline-offset-2 
+                focus-visible:outline-indigo-500"
               >
                 Live Demo
               </a>
-              {/* <a
+              <a
                 href="/"
-                className="w-1/2 text-sm font-semibold 
-                text-indigo-600 dark:text-white
-                hover:text-indigo-700 hover:hover:text-indigo-400 
-              flex justify-center items-center"
+                className="rounded-md px-12 py-3
+                flex justify-center items-center
+                w-full max-w-md md:w-1/2
+                text-sm font-semibold 
+                shadow-xs border border-indigo-500
+                text-indigo-500 
+                hover:bg-indigo-500
+                hover:text-white
+              "
               >
-                Contact support <span aria-hidden="true">&rarr;</span>
-              </a> */}
+                Dashboard
+              </a>
             </div>
           </div>
           <div>

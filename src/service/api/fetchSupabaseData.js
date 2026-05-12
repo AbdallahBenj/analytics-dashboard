@@ -1,38 +1,32 @@
-// test fetch users data
-// import {
-//   timeData,
-//   usersData,
-//   subsData,
-//   paymentsData,
-// } from "../mock/generateData.js";
+import { supabase } from "../../lib/supabase.js";
+import useSupabaseDataStore from "../../store/useSupabaseDataStore.js";
 
-import fetchUsers from "./fetchUsers.js";
+const fetchSupabaseData = async (dataType, table, label = "") => {
+  const updateData = useSupabaseDataStore.getState().updateData;
 
-// test fetch subscriptions data
-import fetchSubscriptions from "./fetchSubscriptions.js";
+  try {
+    updateData(dataType, { loading: true, errors: [] });
+    const { data, error } = await supabase.from(table).select("*");
 
-// test fetch payments data
-import fetchPayments from "./fetchPayments.js";
+    if (error) throw error;
 
-// test fetch timeline data
-import fetchTimeline from "./fetchTimeline.js";
+    updateData(dataType, { dataValue: data, errors: [] });
 
-const fetchSupabaseData = async () => {
-  //test timeline
-  await fetchTimeline();
-  // console.log("timeData", timeData);
-
-  //test users
-  await fetchUsers();
-  // console.log("usersData", usersData);
-
-  //test subscriptions
-  await fetchSubscriptions();
-  // console.log("subsData", subsData);
-
-  //test payments
-  await fetchPayments();
-  // console.log("paymentsData", paymentsData);
+    return data;
+  } catch (error) {
+    const currentErrors =
+      useSupabaseDataStore.getState().data[dataType].errors || [];
+    console.log("Supabase error:", error.message);
+    updateData(dataType, {
+      errors: [
+        ...currentErrors,
+        `${label} data failed to load ,Please try later`,
+      ],
+    });
+    return [];
+  } finally {
+    updateData(dataType, { loading: false });
+  }
 };
 
 export default fetchSupabaseData;
