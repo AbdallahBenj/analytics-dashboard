@@ -11,7 +11,7 @@ const MainHeader = () => {
     <header
       className="main-header-container 
       flex justify-center
-      w-full px-4 pt-4 sm:pt-6 lg:px-8
+      w-full px-4 py-4 sm:py-6 md:pt-6 md:pb-0 lg:px-8
       bg-gray-800 md:bg-gray-100 dark:bg-gray-800/25"
     >
       <div
