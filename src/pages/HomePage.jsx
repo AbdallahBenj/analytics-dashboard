@@ -28,12 +28,13 @@ const HomePage = () => {
       >
         <div
           className="text-center md:text-left 
-          flex flex-col-reverse md:grid md:grid-cols-2 gap-4
+          flex flex-col-reverse 
+          md:grid md:grid-cols-2 gap-4
           max-w-7xl"
         >
           <div className="flex flex-col justify-center">
             <h1
-              className="mt-4 text-5xl sm:text-5xl 
+              className="mt-4 text-5xl 
             font-semibold tracking-tight text-balance 
             text-gray-950 dark:text-white"
             >
@@ -41,30 +42,45 @@ const HomePage = () => {
             </h1>
 
             <h2
-              className="mt-2 text-4xl font-semibold tracking-tight text-balance sm:text-5xl
+              className="mt-2 text-4xl sm:text-5xl
+              font-semibold tracking-tight text-balance
               bg-linear-to-r from-indigo-400 to-indigo-900 bg-clip-text text-transparent"
             >
               Grow your business.
             </h2>
 
-            <p className="mt-10 text-lg text-pretty text-gray-500 dark:text-gray-400 sm:text-xl/8">
+            <p
+              className="mt-8 md:mt-10 text-lg sm:text-xl/8
+            text-pretty text-gray-500 dark:text-gray-400"
+            >
               InsightFlow is an analytics platform that helps you track
               performance, gain insight, and make data-driven decisions.
             </p>
 
-            <div className="mt-12 flex items-center justify-center md:justify-start gap-x-6">
+            <div
+              className="mt-10 md:mt-12 w-full
+            flex flex-col md:flex-row items-center justify-center md:justify-start gap-6"
+            >
               <a
                 href="/dashboard/overview"
-                className="rounded-md px-12 py-2.5 
+                className="rounded-md px-12 py-2.5
+                flex justify-center items-center
+                w-full max-w-md 
                 text-sm font-semibold text-white 
                 bg-indigo-500 shadow-xs hover:bg-indigo-400
                 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
               >
                 Live Demo
               </a>
-              {/* <a href="/" className="text-sm font-semibold text-white">
-          Contact support <span aria-hidden="true">&rarr;</span>
-        </a> */}
+              {/* <a
+                href="/"
+                className="w-1/2 text-sm font-semibold 
+                text-indigo-600 dark:text-white
+                hover:text-indigo-700 hover:hover:text-indigo-400 
+              flex justify-center items-center"
+              >
+                Contact support <span aria-hidden="true">&rarr;</span>
+              </a> */}
             </div>
           </div>
           <div>
