@@ -29,7 +29,7 @@ const ThemeMode = () => {
       value={selected}
       onChange={setSelected}
       aria-label="Server size"
-      className="flex h-8 w-22 md:w-23.5 flex-row rounded-full mr-3
+      className="flex h-8 w-22 md:w-23.5 flex-row rounded-full m-3
       bg-white/10 md:bg-white dark:bg-white/10 p-1 ease-in-out"
     >
       {plans.map((plan) => {

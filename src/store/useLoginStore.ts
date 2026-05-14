@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-type StoreLogin = {
+type LoginStore = {
   isLoading: boolean;
   loginOpen: boolean;
   userLogin: { name: string; email: string } | null;
@@ -18,9 +18,9 @@ type PersistedState = {
   userLogin: { name: string; email: string } | null;
 };
 
-const useStoreLogin = create<StoreLogin>()(
+const useLoginStore = create<LoginStore>()(
   // Persist only user session (userLogin) to keep login after refresh
-  persist<StoreLogin>(
+  persist<LoginStore>(
     (set) => ({
       isLoading: false,
       loginOpen: false,
@@ -61,4 +61,4 @@ const useStoreLogin = create<StoreLogin>()(
   ),
 );
 
-export default useStoreLogin;
+export default useLoginStore;

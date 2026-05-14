@@ -4,24 +4,26 @@ import {
   DisclosurePanel,
 } from "@headlessui/react";
 
+import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
+
 import { BellIcon } from "@heroicons/react/24/outline";
 
-import useStoreLogin from "../store/useStoreLogin.js";
+import useLoginStore from "../store/useLoginStore.js";
 
 const NotificationMenu = () => {
-  const notification = useStoreLogin((state) => state.notification);
-  const resetNotification = useStoreLogin((state) => state.resetNotification);
+  const notification = useLoginStore((state) => state.notification);
+  const resetNotification = useLoginStore((state) => state.resetNotification);
 
-  const userLogin = useStoreLogin((state) => state.userLogin);
+  const userLogin = useLoginStore((state) => state.userLogin);
   const isUserLogin = !!userLogin;
 
   return (
-    <Disclosure as="div" className="relative ml-auto">
-      <DisclosureButton
+    <Popover as="div" className="relative ml-auto">
+      <PopoverButton
         type="button"
         onClick={() => {
           if (notification) {
-            setTimeout(() => resetNotification(), 500);
+            setTimeout(() => resetNotification(), 2500);
           }
         }}
         className="relative cursor-pointer rounded-full p-1 
@@ -42,8 +44,8 @@ const NotificationMenu = () => {
             <span className="relative inline-flex size-3 rounded-full bg-indigo-500"></span>
           </span>
         )}
-      </DisclosureButton>
-      <DisclosurePanel
+      </PopoverButton>
+      <PopoverPanel
         transition
         className="absolute 
                 right-0 z-10 mt-2 w-48 origin-top-right rounded-md 
@@ -68,8 +70,8 @@ const NotificationMenu = () => {
             <p className="text-sm text-gray-400">No new notifications</p>
           )}
         </div>
-      </DisclosurePanel>
-    </Disclosure>
+      </PopoverPanel>
+    </Popover>
   );
 };
 

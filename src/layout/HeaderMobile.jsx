@@ -18,16 +18,16 @@ import {
 import navContent from "../data/navContent.ts";
 const { brand, navigation } = navContent;
 
-import useStoreLogin from "../store/useStoreLogin.js";
+import useLoginStore from "../store/useLoginStore.js";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 const HeaderMobile = () => {
-  const userLogin = useStoreLogin((state) => state.userLogin);
-  const setLoginOpen = useStoreLogin((state) => state.setLoginOpen);
-  const resetLogin = useStoreLogin((state) => state.resetLogin);
+  const userLogin = useLoginStore((state) => state.userLogin);
+  const setLoginOpen = useLoginStore((state) => state.setLoginOpen);
+  const resetLogin = useLoginStore((state) => state.resetLogin);
 
   const isUserLogin = !!userLogin;
 
@@ -75,25 +75,25 @@ const HeaderMobile = () => {
       {/* // Mobile menu, show/hide based on menu state. */}
       <DisclosurePanel>
         <div className="space-y-1 px-2 pt-2 pb-3 sm:px-3">
-          {navigation.map((item) => (
-            <DisclosureButton
-              key={item.name}
-              as={NavLink}
-              to={item.href}
-              aria-current={item.current ? "page" : undefined}
-              className={classNames(
-                "block rounded-md px-3 py-2 text-base font-medium",
-                item.current
-                  ? "text-white bg-gray-900 dark:bg-gray-950/50 "
-                  : "text-gray-300 hover:text-white hover:bg-white/5 ",
-              )}
-            >
-              {item.name}
-            </DisclosureButton>
-          ))}
-          <div className="px-3">
-            <SearchInput />
-          </div>
+          {navigation
+            .filter((item) => item.name !== "Home")
+            .map((item) => (
+              <DisclosureButton
+                key={item.name}
+                as={NavLink}
+                to={item.href}
+                aria-current={item.current ? "page" : undefined}
+                className={classNames(
+                  "block rounded-md px-3 py-2 text-base font-medium",
+                  item.current
+                    ? "text-white bg-gray-900 dark:bg-gray-950/50 "
+                    : "text-gray-300 hover:text-white hover:bg-white/5 ",
+                )}
+              >
+                {item.name}
+              </DisclosureButton>
+            ))}
+          <div className="px-3">{/* <SearchInput /> */}</div>
         </div>
         <div className="border-t border-white/10 pt-4 pb-3">
           <div className="flex items-center px-5">

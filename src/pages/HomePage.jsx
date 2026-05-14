@@ -1,15 +1,25 @@
+import { useNavigate } from "react-router-dom";
+
 import insightFlowImageLight from "../images/insight-flow-light-screenshot.png";
 import insightFlowImageDark from "../images/insight-flow-dark-screenshot.png";
 
 import MainHeader from "../layout/MainHeader";
 
 // test SupabaseData
+import { useEffect, useRef } from "react";
 import fetchAllSupabaseData from "../service/api/fetchAllSupabaseData.js";
 import insertSupabaseData from "../service/api/insertSupabaseData.js";
-import { useEffect, useRef } from "react";
+import useAdminLoginStore from "../store/useAdminLoginStore.js";
+import useAuthStore from "../store/useAuthStore.js";
+// test SupabaseData end
 
 const HomePage = () => {
+  const Navigate = useNavigate();
+
   //test SupabaseData
+  const setDialogOpen = useAdminLoginStore((state) => state.setDialogOpen);
+  const user = useAuthStore((state) => state.user);
+
   const homeRef = useRef(false);
 
   useEffect(() => {
@@ -19,12 +29,13 @@ const HomePage = () => {
     insertSupabaseData();
     fetchAllSupabaseData();
   }, []);
+  //test SupabaseData end
 
   return (
     <>
       <main
         className="grid place-items-center flex-1
-        px-4 py-4 sm:py-6 lg:px-8
+        p-4 sm:p-6 md:p-8 lg:p-10
         bg-gray-100 dark:bg-gray-800/25"
       >
         <div
@@ -75,8 +86,13 @@ const HomePage = () => {
               >
                 Live Demo
               </a>
-              <a
-                href="/"
+              <button
+                onClick={
+                  !user
+                    ? () => setDialogOpen(true)
+                    : () => Navigate("/dashboard/overview")
+                }
+                // href="/"
                 className="rounded-md px-12 py-3
                 flex justify-center items-center
                 w-full max-w-md md:w-1/2
@@ -88,7 +104,7 @@ const HomePage = () => {
               "
               >
                 Dashboard
-              </a>
+              </button>
             </div>
           </div>
           <div>

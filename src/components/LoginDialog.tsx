@@ -9,13 +9,13 @@ import {
 import { Waveform } from "ldrs/react";
 import "ldrs/react/Waveform.css";
 
-import useStoreLogin from "../store/useStoreLogin.js";
+import useLoginStore from "../store/useLoginStore.js";
 
 const LoginDialog = () => {
-  const isLoading = useStoreLogin((state) => state.isLoading);
-  const loginOpen = useStoreLogin((state) => state.loginOpen);
-  const setLoginOpen = useStoreLogin((state) => state.setLoginOpen);
-  const setUserLogin = useStoreLogin((state) => state.setUserLogin);
+  const isLoading = useLoginStore((state) => state.isLoading);
+  const loginOpen = useLoginStore((state) => state.loginOpen);
+  const setLoginOpen = useLoginStore((state) => state.setLoginOpen);
+  const setUserLogin = useLoginStore((state) => state.setUserLogin);
 
   type FormData = {
     name: string;
@@ -110,7 +110,7 @@ const LoginDialog = () => {
           <Waveform size="50" stroke="5" speed="1" color="#615fff" />
         ) : (
           <DialogPanel
-            className="max-w-lg space-y-4 border p-12 rounded-2xl
+            className="max-w-lg w-md space-y-4 border p-12 rounded-2xl
               text-gray-700 dark:text-gray-300
   
               bg-gray-100/90 dark:bg-gray-900/90

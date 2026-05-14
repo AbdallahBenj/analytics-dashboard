@@ -15,10 +15,30 @@ import NotFoundPage from "./pages/NotFoundPage";
 // import ErrorsDialog from "./components/ErrorsDialog.tsx";
 import LoginDialog from "./components/LoginDialog.tsx";
 
+import AdminLoginDialog from "./components/AdminLoginDialog.tsx";
+
+//test check Admin
+import { useEffect } from "react";
+// import useAuthStore from "./store/useAuthStore.js";
+// import checkAdmin from "./service/api/checkAdmin.js";
+import listenAuthChange from "./service/api/listenAuthChange.js";
+
 function App() {
+  // const isAdmin = useAuthStore((state) => state.isAdmin);
+  // const user = useAuthStore((state) => state.user);
+  useEffect(() => {
+    // checkAdmin();
+    // console.log("user", user?.role);
+    // console.log("user", !!user);
+    // console.log("isAdmin", isAdmin);
+    listenAuthChange();
+  }, []);
+
   return (
     <BrowserRouter>
       <LoginDialog />
+      <AdminLoginDialog />
+
       {/* <ErrorsDialog /> */}
 
       {/* Main Layout */}

@@ -8,12 +8,12 @@ const { navigation } = navContent;
 import ThemeMode from "../components/ThemeMode.tsx";
 import NotificationMenu from "../components/NotificationMenu.tsx";
 
-import useStoreLogin from "../store/useStoreLogin.js";
+import useLoginStore from "../store/useLoginStore.js";
 
 const HeaderDesktop = () => {
-  const userLogin = useStoreLogin((state) => state.userLogin);
-  const setLoginOpen = useStoreLogin((state) => state.setLoginOpen);
-  const resetLogin = useStoreLogin((state) => state.resetLogin);
+  const userLogin = useLoginStore((state) => state.userLogin);
+  const setLoginOpen = useLoginStore((state) => state.setLoginOpen);
+  const resetLogin = useLoginStore((state) => state.resetLogin);
 
   const location = useLocation();
   const currentPage = navigation.find(
@@ -26,13 +26,13 @@ const HeaderDesktop = () => {
 
   return (
     <div
-      className="hidden md:flex
+      className="hidden md:flex z-10
       px-4 pt-6 sm:px-6 lg:px-8 pb-0
       max-w-(--main-width) md:mr-(--content-margin)
       bg-gray-800 md:bg-gray-100 dark:bg-gray-800/25"
     >
       <div
-        className=" w-full px-2
+        className=" w-full px-2 z-20
         rounded-2xl cursor-pointer
         
         bg-white/60 dark:bg-gray-900/40
@@ -90,7 +90,7 @@ const HeaderDesktop = () => {
                 />
                 {isUserLogin && (
                   // Show badge when there's the user Login in
-                  <span className="absolute z-20 left-0 bottom-0 flex size-3">
+                  <span className="absolute z-30 left-0 bottom-0 flex size-3">
                     <span
                       className="absolute inline-flex h-full w-full 
                     rounded-full bg-emerald-400 opacity-75"
