@@ -3,9 +3,9 @@ import generateUsers from "./generateUsers.js";
 import generateSubscriptions from "./generateSubscriptions.js";
 import generatePayments from "./generatePayments.js";
 
-const timeData = generateTimeline(366);
-const usersData = generateUsers(timeData);
-const subsData = generateSubscriptions(usersData);
-const paymentsData = generatePayments(subsData);
+const timeline = generateTimeline(366);
+const users = generateUsers(timeline);
+const subscriptions = generateSubscriptions(users);
+const payments = generatePayments(subscriptions);
 
-export { timeData, usersData, subsData, paymentsData };
+export { timeline, users, subscriptions, payments };

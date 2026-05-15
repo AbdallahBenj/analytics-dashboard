@@ -9,11 +9,16 @@ type AllEventsTypes = {
 };
 
 const useOverviewActivityTable = (): AllEventsTypes => {
-  const { globalStatus, events } = useGlobalMockData();
+  // Get mockData
+  const { mockData } = useGlobalMockData();
+  const {
+    isLoading,
+    isErrors,
 
-  const { isDataAndEventsLoading, isDataAndEventsErrors } = globalStatus;
-
-  const { usersEvents, subsEvents, paymentsEvents } = events;
+    usersEvents,
+    subscriptionsEvents,
+    paymentsEvents,
+  } = mockData;
 
   const allEvents = {
     usersEvents: {
@@ -31,7 +36,7 @@ const useOverviewActivityTable = (): AllEventsTypes => {
     },
     subsEvents: {
       label: "Subscriptions",
-      data: subsEvents,
+      data: subscriptionsEvents,
       config: {
         id: "subsId",
         columns: [
@@ -60,8 +65,8 @@ const useOverviewActivityTable = (): AllEventsTypes => {
   } satisfies OverviewActivityTableAllEventsType;
 
   return {
-    isDataAndEventsLoading,
-    isDataAndEventsErrors,
+    isDataAndEventsLoading: isLoading,
+    isDataAndEventsErrors: isErrors,
     allEvents,
   };
 };

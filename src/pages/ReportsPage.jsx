@@ -6,9 +6,9 @@ import ErrorsDialog from "../components/ErrorsDialog.tsx";
 import LoginDialog from "../components/LoginDialog.tsx";
 
 const ReportsPage = () => {
-  // Check  isErrors
-  const { globalStatus } = useGlobalMockData();
-  const { isDataAndEventsErrors } = globalStatus;
+  // Get mockData
+  const { mockData } = useGlobalMockData();
+  const { isErrors } = mockData;
 
   return (
     <section
@@ -17,7 +17,7 @@ const ReportsPage = () => {
       border border-gray-500/10"
     >
       {/* Errors Dialog */}
-      {isDataAndEventsErrors && <ErrorsDialog />}
+      {isErrors && <ErrorsDialog />}
 
       {/* The content */}
 

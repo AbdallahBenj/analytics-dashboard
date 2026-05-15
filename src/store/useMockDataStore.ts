@@ -8,22 +8,22 @@ const useMockDataStore = create<StoreType>((set, get) => ({
 
   // Initial Data Object // data: {dataType: {isLoading, error, dataValue}}
   data: {
-    timeData: {
+    timeline: {
       loading: false,
       errors: [],
       dataValue: [],
     },
-    usersData: {
+    users: {
       loading: false,
       errors: [],
       dataValue: [],
     },
-    subsData: {
+    subscriptions: {
       loading: false,
       errors: [],
       dataValue: [],
     },
-    paymentsData: {
+    payments: {
       loading: false,
       errors: [],
       dataValue: [],
@@ -33,7 +33,7 @@ const useMockDataStore = create<StoreType>((set, get) => ({
   // Initial Events Object // events: {eventType: {isLoading, error, {eventsTitle, eventValue}}}
 
   events: {
-    paymentsEvents: {
+    usersEvents: {
       loading: false,
       errors: [],
       eventsValue: {
@@ -42,7 +42,7 @@ const useMockDataStore = create<StoreType>((set, get) => ({
       },
     },
 
-    subsEvents: {
+    subscriptionsEvents: {
       loading: false,
       errors: [],
       eventsValue: {
@@ -50,7 +50,8 @@ const useMockDataStore = create<StoreType>((set, get) => ({
         eventsTitle: [],
       },
     },
-    usersEvents: {
+
+    paymentsEvents: {
       loading: false,
       errors: [],
       eventsValue: {

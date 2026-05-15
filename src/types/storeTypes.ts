@@ -8,15 +8,15 @@ import type {
 } from "./eventsTypes.js";
 
 type DataTypesMap = {
-  timeData: Timeline[];
-  usersData: User[];
-  subsData: Subscription[];
-  paymentsData: Payment[];
+  timeline: Timeline[];
+  users: User[];
+  subscriptions: Subscription[];
+  payments: Payment[];
 };
 
 type EventsTypesMap = {
   usersEvents: UsersEvents[];
-  subsEvents: SubsEvents[];
+  subscriptionsEvents: SubsEvents[];
   paymentsEvents: PaymentsEvents[];
 };
 

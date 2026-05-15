@@ -13,22 +13,27 @@ type PieColors = {
 const useOverviewPlansPieChart = (
   pieColors: PieColors,
 ): OverviewPlansPieChartType => {
-  const { globalStatus, data } = useGlobalMockData();
+  // Get mockData
+  const { mockData } = useGlobalMockData();
+  const {
+    isLoading,
+    isErrors,
 
-  const { isDataAndEventsLoading, isDataAndEventsErrors } = globalStatus;
-  const { usersData, subsData } = data;
+    users,
+    subscriptions,
+  } = mockData;
 
-  const totalUsers = usersData?.length || 0;
+  const totalUsers = users?.length || 0;
 
   const usersByPlan = getUsersByPlan(
-    usersData ?? [],
-    subsData ?? [],
+    users ?? [],
+    subscriptions ?? [],
     pieColors,
   );
 
   return {
-    isDataAndEventsLoading,
-    isDataAndEventsErrors,
+    isDataAndEventsLoading: isLoading,
+    isDataAndEventsErrors: isErrors,
     totalUsers,
     usersByPlan,
   };

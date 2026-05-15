@@ -6,13 +6,18 @@ import getPerCentValue from "../../../utils/getPerCentValue.ts";
 import useGlobalMockData from "../../../hooks/useGlobalMockData.ts";
 
 const useAnalyticsRevenueTrendChart = () => {
-  const { globalStatus, data } = useGlobalMockData();
+  // Get mockData
+  const { mockData } = useGlobalMockData();
+  const {
+    isLoading,
+    errors,
 
-  const { isDataAndEventsLoading, isDataAndEventsErrors } = globalStatus;
-  const { timeData, paymentsData } = data;
+    timeline,
+    payments,
+  } = mockData;
 
-  const dailyRevenue = getRevenue(timeData, paymentsData);
-  const monthlyRevenue = getRevenue(timeData, paymentsData, "month");
+  const dailyRevenue = getRevenue(timeline, payments);
+  const monthlyRevenue = getRevenue(timeline, payments, "month");
 
   const last7DaysDailyRevenue = dailyRevenue?.slice(-7) || [];
   const prev7DaysDailyRevenue = dailyRevenue?.slice(-14, -7) || [];
@@ -111,8 +116,8 @@ const useAnalyticsRevenueTrendChart = () => {
   };
 
   return {
-    isDataAndEventsLoading,
-    isDataAndEventsErrors,
+    isDataAndEventsLoading: isLoading,
+    isDataAndEventsErrors: errors.length > 0,
     revenueRangeConfig,
   };
 };

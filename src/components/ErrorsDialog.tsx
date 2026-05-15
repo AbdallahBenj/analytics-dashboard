@@ -10,12 +10,14 @@ import useGlobalMockData from "../hooks/useGlobalMockData.js";
 
 const ErrorsDialog = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { globalStatus, retryDataAndEvents } = useGlobalMockData();
-  const { isDataAndEventsErrors, dataAndEventsErrors } = globalStatus;
+
+  // Get mockData
+  const { mockData } = useGlobalMockData();
+  const { isErrors, errors, retryLoadMockData } = mockData;
 
   useEffect(() => {
-    setIsOpen(isDataAndEventsErrors);
-  }, [isDataAndEventsErrors]);
+    setIsOpen(isErrors);
+  }, [isErrors]);
 
   return (
     <Dialog
@@ -55,9 +57,9 @@ const ErrorsDialog = () => {
             </span>
           </Description>
 
-          {isDataAndEventsErrors && (
+          {isErrors && (
             <div className="mt-4 space-y-2">
-              {dataAndEventsErrors.map(
+              {errors.map(
                 (error: { id: number; label: string; message: string }) => (
                   <p
                     key={error.id}
@@ -83,7 +85,7 @@ const ErrorsDialog = () => {
               Cancel
             </button>
             <button
-              onClick={retryDataAndEvents}
+              onClick={retryLoadMockData}
               className="cursor-pointer flex-1
                 px-3 py-1.5 rounded-md 
                 text-sm text-center font-medium 

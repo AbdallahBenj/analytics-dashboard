@@ -9,9 +9,9 @@ import ErrorsDialog from "../components/ErrorsDialog.tsx";
 import LoginDialog from "../components/LoginDialog.tsx";
 
 const OverviewPage = () => {
-  // Check  isErrors
-  const { globalStatus } = useGlobalMockData();
-  const { isDataAndEventsErrors } = globalStatus;
+  // Get mockData
+  const { mockData } = useGlobalMockData();
+  const { isErrors } = mockData;
 
   return (
     <section
@@ -19,7 +19,7 @@ const OverviewPage = () => {
       grid grid-cols-4 gap-4"
     >
       {/* Errors Dialog */}
-      {isDataAndEventsErrors && <ErrorsDialog />}
+      {isErrors && <ErrorsDialog />}
 
       {/* The content */}
       <OverviewMiniCards />

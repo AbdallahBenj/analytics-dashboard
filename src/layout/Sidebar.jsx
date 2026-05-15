@@ -13,8 +13,9 @@ function classNames(...classes) {
 }
 
 const Sidebar = () => {
-  const { globalStatus, retryDataAndEvents } = useGlobalMockData();
-  const isLoading = globalStatus.isDataAndEventsLoading;
+  // Get mockData
+  const { mockData } = useGlobalMockData();
+  const { isLoading, retryLoadMockData } = mockData;
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const handleOpen = () => {
@@ -122,7 +123,7 @@ const Sidebar = () => {
               {/* Refresh Data And Event button */}
               <button
                 type="button"
-                onClick={retryDataAndEvents}
+                onClick={retryLoadMockData}
                 disabled={isLoading}
                 aria-label="Refresh data and events"
                 className="cursor-pointer

@@ -2,16 +2,16 @@ import { create } from "zustand";
 import type { User } from "@supabase/supabase-js";
 
 type AuthStore = {
-  user: User | null;
+  editor: User | null;
   isAdmin: boolean;
-  setUser: (value: User | null) => void;
+  setEditor: (value: User | null) => void;
   setIsAdmin: (value: boolean) => void;
 };
 
 const useAuthStore = create<AuthStore>((set) => ({
-  user: null,
+  editor: null,
   isAdmin: false,
-  setUser: (value) => set({ user: value }),
+  setEditor: (value) => set({ editor: value }),
   setIsAdmin: (value) => set({ isAdmin: value }),
 }));
 

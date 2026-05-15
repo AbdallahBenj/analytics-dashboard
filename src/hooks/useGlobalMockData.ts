@@ -2,21 +2,21 @@ import { useEffect } from "react";
 import useMockDataStore from "../store/useMockDataStore.js";
 
 import {
-  timeData,
-  usersData,
-  subsData,
-  paymentsData,
+  timeline,
+  users,
+  subscriptions,
+  payments,
 } from "../service/mock/generateData.js";
 
 import {
   usersEvents,
-  subsEvents,
+  subscriptionsEvents,
   paymentsEvents,
 } from "../service/events/generateEvents.js";
 
 import type { DataTypesMap, EventsTypesMap } from "../types/storeTypes.js";
 
-const useGlobalFetchedData = () => {
+const useGlobalMockData = () => {
   // Data and Events
 
   const dataStore = useMockDataStore((state) => state.data);
@@ -31,28 +31,28 @@ const useGlobalFetchedData = () => {
   const retryFetchEvents = useMockDataStore((state) => state.retryFetchEvents);
 
   const dataMap = {
-    timeData,
-    usersData,
-    subsData,
-    paymentsData,
+    timeline,
+    users,
+    subscriptions,
+    payments,
   };
 
   const LabelDataMap = {
-    timeData: "Time data",
-    usersData: "Users data",
-    subsData: "Subscriptions data",
-    paymentsData: "Payments data",
+    timeline: "Time data",
+    users: "Users data",
+    subscriptions: "Subscriptions data",
+    payments: "Payments data",
   };
 
   const eventsMap = {
     usersEvents,
-    subsEvents,
+    subscriptionsEvents,
     paymentsEvents,
   };
 
   const LabelEventsMap = {
     usersEvents: "Users events",
-    subsEvents: "Subscriptions events",
+    subscriptionsEvents: "Subscriptions events",
     paymentsEvents: "Payments events",
   };
 
@@ -75,15 +75,15 @@ const useGlobalFetchedData = () => {
 
   // Get data and events values:
   const data = {
-    timeData: dataStore.timeData?.dataValue || [],
-    usersData: dataStore.usersData?.dataValue || [],
-    subsData: dataStore.subsData?.dataValue || [],
-    paymentsData: dataStore.paymentsData?.dataValue || [],
+    timeline: dataStore.timeline?.dataValue || [],
+    users: dataStore.users?.dataValue || [],
+    subscriptions: dataStore.subscriptions?.dataValue || [],
+    payments: dataStore.payments?.dataValue || [],
   };
 
   const events = {
     usersEvents: eventsStore.usersEvents?.eventsValue || [],
-    subsEvents: eventsStore.subsEvents?.eventsValue || [],
+    subscriptionsEvents: eventsStore.subscriptionsEvents?.eventsValue || [],
     paymentsEvents: eventsStore.paymentsEvents?.eventsValue || [],
   };
 
@@ -100,7 +100,7 @@ const useGlobalFetchedData = () => {
     });
   };
 
-  const retryDataAndEvents = () => {
+  const retryLoadMockData = () => {
     retryData();
     retryEvents();
   };
@@ -114,7 +114,7 @@ const useGlobalFetchedData = () => {
     (item) => item?.loading,
   );
 
-  const isDataAndEventsLoading = isDataLoading || isEventsLoading;
+  const isLoading = isDataLoading || isEventsLoading;
 
   // Get errors:
   const dataErrors = Object.values(dataStore || {}).flatMap(
@@ -125,17 +125,28 @@ const useGlobalFetchedData = () => {
     (item) => item?.errors || [],
   );
 
-  const dataAndEventsErrors = [...dataErrors, ...eventsErrors];
+  const errors = [...dataErrors, ...eventsErrors];
 
-  const isDataAndEventsErrors = dataAndEventsErrors.length > 0;
+  const isErrors = errors.length > 0;
 
-  const globalStatus = {
-    isDataAndEventsLoading,
-    isDataAndEventsErrors,
-    dataAndEventsErrors,
+  const mockData = {
+    isLoading,
+    isErrors,
+    errors,
+
+    timeline,
+    users,
+    subscriptions,
+    payments,
+
+    usersEvents,
+    subscriptionsEvents,
+    paymentsEvents,
+
+    retryLoadMockData,
   };
 
-  return { globalStatus, data, events, retryDataAndEvents };
+  return { mockData };
 };
 
-export default useGlobalFetchedData;
+export default useGlobalMockData;

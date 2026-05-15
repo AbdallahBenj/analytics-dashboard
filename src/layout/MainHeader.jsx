@@ -10,7 +10,7 @@ import ThemeMode from "../components/ThemeMode.tsx";
 import adminLogout from "../service/api/adminLogout.js";
 
 const MainHeader = () => {
-  const user = useAuthStore((state) => state.user);
+  const editor = useAuthStore((state) => state.editor);
   const isAdmin = useAuthStore((state) => state.isAdmin);
   const setDialogOpen = useAdminLoginStore((state) => state.setDialogOpen);
 
@@ -56,7 +56,7 @@ const MainHeader = () => {
       </div>
 
       <div className="relative md:flex justify-center items-center whitespace-nowrap">
-        {!user ? (
+        {!editor ? (
           <button
             // href="/dashboard/overview"
             onClick={() => setDialogOpen(true)}

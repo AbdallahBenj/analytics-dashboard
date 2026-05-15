@@ -1,10 +1,10 @@
 import { supabase } from "../../lib/supabase.js";
 
 import {
-  timeData,
-  usersData,
-  subsData,
-  paymentsData,
+  timeline,
+  users,
+  subscriptions,
+  payments,
 } from "../mock/generateData.js";
 
 const isEnableInsertData = false;
@@ -37,10 +37,10 @@ const addDataType = async (table, dataType) => {
 
 const insertSupabaseData = async () => {
   if (!isEnableInsertData) return;
-  await addDataType("timeline", timeData);
-  await addDataType("users", usersData);
-  await addDataType("subscriptions", subsData);
-  await addDataType("payments", paymentsData);
+  await addDataType("timeline", timeline);
+  await addDataType("users", users);
+  await addDataType("subscriptions", subscriptions);
+  await addDataType("payments", payments);
 };
 
 export default insertSupabaseData;

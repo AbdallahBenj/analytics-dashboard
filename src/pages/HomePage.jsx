@@ -16,10 +16,11 @@ import useAuthStore from "../store/useAuthStore.js";
 const HomePage = () => {
   const Navigate = useNavigate();
 
-  //test SupabaseData
+  // login dialog
   const setDialogOpen = useAdminLoginStore((state) => state.setDialogOpen);
-  const user = useAuthStore((state) => state.user);
+  const editor = useAuthStore((state) => state.editor);
 
+  //test SupabaseData
   const homeRef = useRef(false);
 
   useEffect(() => {
@@ -88,7 +89,7 @@ const HomePage = () => {
               </a>
               <button
                 onClick={
-                  !user
+                  !editor
                     ? () => setDialogOpen(true)
                     : () => Navigate("/dashboard/overview")
                 }

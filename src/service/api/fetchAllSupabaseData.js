@@ -43,13 +43,30 @@ const fetchAllSupabaseData = async () => {
   // console.log("fetchedSubscriptions", fetchedSubscriptions);
   // console.log("fetchedPayments", fetchedPayments);
 
+  const supabaseData = {
+    isLoading: isLoading,
+    errors: errors,
+
+    timeline: fetchedTimeline,
+    users: fetchedUsers,
+    subscriptions: fetchedSubscriptions,
+    payments: fetchedPayments,
+
+    // usersEvents,
+    // subscriptionsEvents,
+    // paymentsEvents,
+  };
+
   return {
-    isLoading,
-    errors,
-    fetchedUsers,
-    fetchedTimeline,
-    fetchedSubscriptions,
-    fetchedPayments,
+    supabaseData,
+
+    isLoading: isLoading,
+    errors: errors,
+
+    timeline: fetchedTimeline,
+    users: fetchedUsers,
+    subscriptions: fetchedSubscriptions,
+    payments: fetchedPayments,
   };
 };
 

@@ -26,14 +26,24 @@ import useGlobalMockData from "../../../hooks/useGlobalMockData.js";
 const useOverviewMiniCards = (): {
   miniCardsData: OverviewMiniCardsDataType[];
 } => {
-  const { globalStatus, data } = useGlobalMockData();
-  const { isDataAndEventsLoading, isDataAndEventsErrors } = globalStatus;
-  const { timeData, usersData, subsData, paymentsData } = data;
+  // Get mockData
+  const { mockData } = useGlobalMockData();
+  const {
+    isLoading,
+    isErrors,
+
+    timeline,
+    users,
+    subscriptions,
+    payments,
+  } = mockData;
+
+  // test mockData end
 
   // Revenue calculation (memoized)
   const dailyRevenue = useMemo(() => {
-    return getRevenue(timeData, paymentsData);
-  }, [timeData, paymentsData]);
+    return getRevenue(timeline, payments);
+  }, [timeline, payments]);
 
   const dailyRevenueLast30days = dailyRevenue?.slice(-30) ?? [];
   const dailyRevenuePrev30days = dailyRevenue?.slice(-60, -30) ?? [];
@@ -52,19 +62,19 @@ const useOverviewMiniCards = (): {
     lastMonthRevenue > previousMonthRevenue;
 
   // Subscriptions
-  const activeSubscriptions = getActiveSubscriptions(subsData);
+  const activeSubscriptions = getActiveSubscriptions(subscriptions);
   const totalActiveSubscriptions = activeSubscriptions?.length || 0;
 
   // Churn
-  const lastMonthChurnRate = getChurnRate(subsData);
-  const prevMonthChurnRate = getChurnRate(subsData, 30);
+  const lastMonthChurnRate = getChurnRate(subscriptions);
+  const prevMonthChurnRate = getChurnRate(subscriptions, 30);
 
   const churnGrowthRate = getGrowthRate(lastMonthChurnRate, prevMonthChurnRate);
 
   const isChurnImproving = lastMonthChurnRate < prevMonthChurnRate;
 
   // Conversion
-  const conversionRate = getConversionRate(usersData, subsData);
+  const conversionRate = getConversionRate(users, subscriptions);
 
   return {
     miniCardsData: [
@@ -72,8 +82,8 @@ const useOverviewMiniCards = (): {
         id: 1,
         name: "MRR", // $
         title: "Monthly Revenue",
-        isDataAndEventsLoading,
-        isDataAndEventsErrors,
+        isDataAndEventsLoading: isLoading,
+        isDataAndEventsErrors: isErrors,
         value: formatCurrencyCompact(lastMonthRevenue ?? 0, 2),
         prevValue: previousMonthRevenue ?? 0,
         growthRateValue: revenueGrowthRate,
@@ -84,8 +94,8 @@ const useOverviewMiniCards = (): {
         id: 2,
         name: "AS", // user
         title: "Active Subscriptions",
-        isDataAndEventsLoading,
-        isDataAndEventsErrors,
+        isDataAndEventsLoading: isLoading,
+        isDataAndEventsErrors: isErrors,
         value: formatCompact(totalActiveSubscriptions, 2),
         prevValue: null,
         growthRateValue: null,
@@ -96,8 +106,8 @@ const useOverviewMiniCards = (): {
         id: 3,
         name: "ChurnR", // %
         title: "Churn Rate",
-        isDataAndEventsLoading,
-        isDataAndEventsErrors,
+        isDataAndEventsLoading: isLoading,
+        isDataAndEventsErrors: isErrors,
         value: formatPercent(lastMonthChurnRate ?? 0),
         prevValue: prevMonthChurnRate ?? 0,
         growthRateValue: churnGrowthRate,
@@ -108,8 +118,8 @@ const useOverviewMiniCards = (): {
         id: 4,
         name: "ConversionR", // %
         title: "Conversion Rate",
-        isDataAndEventsLoading,
-        isDataAndEventsErrors,
+        isDataAndEventsLoading: isLoading,
+        isDataAndEventsErrors: isErrors,
         value: formatPercent(conversionRate ?? 0),
         prevValue: null,
         growthRateValue: null,

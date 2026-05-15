@@ -10,8 +10,9 @@ const { navigation } = navContent;
 const isActive = true;
 
 const PageHeader = () => {
-  const { globalStatus, retryDataAndEvents } = useGlobalMockData();
-  const isLoading = globalStatus.isDataAndEventsLoading;
+  // Get mockData
+  const { mockData } = useGlobalMockData();
+  const { isLoading, retryLoadMockData } = mockData;
 
   const location = useLocation();
 
@@ -53,7 +54,7 @@ const PageHeader = () => {
         }
         <button
           type="button"
-          onClick={retryDataAndEvents}
+          onClick={retryLoadMockData}
           disabled={isLoading}
           aria-label="Refresh data and events"
           className="md:hidden

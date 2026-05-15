@@ -8,9 +8,9 @@ const defaultState = {
 
 const useSupabaseDataStore = create((set) => ({
   data: {
-    timeData: { ...defaultState },
-    usersData: { ...defaultState },
-    subsData: { ...defaultState },
+    timeline: { ...defaultState },
+    users: { ...defaultState },
+    subscriptions: { ...defaultState },
     paymentsData: { ...defaultState },
   },
 

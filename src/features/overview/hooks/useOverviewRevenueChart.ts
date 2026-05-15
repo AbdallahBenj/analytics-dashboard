@@ -13,16 +13,18 @@ import type {
 import type { Revenue } from "../../../types/utilsTypes.js";
 
 const useOverviewRevenueChart = (): OverviewRevenueChartType => {
-  const { globalStatus, data } = useGlobalMockData();
-  const { isDataAndEventsLoading, isDataAndEventsErrors } = globalStatus;
-  const { timeData, paymentsData } = data;
+  // Get mockData
+  const { mockData } = useGlobalMockData();
+  const {
+    isLoading,
+    isErrors,
 
-  const dailyRevenue = getRevenue(timeData ?? [], paymentsData ?? []);
-  const monthlyRevenue = getRevenue(
-    timeData ?? [],
-    paymentsData ?? [],
-    "month",
-  );
+    timeline,
+    payments,
+  } = mockData;
+
+  const dailyRevenue = getRevenue(timeline ?? [], payments ?? []);
+  const monthlyRevenue = getRevenue(timeline ?? [], payments ?? [], "month");
 
   const getLast = (arr: Revenue[], n: number) => arr.slice(-n) || [];
   const getPrev = (arr: Revenue[], n: number) => arr.slice(-n * 2, -n) || [];
@@ -68,8 +70,8 @@ const useOverviewRevenueChart = (): OverviewRevenueChartType => {
   };
 
   return {
-    isDataAndEventsLoading,
-    isDataAndEventsErrors,
+    isDataAndEventsLoading: isLoading,
+    isDataAndEventsErrors: isErrors,
 
     last30daysRevenue,
     growthRate30daysRevenue,
