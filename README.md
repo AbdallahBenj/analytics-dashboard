@@ -69,6 +69,7 @@ src/
 │   └── react.svg
 │
 ├── components/            # Reusable UI components
+│   ├── AdminLoginDialog.tsx
 │   ├── ComingSoon.tsx
 │   ├── ErrorsDialog.tsx
 │   ├── LoginDialog.tsx
@@ -87,23 +88,14 @@ src/
 │   │   ├── components/
 │   │   │   ├── OverviewMiniCards.tsx
 │   │   │   ├── OverviewPlansPieChart.tsx
-│   │   │   ├── OverviewRecentActivity.tsx
-│   │   │   └── OverviewRevenueChart.tsx
+│   │   │   ├── OverviewRevenueChart.tsx
+│   │   │   └── OverviewActivityTable.tsx
 │   │   │
-│   │   ├── hooks/
-│   │   │   ├── useOverviewMiniCardsStats.ts
-│   │   │   ├── useOverviewPlansPieChartStats.ts
-│   │   │   ├── useOverviewRecentActivity.ts
-│   │   │   └── useOverviewRevenueChartStats.ts
-│   │   │
-│   │   └── utils/
-│   │       ├── getActiveSubscriptions.ts
-│   │       ├── getChurnRate.ts
-│   │       ├── getConversionRate.ts
-│   │       ├── getGrowthRate.ts
-│   │       ├── getMonthlyRevenue.ts
-│   │       ├── getRevenue.ts
-│   │       └── getUsersByPlan.ts
+│   │   └── hooks/
+│   │       ├── useOverviewMiniCards.ts
+│   │       ├── useOverviewPlansPieChart.ts
+│   │       ├── useOverviewRevenueChart.ts
+│   │       └── useOverviewActivityTable.ts
 │   │
 │   ├── analytics/
 │   │   ├── components/
@@ -111,20 +103,24 @@ src/
 │   │   │   ├── .jsx
 │   │   │   └── .jsx
 │   │   │
-│   │   ├── hooks/
-│   │   │   ├── useAnalyticsRevenueTrendChart.js
-│   │   │   ├── .js
-│   │   │   └── .js
-│   │   │
-│   │   └── utils/
-│   │       ├── .js
+│   │   └── hooks/
+│   │       ├── useAnalyticsRevenueTrendChart.js
 │   │       ├── .js
 │   │       └── .js
+│   │    
 │   │
-│   ├──
+│   └── utils/
+│       ├── getActiveSubscriptions.ts
+│       ├── getChurnRate.ts
+│       ├── getConversionRate.ts
+│       ├── getGrowthRate.ts
+│       ├── getMonthlyRevenue.ts
+│       ├── getRevenue.ts
+│       └── getUsersByPlan.ts
 │   
 ├── hooks/                 # Global reusable hooks
-│   ├── useGlobalMockData.ts // useGlobalFetchedData.ts
+│   ├── retryFetchMockData.ts
+│   ├── useGlobalMockData.ts 
 │   ├── useSystemMode.js
 │   └── useThemeMode.js
 │
@@ -133,21 +129,31 @@ src/
 │   ├── Header.jsx
 │   ├── HeaderDesktop.jsx
 │   ├── HeaderMobile.jsx
+│   ├── MainHeader.jsx
+│   ├── MainLayout.jsx
 │   ├── PageHeader.jsx
 │   └── Sidebar.jsx
 │
 ├── pages/
 │   ├── AnalyticsPage.jsx
 │   ├── CustomersPage.jsx
-│   ├── OverviewPage.jsx
 │   ├── FeaturesPage.jsx
+│   ├── HomePage.jsx
+│   ├── NotFoundPage.jsx
+│   ├── OverviewPage.jsx
 │   ├── ReportsPage.jsx
 │   └── SubscriptionsPage.jsx
 │
 ├── services/
 │   ├── api/              # Future real API
-│   │   ├── fetchUsers.js
-│   │   ├── addData.js
+│   │   ├── adminLogin.js
+│   │   ├── adminLogout.js
+│   │   ├── checkAdmin.js
+│   │   ├── fetchAllSupabaseData.js
+│   │   ├── fetchSupabaseData.js
+│   │   ├── insertSupabaseData.js
+│   │   └── listenAuthChange.js
+│   │
 │   ├── mock/
 │   │   ├── generateData.ts
 │   │   ├── generateUsers.ts
@@ -165,9 +171,11 @@ src/
 │       └── convertToDynamicTime.ts
 │
 ├── store/                # Zustand global state
-│   ├── useMockDataStore.ts // useStoreFetchedData.ts
-│   ├── useSupabaseDataStore.js
-│   └── useStoreLogin.ts
+│   ├── useAdminLoginStore.ts 
+│   ├── useAuthStore.ts 
+│   ├── useLoginStore.ts 
+│   ├── useMockDataStore.ts
+│   └── useSupabaseDataStore.js
 │
 ├── utils/                # Global utilities
 │   ├── convertToKilo.ts
@@ -181,6 +189,9 @@ src/
 ├── types/                # Global utilities
 │   ├── dataTypes.ts
 │   ├── eventTypes.ts
+│   ├── featuresTypes.ts
+│   ├── storeTypes.ts
+│   ├── utilsTypes.ts
 │   └── .ts
 │
 ├── App.jsx
@@ -195,37 +206,57 @@ src/
 
 ##  1. Data Generation Flow
 
-```txt
-generateTimeline.js
+```bash
+├── generateTimeline.js
         ↓
-generateUsers.js
-        ↓
-generateSubscriptions.js
-        ↓
-generatePayments.js
-        ↓
-generateData.js
+        └── generateUsers.js
+                ↓
+                └── generateSubscriptions.js
+                        ↓
+                        └── generatePayments.js
+                                ↓
+                                └── generateData.js
 ```
 
 ---
 
-##  2. Data Fetch Flow
 
-```txt
-generateData.js
+##  2. MockData Flow
+
+```bash
+├── generateData.js
         ↓
-useMockDataStore.js (Zustand Store)
-        ↓
-useGlobalMockData.ts.js (Hook Layer)
-        ↓
-Components (Dashboard / Analytics / Sidebar / Header)
-        ↓
-UI Rendering
+        └── useMockDataStore.js (Zustand Simulate Fetch and Data Store)
+                ↓
+                └── useGlobalMockData.ts (Mock Data Hook Layer)
+                        ↓
+                        └── Components (Ui logic)
+                                ↓
+                                └── UI Rendering
 ```
 
 ---
 
-##  3. Events Flow
+
+##  3. Supabase Data Flow
+
+```bash
+├── generateData.js
+        ↓
+        └── insertSupabaseData.js (Supabase Data)
+                ↓
+                └── useSupabaseDataStore (Zustand Data Store)
+                        ↓
+                        └── fetchAllSupabaseData.ts (Supabase Data)
+                                ↓
+                                └── Components (Ui logic)
+                                        ↓
+                                        └── UI Rendering
+```
+
+---
+
+##  4. Events Flow
 
 ```txt
 generateData.js

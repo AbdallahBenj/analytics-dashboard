@@ -5,13 +5,9 @@ import insightFlowImageDark from "../images/insight-flow-dark-screenshot.png";
 
 import MainHeader from "../layout/MainHeader";
 
-// test SupabaseData
-import { useEffect, useRef } from "react";
-import fetchAllSupabaseData from "../service/api/fetchAllSupabaseData.js";
-import insertSupabaseData from "../service/api/insertSupabaseData.js";
+// SupabaseData
 import useAdminLoginStore from "../store/useAdminLoginStore.js";
 import useAuthStore from "../store/useAuthStore.js";
-// test SupabaseData end
 
 const HomePage = () => {
   const Navigate = useNavigate();
@@ -19,18 +15,6 @@ const HomePage = () => {
   // login dialog
   const setDialogOpen = useAdminLoginStore((state) => state.setDialogOpen);
   const editor = useAuthStore((state) => state.editor);
-
-  //test SupabaseData
-  const homeRef = useRef(false);
-
-  useEffect(() => {
-    if (homeRef.current) return;
-
-    homeRef.current = true;
-    insertSupabaseData();
-    fetchAllSupabaseData();
-  }, []);
-  //test SupabaseData end
 
   return (
     <>

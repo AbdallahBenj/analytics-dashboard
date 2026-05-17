@@ -17,20 +17,23 @@ import LoginDialog from "./components/LoginDialog.tsx";
 
 import AdminLoginDialog from "./components/AdminLoginDialog.tsx";
 
-//test check Admin
-import { useEffect } from "react";
-// import useAuthStore from "./store/useAuthStore.js";
-// import checkAdmin from "./service/api/checkAdmin.js";
+// import SupabaseData
+import { useEffect, useRef } from "react";
+
+import fetchAllSupabaseData from "./service/api/fetchAllSupabaseData.js";
+import insertSupabaseData from "./service/api/insertSupabaseData.js";
 import listenAuthChange from "./service/api/listenAuthChange.js";
 
 function App() {
-  // const isAdmin = useAuthStore((state) => state.isAdmin);
-  // const user = useAuthStore((state) => state.user);
+  const homeRef = useRef(false);
+
+  // SupabaseData
   useEffect(() => {
-    // checkAdmin();
-    // console.log("user", user?.role);
-    // console.log("user", !!user);
-    // console.log("isAdmin", isAdmin);
+    if (homeRef.current) return;
+    homeRef.current = true;
+
+    insertSupabaseData();
+    fetchAllSupabaseData();
     listenAuthChange();
   }, []);
 
