@@ -66,12 +66,7 @@ const useGlobalMockData = () => {
     });
 
     (Object.keys(eventsMap) as (keyof EventsTypesMap)[]).forEach((key) => {
-      fetchEvents(
-        key,
-        eventsMap[key].events,
-        eventsMap[key].eventsTitle,
-        LabelEventsMap[key],
-      );
+      fetchEvents(key, eventsMap[key], LabelEventsMap[key]);
       // console.log("object", eventsMap[key].events);
     });
 
@@ -102,12 +97,7 @@ const useGlobalMockData = () => {
 
   const retryEvents = () => {
     (Object.keys(eventsMap) as (keyof EventsTypesMap)[]).forEach((key) => {
-      retryFetchEvents(
-        key,
-        eventsMap[key].events,
-        eventsMap[key].eventsTitle,
-        LabelEventsMap[key],
-      );
+      retryFetchEvents(key, eventsMap[key], LabelEventsMap[key]);
     });
   };
 

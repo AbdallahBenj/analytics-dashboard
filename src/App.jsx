@@ -12,17 +12,12 @@ import FeaturesPage from "./pages/FeaturesPage";
 import ReportsPage from "./pages/ReportsPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
-// test events
-import useMockDataStore from "./store/useMockDataStore.ts";
-
-// import ErrorsDialog from "./components/ErrorsDialog.tsx";
 import LoginDialog from "./components/LoginDialog.tsx";
 
 import AdminLoginDialog from "./components/AdminLoginDialog.tsx";
 
 // import SupabaseData
 import { useEffect, useRef } from "react";
-
 import fetchAllSupabaseData from "./service/api/fetchAllSupabaseData.js";
 import insertSupabaseData from "./service/api/insertSupabaseData.js";
 import listenAuthChange from "./service/api/listenAuthChange.js";
@@ -30,20 +25,16 @@ import listenAuthChange from "./service/api/listenAuthChange.js";
 function App() {
   const homeRef = useRef(false);
 
-  const eventsStore = useMockDataStore((state) => state.events);
-
   // SupabaseData
   useEffect(() => {
-    // test events
-    // console.log("eventsStore", eventsStore);
+    listenAuthChange();
 
     if (homeRef.current) return;
     homeRef.current = true;
 
     insertSupabaseData();
     fetchAllSupabaseData();
-    listenAuthChange();
-  }, [eventsStore]);
+  }, []);
 
   return (
     <BrowserRouter>

@@ -36,22 +36,28 @@ const useMockDataStore = create<StoreType>((set, get) => ({
     usersEvents: {
       loading: false,
       errors: [],
-      eventsTitle: [],
-      eventsValue: [],
+      eventsValue: {
+        events: [],
+        eventsTitle: [],
+      },
     },
 
     subscriptionsEvents: {
       loading: false,
       errors: [],
-      eventsTitle: [],
-      eventsValue: [],
+      eventsValue: {
+        events: [],
+        eventsTitle: [],
+      },
     },
 
     paymentsEvents: {
       loading: false,
       errors: [],
-      eventsTitle: [],
-      eventsValue: [],
+      eventsValue: {
+        events: [],
+        eventsTitle: [],
+      },
     },
   },
 
@@ -121,7 +127,7 @@ const useMockDataStore = create<StoreType>((set, get) => ({
     }
   },
 
-  fetchEvents: async (eventsType, realEvents, titleEvents, label) => {
+  fetchEvents: async (eventsType, realEvents, label) => {
     const state = get();
 
     if (state.events[eventsType]?.loading) return;
@@ -132,8 +138,10 @@ const useMockDataStore = create<StoreType>((set, get) => ({
           ...state.events[eventsType],
           loading: true,
           errors: [],
-          eventsTitle: [],
-          eventsValue: [],
+          eventsValue: {
+        events: [],
+        eventsTitle: [],
+      },
         },
       },
     });
@@ -150,8 +158,10 @@ const useMockDataStore = create<StoreType>((set, get) => ({
               ...state.events[eventsType],
               loading: false,
               errors: [],
-              eventsTitle: titleEvents,
-              eventsValue: realEvents,
+              eventsValue: {
+                events: [],
+                eventsTitle: [],
+              },
             },
           },
         }));
@@ -163,8 +173,10 @@ const useMockDataStore = create<StoreType>((set, get) => ({
               ...state.events[eventsType],
               loading: false,
               errors: [{ id: Date.now(), label, message: "Failed to load" }],
-              eventsTitle: [],
-              eventsValue: [],
+              eventsValue: {
+        events: [],
+        eventsTitle: [],
+      },
             },
           },
         }));
@@ -183,8 +195,10 @@ const useMockDataStore = create<StoreType>((set, get) => ({
                 message: err instanceof Error ? err.message : "Unknown error",
               },
             ],
-            eventsTitle: [],
-            eventsValue: [],
+            eventsValue: {
+        events: [],
+        eventsTitle: [],
+      },
           },
         },
       }));
@@ -195,8 +209,8 @@ const useMockDataStore = create<StoreType>((set, get) => ({
     get().fetchData(dataType, realData, label);
   },
 
-  retryFetchEvents: (eventsType, realEvents, titleEvents, label) => {
-    get().fetchEvents(eventsType, realEvents, titleEvents, label);
+  retryFetchEvents: (eventsType, realEvents, label) => {
+    get().fetchEvents(eventsType, realEvents, label);
   },
 
   // Mark that initial fetch has been completed

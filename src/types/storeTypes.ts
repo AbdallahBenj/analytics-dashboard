@@ -33,8 +33,7 @@ type StoreType = {
     [key in keyof EventsTypesMap]: {
       loading: boolean;
       errors: { id: number; label: string; message: string }[];
-      eventsValue: EventsTypesMap[key];
-      eventsTitle: EventsTitle[];
+      eventsValue: { events: EventsTypesMap[key]; eventsTitle: EventsTitle[] };
     };
   };
   fetchData: <key extends keyof DataTypesMap>(
@@ -44,8 +43,7 @@ type StoreType = {
   ) => void;
   fetchEvents: <key extends keyof EventsTypesMap>(
     eventsType: key,
-    realEvents: EventsTypesMap[key],
-    titleEvents: string[],
+    realEvents: { events: EventsTypesMap[key]; eventsTitle: EventsTitle[] },
     label: string,
   ) => void;
 
@@ -56,8 +54,7 @@ type StoreType = {
   ) => void;
   retryFetchEvents: <key extends keyof EventsTypesMap>(
     eventsType: key,
-    realEvents: EventsTypesMap[key],
-    titleEvents: string[],
+    realEvents: { events: EventsTypesMap[key]; eventsTitle: EventsTitle[] },
     label: string,
   ) => void;
 
