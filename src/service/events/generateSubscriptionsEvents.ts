@@ -1,7 +1,7 @@
 import getTimeAgo from "../../utils/getTimeAgo.js";
 
 import type { Subscription } from "../../types/dataTypes.js";
-import type { EventsTitle, SubsEvents } from "../../types/eventsTypes.js";
+import type { SubsEvents } from "../../types/eventsTypes.js";
 
 const generateSubscriptionsEvents = (
   subsData: Subscription[] = [],
@@ -41,12 +41,6 @@ const generateSubscriptionsEvents = (
       );
 
   const subsEvents = getLatestSubsEvents(subsData);
-  // {
-  //   eventsTitle,
-  //   events: getLatestSubsEvents(subsData),
-  // };
-
-  console.log("subsEvents", subsEvents);
 
   return subsEvents;
 };

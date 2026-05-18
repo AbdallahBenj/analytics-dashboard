@@ -1,7 +1,6 @@
 import type { Timeline, User, Subscription, Payment } from "./dataTypes.js";
 
 import type {
-  EventsTitle,
   UsersEvents,
   SubsEvents,
   PaymentsEvents,

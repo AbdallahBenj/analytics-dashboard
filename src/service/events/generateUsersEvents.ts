@@ -1,7 +1,7 @@
 import getTimeAgo from "../../utils/getTimeAgo.js";
 
 import type { User } from "../../types/dataTypes.js";
-import type { EventsTitle, UsersEvents } from "../../types/eventsTypes.js";
+import type { UsersEvents } from "../../types/eventsTypes.js";
 
 const generateUsersEvents = (usersData: User[] = []): UsersEvents[] => {
   if (!usersData || usersData.length === 0) {
@@ -34,9 +34,7 @@ const generateUsersEvents = (usersData: User[] = []): UsersEvents[] => {
         eventTimeAgo: eventDateObj ? getTimeAgo(eventDateObj) : "N/A",
       }));
 
-  const usersEvents = getLatestUsersEvents(usersData); // { eventsTitle, events: getLatestUsersEvents(usersData) };
-
-  console.log("usersEvents", usersEvents);
+  const usersEvents = getLatestUsersEvents(usersData);
 
   return usersEvents;
 };

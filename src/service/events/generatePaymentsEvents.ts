@@ -2,19 +2,11 @@ import getTimeAgo from "../../utils/getTimeAgo.js";
 import formatCurrency from "../../utils/formatCurrency.js";
 
 import type { Payment } from "../../types/dataTypes.js";
-import type { EventsTitle, PaymentsEvents } from "../../types/eventsTypes.js";
+import type { PaymentsEvents } from "../../types/eventsTypes.js";
 
 const generatePaymentsEvents = (
   paymentsData: Payment[] = [],
 ): PaymentsEvents[] => {
-  const eventsTitle: EventsTitle[] = [
-    "Time",
-    "User",
-    "Paid At",
-    "Invoice Price",
-    "Invoice Status",
-  ];
-
   if (!paymentsData || paymentsData.length === 0) {
     return [];
   }
@@ -63,12 +55,7 @@ const generatePaymentsEvents = (
       );
 
   const paymentsEvents = getLatestPaymentsEvents(paymentsData);
-  // {
-  //   eventsTitle,
-  //   events: getLatestPaymentsEvents(paymentsData),
-  // };
 
-  console.log("paymentsEvents", paymentsEvents);
   return paymentsEvents;
 };
 
