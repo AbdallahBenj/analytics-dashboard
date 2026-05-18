@@ -12,6 +12,9 @@ import FeaturesPage from "./pages/FeaturesPage";
 import ReportsPage from "./pages/ReportsPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
+// test events
+import useMockDataStore from "./store/useMockDataStore.ts";
+
 // import ErrorsDialog from "./components/ErrorsDialog.tsx";
 import LoginDialog from "./components/LoginDialog.tsx";
 
@@ -27,15 +30,20 @@ import listenAuthChange from "./service/api/listenAuthChange.js";
 function App() {
   const homeRef = useRef(false);
 
+  const eventsStore = useMockDataStore((state) => state.events);
+
   // SupabaseData
   useEffect(() => {
+    // test events
+    // console.log("eventsStore", eventsStore);
+
     if (homeRef.current) return;
     homeRef.current = true;
 
     insertSupabaseData();
     fetchAllSupabaseData();
     listenAuthChange();
-  }, []);
+  }, [eventsStore]);
 
   return (
     <BrowserRouter>

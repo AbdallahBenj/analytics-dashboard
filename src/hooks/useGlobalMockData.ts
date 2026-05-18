@@ -66,7 +66,13 @@ const useGlobalMockData = () => {
     });
 
     (Object.keys(eventsMap) as (keyof EventsTypesMap)[]).forEach((key) => {
-      fetchEvents(key, eventsMap[key], LabelEventsMap[key]);
+      fetchEvents(
+        key,
+        eventsMap[key].events,
+        eventsMap[key].eventsTitle,
+        LabelEventsMap[key],
+      );
+      // console.log("object", eventsMap[key].events);
     });
 
     // Mark that initial fetch has been done
@@ -74,14 +80,14 @@ const useGlobalMockData = () => {
   }, [hasFetched]); // Empty dependency array - runs only once on mount
 
   // Get data and events values:
-  const data = {
+  const fetchedData = {
     timeline: dataStore.timeline?.dataValue || [],
     users: dataStore.users?.dataValue || [],
     subscriptions: dataStore.subscriptions?.dataValue || [],
     payments: dataStore.payments?.dataValue || [],
   };
 
-  const events = {
+  const fetchedEvents = {
     usersEvents: eventsStore.usersEvents?.eventsValue || [],
     subscriptionsEvents: eventsStore.subscriptionsEvents?.eventsValue || [],
     paymentsEvents: eventsStore.paymentsEvents?.eventsValue || [],
@@ -96,7 +102,12 @@ const useGlobalMockData = () => {
 
   const retryEvents = () => {
     (Object.keys(eventsMap) as (keyof EventsTypesMap)[]).forEach((key) => {
-      retryFetchEvents(key, eventsMap[key], LabelEventsMap[key]);
+      retryFetchEvents(
+        key,
+        eventsMap[key].events,
+        eventsMap[key].eventsTitle,
+        LabelEventsMap[key],
+      );
     });
   };
 
@@ -134,19 +145,19 @@ const useGlobalMockData = () => {
     isErrors,
     errors,
 
-    timeline,
-    users,
-    subscriptions,
-    payments,
+    timeline: fetchedData.timeline,
+    users: fetchedData.users,
+    subscriptions: fetchedData.subscriptions,
+    payments: fetchedData.payments,
 
-    usersEvents,
-    subscriptionsEvents,
-    paymentsEvents,
+    usersEvents: fetchedEvents.usersEvents,
+    subscriptionsEvents: fetchedEvents.subscriptionsEvents,
+    paymentsEvents: fetchedEvents.paymentsEvents,
 
     retryLoadMockData,
   };
 
-  console.log("mockData", mockData);
+  console.log("usersEvents", mockData);
 
   return { mockData };
 };
