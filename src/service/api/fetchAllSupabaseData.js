@@ -1,10 +1,12 @@
 import fetchSupabaseData from "./fetchSupabaseData.js";
 import useSupabaseDataStore from "../../store/useSupabaseDataStore.js";
 
-const isEnableFetchData = true;
+const isEnableFetchData = false;
 
 const fetchAllSupabaseData = async () => {
   if (!isEnableFetchData) return;
+
+  console.log("fetch All Supabase Data");
 
   await Promise.all([
     fetchSupabaseData("timelineData", "timeline", "Time"), // fetchTimeline();

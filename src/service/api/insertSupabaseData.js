@@ -37,6 +37,7 @@ const addDataType = async (table, dataType) => {
 
 const insertSupabaseData = async () => {
   if (!isEnableInsertData) return;
+  console.log("Insert Supabase Data");
   await addDataType("timeline", timeline);
   await addDataType("users", users);
   await addDataType("subscriptions", subscriptions);
