@@ -5,7 +5,6 @@ import type { EventsTitle, SubsEvents } from "../../types/eventsTypes.js";
 
 const generateSubscriptionsEvents = (
   subsData: Subscription[] = [],
-  limit: number = 10,
 ): { eventsTitle: EventsTitle[]; events: SubsEvents[] } => {
   const eventsTitle: EventsTitle[] = ["Time", "User", "Date", "Plan", "Status"];
   if (!subsData || subsData.length === 0) {
@@ -25,7 +24,6 @@ const generateSubscriptionsEvents = (
         (a, b) =>
           (b.eventDateObj?.getTime() || 0) - (a.eventDateObj?.getTime() || 0),
       )
-      .slice(0, limit)
       .map(
         ({ eventDateObj: date, subsId, userName, subsPlan, subsStatus }) => ({
           subsId,

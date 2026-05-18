@@ -3,12 +3,12 @@ import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import PageHeader from "./PageHeader";
 import Sidebar from "./Sidebar";
-import DataTypeNotice from "../components/DataTypeNotice.jsx";
+import DataSourceNotice from "../components/DataSourceNotice.jsx";
 
 const DashboardLayout = () => {
   return (
     <div>
-      <DataTypeNotice />
+      <DataSourceNotice />
 
       <div className="min-h-screen flex">
         <Sidebar />

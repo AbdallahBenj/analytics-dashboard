@@ -90,7 +90,7 @@ const MainHeader = () => {
             Logout
           </button>
         )}
-        {!!editor && (
+        {!!editor && !isAdmin && (
           // Show badge when there's the user Login in
           <span
             className="absolute z-30

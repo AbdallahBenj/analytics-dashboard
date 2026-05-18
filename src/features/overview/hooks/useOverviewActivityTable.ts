@@ -8,7 +8,7 @@ type AllEventsTypes = {
   allEvents: OverviewActivityTableAllEventsType;
 };
 
-const useOverviewActivityTable = (): AllEventsTypes => {
+const useOverviewActivityTable = (limit: number = 10): AllEventsTypes => {
   // Get mockData
   const { mockData } = useGlobalMockData();
 
@@ -24,7 +24,10 @@ const useOverviewActivityTable = (): AllEventsTypes => {
   const allEvents = {
     usersEvents: {
       label: "Users",
-      data: usersEvents,
+      data: {
+        events: usersEvents.events.slice(0, limit),
+        eventsTitle: usersEvents.eventsTitle,
+      },
       config: {
         id: "userId",
         columns: [
@@ -37,7 +40,10 @@ const useOverviewActivityTable = (): AllEventsTypes => {
     },
     subsEvents: {
       label: "Subscriptions",
-      data: subscriptionsEvents,
+      data: {
+        events: subscriptionsEvents.events.slice(0, limit),
+        eventsTitle: subscriptionsEvents.eventsTitle,
+      },
       config: {
         id: "subsId",
         columns: [
@@ -51,7 +57,10 @@ const useOverviewActivityTable = (): AllEventsTypes => {
     },
     paymentsEvents: {
       label: "Payments",
-      data: paymentsEvents,
+      data: {
+        events: paymentsEvents.events.slice(0, limit),
+        eventsTitle: paymentsEvents.eventsTitle,
+      },
       config: {
         id: "paymentId",
         columns: [

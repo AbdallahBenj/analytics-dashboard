@@ -6,7 +6,6 @@ import type { EventsTitle, PaymentsEvents } from "../../types/eventsTypes.js";
 
 const generatePaymentsEvents = (
   paymentsData: Payment[] = [],
-  limit: number = 10,
 ): { eventsTitle: EventsTitle[]; events: PaymentsEvents[] } => {
   const eventsTitle: EventsTitle[] = [
     "Time",
@@ -40,7 +39,6 @@ const generatePaymentsEvents = (
         (a, b) =>
           (b.eventDateObj?.getTime() || 0) - (a.eventDateObj?.getTime() || 0),
       )
-      .slice(0, limit)
       .map(
         ({
           eventDateObj: date,

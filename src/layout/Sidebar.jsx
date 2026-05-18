@@ -33,7 +33,7 @@ const Sidebar = () => {
       <aside
         className={`hidden
         md:flex flex-col
-        p-6 ml-(--content-margin) min-h-screen
+        p-6 ml-(--content-margin) min-h-[calc(100vh-32px)]
         transition-[width] duration-300 ease-in-out
         ${isSidebarOpen ? "w-(--open-sidebar-width)" : "w-(--close-sidebar-width)"}`}
       >

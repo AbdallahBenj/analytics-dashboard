@@ -25,7 +25,7 @@ const spanColorMap = {
 
 const OverviewActivityTable = () => {
   const { isDataAndEventsLoading, isDataAndEventsErrors, allEvents } =
-    useOverviewActivityTable();
+    useOverviewActivityTable(5);
 
   type EventKey = keyof AllEventsMap;
   const [tableContent, setTableContent] = useState<EventKey>("usersEvents");

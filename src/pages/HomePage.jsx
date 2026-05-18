@@ -72,10 +72,10 @@ const HomePage = () => {
                 Live Demo
               </a>
               <button
-                onClick={
+                onClick={() =>
                   !editor
-                    ? () => setDialogOpen(true)
-                    : () => Navigate("/dashboard/overview")
+                    ? setDialogOpen(true)
+                    : Navigate("/dashboard/overview")
                 }
                 // href="/"
                 className="rounded-md px-12 py-3

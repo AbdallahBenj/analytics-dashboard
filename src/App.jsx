@@ -22,8 +22,19 @@ import fetchAllSupabaseData from "./service/api/fetchAllSupabaseData.js";
 import insertSupabaseData from "./service/api/insertSupabaseData.js";
 import listenAuthChange from "./service/api/listenAuthChange.js";
 
+// Data Mode
+import useDataModeStore from "./store/useDataModeStore";
+import useAuthStore from "./store/useAuthStore.ts";
+
 function App() {
   const homeRef = useRef(false);
+
+  // Set Data Mode
+  const setIsSupabaseData = useDataModeStore(
+    (state) => state.setIsSupabaseData,
+  );
+  const editor = useAuthStore((state) => state.editor);
+  setIsSupabaseData(editor ? true : false);
 
   // SupabaseData
   useEffect(() => {

@@ -5,7 +5,6 @@ import type { EventsTitle, UsersEvents } from "../../types/eventsTypes.js";
 
 const generateUsersEvents = (
   usersData: User[] = [],
-  limit: number = 10,
 ): { eventsTitle: EventsTitle[]; events: UsersEvents[] } => {
   const eventsTitle: EventsTitle[] = ["Time", "User", "Email", "Created At"];
 
@@ -25,7 +24,6 @@ const generateUsersEvents = (
         (a, b) =>
           (b.eventDateObj?.getTime() || 0) - (a.eventDateObj?.getTime() || 0),
       )
-      .slice(0, limit)
       .map(({ eventDateObj, userId, userName, userEmail }) => ({
         userId,
         userName,

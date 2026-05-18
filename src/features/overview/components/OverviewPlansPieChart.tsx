@@ -93,8 +93,8 @@ const OverviewPlansPieChart = () => {
               nameKey="name"
               label={({ percent = 0 }) => formatPercent(percent)}
               dataKey="value"
-              innerRadius="60%"
-              outerRadius="80%"
+              innerRadius="50%"
+              outerRadius="70%"
               paddingAngle={3}
               stroke="#99a1af"
               labelLine={false}
