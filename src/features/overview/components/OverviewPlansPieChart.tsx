@@ -62,15 +62,15 @@ const OverviewPlansPieChart = () => {
       ) : isDataAndEventsErrors ? (
         errorsContent
       ) : (
-        <ResponsiveContainer width="100%" height={300}>
+        <ResponsiveContainer width="100%" height={320}>
           <PieChart>
             <text
               x="50%"
-              y="45%"
+              y="42%"
               pointerEvents="none"
               textAnchor="middle"
               dominantBaseline="middle"
-              className="text-2xl font-bold fill-gray-800 dark:fill-white"
+              className="text-xl font-bold fill-gray-800 dark:fill-white"
             >
               {!totalUsers ? (
                 <span className="text-gray-500">---</span>
@@ -80,7 +80,7 @@ const OverviewPlansPieChart = () => {
             </text>
             <text
               x="50%"
-              y="55%"
+              y="50%"
               pointerEvents="none"
               textAnchor="middle"
               dominantBaseline="middle"
@@ -93,8 +93,8 @@ const OverviewPlansPieChart = () => {
               nameKey="name"
               label={({ percent = 0 }) => formatPercent(percent)}
               dataKey="value"
-              innerRadius={70}
-              outerRadius={90}
+              innerRadius="60%"
+              outerRadius="80%"
               paddingAngle={3}
               stroke="#99a1af"
               labelLine={false}
