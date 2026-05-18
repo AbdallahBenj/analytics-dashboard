@@ -36,28 +36,31 @@ const useMockDataStore = create<StoreType>((set, get) => ({
     usersEvents: {
       loading: false,
       errors: [],
-      eventsValue: {
-        events: [],
-        eventsTitle: [],
-      },
+      eventsValue: [],
+      // {
+      //   events: [],
+      //   eventsTitle: [],
+      // },
     },
 
     subscriptionsEvents: {
       loading: false,
       errors: [],
-      eventsValue: {
-        events: [],
-        eventsTitle: [],
-      },
+      eventsValue: [],
+      //  {
+      //   events: [],
+      //   eventsTitle: [],
+      // },
     },
 
     paymentsEvents: {
       loading: false,
       errors: [],
-      eventsValue: {
-        events: [],
-        eventsTitle: [],
-      },
+      eventsValue: [],
+      //  {
+      //   events: [],
+      //   eventsTitle: [],
+      // },
     },
   },
 
@@ -138,10 +141,11 @@ const useMockDataStore = create<StoreType>((set, get) => ({
           ...state.events[eventsType],
           loading: true,
           errors: [],
-          eventsValue: {
-            events: [],
-            eventsTitle: [],
-          },
+          eventsValue: [],
+          //  {
+          //   events: [],
+          //   eventsTitle: [],
+          // },
         },
       },
     });
@@ -170,10 +174,11 @@ const useMockDataStore = create<StoreType>((set, get) => ({
               ...state.events[eventsType],
               loading: false,
               errors: [{ id: Date.now(), label, message: "Failed to load" }],
-              eventsValue: {
-                events: [],
-                eventsTitle: [],
-              },
+              eventsValue: [],
+              //  {
+              //   events: [],
+              //   eventsTitle: [],
+              // },
             },
           },
         }));
@@ -192,10 +197,11 @@ const useMockDataStore = create<StoreType>((set, get) => ({
                 message: err instanceof Error ? err.message : "Unknown error",
               },
             ],
-            eventsValue: {
-              events: [],
-              eventsTitle: [],
-            },
+            eventsValue: [],
+            //  {
+            //   events: [],
+            //   eventsTitle: [],
+            // },
           },
         },
       }));

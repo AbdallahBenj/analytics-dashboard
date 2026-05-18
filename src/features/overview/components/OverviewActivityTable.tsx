@@ -30,7 +30,7 @@ const OverviewActivityTable = () => {
   type EventKey = keyof AllEventsMap;
   const [tableContent, setTableContent] = useState<EventKey>("usersEvents");
 
-  const { eventsTitle, events } = allEvents[tableContent].data;
+  const { eventsTitle, events } = allEvents[tableContent]; // .data;
 
   const headers = eventsTitle || [];
   const rows = events || [];

@@ -146,8 +146,6 @@ const useGlobalMockData = () => {
     retryLoadMockData,
   };
 
-  console.log("mockData", mockData);
-
   return { mockData };
 };
 

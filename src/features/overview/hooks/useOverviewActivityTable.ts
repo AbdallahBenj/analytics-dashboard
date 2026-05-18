@@ -24,10 +24,11 @@ const useOverviewActivityTable = (limit: number = 10): AllEventsTypes => {
   const allEvents = {
     usersEvents: {
       label: "Users",
-      data: {
-        events: usersEvents.events.slice(0, limit),
-        eventsTitle: usersEvents.eventsTitle,
-      },
+      eventsTitle: ['Time', 'User', 'Email', 'Created At'],
+      // data: {
+        events: usersEvents, // .events.slice(0, limit),
+        // eventsTitle: usersEvents.eventsTitle,
+      // },
       config: {
         id: "userId",
         columns: [
@@ -40,10 +41,11 @@ const useOverviewActivityTable = (limit: number = 10): AllEventsTypes => {
     },
     subsEvents: {
       label: "Subscriptions",
-      data: {
-        events: subscriptionsEvents.events.slice(0, limit),
-        eventsTitle: subscriptionsEvents.eventsTitle,
-      },
+      eventsTitle: ['Time', 'User', 'Date', 'Plan', 'Status'],
+      // data: {
+        events: subscriptionsEvents, // .events.slice(0, limit),
+        // eventsTitle: subscriptionsEvents.eventsTitle,
+      // },
       config: {
         id: "subsId",
         columns: [
@@ -57,10 +59,11 @@ const useOverviewActivityTable = (limit: number = 10): AllEventsTypes => {
     },
     paymentsEvents: {
       label: "Payments",
-      data: {
-        events: paymentsEvents.events.slice(0, limit),
-        eventsTitle: paymentsEvents.eventsTitle,
-      },
+      eventsTitle: ['Time', 'User', 'Paid At', 'Invoice Price', 'Invoice Status'],
+      // data: {
+        events: paymentsEvents, // .events.slice(0, limit),
+        // eventsTitle: paymentsEvents.eventsTitle,
+      // },
       config: {
         id: "paymentId",
         columns: [

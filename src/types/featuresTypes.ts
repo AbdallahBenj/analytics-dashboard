@@ -70,10 +70,10 @@ type AllEventsMap = {
   paymentsEvents: PaymentsEvents;
 };
 
-type DataType<Type> = {
-  events: Type[];
-  eventsTitle: EventsTitle[];
-};
+// type DataType<Type> = {
+//   events: Type[];
+//   eventsTitle: EventsTitle[];
+// };
 
 type ColumnsType<Type> = {
   key: keyof Type;
@@ -87,7 +87,9 @@ type ConfigType<Type> = {
 
 type EventsItemType<Type> = {
   label: string;
-  data: DataType<Type>;
+  // data: DataType<Type>;
+  events: Type[];
+  eventsTitle: EventsTitle[];
   config: ConfigType<Type>;
 };
 

@@ -6,7 +6,7 @@ import type { EventsTitle, PaymentsEvents } from "../../types/eventsTypes.js";
 
 const generatePaymentsEvents = (
   paymentsData: Payment[] = [],
-): { eventsTitle: EventsTitle[]; events: PaymentsEvents[] } => {
+): PaymentsEvents[] => {
   const eventsTitle: EventsTitle[] = [
     "Time",
     "User",
@@ -16,7 +16,7 @@ const generatePaymentsEvents = (
   ];
 
   if (!paymentsData || paymentsData.length === 0) {
-    return { eventsTitle, events: [] };
+    return [];
   }
 
   const getEventDate = (payment: Payment): Date | null => {
@@ -62,10 +62,13 @@ const generatePaymentsEvents = (
         }),
       );
 
-  const paymentsEvents = {
-    eventsTitle,
-    events: getLatestPaymentsEvents(paymentsData),
-  };
+  const paymentsEvents = getLatestPaymentsEvents(paymentsData);
+  // {
+  //   eventsTitle,
+  //   events: getLatestPaymentsEvents(paymentsData),
+  // };
+
+  console.log("paymentsEvents", paymentsEvents);
   return paymentsEvents;
 };
 

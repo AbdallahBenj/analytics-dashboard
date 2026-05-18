@@ -5,10 +5,9 @@ import type { EventsTitle, SubsEvents } from "../../types/eventsTypes.js";
 
 const generateSubscriptionsEvents = (
   subsData: Subscription[] = [],
-): { eventsTitle: EventsTitle[]; events: SubsEvents[] } => {
-  const eventsTitle: EventsTitle[] = ["Time", "User", "Date", "Plan", "Status"];
+): SubsEvents[] => {
   if (!subsData || subsData.length === 0) {
-    return { eventsTitle, events: [] };
+    return [];
   }
 
   const getEventDate = (sub: Subscription): Date | null => {
@@ -41,10 +40,13 @@ const generateSubscriptionsEvents = (
         }),
       );
 
-  const subsEvents = {
-    eventsTitle,
-    events: getLatestSubsEvents(subsData),
-  };
+  const subsEvents = getLatestSubsEvents(subsData);
+  // {
+  //   eventsTitle,
+  //   events: getLatestSubsEvents(subsData),
+  // };
+
+  console.log("subsEvents", subsEvents);
 
   return subsEvents;
 };
