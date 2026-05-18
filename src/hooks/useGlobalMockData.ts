@@ -67,7 +67,6 @@ const useGlobalMockData = () => {
 
     (Object.keys(eventsMap) as (keyof EventsTypesMap)[]).forEach((key) => {
       fetchEvents(key, eventsMap[key], LabelEventsMap[key]);
-      // console.log("object", eventsMap[key].events);
     });
 
     // Mark that initial fetch has been done
@@ -146,8 +145,6 @@ const useGlobalMockData = () => {
 
     retryLoadMockData,
   };
-
-  console.log("usersEvents", mockData);
 
   return { mockData };
 };

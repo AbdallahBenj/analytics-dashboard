@@ -139,9 +139,9 @@ const useMockDataStore = create<StoreType>((set, get) => ({
           loading: true,
           errors: [],
           eventsValue: {
-        events: [],
-        eventsTitle: [],
-      },
+            events: [],
+            eventsTitle: [],
+          },
         },
       },
     });
@@ -158,10 +158,7 @@ const useMockDataStore = create<StoreType>((set, get) => ({
               ...state.events[eventsType],
               loading: false,
               errors: [],
-              eventsValue: {
-                events: [],
-                eventsTitle: [],
-              },
+              eventsValue: realEvents,
             },
           },
         }));
@@ -174,9 +171,9 @@ const useMockDataStore = create<StoreType>((set, get) => ({
               loading: false,
               errors: [{ id: Date.now(), label, message: "Failed to load" }],
               eventsValue: {
-        events: [],
-        eventsTitle: [],
-      },
+                events: [],
+                eventsTitle: [],
+              },
             },
           },
         }));
@@ -196,9 +193,9 @@ const useMockDataStore = create<StoreType>((set, get) => ({
               },
             ],
             eventsValue: {
-        events: [],
-        eventsTitle: [],
-      },
+              events: [],
+              eventsTitle: [],
+            },
           },
         },
       }));

@@ -11,6 +11,7 @@ type AllEventsTypes = {
 const useOverviewActivityTable = (): AllEventsTypes => {
   // Get mockData
   const { mockData } = useGlobalMockData();
+
   const {
     isLoading,
     isErrors,

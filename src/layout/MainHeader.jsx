@@ -90,6 +90,22 @@ const MainHeader = () => {
             Logout
           </button>
         )}
+        {!!editor && (
+          // Show badge when there's the user Login in
+          <span
+            className="absolute z-30
+          flex justify-center items-center size-5
+          left-0 bottom-0 -translate-x-1/2 translate-y-1/2
+          rounded-full
+            "
+          >
+            <span
+              className="absolute inline-flex h-full w-full 
+              rounded-full bg-gray-800 md:bg-gray-100 dark:bg-gray-900"
+            ></span>
+            <span className="relative inline-flex size-3 rounded-full bg-green-500"></span>
+          </span>
+        )}
         {isAdmin && (
           <MdAdminPanelSettings
             className="absolute 

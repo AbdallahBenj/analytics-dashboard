@@ -4,7 +4,7 @@ import generateUsersEvents from "./generateUsersEvents.js";
 import generateSubscriptionsEvents from "./generateSubscriptionsEvents.js";
 import generatePaymentsEvents from "./generatePaymentsEvents.js";
 
-const limit = 10;
+const limit = 5;
 const usersEvents = generateUsersEvents(users, limit);
 const subscriptionsEvents = generateSubscriptionsEvents(subscriptions, limit);
 const paymentsEvents = generatePaymentsEvents(payments, limit);
