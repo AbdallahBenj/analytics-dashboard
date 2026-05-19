@@ -17,7 +17,7 @@ import useMockDataStore from "../store/useMockDataStore.js";
 
 import type { DataTypesMap, EventsTypesMap } from "../types/storeTypes.js";
 
-const retryLoadMockData = () => {
+const useReloadMockData = () => {
   const retryFetchData = useMockDataStore((state) => state.retryFetchData);
   const retryFetchEvents = useMockDataStore((state) => state.retryFetchEvents);
 
@@ -60,12 +60,12 @@ const retryLoadMockData = () => {
     });
   };
 
-  const retryLoadMockData = () => {
+  const reloadMockData = () => {
     retryData();
     retryEvents();
   };
 
-  return retryLoadMockData;
+  return reloadMockData;
 };
 
-export default retryLoadMockData;
+export default useReloadMockData; // useReloadMockData

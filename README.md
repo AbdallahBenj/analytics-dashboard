@@ -71,6 +71,7 @@ src/
 ├── components/            # Reusable UI components
 │   ├── AdminLoginDialog.tsx
 │   ├── ComingSoon.tsx
+│   ├── DataSourceNotice.tsx
 │   ├── ErrorsDialog.tsx
 │   ├── LoginDialog.tsx
 │   ├── NotificationMenu.tsx
@@ -99,12 +100,12 @@ src/
 │   │
 │   ├── analytics/
 │   │   ├── components/
-│   │   │   ├── AnalyticsRevenueTrendChart.jsx
+│   │   │   ├── AnalyticsRevenueByPlanChart.jsx
 │   │   │   ├── .jsx
 │   │   │   └── .jsx
 │   │   │
 │   │   └── hooks/
-│   │       ├── useAnalyticsRevenueTrendChart.js
+│   │       ├── useAnalyticsRevenueByPlanChart.js
 │   │       ├── .js
 │   │       └── .js
 │   │    
@@ -177,22 +178,24 @@ src/
 │   ├── useMockDataStore.ts
 │   └── useSupabaseDataStore.js
 │
+├── types/    
+│   ├── analyticsSectionTypes            # Global utilities
+│   ├── dataTypes.ts
+│   ├── eventTypes.ts
+│   ├── overviewSectionTypes.ts
+│   ├── storeTypes.ts
+│   ├── utilsTypes.ts
+│   └── .ts
+│
 ├── utils/                # Global utilities
-│   ├── convertToKilo.ts
+│   ├── convertToKilo.ts // Not used
 │   ├── formatCompact.ts
 │   ├── formatCurrency.ts
 │   ├── formatCurrencyCompact.ts
 │   ├── formatPercent.ts
-│   ├── getPercentValue.ts
+│   ├── getPercentValue.ts // Not used
 │   └── getTimeAgo.ts
-│    
-├── types/                # Global utilities
-│   ├── dataTypes.ts
-│   ├── eventTypes.ts
-│   ├── featuresTypes.ts
-│   ├── storeTypes.ts
-│   ├── utilsTypes.ts
-│   └── .ts
+│
 │
 ├── App.jsx
 └── main.jsx

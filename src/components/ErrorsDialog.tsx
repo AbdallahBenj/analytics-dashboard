@@ -7,13 +7,15 @@ import {
 } from "@headlessui/react";
 
 import useGlobalMockData from "../hooks/useGlobalMockData.js";
+import useReloadMockData from "../hooks/useReloadMockData.js";
 
 const ErrorsDialog = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   // Get mockData
+  const reloadMockData = useReloadMockData();
   const { mockData } = useGlobalMockData();
-  const { isErrors, errors, retryLoadMockData } = mockData;
+  const { isErrors, errors } = mockData;
 
   useEffect(() => {
     setIsOpen(isErrors);
@@ -85,7 +87,7 @@ const ErrorsDialog = () => {
               Cancel
             </button>
             <button
-              onClick={retryLoadMockData}
+              onClick={reloadMockData}
               className="cursor-pointer flex-1
                 px-3 py-1.5 rounded-md 
                 text-sm text-center font-medium 

@@ -1,4 +1,4 @@
-import useDataModeStore from "../store/useDataModeStore";
+import useDataModeStore from "../store/useDataModeStore.js";
 
 const DataSourceNotice = () => {
   const isSupabaseData = useDataModeStore((state) => state.isSupabaseData);

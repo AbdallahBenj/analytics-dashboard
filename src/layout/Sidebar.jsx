@@ -7,6 +7,7 @@ import navContent from "../data/navContent.ts";
 const { brand, navigation } = navContent;
 
 import useGlobalMockData from "../hooks/useGlobalMockData.ts";
+import useReloadMockData from "../hooks/useReloadMockData.ts";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -14,8 +15,9 @@ function classNames(...classes) {
 
 const Sidebar = () => {
   // Get mockData
+  const reloadMockData = useReloadMockData();
   const { mockData } = useGlobalMockData();
-  const { isLoading, retryLoadMockData } = mockData;
+  const { isLoading } = mockData;
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const handleOpen = () => {
@@ -123,7 +125,7 @@ const Sidebar = () => {
               {/* Refresh Data And Event button */}
               <button
                 type="button"
-                onClick={retryLoadMockData}
+                onClick={reloadMockData}
                 disabled={isLoading}
                 aria-label="Refresh data and events"
                 className="cursor-pointer

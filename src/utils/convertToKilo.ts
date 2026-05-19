@@ -1,4 +1,4 @@
-// Not used use  
+// Not used
 
 const convertToKilo = (value: number): string => {
   if (!value) return "";

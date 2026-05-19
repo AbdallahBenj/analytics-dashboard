@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import PageHeader from "./PageHeader";
 import Sidebar from "./Sidebar";
-import DataSourceNotice from "../components/DataSourceNotice.jsx";
+import DataSourceNotice from "../components/DataSourceNotice.tsx";
 
 const DashboardLayout = () => {
   return (

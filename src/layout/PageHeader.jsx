@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 import { ArrowPathIcon } from "@heroicons/react/20/solid";
 
 import useGlobalMockData from "../hooks/useGlobalMockData.ts";
+import useReloadMockData from "../hooks/useReloadMockData.ts";
 
 import SearchInput from "../components/SearchInput.tsx";
 import navContent from "../data/navContent.ts";
@@ -11,8 +12,9 @@ const isActive = true;
 
 const PageHeader = () => {
   // Get mockData
+  const reloadMockData = useReloadMockData();
   const { mockData } = useGlobalMockData();
-  const { isLoading, retryLoadMockData } = mockData;
+  const { isLoading } = mockData;
 
   const location = useLocation();
 
@@ -54,7 +56,7 @@ const PageHeader = () => {
         }
         <button
           type="button"
-          onClick={retryLoadMockData}
+          onClick={reloadMockData}
           disabled={isLoading}
           aria-label="Refresh data and events"
           className="md:hidden

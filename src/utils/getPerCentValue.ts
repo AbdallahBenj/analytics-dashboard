@@ -1,3 +1,5 @@
+// Not used
+
 const getPerCentValue = (
   revenue: number,
   prevRevenue: number,
