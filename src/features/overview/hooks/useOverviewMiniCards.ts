@@ -7,7 +7,7 @@ import {
   ArrowPathIcon,
 } from "@heroicons/react/24/solid";
 
-import type { OverviewMiniCardsDataType } from "../../../types/featuresTypes.js";
+import type { OverviewMiniCardsType } from "../../../types/overviewSectionTypes.js";
 
 import getRevenue from "../../utils/getRevenue.js";
 import getMonthlyRevenue from "../../utils/getMonthlyRevenue.js";
@@ -24,7 +24,7 @@ import formatPercent from "../../../utils/formatPercent.js";
 import useGlobalMockData from "../../../hooks/useGlobalMockData.js";
 
 const useOverviewMiniCards = (): {
-  miniCardsData: OverviewMiniCardsDataType[];
+  miniCardsData: OverviewMiniCardsType[];
 } => {
   // Get mockData
   const { mockData } = useGlobalMockData();

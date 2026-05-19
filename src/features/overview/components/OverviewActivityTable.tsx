@@ -6,7 +6,7 @@ import { Zoomies } from "ldrs/react";
 import "ldrs/react/Zoomies.css";
 
 import useOverviewActivityTable from "../hooks/useOverviewActivityTable.js";
-import type { AllEventsMap } from "../../../types/featuresTypes.js";
+import type { AllEventsMap } from "../../../types/overviewSectionTypes.js";
 
 const spanColorMap = {
   basic: "text-indigo-400",

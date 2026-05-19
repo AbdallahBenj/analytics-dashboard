@@ -7,7 +7,7 @@ import "ldrs/react/DotPulse.css";
 import "ldrs/react/Cardio.css";
 
 import useOverviewRevenueChart from "../hooks/useOverviewRevenueChart.js";
-import type { OverviewRevenueChartConfigType } from "../../../types/featuresTypes.js";
+import type { OverviewRevenueChartConfigType } from "../../../types/overviewSectionTypes.js";
 
 import {
   AreaChart,
@@ -26,53 +26,45 @@ const OverviewRevenueChart = () => {
   const {
     isDataAndEventsLoading,
     isDataAndEventsErrors,
-
-    // raw values (better design)
-    last30daysRevenue,
-    growthRate30daysRevenue,
-
-    isRevenueGrowing,
-
-    revenueChartConfig,
+    revenueOverTimeChartConfig,
   } = useOverviewRevenueChart();
 
   type Range = keyof OverviewRevenueChartConfigType;
 
   const [range, setRange] = useState<Range>("d30");
 
-  // ✅ safe access
-  const activeRange = revenueChartConfig?.[range];
+  // Safe access
+  const activeRange = revenueOverTimeChartConfig?.[range];
 
-  // ✅ formatting Currency Compact 30 days Revenue
-  const formattedRevenue =
-    last30daysRevenue != null
-      ? formatCurrencyCompact(last30daysRevenue, 2)
-      : null;
-
-  // ✅ formatting Percent Growth Rate 30 days Revenue
-  const formattedPercentGrowthRate =
-    growthRate30daysRevenue != null
-      ? formatPercent(growthRate30daysRevenue, 2)
-      : null;
+  //test
+  const revenueValueRange = revenueOverTimeChartConfig?.[range].revenueValue;
+  const revenueGrowthRateRange =
+    revenueOverTimeChartConfig?.[range].revenueGrowthRate;
 
   const loadingContent = <DotPulse size="43" speed="1.3" color="#615fff" />;
   const errorsContent = (
     <span className="text-lg font-semibold text-red-500 mb-2 md:mb-4">N/A</span>
   );
 
-  const hasRevenue = last30daysRevenue != null;
-  const valueContent = !hasRevenue ? (
+  const valueContent = !revenueValueRange ? (
     <span className="text-gray-500">-</span>
   ) : (
     <p className="text-xl font-semibold text-gray-900 dark:text-white">
-      {formattedRevenue}
+      {formatCurrencyCompact(revenueValueRange, 2)}
       <span
         className={`text-sm
-        ${isRevenueGrowing ? "text-green-500" : "text-red-500"}`}
+        ${
+          revenueGrowthRateRange !== null && revenueGrowthRateRange >= 0
+            ? "text-green-500"
+            : "text-red-500"
+        }`}
       >
         {" "}
-        {formattedPercentGrowthRate != null &&
-          `${isRevenueGrowing ? "+" : ""}${formattedPercentGrowthRate}`}
+        {!revenueGrowthRateRange
+          ? ""
+          : `${
+              revenueGrowthRateRange >= 0 ? "+" : "-"
+            }${formatPercent(revenueGrowthRateRange)}`}
       </span>
     </p>
   );
@@ -97,9 +89,13 @@ const OverviewRevenueChart = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between mb-4">
         <div className="Title-chart mb-2 md:mb-4">
-          <h3 className="text-md font-medium text-gray-600 dark:text-gray-300">
-            Monthly Revenue
+          <h3 className="text-lg font-bold mb-2 md:mb-4 text-gray-700 dark:text-gray-200">
+            Revenue Over Time
           </h3>
+          <p className="text-md font-semibold text-indigo-500 dark:text-indigo-400">
+            {revenueOverTimeChartConfig[range].label}{" "}
+            <span className="text-gray-600 dark:text-gray-300">Revenue</span>
+          </p>
           {isDataAndEventsLoading
             ? loadingContent
             : isDataAndEventsErrors
@@ -112,7 +108,7 @@ const OverviewRevenueChart = () => {
           <RadioGroupButtons
             state={range}
             setState={setRange}
-            stateConfig={revenueChartConfig}
+            stateConfig={revenueOverTimeChartConfig}
           />
         </div>
       </div>
@@ -155,6 +151,7 @@ const OverviewRevenueChart = () => {
                   tickLine={false}
                 />
                 <Tooltip
+                  labelFormatter={(label) => `Date: ${label}`}
                   formatter={(value) => {
                     if (typeof value !== "number") return ["N/A", "Revenue"];
                     return [formatCurrencyCompact(value, 2), "Revenue"];

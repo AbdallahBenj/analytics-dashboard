@@ -4,13 +4,13 @@ import type {
   UsersEvents,
   SubsEvents,
   PaymentsEvents,
-} from "./eventsTypes.ts";
+} from "./eventsTypes.js";
 
-// feature Overview MiniCardsData Types
+// feature Overview Section OverviewMiniCards Types
 
 type IconType = React.ComponentType<React.SVGProps<SVGSVGElement>>;
 
-type OverviewMiniCardsDataType = {
+type OverviewMiniCardsType = {
   id: number;
   name: string;
   title: string;
@@ -23,28 +23,27 @@ type OverviewMiniCardsDataType = {
   Icon: IconType;
 };
 
-// feature Overview RevenueChartConfig Types
+// feature Overview Section OverviewRevenueChart Types
 
-type DaysRevenueChartConfigType = {
+type OverviewDaysRevenueChartConfigType = {
   data: Revenue[];
   label: string;
   xKey: string;
   yKey: string;
+  revenueValue: number;
+  revenueGrowthRate: number | null;
 };
 
 type OverviewRevenueChartConfigType = {
-  d30: DaysRevenueChartConfigType;
-  d90: DaysRevenueChartConfigType;
-  m6: DaysRevenueChartConfigType;
+  d30: OverviewDaysRevenueChartConfigType;
+  d90: OverviewDaysRevenueChartConfigType;
+  m6: OverviewDaysRevenueChartConfigType;
 };
 
 type OverviewRevenueChartType = {
-  growthRate30daysRevenue: number | null;
   isDataAndEventsErrors: boolean;
   isDataAndEventsLoading: boolean;
-  isRevenueGrowing: boolean | null;
-  last30daysRevenue: number | null;
-  revenueChartConfig: OverviewRevenueChartConfigType;
+  revenueOverTimeChartConfig: OverviewRevenueChartConfigType;
 };
 
 // feature Overview PlansPieChart Types
@@ -69,11 +68,6 @@ type AllEventsMap = {
   subsEvents: SubsEvents;
   paymentsEvents: PaymentsEvents;
 };
-
-// type DataType<Type> = {
-//   events: Type[];
-//   eventsTitle: EventsTitle[];
-// };
 
 type ColumnsType<Type> = {
   key: keyof Type;
@@ -100,7 +94,7 @@ type OverviewActivityTableAllEventsType = {
 };
 
 export type {
-  OverviewMiniCardsDataType,
+  OverviewMiniCardsType,
   OverviewRevenueChartType,
   OverviewRevenueChartConfigType,
   OverviewPlansPieChartType,

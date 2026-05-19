@@ -51,8 +51,11 @@ const HomePage = () => {
               mt-8 md:mt-10 text-lg sm:text-xl/8
             text-pretty text-gray-500 dark:text-gray-400"
             >
-              InsightFlow is an analytics platform that helps you track
-              performance, gain insight, and make data-driven decisions.
+              <span className="text-indigo-500 dark:text-indigo-400 font-medium">
+                InsightFlow
+              </span>{" "}
+              is an analytics platform that helps you track performance, gain
+              insight, and make data-driven decisions.
             </p>
 
             <div

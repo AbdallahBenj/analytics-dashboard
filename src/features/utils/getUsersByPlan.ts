@@ -1,6 +1,6 @@
 import getActiveSubscriptions from "./getActiveSubscriptions.js";
 
-import type { OverviewUsersByPlanType } from "../../types/featuresTypes.ts";
+import type { OverviewUsersByPlanType } from "../../types/overviewSectionTypes.js";
 
 import type { User, Subscription } from "../../types/dataTypes.js";
 

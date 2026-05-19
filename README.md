@@ -245,9 +245,9 @@ src/
         ↓
         └── insertSupabaseData.js (Supabase Data)
                 ↓
-                └── useSupabaseDataStore (Zustand Data Store)
+                └── fetchAllSupabaseData.ts (Supabase Data)
                         ↓
-                        └── fetchAllSupabaseData.ts (Supabase Data)
+                        └── useSupabaseDataStore (Zustand Data Store)
                                 ↓
                                 └── Components (Ui logic)
                                         ↓
@@ -256,20 +256,20 @@ src/
 
 ---
 
-##  4. Events Flow
+##  4. Events MockData Flow
 
-```txt
-generateData.js
+```bash
+├── generateData.js
         ↓
-generateEvents.js
-        ↓
-useMockDataStore.js (State Update)
-        ↓
-useGlobalMockData.ts.js
-        ↓
-Components
-        ↓
-UI Rendering (Reactive Updates)
+        └── generateEvents.js
+                ↓
+                └── useMockDataStore.js (State Update)
+                        ↓
+                        └── useGlobalMockData.ts.js
+                                ↓
+                                └── Components (Ui logic)
+                                        ↓
+                                        └── UI Rendering (Reactive Updates)
 ```
 
                                           

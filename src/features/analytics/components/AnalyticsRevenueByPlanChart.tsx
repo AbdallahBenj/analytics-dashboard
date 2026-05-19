@@ -1,50 +1,71 @@
 import { useState } from "react";
-import RadioGroupButtons from "../../../components/RadioGroupButtons.tsx";
+import RadioGroupButtons from "../../../components/RadioGroupButtons.js";
 
 // Loading snipper icon
 import { DotPulse, Cardio } from "ldrs/react";
 import "ldrs/react/DotPulse.css";
 import "ldrs/react/Cardio.css";
 
-import useAnalyticsRevenueTrendChart from "../hooks/useAnalyticsRevenueTrendChart.js";
+import useAnalyticsRevenueByPlanChart from "../hooks/useAnalyticsRevenueByPlanChart.js";
+
+import type { AnalyticsRevenueByPlanChartConfigType } from "../../../types/analyticsSectionTypes.js";
 
 import {
   AreaChart,
   Area,
-  LineChart,
   XAxis,
   YAxis,
-  Line,
   Legend,
   ResponsiveContainer,
   CartesianGrid,
   Tooltip,
 } from "recharts";
 
-import convertToKilo from "../../../utils/convertToKilo.ts";
+import formatCurrencyCompact from "../../../utils/formatCurrencyCompact.js";
+import formatPercent from "../../../utils/formatPercent.js";
 
-const AnalyticsRevenueTrendChart = () => {
-  const { isDataAndEventsLoading, isDataAndEventsErrors, revenueRangeConfig } =
-    useAnalyticsRevenueTrendChart();
+const AnalyticsRevenueByPlanChart = () => {
+  const {
+    isDataAndEventsLoading,
+    isDataAndEventsErrors,
+    revenueByPlanChartConfig,
+  } = useAnalyticsRevenueByPlanChart();
 
-  const [range, setRange] = useState("d30");
+  type Range = keyof AnalyticsRevenueByPlanChartConfigType;
+
+  const [range, setRange] = useState<Range>("d30");
+
+  // Safe access
+  const activeRange = revenueByPlanChartConfig?.[range];
+
+  const revenueValueRange = revenueByPlanChartConfig?.[range].revenueValue;
+  const revenueGrowthRateRange =
+    revenueByPlanChartConfig?.[range].revenueGrowthRate;
 
   const loadingContent = <DotPulse size="43" speed="1.3" color="#615fff" />;
   const errorsContent = (
     <span className="text-lg font-semibold text-red-500">N/A</span>
   );
-  const valueContent = !revenueRangeConfig[range].revenueValue ? (
+
+  const valueContent = !revenueValueRange ? (
     <span className="text-gray-500">-</span>
   ) : (
     <p className="text-xl font-semibold mb-2 md:mb-4 text-gray-900 dark:text-white">
-      {`$ ${convertToKilo(revenueRangeConfig[range].revenueValue)}`}
-      <span className="text-sm text-gray-500">
+      {formatCurrencyCompact(revenueValueRange, 2)}
+      <span
+        className={`text-sm text-gray-500
+        ${
+          revenueGrowthRateRange !== null && revenueGrowthRateRange >= 0
+            ? "text-green-500"
+            : "text-red-500"
+        }`}
+      >
         {" "}
-        {!revenueRangeConfig[range].perCentRevenue
+        {!revenueGrowthRateRange
           ? ""
           : `${
-              revenueRangeConfig[range].perCentRevenue >= 0 ? "+" : ""
-            }${revenueRangeConfig[range].perCentRevenue}%`}
+              revenueGrowthRateRange >= 0 ? "+" : ""
+            }${formatPercent(revenueGrowthRateRange)}`}
       </span>
     </p>
   );
@@ -68,13 +89,14 @@ const AnalyticsRevenueTrendChart = () => {
     >
       <div className="mb-4">
         <h3 className="text-lg font-bold mb-2 md:mb-4 text-gray-700 dark:text-gray-200">
-          Revenue Trend Chart By Plan
+          {/* Revenue Trend Chart By Plan */}
+          Revenue by Plan
         </h3>
 
         <div className="flex flex-col md:flex-row justify-between">
           <div className="Title-chart mb-2 md:mb-4">
             <p className="text-md font-semibold text-indigo-500 dark:text-indigo-400">
-              {revenueRangeConfig[range].label}{" "}
+              {activeRange?.label}{" "}
               <span className="text-gray-600 dark:text-gray-300">Revenue</span>
             </p>
             {isDataAndEventsLoading
@@ -87,7 +109,7 @@ const AnalyticsRevenueTrendChart = () => {
             <RadioGroupButtons
               state={range}
               setState={setRange}
-              stateConfig={revenueRangeConfig}
+              stateConfig={revenueByPlanChartConfig}
             />
           </div>
         </div>
@@ -101,7 +123,7 @@ const AnalyticsRevenueTrendChart = () => {
         ) : (
           !isDataAndEventsErrors && (
             <ResponsiveContainer width="100%" height={280}>
-              <AreaChart responsive data={revenueRangeConfig[range].data}>
+              <AreaChart responsive data={activeRange?.data}>
                 <defs>
                   {/* Total Revenue (Primary - Indigo) */}
                   <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
@@ -127,22 +149,23 @@ const AnalyticsRevenueTrendChart = () => {
                   vertical={false}
                 />
                 <XAxis
-                  dataKey={revenueRangeConfig[range].xKey}
+                  dataKey={activeRange?.xKey}
                   tick={{ fill: "var(--color-chart-gray)", fontSize: 12 }}
                   axisLine={false}
                   tickLine={false}
                 />
                 <YAxis
-                  tickFormatter={(value) => `$${convertToKilo(value)}`}
+                  tickFormatter={(value) => formatCurrencyCompact(value)}
                   tick={{ fill: "var(--color-chart-gray)", fontSize: 12 }}
                   axisLine={false}
                   tickLine={false}
                 />
                 <Tooltip
-                  formatter={(value, name) => [
-                    `$${convertToKilo(value)}`,
-                    name,
-                  ]}
+                  labelFormatter={(label) => `Date: ${label}`}
+                  formatter={(value, name) => {
+                    if (typeof value !== "number") return ["N/A", "Revenue"];
+                    return [formatCurrencyCompact(value, 2), name];
+                  }}
                   contentStyle={{
                     backgroundColor: "rgba(17, 24, 39, 0.9)",
                     borderRadius: "12px",
@@ -156,7 +179,7 @@ const AnalyticsRevenueTrendChart = () => {
                 <Area
                   type="monotone"
                   name="Total Revenue"
-                  dataKey={revenueRangeConfig[range].yKey}
+                  dataKey={activeRange?.yKey}
                   fillOpacity={1}
                   fill="url(#colorPv)"
                   stroke="#6366F1"
@@ -167,7 +190,7 @@ const AnalyticsRevenueTrendChart = () => {
                 <Area
                   type="monotone"
                   name="Basic Revenue"
-                  dataKey={revenueRangeConfig[range].basicKey}
+                  dataKey={activeRange?.basicKey}
                   fillOpacity={1}
                   fill="url(#colorBasic)"
                   stroke="#fe9a00"
@@ -178,7 +201,7 @@ const AnalyticsRevenueTrendChart = () => {
                 <Area
                   type="monotone"
                   name="Pro Revenue"
-                  dataKey={revenueRangeConfig[range].proKey}
+                  dataKey={activeRange?.proKey}
                   fillOpacity={1}
                   fill="url(#colorPro)"
                   stroke="#00bc7d"
@@ -195,4 +218,4 @@ const AnalyticsRevenueTrendChart = () => {
   );
 };
 
-export default AnalyticsRevenueTrendChart;
+export default AnalyticsRevenueByPlanChart;

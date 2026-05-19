@@ -1,6 +1,6 @@
 import ComingSoon from "../components/ComingSoon.tsx";
 
-import AnalyticsRevenueTrendChart from "../features/analytics/components/AnalyticsRevenueTrendChart";
+import AnalyticsRevenueByPlanChart from "../features/analytics/components/AnalyticsRevenueByPlanChart.tsx";
 
 // import Errors Dialog
 import useGlobalMockData from "../hooks/useGlobalMockData.js";
@@ -22,7 +22,7 @@ const AnalyticsPage = () => {
       {isErrors && <ErrorsDialog />}
 
       {/* The content */}
-      <AnalyticsRevenueTrendChart />
+      <AnalyticsRevenueByPlanChart />
 
       {/* Coming soon content */}
       <ComingSoon />

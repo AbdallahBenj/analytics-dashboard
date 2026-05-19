@@ -1,6 +1,6 @@
 import useGlobalMockData from "../../../hooks/useGlobalMockData.js";
 
-import type { OverviewActivityTableAllEventsType } from "../../../types/featuresTypes.js";
+import type { OverviewActivityTableAllEventsType } from "../../../types/overviewSectionTypes.js";
 
 type AllEventsTypes = {
   isDataAndEventsLoading: boolean;

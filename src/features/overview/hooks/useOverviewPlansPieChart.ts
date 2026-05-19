@@ -2,7 +2,7 @@ import getUsersByPlan from "../../utils/getUsersByPlan.js";
 
 import useGlobalMockData from "../../../hooks/useGlobalMockData.js";
 
-import type { OverviewPlansPieChartType } from "../../../types/featuresTypes.tsx";
+import type { OverviewPlansPieChartType } from "../../../types/overviewSectionTypes.js";
 
 type PieColors = {
   free: string;
