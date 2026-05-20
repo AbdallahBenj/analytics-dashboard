@@ -123,8 +123,6 @@ const useGlobalMockData = () => {
     paymentsEvents: fetchedEvents.paymentsEvents,
   };
 
-  console.log("mockData", mockData);
-
   return { mockData };
 };
 
