@@ -12,8 +12,13 @@ const generateSubscriptionsEvents = (
 
   const getEventDate = (sub: Subscription): Date | null => {
     const eventDate =
-      sub.subsStatus === "active" ? sub.subsStartDate : sub.subsEndDate;
-    return eventDate ? new Date(eventDate) : null;
+      sub.subsStatus === "active"
+        ? new Date(sub.subsStartDate)
+        : new Date(sub.subsEndDate);
+
+    const isValidDate = eventDate && !Number.isNaN(eventDate?.getTime());
+
+    return isValidDate ? new Date(eventDate) : null;
   };
 
   const getLatestSubsEvents = (eventsData: Subscription[] = []) =>
@@ -29,14 +34,7 @@ const generateSubscriptionsEvents = (
           userName,
           subsPlan,
           subsStatus,
-          eventDate: date
-            ? date.toLocaleDateString("en-GB", {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-              })
-            : "N/A",
-          eventTimeAgo: date ? getTimeAgo(date) : "N/A",
+          eventDate: date ? date.toISOString() : null,
         }),
       );
 

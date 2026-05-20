@@ -3,7 +3,7 @@ import getTimeAgo from "../../utils/getTimeAgo.js";
 import type { User } from "../../types/dataTypes.js";
 import type { UsersEvents } from "../../types/eventsTypes.js";
 
-const generateUsersEvents = (usersData: User[] = []): UsersEvents[] => {
+const generateUsersEvents = (usersData: User[]): UsersEvents[] => {
   if (!usersData || usersData.length === 0) {
     return [];
   }
@@ -14,7 +14,10 @@ const generateUsersEvents = (usersData: User[] = []): UsersEvents[] => {
         const eventDate = user.userCreatedAt
           ? new Date(user.userCreatedAt)
           : null;
-        return { ...user, eventDateObj: eventDate };
+
+        const isValidDate = eventDate && !Number.isNaN(eventDate?.getTime());
+
+        return { ...user, eventDateObj: isValidDate ? eventDate : null };
       })
       .sort(
         (a, b) =>
@@ -24,14 +27,7 @@ const generateUsersEvents = (usersData: User[] = []): UsersEvents[] => {
         userId,
         userName,
         userEmail,
-        eventDate: eventDateObj
-          ? eventDateObj.toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "short",
-              day: "numeric",
-            })
-          : "N/A",
-        eventTimeAgo: eventDateObj ? getTimeAgo(eventDateObj) : "N/A",
+        eventDate: eventDateObj ? eventDateObj.toISOString() : null,
       }));
 
   const usersEvents = getLatestUsersEvents(usersData);

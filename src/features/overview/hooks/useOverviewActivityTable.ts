@@ -1,6 +1,8 @@
 import useGlobalMockData from "../../../hooks/useGlobalMockData.js";
 
 import type { OverviewActivityTableAllEventsType } from "../../../types/overviewSectionTypes.js";
+import getTimeAgo from "../../../utils/getTimeAgo.js";
+import formatDate from "../../../utils/formatDate.js";
 
 type AllEventsTypes = {
   isDataAndEventsLoading: boolean;
@@ -25,7 +27,13 @@ const useOverviewActivityTable = (limit: number = 10): AllEventsTypes => {
     usersEvents: {
       label: "Users",
       eventsTitle: ["Time", "User", "Email", "Created At"],
-      events: usersEvents.slice(0, limit),
+      events: usersEvents.slice(0, limit).map((event) => ({
+        ...event,
+        eventDate: formatDate(event.eventDate),
+        eventTimeAgo: event.eventDate
+          ? getTimeAgo(new Date(event.eventDate))
+          : "N/A",
+      })),
       config: {
         id: "userId",
         columns: [
@@ -39,7 +47,13 @@ const useOverviewActivityTable = (limit: number = 10): AllEventsTypes => {
     subsEvents: {
       label: "Subscriptions",
       eventsTitle: ["Time", "User", "Date", "Plan", "Status"],
-      events: subscriptionsEvents.slice(0, limit),
+      events: subscriptionsEvents.slice(0, limit).map((event) => ({
+        ...event,
+        eventDate: formatDate(event.eventDate),
+        eventTimeAgo: event.eventDate
+          ? getTimeAgo(new Date(event.eventDate))
+          : "N/A",
+      })),
       config: {
         id: "subsId",
         columns: [
@@ -60,13 +74,19 @@ const useOverviewActivityTable = (limit: number = 10): AllEventsTypes => {
         "Invoice Price",
         "Invoice Status",
       ],
-      events: paymentsEvents.slice(0, limit),
+      events: paymentsEvents.slice(0, limit).map((event) => ({
+        ...event,
+        eventDate: formatDate(event.eventDate),
+        eventTimeAgo: event.eventDate
+          ? getTimeAgo(new Date(event.eventDate))
+          : "N/A",
+      })),
       config: {
         id: "paymentId",
         columns: [
-          { key: "paymentTimeAgo" },
+          { key: "eventTimeAgo" },
           { key: "userName" },
-          { key: "paidDate" },
+          { key: "eventDate" },
           { key: "invoicePrice", colored: true },
           { key: "paymentStatus", colored: true },
         ],

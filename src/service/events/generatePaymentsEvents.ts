@@ -42,15 +42,8 @@ const generatePaymentsEvents = (
           paymentId,
           paymentStatus,
           userName,
-          paidDate: date
-            ? date.toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-              })
-            : "N/A",
+          eventDate: date ? date.toISOString() : null,
           invoicePrice: formatCurrency(invoicePrice, 2), //`${invoicePrice}$`
-          paymentTimeAgo: date ? getTimeAgo(date) : "N/A",
         }),
       );
 

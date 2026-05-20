@@ -5,7 +5,7 @@ type UsersEvents = {
   userName: string;
   userEmail: string;
   eventDate: string | null;
-  eventTimeAgo: string;
+  eventTimeAgo?: string;
 };
 
 type SubsEvents = {
@@ -13,17 +13,17 @@ type SubsEvents = {
   userName: string;
   subsPlan: string;
   subsStatus: string;
-  eventDate: string;
-  eventTimeAgo: string;
+  eventDate: string | null;
+  eventTimeAgo?: string;
 };
 
 type PaymentsEvents = {
   paymentId: string;
   paymentStatus: string;
   userName: string;
-  paidDate: string;
+  eventDate: string | null;
   invoicePrice: string;
-  paymentTimeAgo: string;
+  eventTimeAgo?: string;
 };
 
 // type UsersEvents = {
