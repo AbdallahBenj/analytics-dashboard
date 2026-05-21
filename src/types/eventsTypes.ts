@@ -11,8 +11,8 @@ type UsersEvents = {
 type SubsEvents = {
   subsId: string;
   userName: string;
-  subsPlan: string;
-  subsStatus: string;
+  subscriptionPlan: string;
+  subscriptionStatus: string;
   eventDate: string | null;
   eventTimeAgo?: string;
 };

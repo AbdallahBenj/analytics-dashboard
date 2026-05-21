@@ -13,12 +13,12 @@ type Subscription = {
   userId: string;
   userName: string;
   userCreatedAt: string;
-  subsStartDate: string;
-  subsEndDate: string;
-  subsDuration: number;
-  subsPlan: string;
+  subscriptionStartDate: string;
+  subscriptionEndDate: string;
+  subscriptionDuration: number;
+  subscriptionPlan: string;
   priceMonthly: number;
-  subsStatus: string;
+  subscriptionStatus: string;
 };
 
 type Payment = {

@@ -4,7 +4,7 @@ const getActiveSubscriptions = (
   subscriptions: Subscription[] = [],
 ): Subscription[] => {
   const activeSubscriptions = subscriptions.filter(
-    (subscription) => subscription.subsStatus === "active",
+    (subscription) => subscription.subscriptionStatus === "active",
   );
 
   return activeSubscriptions;

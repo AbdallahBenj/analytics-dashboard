@@ -23,8 +23,10 @@ const getConversionRate = (
   // Subscriptions active at startPeriod
 
   const subUsersAtStart = subscriptions.filter((sub) => {
-    const start = new Date(sub.subsStartDate);
-    const end = sub.subsEndDate ? new Date(sub.subsEndDate) : null;
+    const start = new Date(sub.subscriptionStartDate);
+    const end = sub.subscriptionEndDate
+      ? new Date(sub.subscriptionEndDate)
+      : null;
 
     return start < startPeriod && (!end || end >= startPeriod);
   });
@@ -38,7 +40,7 @@ const getConversionRate = (
   // Activated subscriptions during the period (unique users)
 
   const activatedInPeriod = subscriptions.filter((sub) => {
-    const start = new Date(sub.subsStartDate);
+    const start = new Date(sub.subscriptionStartDate);
     return start >= startPeriod && start < endPeriod;
   });
 

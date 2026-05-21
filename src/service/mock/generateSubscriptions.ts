@@ -78,12 +78,12 @@ const generateSubscriptions = (users: User[] = []): Subscription[] => {
       userId: user.userId,
       userName: user.userName,
       userCreatedAt: user.userCreatedAt,
-      subsStartDate: subStartDate.toISOString(),
-      subsEndDate: endDate.toISOString(),
-      subsDuration: durationMonths,
-      subsPlan: plan.name,
+      subscriptionStartDate: subStartDate.toISOString(),
+      subscriptionEndDate: endDate.toISOString(),
+      subscriptionDuration: durationMonths,
+      subscriptionPlan: plan.name,
       priceMonthly: plan.price,
-      subsStatus: subStatus,
+      subscriptionStatus: subStatus,
     };
   });
 

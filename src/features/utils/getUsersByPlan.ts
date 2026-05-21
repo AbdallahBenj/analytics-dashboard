@@ -21,8 +21,8 @@ const getUsersByPlan = (
   };
 
   activeSubs.forEach((sub) => {
-    if (sub.subsPlan === "basic" || sub.subsPlan === "pro") {
-      totalUsersPlans[sub.subsPlan]++;
+    if (sub.subscriptionPlan === "basic" || sub.subscriptionPlan === "pro") {
+      totalUsersPlans[sub.subscriptionPlan]++;
     }
   });
 

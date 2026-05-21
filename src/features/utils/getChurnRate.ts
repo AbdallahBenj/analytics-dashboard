@@ -13,15 +13,17 @@ const getChurnRate = (
   startPeriod.setDate(startPeriod.getDate() - 30);
 
   const activeAtStart = subscriptions.filter((sub) => {
-    const start = new Date(sub.subsStartDate);
-    const end = new Date(sub.subsEndDate);
+    const start = new Date(sub.subscriptionStartDate);
+    const end = new Date(sub.subscriptionEndDate);
 
-    return start <= startPeriod && (end > startPeriod || !sub.subsEndDate);
+    return (
+      start <= startPeriod && (end > startPeriod || !sub.subscriptionEndDate)
+    );
   });
 
   const canceledInPeriod = activeAtStart.filter((sub) => {
-    if (!sub.subsEndDate) return false;
-    const end = new Date(sub.subsEndDate);
+    if (!sub.subscriptionEndDate) return false;
+    const end = new Date(sub.subscriptionEndDate);
 
     return end >= startPeriod && end <= endPeriod;
   });

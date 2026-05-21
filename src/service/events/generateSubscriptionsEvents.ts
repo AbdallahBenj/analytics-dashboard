@@ -12,9 +12,9 @@ const generateSubscriptionsEvents = (
 
   const getEventDate = (sub: Subscription): Date | null => {
     const eventDate =
-      sub.subsStatus === "active"
-        ? new Date(sub.subsStartDate)
-        : new Date(sub.subsEndDate);
+      sub.subscriptionStatus === "active"
+        ? new Date(sub.subscriptionStartDate)
+        : new Date(sub.subscriptionEndDate);
 
     const isValidDate = eventDate && !Number.isNaN(eventDate?.getTime());
 
@@ -29,11 +29,17 @@ const generateSubscriptionsEvents = (
           (b.eventDateObj?.getTime() || 0) - (a.eventDateObj?.getTime() || 0),
       )
       .map(
-        ({ eventDateObj: date, subsId, userName, subsPlan, subsStatus }) => ({
+        ({
+          eventDateObj: date,
           subsId,
           userName,
-          subsPlan,
-          subsStatus,
+          subscriptionPlan,
+          subscriptionStatus,
+        }) => ({
+          subsId,
+          userName,
+          subscriptionPlan,
+          subscriptionStatus,
           eventDate: date ? date.toISOString() : null,
         }),
       );
