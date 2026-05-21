@@ -55,7 +55,7 @@ const useOverviewActivityTable = (limit: number = 10): AllEventsTypes => {
           : "N/A",
       })),
       config: {
-        id: "subsId",
+        id: "subscriptionId",
         columns: [
           { key: "eventTimeAgo" },
           { key: "userName" },

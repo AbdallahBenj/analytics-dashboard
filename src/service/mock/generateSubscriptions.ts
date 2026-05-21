@@ -25,7 +25,7 @@ const generateSubscriptions = (users: User[] = []): Subscription[] => {
     const plan = plans[plansIndex]!;
     const isFreePlan = plan.price === 0;
 
-    if (isFreePlan) return[];
+    if (isFreePlan) return [];
 
     // Compute how many days user existed before today
 
@@ -74,10 +74,10 @@ const generateSubscriptions = (users: User[] = []): Subscription[] => {
     const subStatus = endDate < toDay ? "canceled" : "active";
 
     return {
-      subsId: `sub_${i}`,
       userId: user.userId,
       userName: user.userName,
       userCreatedAt: user.userCreatedAt,
+      subscriptionId: `sub_${i}`,
       subscriptionStartDate: subStartDate.toISOString(),
       subscriptionEndDate: endDate.toISOString(),
       subscriptionDuration: durationMonths,

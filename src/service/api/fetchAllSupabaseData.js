@@ -49,7 +49,12 @@ const fetchAllSupabaseData = async () => {
     // paymentsEvents,
   };
 
-  // console.log("object", supabaseData);
+  // test format supabase table rows
+
+  // const formattedTimeline = fetchedTimeline.map((row) => ({
+  //   id: row.id,
+  //   dateTest: row.date,
+  // }));
 
   return {
     supabaseData,

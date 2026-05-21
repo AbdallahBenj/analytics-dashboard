@@ -27,8 +27,6 @@ const OverviewActivityTable = () => {
   const { isDataAndEventsLoading, isDataAndEventsErrors, allEvents } =
     useOverviewActivityTable(5);
 
-  console.log("allEvents", allEvents);
-
   type EventKey = keyof AllEventsMap;
   const [tableContent, setTableContent] = useState<EventKey>("usersEvents");
 

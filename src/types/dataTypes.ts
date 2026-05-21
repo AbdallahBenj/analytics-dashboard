@@ -9,10 +9,10 @@ type User = {
 };
 
 type Subscription = {
-  subsId: string;
   userId: string;
   userName: string;
   userCreatedAt: string;
+  subscriptionId: string;
   subscriptionStartDate: string;
   subscriptionEndDate: string;
   subscriptionDuration: number;

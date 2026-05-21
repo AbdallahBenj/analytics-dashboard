@@ -55,7 +55,7 @@ const generatePayments = (subscriptions: Subscription[] = []): Payment[] => {
           paymentId: `pay_${++id}`,
           userId: sub.userId,
           userName: sub.userName,
-          subscriptionId: sub.subsId,
+          subscriptionId: sub.subscriptionId,
           subscriptionPlan: sub.subscriptionPlan,
           invoicePrice: sub.priceMonthly,
           invoiceNumber: invoiceNumber,

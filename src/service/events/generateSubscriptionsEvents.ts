@@ -31,12 +31,12 @@ const generateSubscriptionsEvents = (
       .map(
         ({
           eventDateObj: date,
-          subsId,
+          subscriptionId,
           userName,
           subscriptionPlan,
           subscriptionStatus,
         }) => ({
-          subsId,
+          subscriptionId,
           userName,
           subscriptionPlan,
           subscriptionStatus,

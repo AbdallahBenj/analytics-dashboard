@@ -9,8 +9,8 @@ type UsersEvents = {
 };
 
 type SubsEvents = {
-  subsId: string;
   userName: string;
+  subscriptionId: string;
   subscriptionPlan: string;
   subscriptionStatus: string;
   eventDate: string | null;
