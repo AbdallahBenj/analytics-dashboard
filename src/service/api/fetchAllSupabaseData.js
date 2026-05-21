@@ -56,6 +56,8 @@ const fetchAllSupabaseData = async () => {
   //   dateTest: row.date,
   // }));
 
+  // console.log("supabaseData", supabaseData);
+
   return {
     supabaseData,
   };
