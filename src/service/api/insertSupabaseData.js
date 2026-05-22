@@ -1,4 +1,5 @@
 import { supabase } from "../../lib/supabase.js";
+import convertKeysToSnakeCase from "../utils/toSnakeCase.js";
 
 import {
   timeline,
@@ -42,72 +43,22 @@ const addDataType = async (dataType, table) => {
 };
 
 const insertSupabaseData = async () => {
-  // Convert table columns from camelCase to snake_case
-
-  const formattedUser = users.map((user) => ({
-    user_id: user.userId,
-    user_name: user.userName,
-    user_country: user.userCountry,
-    user_email: user.userEmail,
-    user_created_at: user.userCreatedAt,
-  }));
-
-  const formattedSubscriptions = subscriptions.map((subscription) => ({
-    user_id: subscription.userId,
-    user_name: subscription.userName,
-    user_created_at: subscription.userCreatedAt,
-    subscription_id: subscription.subscriptionId,
-    subscription_start_date: subscription.subscriptionStartDate,
-    subscription_end_date: subscription.subscriptionEndDate,
-    subscription_duration: subscription.subscriptionDuration,
-    subscription_plan: subscription.subscriptionPlan,
-    price_monthly: subscription.priceMonthly,
-    subscription_status: subscription.subscriptionStatus,
-  }));
-
-  const formattedPayments = payments.map((payment) => ({
-    payment_id: payment.paymentId,
-    user_id: payment.userId,
-    user_name: payment.userName,
-    subscription_id: payment.subscriptionId,
-    subscription_plan: payment.subscriptionPlan,
-    invoice_price: payment.invoicePrice,
-    invoice_number: payment.invoiceNumber,
-    payment_status: payment.paymentStatus,
-    paid_at: payment.paidAt,
-    invoice_start: payment.invoiceStart,
-    invoice_end: payment.invoiceEnd,
-  }));
-
-  const formattedUsersEvents = usersEvents.map((usersEvent) => ({
-    user_id: usersEvent.userId,
-    user_name: usersEvent.userName,
-    user_email: usersEvent.userEmail,
-    event_date: usersEvent.eventDate,
-  }));
-
-  const formattedSubscriptionsEvents = subscriptionsEvents.map(
-    (subscriptionsEvent) => ({
-      user_name: subscriptionsEvent.userName,
-      subscription_id: subscriptionsEvent.subscriptionId,
-      subscription_plan: subscriptionsEvent.subscriptionPlan,
-      subscription_status: subscriptionsEvent.subscriptionStatus,
-      event_date: subscriptionsEvent.eventDate,
-    }),
-  );
-
-  const formattedPaymentsEvents = paymentsEvents.map((paymentsEvent) => ({
-    payment_id: paymentsEvent.paymentId,
-    payment_status: paymentsEvent.paymentStatus,
-    user_name: paymentsEvent.userName,
-    event_date: paymentsEvent.eventDate,
-    invoice_price: paymentsEvent.invoicePrice,
-  }));
-
   if (!isEnableInsertData) return;
+
+  // Convert data objects keys to snakeCase
+  const formattedUsers = users.map(convertKeysToSnakeCase);
+  const formattedSubscriptions = subscriptions.map(convertKeysToSnakeCase);
+  const formattedPayments = payments.map(convertKeysToSnakeCase);
+  const formattedUsersEvents = usersEvents.map(convertKeysToSnakeCase);
+  const formattedSubscriptionsEvents = subscriptionsEvents.map(
+    convertKeysToSnakeCase,
+  );
+  const formattedPaymentsEvents = paymentsEvents.map(convertKeysToSnakeCase);
+
   console.log("START ALLData INSERT");
+
   await addDataType(timeline, "timeline");
-  await addDataType(formattedUser, "users");
+  await addDataType(formattedUsers, "users");
   await addDataType(formattedSubscriptions, "subscriptions");
   await addDataType(formattedPayments, "payments");
 

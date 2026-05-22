@@ -9,10 +9,10 @@ const fetchAllSupabaseData = async () => {
   console.log("fetch All Supabase Data");
 
   await Promise.all([
-    fetchSupabaseData("timelineData", "timeline", "Time"), // fetchTimeline();
-    fetchSupabaseData("usersData", "users", "Users"), // fetchUsers();
-    fetchSupabaseData("subscriptionsData", "subscriptions", "Subscriptions"), // fetchSubscriptions();
-    fetchSupabaseData("paymentsData", "payments", "Payments"), // fetchPayments();
+    fetchSupabaseData("timelineData", "timeline", "Time"),
+    fetchSupabaseData("usersData", "users", "Users"),
+    fetchSupabaseData("subscriptionsData", "subscriptions", "Subscriptions"),
+    fetchSupabaseData("paymentsData", "payments", "Payments"),
   ]);
 
   const dataStore = useSupabaseDataStore.getState().data;
@@ -48,13 +48,6 @@ const fetchAllSupabaseData = async () => {
     // subscriptionsEvents,
     // paymentsEvents,
   };
-
-  // test format supabase table rows
-
-  // const formattedTimeline = fetchedTimeline.map((row) => ({
-  //   id: row.id,
-  //   dateTest: row.date,
-  // }));
 
   // console.log("supabaseData", supabaseData);
 
