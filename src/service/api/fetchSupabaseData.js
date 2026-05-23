@@ -1,5 +1,6 @@
 import { supabase } from "../../lib/supabase.js";
 import useSupabaseDataStore from "../../store/useSupabaseDataStore.js";
+import convertKeysToCamelCase from "../utils/toCamelCase.js";
 
 const fetchSupabaseData = async (dataType, table, label = "") => {
   const updateData = useSupabaseDataStore.getState().updateData;
@@ -10,7 +11,10 @@ const fetchSupabaseData = async (dataType, table, label = "") => {
 
     if (error) throw error;
 
-    updateData(dataType, { dataValue: data, errors: [] });
+    updateData(dataType, {
+      dataValue: data.map(convertKeysToCamelCase),
+      errors: [],
+    });
 
     return data;
   } catch (error) {

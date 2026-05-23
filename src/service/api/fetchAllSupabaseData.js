@@ -13,6 +13,10 @@ const fetchAllSupabaseData = async () => {
     fetchSupabaseData("usersData", "users", "Users"),
     fetchSupabaseData("subscriptionsData", "subscriptions", "Subscriptions"),
     fetchSupabaseData("paymentsData", "payments", "Payments"),
+
+    fetchSupabaseData("paymentsData", "payments", "Payments"),
+    fetchSupabaseData("paymentsData", "payments", "Payments"),
+    fetchSupabaseData("paymentsData", "payments", "Payments"),
   ]);
 
   const dataStore = useSupabaseDataStore.getState().data;
