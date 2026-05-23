@@ -2,7 +2,7 @@ import { supabase } from "../../lib/supabase.js";
 import useSupabaseDataStore from "../../store/useSupabaseDataStore.js";
 import convertKeysToCamelCase from "../utils/toCamelCase.js";
 
-const isFetchEnabled = true;
+const isFetchEnabled = false;
 
 const fetchSupabaseTable = async (dataType, table, label = "") => {
   const updateData = useSupabaseDataStore.getState().updateData;
