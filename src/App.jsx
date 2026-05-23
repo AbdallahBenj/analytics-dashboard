@@ -24,7 +24,8 @@ import listenAuthChange from "./service/api/listenAuthChange.js";
 
 // Data Mode
 import useDataModeStore from "./store/useDataModeStore";
-import useAuthStore from "./store/useAuthStore.ts";
+import useDashboardData from "./hooks/useDashboardData.js";
+// import useAuthStore from "./store/useAuthStore.ts";
 
 function App() {
   const homeRef = useRef(false);
@@ -33,8 +34,9 @@ function App() {
   const setIsSupabaseData = useDataModeStore(
     (state) => state.setIsSupabaseData,
   );
-  const editor = useAuthStore((state) => state.editor);
-  setIsSupabaseData(editor ? true : false);
+  // const editor = useAuthStore((state) => state.editor);
+  setIsSupabaseData(false);
+  useDashboardData();
 
   // SupabaseData
   useEffect(() => {

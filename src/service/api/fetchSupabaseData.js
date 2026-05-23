@@ -2,7 +2,7 @@ import { supabase } from "../../lib/supabase.js";
 import useSupabaseDataStore from "../../store/useSupabaseDataStore.js";
 import convertKeysToCamelCase from "../utils/toCamelCase.js";
 
-const isEnableFetchData = true;
+const isFetchEnabled = true;
 
 const fetchSupabaseTable = async (dataType, table, label = "") => {
   const updateData = useSupabaseDataStore.getState().updateData;
@@ -10,15 +10,16 @@ const fetchSupabaseTable = async (dataType, table, label = "") => {
   try {
     updateData(dataType, { loading: true, errors: [] });
     const { data, error } = await supabase.from(table).select("*");
+    const formattedData = data.map(convertKeysToCamelCase);
 
     if (error) throw error;
 
     updateData(dataType, {
-      dataValue: data.map(convertKeysToCamelCase),
+      dataValue: formattedData,
       errors: [],
     });
 
-    return data;
+    return formattedData;
   } catch (error) {
     const currentErrors =
       useSupabaseDataStore.getState().data[dataType].errors || [];
@@ -36,7 +37,7 @@ const fetchSupabaseTable = async (dataType, table, label = "") => {
 };
 
 const fetchSupabaseData = async () => {
-  if (!isEnableFetchData) return;
+  if (!isFetchEnabled) return;
 
   console.log("fetch All Supabase Data");
 
