@@ -18,7 +18,7 @@ import AdminLoginDialog from "./components/AdminLoginDialog.tsx";
 
 // import SupabaseData
 import { useEffect, useRef } from "react";
-import fetchAllSupabaseData from "./service/api/fetchAllSupabaseData.js";
+import fetchSupabaseData from "./service/api/fetchSupabaseData.js";
 import insertSupabaseData from "./service/api/insertSupabaseData.js";
 import listenAuthChange from "./service/api/listenAuthChange.js";
 
@@ -44,7 +44,7 @@ function App() {
     homeRef.current = true;
 
     insertSupabaseData();
-    fetchAllSupabaseData();
+    fetchSupabaseData();
   }, []);
 
   return (

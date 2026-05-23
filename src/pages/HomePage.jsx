@@ -9,8 +9,18 @@ import MainHeader from "../layout/MainHeader";
 import useAdminLoginStore from "../store/useAdminLoginStore.js";
 import useAuthStore from "../store/useAuthStore.js";
 
+// test Data Sources
+import useGlobalMockData from "../hooks/useGlobalMockData.js";
+import useGlobalSupabaseData from "../service/api/useGlobalSupabaseData.js";
+
 const HomePage = () => {
   const Navigate = useNavigate();
+
+  // test Data Sources
+  const { mockData } = useGlobalMockData();
+  const { supabaseData } = useGlobalSupabaseData();
+  console.log("mockData:", mockData);
+  console.log("supabaseData:", supabaseData);
 
   // login dialog
   const setDialogOpen = useAdminLoginStore((state) => state.setDialogOpen);

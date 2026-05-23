@@ -2,7 +2,9 @@ import { supabase } from "../../lib/supabase.js";
 import useSupabaseDataStore from "../../store/useSupabaseDataStore.js";
 import convertKeysToCamelCase from "../utils/toCamelCase.js";
 
-const fetchSupabaseData = async (dataType, table, label = "") => {
+const isEnableFetchData = true;
+
+const fetchSupabaseTable = async (dataType, table, label = "") => {
   const updateData = useSupabaseDataStore.getState().updateData;
 
   try {
@@ -31,6 +33,27 @@ const fetchSupabaseData = async (dataType, table, label = "") => {
   } finally {
     updateData(dataType, { loading: false });
   }
+};
+
+const fetchSupabaseData = async () => {
+  if (!isEnableFetchData) return;
+
+  console.log("fetch All Supabase Data");
+
+  await Promise.all([
+    fetchSupabaseTable("timeline", "timeline", "Time"),
+    fetchSupabaseTable("users", "users", "Users"),
+    fetchSupabaseTable("subscriptions", "subscriptions", "Subscriptions"),
+    fetchSupabaseTable("payments", "payments", "Payments"),
+
+    fetchSupabaseTable("usersEvents", "users_events", "Users events"),
+    fetchSupabaseTable(
+      "subscriptionsEvents",
+      "subscriptions_events",
+      "Subscriptions events",
+    ),
+    fetchSupabaseTable("paymentsEvents", "payments_events", "Payments events"),
+  ]);
 };
 
 export default fetchSupabaseData;

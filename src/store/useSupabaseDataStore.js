@@ -11,7 +11,7 @@ const useSupabaseDataStore = create((set) => ({
     timeline: { ...defaultState },
     users: { ...defaultState },
     subscriptions: { ...defaultState },
-    paymentsData: { ...defaultState },
+    payments: { ...defaultState },
   },
 
   updateData: (dataType, newData) =>
