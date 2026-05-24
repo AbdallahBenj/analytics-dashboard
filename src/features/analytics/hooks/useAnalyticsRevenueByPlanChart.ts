@@ -4,20 +4,21 @@ import getMonthlyRevenue from "../../utils/getMonthlyRevenue.js";
 import getGrowthRate from "../../utils/getGrowthRate.js";
 
 import useGlobalMockData from "../../../hooks/useGlobalMockData.js";
+import useDashboardData from "../../../hooks/useDashboardData.js";
 
 import type { Revenue } from "../../../types/utilsTypes.js";
 import type { AnalyticsRevenueByPlanChartType } from "../../../types/analyticsSectionTypes.js";
 
 const useAnalyticsRevenueByPlanChart = (): AnalyticsRevenueByPlanChartType => {
   // Get mockData
-  const { mockData } = useGlobalMockData();
+  const { dashboardData } = useDashboardData();
   const {
     isLoading,
     isErrors,
 
     timeline,
     payments,
-  } = mockData;
+  } = dashboardData;
 
   const dailyRevenue = getRevenue(timeline, payments);
   const monthlyRevenue = getRevenue(timeline, payments, "month");

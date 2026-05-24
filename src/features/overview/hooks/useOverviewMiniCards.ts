@@ -22,12 +22,13 @@ import formatCompact from "../../../utils/formatCompact.js";
 import formatPercent from "../../../utils/formatPercent.js";
 
 import useGlobalMockData from "../../../hooks/useGlobalMockData.js";
+import useDashboardData from "../../../hooks/useDashboardData.js";
 
 const useOverviewMiniCards = (): {
   miniCardsData: OverviewMiniCardsType[];
 } => {
   // Get mockData
-  const { mockData } = useGlobalMockData();
+  const { dashboardData } = useDashboardData();
   const {
     isLoading,
     isErrors,
@@ -36,7 +37,7 @@ const useOverviewMiniCards = (): {
     users,
     subscriptions,
     payments,
-  } = mockData;
+  } = dashboardData;
 
   // test mockData end
 

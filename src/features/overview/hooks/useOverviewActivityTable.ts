@@ -1,4 +1,5 @@
 import useGlobalMockData from "../../../hooks/useGlobalMockData.js";
+import useDashboardData from "../../../hooks/useDashboardData.js";
 
 import type { OverviewActivityTableAllEventsType } from "../../../types/overviewSectionTypes.js";
 import getTimeAgo from "../../../utils/getTimeAgo.js";
@@ -12,7 +13,7 @@ type AllEventsTypes = {
 
 const useOverviewActivityTable = (limit: number = 10): AllEventsTypes => {
   // Get mockData
-  const { mockData } = useGlobalMockData();
+  const { dashboardData } = useDashboardData();
 
   const {
     isLoading,
@@ -21,7 +22,7 @@ const useOverviewActivityTable = (limit: number = 10): AllEventsTypes => {
     usersEvents,
     subscriptionsEvents,
     paymentsEvents,
-  } = mockData;
+  } = dashboardData;
 
   const allEvents = {
     usersEvents: {

@@ -22,20 +22,13 @@ import fetchSupabaseData from "./service/api/fetchSupabaseData.js";
 import insertSupabaseData from "./service/api/insertSupabaseData.js";
 import listenAuthChange from "./service/api/listenAuthChange.js";
 
-// Data Mode
-import useDataModeStore from "./store/useDataModeStore";
+// Dashboard Data Mode
 import useDashboardData from "./hooks/useDashboardData.js";
-// import useAuthStore from "./store/useAuthStore.ts";
 
 function App() {
   const homeRef = useRef(false);
 
-  // Set Data Mode
-  const setIsSupabaseData = useDataModeStore(
-    (state) => state.setIsSupabaseData,
-  );
-  // const editor = useAuthStore((state) => state.editor);
-  setIsSupabaseData(false);
+  // use Dashboard Data Mode
   useDashboardData();
 
   // SupabaseData

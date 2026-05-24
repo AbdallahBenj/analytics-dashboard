@@ -1,6 +1,7 @@
 import getUsersByPlan from "../../utils/getUsersByPlan.js";
 
 import useGlobalMockData from "../../../hooks/useGlobalMockData.js";
+import useDashboardData from "../../../hooks/useDashboardData.js";
 
 import type { OverviewPlansPieChartType } from "../../../types/overviewSectionTypes.js";
 
@@ -14,14 +15,14 @@ const useOverviewPlansPieChart = (
   pieColors: PieColors,
 ): OverviewPlansPieChartType => {
   // Get mockData
-  const { mockData } = useGlobalMockData();
+  const { dashboardData } = useDashboardData();
   const {
     isLoading,
     isErrors,
 
     users,
     subscriptions,
-  } = mockData;
+  } = dashboardData;
 
   const totalUsers = users?.length || 0;
 

@@ -5,16 +5,25 @@ import insightFlowImageDark from "../images/insight-flow-dark-screenshot.png";
 
 import MainHeader from "../layout/MainHeader";
 
-// SupabaseData
-import useAdminLoginStore from "../store/useAdminLoginStore.js";
-import useAuthStore from "../store/useAuthStore.js";
+// Call Data Mode store
+import useDataModeStore from "../store/useDataModeStore.js";
 
 const HomePage = () => {
   const Navigate = useNavigate();
 
-  // login dialog
-  const setDialogOpen = useAdminLoginStore((state) => state.setDialogOpen);
-  const editor = useAuthStore((state) => state.editor);
+  // Update Data Mode
+  const setIsSupabaseData = useDataModeStore(
+    (state) => state.setIsSupabaseData,
+  );
+  const handleDashboardBtn = () => {
+    setIsSupabaseData(true);
+    Navigate("/dashboard/overview");
+  };
+
+  const handleLiveDemoBtn = () => {
+    setIsSupabaseData(false);
+    Navigate("/dashboard/overview");
+  };
 
   return (
     <>
@@ -62,9 +71,10 @@ const HomePage = () => {
               className="mt-10 md:mt-12 w-full
             flex flex-col md:flex-row items-center justify-center md:justify-start gap-4"
             >
-              <a
-                href="/dashboard/overview"
-                className="rounded-md px-12 py-3
+              <button
+                onClick={handleLiveDemoBtn}
+                className="cursor-pointer
+                rounded-md px-12 py-3
                 flex justify-center items-center
                 w-full max-w-md md:w-1/2
                 text-sm font-semibold text-white 
@@ -73,15 +83,12 @@ const HomePage = () => {
                 focus-visible:outline-indigo-500"
               >
                 Live Demo
-              </a>
+              </button>
               <button
-                onClick={() =>
-                  !editor
-                    ? setDialogOpen(true)
-                    : Navigate("/dashboard/overview")
-                }
+                onClick={handleDashboardBtn}
                 // href="/"
-                className="rounded-md px-12 py-3
+                className="cursor-pointer
+                rounded-md px-12 py-3
                 flex justify-center items-center
                 w-full max-w-md md:w-1/2
                 text-sm font-semibold 
