@@ -6,18 +6,18 @@ import { ChevronUpDownIcon, ArrowPathIcon } from "@heroicons/react/20/solid";
 import navContent from "../data/navContent.ts";
 const { brand, navigation } = navContent;
 
-import useGlobalMockData from "../hooks/useGlobalMockData.ts";
-import useReloadMockData from "../hooks/useReloadMockData.ts";
+import useDashboardData from "../hooks/useDashboardData.js";
+import useReloadDashboardData from "../hooks/useReloadDashboardData.js";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 const Sidebar = () => {
-  // Get mockData
-  const reloadMockData = useReloadMockData();
-  const { mockData } = useGlobalMockData();
-  const { isLoading } = mockData;
+  // Set DashboardData and fetch logic
+  const reloadDashboardData = useReloadDashboardData();
+  const { dashboardData } = useDashboardData();
+  const { isLoading } = dashboardData;
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const handleOpen = () => {
@@ -125,7 +125,7 @@ const Sidebar = () => {
               {/* Refresh Data And Event button */}
               <button
                 type="button"
-                onClick={reloadMockData}
+                onClick={reloadDashboardData}
                 disabled={isLoading}
                 aria-label="Refresh data and events"
                 className="cursor-pointer

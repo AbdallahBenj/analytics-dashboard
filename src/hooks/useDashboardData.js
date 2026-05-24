@@ -7,15 +7,7 @@ const useDashboardData = () => {
   const { mockData } = useGlobalMockData();
   const { supabaseData } = useGlobalSupabaseData();
 
-  let dashboardData;
-  if (isSupabaseData) {
-    dashboardData = supabaseData;
-    // console.table("supabaseData", dashboardData);
-  } else {
-    dashboardData = mockData;
-    // console.table("mockData", dashboardData);
-  }
-  // const dashboardData = isSupabaseData ? supabaseData : mockData;
+  const dashboardData = isSupabaseData ? supabaseData : mockData;
 
   return { dashboardData };
 };

@@ -1,11 +1,13 @@
 import useDataModeStore from "../store/useDataModeStore.js";
 import fetchSupabaseData from "../service/api/fetchSupabaseData";
-import reloadMockData from "../hooks/useRouteLoaderData";
+import useReloadMockData from "../hooks/useReloadMockData";
 
 const useReloadDashboardData = () => {
-  const isSupabaseData = useDataModeStore.getState().isSupabaseData;
-  const reloadDashboardData = () =>
-    isSupabaseData ? fetchSupabaseData() : reloadMockData();
+  const reloadMockData = useReloadMockData();
+  const reloadDashboardData = () => {
+    const isSupabaseData = useDataModeStore.getState().isSupabaseData;
+    return isSupabaseData ? fetchSupabaseData() : reloadMockData();
+  };
 
   return reloadDashboardData;
 };

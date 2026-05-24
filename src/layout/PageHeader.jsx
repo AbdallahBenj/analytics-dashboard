@@ -1,8 +1,8 @@
 import { useLocation } from "react-router-dom";
 import { ArrowPathIcon } from "@heroicons/react/20/solid";
 
-import useGlobalMockData from "../hooks/useGlobalMockData.ts";
-import useReloadMockData from "../hooks/useReloadMockData.ts";
+import useDashboardData from "../hooks/useDashboardData.js";
+import useReloadDashboardData from "../hooks/useReloadDashboardData.js";
 
 import SearchInput from "../components/SearchInput.tsx";
 import navContent from "../data/navContent.ts";
@@ -11,10 +11,10 @@ const { navigation } = navContent;
 const isActive = true;
 
 const PageHeader = () => {
-  // Get mockData
-  const reloadMockData = useReloadMockData();
-  const { mockData } = useGlobalMockData();
-  const { isLoading } = mockData;
+  // Set DashboardData and fetch logic
+  const reloadDashboardData = useReloadDashboardData();
+  const { dashboardData } = useDashboardData();
+  const { isLoading } = dashboardData;
 
   const location = useLocation();
 
@@ -56,7 +56,7 @@ const PageHeader = () => {
         }
         <button
           type="button"
-          onClick={reloadMockData}
+          onClick={reloadDashboardData}
           disabled={isLoading}
           aria-label="Refresh data and events"
           className="md:hidden
