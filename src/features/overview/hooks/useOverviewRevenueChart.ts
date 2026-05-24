@@ -10,7 +10,7 @@ import type { OverviewRevenueChartType } from "../../../types/overviewSectionTyp
 import type { Revenue } from "../../../types/utilsTypes.js";
 
 const useOverviewRevenueChart = (): OverviewRevenueChartType => {
-  // Get mockData
+  // Get DashboardData
   const { dashboardData } = useDashboardData();
   const {
     isLoading,

@@ -6,16 +6,16 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 
-import useGlobalMockData from "../hooks/useGlobalMockData.js";
-import useReloadMockData from "../hooks/useReloadMockData.js";
+import useDashboardData from "../hooks/useDashboardData.js";
+import useReloadDashboardData from "../hooks/useReloadDashboardData.js";
 
 const ErrorsDialog = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  // Get mockData
-  const reloadMockData = useReloadMockData();
-  const { mockData } = useGlobalMockData();
-  const { isErrors, errors } = mockData;
+  // Get DashboardData
+  const reloadDashboardData = useReloadDashboardData();
+  const { dashboardData } = useDashboardData();
+  const { isErrors, errors } = dashboardData;
 
   useEffect(() => {
     setIsOpen(isErrors);
@@ -87,7 +87,7 @@ const ErrorsDialog = () => {
               Cancel
             </button>
             <button
-              onClick={reloadMockData}
+              onClick={reloadDashboardData}
               className="cursor-pointer flex-1
                 px-3 py-1.5 rounded-md 
                 text-sm text-center font-medium 

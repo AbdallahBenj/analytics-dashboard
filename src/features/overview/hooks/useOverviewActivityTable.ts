@@ -12,7 +12,7 @@ type AllEventsTypes = {
 };
 
 const useOverviewActivityTable = (limit: number = 10): AllEventsTypes => {
-  // Get mockData
+  // Get DashboardData
   const { dashboardData } = useDashboardData();
 
   const {

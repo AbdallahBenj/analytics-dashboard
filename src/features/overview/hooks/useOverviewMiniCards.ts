@@ -27,7 +27,7 @@ import useDashboardData from "../../../hooks/useDashboardData.js";
 const useOverviewMiniCards = (): {
   miniCardsData: OverviewMiniCardsType[];
 } => {
-  // Get mockData
+  // Get DashboardData
   const { dashboardData } = useDashboardData();
   const {
     isLoading,
@@ -38,8 +38,6 @@ const useOverviewMiniCards = (): {
     subscriptions,
     payments,
   } = dashboardData;
-
-  // test mockData end
 
   // Revenue calculation (memoized)
   const dailyRevenue = useMemo(() => {

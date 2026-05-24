@@ -14,7 +14,7 @@ type PieColors = {
 const useOverviewPlansPieChart = (
   pieColors: PieColors,
 ): OverviewPlansPieChartType => {
-  // Get mockData
+  // Get DashboardData
   const { dashboardData } = useDashboardData();
   const {
     isLoading,
