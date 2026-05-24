@@ -1,0 +1,114 @@
+[33me32a01b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m refactor: create useDashboardData hook to manage data sources
+[33m3759d06[m refactor: create useDashboardData hook to manage data sources
+[33mb6ae6ee[m refactor: move Supabase fetching logic into fetchSupabaseData service and useGlobalSupabaseData hook
+[33m90d842e[m refactor: Convert data objects keys to camelCase from supabase
+[33m009706d[m refactor: Convert data objects keys to snakeCase to insert to supabase
+[33mae45faf[m refactor: rename table row fields from camelCase to snake_case and fix insert logic
+[33mfbd743f[m refactor: fix data insertion errors in Supabase
+[33m7410a47[m refactor: rename subs_ to subscription_ on generateSubscriptions data and events
+[33m7c74692[m clear console
+[33m5e398da[m refactor: move timeAgo logic to UI hooks and format event dates as ISO strings and create formatDate function for UI component
+[33m1f98d51[m refactor: rename retryFetchMockData to useReloadMockData and extract reload logic into custom hook
+[33mff50a81[m refactor: update Revenue chart data strecture and types add data range
+[33m60b8e8d[m refactor: clean eventsTitle old code comments
+[33mccd3cd3[m refactor: remove eventsTitle from events data sources
+[33m5b12e96[m refactore Data Source Mode Notice
+[33mea9ae8d[m fix Pie chart width and height
+[33m3241b60[m featured: topbar data type notice
+[33mdc6e759[m fix: empty events bug
+[33m309d44b[m fix: events bug
+[33mac66008[m events bug
+[33m3246b01[m prepare supabase events integration
+[33mcc6f302[m refactor: update mock data naming and structure
+[33m1608331[m feature: add admin login
+[33m498b624[m clean console
+[33m5a51862[m update: fetch All Supabase Data
+[33m7962311[m fix: main header padding bottom
+[33m50a7856[m update home page CSS styles
+[33m7497c78[m create Supabase data fetching logic
+[33m504212c[m feat: add main layout, main header, home page, and 404 page
+[33m31122ad[m update logo and icon
+[33m7bf1e67[m fix: InsightFlow  icon
+[33m0d81545[m update: rebrand app name, logo, and icons to InsightFlow
+[33mb97535d[m refactor: update container and  Recharts width and height
+[33m8f85162[m fix: resolve Recharts width and height issues and update README
+[33m91497e6[m refactor: convert overview feature components and hooks to TypeScript and add types
+[33mf42045b[m refactor(store): convert to strict types and add typed data map
+[33m087e606[m rename Dashboard page components and hooks to Overview page
+[33m9197459[m refactor: convert features utils to TypeScript
+[33mdeaec54[m refactor: move formatNumber logic from MiniCards UI to hook
+[33m21bff77[m refactor: replace manual number formatting with Intl.NumberFormat in miniCards
+[33md749fa0[m continue TypeScript conversion and add 3 NumberFormat utility functions
+[33ma8daf55[m convert generate data to TypeScript
+[33madfcc41[m convert Zustand global state component to TypeScript
+[33mf35dbc8[m fix package vulnerabilities
+[33m7b6ebaa[m fix: prevent chart overflow in AnalyticsRevenueTrendChart
+[33md48b227[m fix: ensure data is fetched only once instead of on every re-render
+[33mf689be1[m docs: update project structure in README
+[33m2afa67c[m refactor(analytics): rename calculateRevenue to getRevenue and extend revenue chart data
+[33m244df19[m clean code from console
+[33mfbd4b4f[m feat: add Revenue Trend Chart By Plan to Analytics section
+[33m581c524[m fix: rename variables from monthly revenue to 30-day revenue and update 6-month revenue logic from daily to monthly revenue
+[33md4c5802[m docs: fix project structure alignment in README
+[33m7830633[m docs: improve project structure formatting in README
+[33mfa9d088[m Refactor and Update README
+[33m235f0ab[m add index.css link on the index.html header
+[33m0ba6437[m update porject link on the README file
+[33m2c9745a[m switch to Browser Route
+[33mddaf749[m fix: remove base path for Vercel deployment
+[33mdd24026[m fix base path issue
+[33m3919468[m fix: add missing zustand dependency
+[33m43c46bc[m[33m ([m[1;31morigin/dev[m[33m, [m[1;32mdev[m[33m)[m refactor: clean up notification component
+[33mc512f9a[m feat: disable search input and mark it as coming soon
+[33m2c12c23[m feat: add 'Coming Soon' page for unfinished features
+[33m4951956[m chore: cleanup project by removing unused files, folders, compenents and HTML elements
+[33m74a5143[m feat(ui): add notifications bell icon with dropdown menu in header (desktop & mobile)
+[33mb49b1a4[m feat: add loading spinner to login dialog
+[33mc7f52f3[m feat: add user login state and conditional UI to header desktop and mobile menu
+[33mb21981f[m feat: add user info, namr and email on headerDesktop
+[33me0b40dc[m style: improve refresh button UI with loading state
+[33m3c45e16[m feat: add refresh button to retry data and events
+[33m1e36cd0[m refactor: separate Header into HeaderMobile and HeaderDesktop
+[33m07e6334[m feat: add global data/events fetching with retry and error handling (zustand)
+[33mb0a3625[m feat: fetch data and events in zustand global store
+[33m1acfb87[m fix: avoid nested <p> elements in ErrorsDialog
+[33m4eb4209[m refactor: remove header navbar view and unused components
+[33me6aae11[m refactor: apply best practices, clean unused parts, and review entire project
+[33me4f73cc[m refactor: remove unused isDataErrors and isEventsErrors
+[33m4a6fc9a[m all project checked
+[33m32dd3de[m feat: create fetch data dialog with retry functionality
+[33m304d488[m fix: add global status to RecentEvent component UI
+[33me558b59[m feat: add global loading and error states; fix value rendering and mobile table overflow
+[33ma3caa2b[m feat: add EVENTS to useGlobalFetchedData and useStoreFetchedData hooks using Zustand for global state
+[33md86a799[m feat: add useGlobalFetchedData and useStoreFetchedData hooks using Zustand for global state
+[33mac7ba1b[m fix: improve error handling in UI components
+[33mc30e9f2[m add error and isError states to hooks and UI
+[33m14544f0[m update readme to use zustand globale data store
+[33mba3255b[m create useFetchedGenerateData and useFetchedGenerateEvents hooks to generate fetched generated data and Events - Add loading snippers Icons
+[33mcd11742[m update project stricture - create useGenerateData hook to generate fetched generated data
+[33m7d41b8a[m just create useFetchData hook
+[33mfa78f0d[m update service files and folders stricture - add events, mock and analytics folders, finish events table
+[33m39aa9f6[m create latest events table
+[33me8f34c4[m change dashboard revenue chart radio buttons style
+[33m95c102a[m create dashboard Subscription Plans table
+[33m153e377[m finish pieChart and linked it with generated data
+[33m55bf95c[m creat subscriptions plans dashboard pieChart
+[33m1b5adfc[m finish and switch to single src data
+[33m7be4a80[m Refactor one chart to use a single data source
+[33m55f2c27[m Create a single data source
+[33m34e12fa[m Update dashboard and create one single data src
+[33mb7bce3b[m Update data archetectures
+[33m7a1a538[m Add dynamic date range to primary chart
+[33ma13b78a[m Add Primary Chart
+[33m9385eb9[m Add dashboard MiniCards
+[33m703bc84[m Update dashboard - fix width bug in the sidebar layout
+[33m065ff76[m Add pages sectiond and react router
+[33mb4b7e4b[m update and anhace layout
+[33m89226e7[m Add Sidebar or desktop
+[33m8456b81[m Update Dashboard - separate components
+[33mdbcc961[m Update Dashboard- add icon
+[33m40d1c53[m update home link page
+[33m57e5cd7[m Update readme file
+[33m6cda35f[m Update Analytics Dashboard - add header
+[33me3f3f62[m add three type theme toggle mode
+[33mc3d90c1[m First commit - add Class Dark Mode
