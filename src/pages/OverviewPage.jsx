@@ -4,14 +4,14 @@ import OverviewPlansPieChart from "../features/overview/components/OverviewPlans
 import OverviewActivityTable from "../features/overview/components/OverviewActivityTable.tsx";
 
 // import Errors Dialog
-import useGlobalMockData from "../hooks/useGlobalMockData.js";
+import useDashboardData from "../hooks/useDashboardData.js";
 import ErrorsDialog from "../components/ErrorsDialog.tsx";
 import LoginDialog from "../components/LoginDialog.tsx";
 
 const OverviewPage = () => {
-  // Get mockData
-  const { mockData } = useGlobalMockData();
-  const { isErrors } = mockData;
+  // Get DashboardData
+  const { dashboardData } = useDashboardData();
+  const { isErrors } = dashboardData;
 
   return (
     <section
