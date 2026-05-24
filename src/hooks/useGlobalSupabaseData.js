@@ -3,6 +3,7 @@ import useSupabaseDataStore from "../store/useSupabaseDataStore.js";
 const useGlobalSupabaseData = () => {
   const dataStore = useSupabaseDataStore((state) => state.data);
 
+  // get fetched supabase data
   const fetchedUsers = dataStore.users?.dataValue || [];
   const fetchedTimeline = dataStore.timeline?.dataValue || [];
   const fetchedSubscriptions = dataStore.subscriptions?.dataValue || [];
