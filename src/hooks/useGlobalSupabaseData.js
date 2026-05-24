@@ -3,14 +3,15 @@ import useSupabaseDataStore from "../store/useSupabaseDataStore.js";
 const useGlobalSupabaseData = () => {
   const dataStore = useSupabaseDataStore((state) => state.data);
 
-  const fetchedUsers = dataStore.users?.dataValue;
-  const fetchedTimeline = dataStore.timeline?.dataValue;
-  const fetchedSubscriptions = dataStore.subscriptions?.dataValue;
-  const fetchedPayments = dataStore.payments?.dataValue;
+  const fetchedUsers = dataStore.users?.dataValue || [];
+  const fetchedTimeline = dataStore.timeline?.dataValue || [];
+  const fetchedSubscriptions = dataStore.subscriptions?.dataValue || [];
+  const fetchedPayments = dataStore.payments?.dataValue || [];
 
-  const fetchedUsersEvents = dataStore.usersEvents?.dataValue;
-  const fetchedSubscriptionsEvents = dataStore.subscriptionsEvents?.dataValue;
-  const fetchedPaymentsEvents = dataStore.paymentsEvents?.dataValue;
+  const fetchedUsersEvents = dataStore.usersEvents?.dataValue || [];
+  const fetchedSubscriptionsEvents =
+    dataStore.subscriptionsEvents?.dataValue || [];
+  const fetchedPaymentsEvents = dataStore.paymentsEvents?.dataValue || [];
 
   const isLoading =
     dataStore.users?.loading ||
