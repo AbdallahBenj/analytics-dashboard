@@ -1,4 +1,3 @@
-import useGlobalMockData from "../../../hooks/useGlobalMockData.js";
 import useDashboardData from "../../../hooks/useDashboardData.js";
 
 import type { OverviewActivityTableAllEventsType } from "../../../types/overviewSectionTypes.js";

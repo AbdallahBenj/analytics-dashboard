@@ -1,6 +1,6 @@
 // NOT USED YET
 
-const formatCompact = (number: number, fractionDigits = 0): string => {
+const formatNumberCompact = (number: number, fractionDigits = 0): string => {
   return new Intl.NumberFormat("en-US", {
     notation: "compact",
     compactDisplay: "short",
@@ -9,4 +9,4 @@ const formatCompact = (number: number, fractionDigits = 0): string => {
   }).format(number);
 };
 
-export default formatCompact;
+export default formatNumberCompact;

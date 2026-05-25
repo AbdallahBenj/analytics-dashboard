@@ -63,6 +63,7 @@ npm run dev
 ## Project Stricture
 
 ```bash
+
 src/
 ├── assets/                 # Logos, favicon
 │   ├── dashboard-logo.svg
@@ -121,10 +122,10 @@ src/
 │   
 ├── hooks/                 # Global reusable hooks
 │   ├── useDashboardData.js
-│   ├── useGlobalMockData.ts
-│   ├── useGlobalSupabaseData.js
+│   ├── useMockData.ts
 │   ├── useReloadDashboardData.js
 │   ├── useReloadMockData.ts
+│   ├── useSupabaseData.js
 │   ├── useSystemMode.js
 │   └── useThemeMode.js
 │
@@ -153,7 +154,6 @@ src/
 │   │   ├── adminLogin.js
 │   │   ├── adminLogout.js
 │   │   ├── checkAdmin.js
-│   │   ├── fetchSupabaseData.js
 │   │   ├── fetchSupabaseData.js
 │   │   ├── insertSupabaseData.js
 │   │   └── listenAuthChange.js
@@ -196,10 +196,10 @@ src/
 │
 ├── utils/                # Global utilities
 │   ├── convertToKilo.ts // Not used
-│   ├── formatCompact.ts
 │   ├── formatCurrency.ts
 │   ├── formatCurrencyCompact.ts
 │   ├── formatDate.ts
+│   ├── formatNumberCompact.ts
 │   ├── formatPercent.ts
 │   ├── getPercentValue.ts // Not used
 │   └── getTimeAgo.ts
@@ -207,6 +207,7 @@ src/
 │
 ├── App.jsx
 └── main.jsx
+
 ```
 
 
@@ -218,69 +219,85 @@ src/
 ##  1. Data Generation Flow
 
 ```bash
-├── generateTimeline.js
+
+├── generateTimeline.ts
         ↓
-        └── generateUsers.js
+        └── generateUsers.ts
                 ↓
-                └── generateSubscriptions.js
+                └── generateSubscriptions.ts
                         ↓
-                        └── generatePayments.js
+                        └── generatePayments.ts
                                 ↓
-                                └── generateData.js
+                                └── generateData.ts
+
 ```
 
 ---
 
-
-##  2. MockData Flow
+##  2. Events Generation Flow
 
 ```bash
-├── generateData.js
+
+├── generateData.ts
         ↓
-        └── useMockDataStore.js (Zustand Simulate Fetch and Data Store)
+        └── generateUsersEvents.ts
                 ↓
-                └── useGlobalMockData.ts (Mock Data Hook Layer)
+                └── generateSubscriptionsEvents.ts
                         ↓
-                        └── Components (Ui logic)
+                        └── generatePaymentsEvents.ts
                                 ↓
-                                └── UI Rendering
+                                └── generateEvents.ts
+
 ```
 
 ---
 
-
-##  3. Supabase Data Flow
+##  3. Mock Data Flow
 
 ```bash
-├── generateData.js
+
+├── generateData.ts
+├── generateEvents.ts
         ↓
-        └── insertSupabaseData.js (Supabase Data)
+        └── useMockDataStore.ts (Zustand - Simulate Fetch and Store Data and Events)
                 ↓
-                └── fetchAllSupabaseData.ts (Supabase Data)
+                └── useMockData.ts (Mock Data and Events Hook)
                         ↓
-                        └── useSupabaseDataStore (Zustand Data Store)
+                        └── useDashboardData.js (Dashboard Data Mode - MockData/SupabaseData)
                                 ↓
                                 └── Components (Ui logic)
                                         ↓
                                         └── UI Rendering
+
 ```
 
 ---
 
-##  4. Events MockData Flow
+
+##  4. Supabase Data Flow
 
 ```bash
-├── generateData.js
+
+├── generateData.ts
+├── generateEvents.ts
         ↓
-        └── generateEvents.js
+        └── insertSupabaseData.js (Supabase Data)
                 ↓
-                └── useMockDataStore.js (State Update)
+                └── fetchSupabaseData.js (Supabase Data)
                         ↓
-                        └── useGlobalMockData.ts.js
+                        └── useSupabaseDataStore.js (Zustand - Store Fetched Data and Events)
                                 ↓
-                                └── Components (Ui logic)
+                                └── useSupabaseData.js (Supabase Data and Events Hook)
                                         ↓
-                                        └── UI Rendering (Reactive Updates)
+                                        └── useDashboardData.js (Dashboard Data Mode - MockData/SupabaseData)
+                                                ↓
+                                                └── Components (Ui logic)
+                                                        ↓
+                                                        └── UI Rendering
+
 ```
 
-                                          
+---
+
+
+

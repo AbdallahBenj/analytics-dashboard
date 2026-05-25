@@ -16,7 +16,7 @@ import {
 
 import type { DataTypesMap, EventsTypesMap } from "../types/storeTypes.js";
 
-const useGlobalMockData = () => {
+const useMockData = () => {
   // Data and Events
   const dataStore = useMockDataStore((state) => state.data);
   const eventsStore = useMockDataStore((state) => state.events);
@@ -128,4 +128,4 @@ const useGlobalMockData = () => {
   return { mockData };
 };
 
-export default useGlobalMockData;
+export default useMockData;

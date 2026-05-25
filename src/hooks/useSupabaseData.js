@@ -1,6 +1,6 @@
 import useSupabaseDataStore from "../store/useSupabaseDataStore.js";
 
-const useGlobalSupabaseData = () => {
+const useSupabaseData = () => {
   const dataStore = useSupabaseDataStore((state) => state.data);
 
   // get fetched supabase data
@@ -57,4 +57,4 @@ const useGlobalSupabaseData = () => {
   };
 };
 
-export default useGlobalSupabaseData;
+export default useSupabaseData;

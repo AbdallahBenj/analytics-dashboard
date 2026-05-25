@@ -18,10 +18,9 @@ import getConversionRate from "../../utils/getConversionRate.js";
 import getGrowthRate from "../../utils/getGrowthRate.js";
 
 import formatCurrencyCompact from "../../../utils/formatCurrencyCompact.js";
-import formatCompact from "../../../utils/formatCompact.js";
+import formatNumberCompact from "../../../utils/formatNumberCompact.js";
 import formatPercent from "../../../utils/formatPercent.js";
 
-import useGlobalMockData from "../../../hooks/useGlobalMockData.js";
 import useDashboardData from "../../../hooks/useDashboardData.js";
 
 const useOverviewMiniCards = (): {
@@ -95,7 +94,7 @@ const useOverviewMiniCards = (): {
         title: "Active Subscriptions",
         isDataAndEventsLoading: isLoading,
         isDataAndEventsErrors: isErrors,
-        value: formatCompact(totalActiveSubscriptions, 2),
+        value: formatNumberCompact(totalActiveSubscriptions, 2),
         prevValue: null,
         growthRateValue: null,
         isGoodChange: null,

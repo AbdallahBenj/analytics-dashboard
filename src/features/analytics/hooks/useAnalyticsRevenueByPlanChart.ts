@@ -3,7 +3,6 @@ import getRevenue from "../../utils/getRevenue.js";
 import getMonthlyRevenue from "../../utils/getMonthlyRevenue.js";
 import getGrowthRate from "../../utils/getGrowthRate.js";
 
-import useGlobalMockData from "../../../hooks/useGlobalMockData.js";
 import useDashboardData from "../../../hooks/useDashboardData.js";
 
 import type { Revenue } from "../../../types/utilsTypes.js";

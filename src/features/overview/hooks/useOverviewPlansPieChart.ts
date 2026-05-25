@@ -1,6 +1,5 @@
 import getUsersByPlan from "../../utils/getUsersByPlan.js";
 
-import useGlobalMockData from "../../../hooks/useGlobalMockData.js";
 import useDashboardData from "../../../hooks/useDashboardData.js";
 
 import type { OverviewPlansPieChartType } from "../../../types/overviewSectionTypes.js";
