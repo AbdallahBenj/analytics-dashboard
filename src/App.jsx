@@ -9,6 +9,7 @@ import AnalyticsPage from "./pages/AnalyticsPage";
 import CustomersPage from "./pages/CustomersPage";
 import SubscriptionsPage from "./pages/SubscriptionsPage";
 import FeaturesPage from "./pages/FeaturesPage";
+import SettingPage from "./pages/SettingPage";
 import ReportsPage from "./pages/ReportsPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
@@ -62,6 +63,7 @@ function App() {
           <Route path="customers" element={<CustomersPage />} />
           <Route path="subscriptions" element={<SubscriptionsPage />} />
           <Route path="features" element={<FeaturesPage />} />
+          <Route path="setting" element={<SettingPage />} />
           <Route path="reports" element={<ReportsPage />} />
         </Route>
 

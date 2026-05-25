@@ -25,7 +25,7 @@ const fetchSupabaseTable = async (dataType, table, label = "") => {
   } catch (error) {
     const currentErrors =
       useSupabaseDataStore.getState().data[dataType].errors || [];
-    // console.error("Supabase error:", error.message);
+    console.error("Supabase error:", error.message);
     updateData(dataType, {
       errors: [
         ...currentErrors,
@@ -41,7 +41,7 @@ const fetchSupabaseTable = async (dataType, table, label = "") => {
 const fetchSupabaseData = async () => {
   if (!isFetchEnabled) return;
 
-  // console.log("fetch All Supabase Data");
+  console.log("fetch All Supabase Data");
 
   await Promise.all([
     fetchSupabaseTable("timeline", "timeline", "Time"),

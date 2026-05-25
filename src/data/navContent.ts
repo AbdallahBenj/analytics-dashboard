@@ -5,6 +5,7 @@ import {
   CreditCardIcon,
   SparklesIcon,
   ChartPieIcon,
+  Cog6ToothIcon,
 } from "@heroicons/react/24/outline";
 
 import DashboardLogo from "../assets/dashboard-logo.svg";
@@ -74,6 +75,12 @@ const navContent: NavContent = {
       name: "Reports",
       href: "/dashboard/reports",
       Icon: ChartPieIcon,
+      current: false,
+    },
+    {
+      name: "Setting",
+      href: "/dashboard/setting",
+      Icon: Cog6ToothIcon,
       current: false,
     },
   ],
