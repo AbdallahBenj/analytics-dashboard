@@ -155,7 +155,7 @@ src/
 │   │   ├── adminLogout.js
 │   │   ├── checkAdmin.js
 │   │   ├── fetchSupabaseData.js
-│   │   ├── insertSupabaseData.js
+│   │   ├── updateSupabaseData.js
 │   │   └── listenAuthChange.js
 │   │
 │   ├── events/
@@ -281,7 +281,7 @@ src/
 ├── generateData.ts
 ├── generateEvents.ts
         ↓
-        └── insertSupabaseData.js (Supabase Data)
+        └── updateSupabaseData.js (Supabase Data)
                 ↓
                 └── fetchSupabaseData.js (Supabase Data)
                         ↓
