@@ -10,9 +10,9 @@ const DashboardLayout = () => {
     <div>
       <DataSourceNotice />
 
-      <div className="min-h-screen flex">
+      <div className="min-h-[calc(100vh-28px)] md:min-h-[calc(100vh-32px)]  flex">
         <Sidebar />
-        <div className="w-full min-h-screen flex flex-col">
+        <div className="w-full min-h-[calc(100vh-28px)] md:min-h-[calc(100vh-32px)] flex flex-col">
           <Header />
           <PageHeader />
           <main

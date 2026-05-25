@@ -78,8 +78,8 @@ const navContent: NavContent = {
       current: false,
     },
     {
-      name: "Setting",
-      href: "/dashboard/setting",
+      name: "Settings",
+      href: "/dashboard/settings",
       Icon: Cog6ToothIcon,
       current: false,
     },

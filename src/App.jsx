@@ -9,8 +9,8 @@ import AnalyticsPage from "./pages/AnalyticsPage";
 import CustomersPage from "./pages/CustomersPage";
 import SubscriptionsPage from "./pages/SubscriptionsPage";
 import FeaturesPage from "./pages/FeaturesPage";
-import SettingPage from "./pages/SettingPage";
 import ReportsPage from "./pages/ReportsPage";
+import SettingsPage from "./pages/SettingsPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 import LoginDialog from "./components/LoginDialog.tsx";
@@ -63,7 +63,7 @@ function App() {
           <Route path="customers" element={<CustomersPage />} />
           <Route path="subscriptions" element={<SubscriptionsPage />} />
           <Route path="features" element={<FeaturesPage />} />
-          <Route path="setting" element={<SettingPage />} />
+          <Route path="settings" element={<SettingsPage />} />
           <Route path="reports" element={<ReportsPage />} />
         </Route>
 
