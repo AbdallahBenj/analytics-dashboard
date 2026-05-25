@@ -120,8 +120,11 @@ src/
 │       └── getUsersByPlan.ts
 │   
 ├── hooks/                 # Global reusable hooks
+│   ├── useDashboardData.js
+│   ├── useGlobalMockData.ts
+│   ├── useGlobalSupabaseData.js
+│   ├── useReloadDashboardData.js
 │   ├── useReloadMockData.ts
-│   ├── useGlobalMockData.ts 
 │   ├── useSystemMode.js
 │   └── useThemeMode.js
 │
@@ -150,17 +153,10 @@ src/
 │   │   ├── adminLogin.js
 │   │   ├── adminLogout.js
 │   │   ├── checkAdmin.js
-│   │   ├── fetchAllSupabaseData.js
+│   │   ├── fetchSupabaseData.js
 │   │   ├── fetchSupabaseData.js
 │   │   ├── insertSupabaseData.js
 │   │   └── listenAuthChange.js
-│   │
-│   ├── mock/
-│   │   ├── generateData.ts
-│   │   ├── generateUsers.ts
-│   │   ├── generatePayments.ts
-│   │   ├── generateSubscriptions.ts
-│   │   └── generateTimeline.ts
 │   │
 │   ├── events/
 │   │   ├── generateEvents.ts
@@ -168,18 +164,29 @@ src/
 │   │   ├── generateSubscriptionsEvents.ts
 │   │   └── generateUsersEvents.ts
 │   │
+│   ├── mock/
+│   │   ├── generateData.ts
+│   │   ├── generatePayments.ts
+│   │   ├── generateSubscriptions.ts
+│   │   ├── generateTimeline.ts
+│   │   └── generateUsers.ts
+│   │
+│   │
 │   └── utils/
-│       └── convertToDynamicTime.ts
+│   │   ├── toCamelCase.js
+│   │   ├── toDynamicTime.ts
+│       └── toSnakeCase.js
 │
 ├── store/                # Zustand global state
 │   ├── useAdminLoginStore.ts 
 │   ├── useAuthStore.ts 
-│   ├── useLoginStore.ts 
+│   ├── useDataModeStore.ts 
+│   ├── useLoginStore.ts
 │   ├── useMockDataStore.ts
 │   └── useSupabaseDataStore.js
 │
 ├── types/    
-│   ├── analyticsSectionTypes            # Global utilities
+│   ├── analyticsSectionTypes.ts          # Global utilities
 │   ├── dataTypes.ts
 │   ├── eventTypes.ts
 │   ├── overviewSectionTypes.ts
@@ -192,6 +199,7 @@ src/
 │   ├── formatCompact.ts
 │   ├── formatCurrency.ts
 │   ├── formatCurrencyCompact.ts
+│   ├── formatDate.ts
 │   ├── formatPercent.ts
 │   ├── getPercentValue.ts // Not used
 │   └── getTimeAgo.ts

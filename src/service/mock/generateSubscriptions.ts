@@ -1,4 +1,4 @@
-import convertToDynamicTime from "../utils/convertToDynamicTime.js";
+import toDynamicTime from "../utils/toDynamicTime.js";
 
 import type { User, Subscription } from "../../types/dataTypes.ts";
 
@@ -45,7 +45,7 @@ const generateSubscriptions = (users: User[] = []): Subscription[] => {
 
     // Dynamic time for each date
 
-    let subStartDate = convertToDynamicTime(startDate);
+    let subStartDate = toDynamicTime(startDate);
 
     // Ensure start date never exceeds today
 

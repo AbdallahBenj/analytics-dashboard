@@ -1,4 +1,4 @@
-import convertToDynamicTime from "../utils/convertToDynamicTime.js";
+import toDynamicTime from "../utils/toDynamicTime.js";
 
 import type { Subscription, Payment } from "../../types/dataTypes.ts";
 
@@ -30,7 +30,7 @@ const generatePayments = (subscriptions: Subscription[] = []): Payment[] => {
 
         // Determine payment status based on today's date
 
-        const paidDate = convertToDynamicTime(invoiceStart);
+        const paidDate = toDynamicTime(invoiceStart);
         paidDate.setDate(paidDate.getDate() + Math.floor(Math.random() * 3));
 
         if (invoiceStart > toDay) {

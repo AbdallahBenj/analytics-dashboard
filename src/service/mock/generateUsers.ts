@@ -1,6 +1,6 @@
 import usersNames from "../../data/usersNames.js";
 import countries from "../../data/countries.js";
-import convertToDynamicTime from "../utils/convertToDynamicTime.js";
+import toDynamicTime from "../utils/toDynamicTime.js";
 
 import type { Timeline, User } from "../../types/dataTypes.ts";
 
@@ -32,11 +32,10 @@ const generateUsers = (
       const baseDate = new Date(dateObj.date);
 
       // Dynamic time for each date
-      const userRandomCreatedAt = convertToDynamicTime(baseDate);
+      const userRandomCreatedAt = toDynamicTime(baseDate);
 
       const domains = ["gmail.com", "yahoo.com", "outlook.com"];
-      const firstName = usersNames[userNameIndex]!
-        .toLowerCase()
+      const firstName = usersNames[userNameIndex]!.toLowerCase()
         .trim()
         .split(" ")[0];
 
