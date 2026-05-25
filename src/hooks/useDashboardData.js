@@ -9,6 +9,7 @@ const useDashboardData = () => {
 
   const dashboardData = isSupabaseData ? supabaseData : mockData;
 
+  // console.log("dashboardData", dashboardData);
   return { dashboardData };
 };
 

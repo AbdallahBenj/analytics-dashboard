@@ -12,7 +12,9 @@ const fetchSupabaseTable = async (dataType, table, label = "") => {
     const { data, error } = await supabase.from(table).select("*");
     const formattedData = data.map(convertKeysToCamelCase);
 
-    if (error) throw error;
+    if (error) {
+      throw error;
+    }
 
     updateData(dataType, {
       dataValue: formattedData,
@@ -23,11 +25,11 @@ const fetchSupabaseTable = async (dataType, table, label = "") => {
   } catch (error) {
     const currentErrors =
       useSupabaseDataStore.getState().data[dataType].errors || [];
-    console.log("Supabase error:", error.message);
+    // console.error("Supabase error:", error.message);
     updateData(dataType, {
       errors: [
         ...currentErrors,
-        `${label} data failed to load ,Please try later`,
+        { id: Date.now(), label: `${label} Data`, message: "Failed to load" },
       ],
     });
     return [];
@@ -39,7 +41,7 @@ const fetchSupabaseTable = async (dataType, table, label = "") => {
 const fetchSupabaseData = async () => {
   if (!isFetchEnabled) return;
 
-  console.log("fetch All Supabase Data");
+  // console.log("fetch All Supabase Data");
 
   await Promise.all([
     fetchSupabaseTable("timeline", "timeline", "Time"),

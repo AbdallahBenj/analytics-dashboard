@@ -11,7 +11,7 @@ const DataSourceNotice = () => {
     flex justify-center items-center
     ${isSupabaseData ? "bg-green-500" : "bg-indigo-500"}`}
     >
-      <p className="text-gray-100 text-sm font-semibold">
+      <p className="text-white text-sm font-semibold">
         {isSupabaseData ? liveMode : demoMode}
       </p>
     </div>

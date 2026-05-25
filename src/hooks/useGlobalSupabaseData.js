@@ -33,8 +33,11 @@ const useGlobalSupabaseData = () => {
     ...(dataStore.paymentsEvents?.errors || []),
   ];
 
+  const isErrors = errors.length > 0;
+
   const supabaseData = {
     isLoading: isLoading,
+    isErrors: isErrors,
     errors: errors,
 
     timeline: fetchedTimeline,
