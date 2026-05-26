@@ -180,7 +180,7 @@ src/
 ├── store/                # Zustand global state
 │   ├── useAdminLoginStore.ts 
 │   ├── useAuthStore.ts 
-│   ├── useDataModeStore.ts 
+│   ├── useDataSourceStore.ts
 │   ├── useLoginStore.ts
 │   ├── useMockDataStore.ts
 │   └── useSupabaseDataStore.js

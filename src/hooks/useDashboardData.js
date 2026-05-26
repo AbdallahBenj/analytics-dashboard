@@ -1,13 +1,15 @@
 import useMockData from "./useMockData";
 import useSupabaseData from "./useSupabaseData";
-import useDataModeStore from "../store/useDataModeStore";
+import useDataSourceStore from "../store/useDataSourceStore";
 
 const useDashboardData = () => {
-  const isSupabaseData = useDataModeStore((state) => state.isSupabaseData);
+  const dataSource = useDataSourceStore((state) => state.dataSource);
+  const isMockData = dataSource === "mockData";
+
   const { mockData } = useMockData();
   const { supabaseData } = useSupabaseData();
 
-  const dashboardData = isSupabaseData ? supabaseData : mockData;
+  const dashboardData = isMockData ? mockData : supabaseData;
 
   // console.log("mockData", mockData);
   // console.log("supabaseData", supabaseData);

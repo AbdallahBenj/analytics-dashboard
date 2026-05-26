@@ -41,7 +41,7 @@ const fetchSupabaseTable = async (dataType, table, label = "") => {
 const fetchSupabaseData = async () => {
   if (!isFetchEnabled) return;
 
-  console.log("fetch All Supabase Data");
+  // console.log("fetch All Supabase Data");
 
   await Promise.all([
     fetchSupabaseTable("timeline", "timeline", "Time"),

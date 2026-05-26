@@ -6,22 +6,21 @@ import insightFlowImageDark from "../images/insight-flow-dark-screenshot.png";
 import MainHeader from "../layout/MainHeader";
 
 // Call Data Mode store
-import useDataModeStore from "../store/useDataModeStore.js";
+import useDataSourceStore from "../store/useDataSourceStore.js";
 
 const HomePage = () => {
   const Navigate = useNavigate();
 
-  // Update Data Mode
-  const setIsSupabaseData = useDataModeStore(
-    (state) => state.setIsSupabaseData,
-  );
+  // Update Data Source
+  const setDataSource = useDataSourceStore((state) => state.setDataSource);
+
   const handleDashboardBtn = () => {
-    setIsSupabaseData(true);
+    setDataSource("supabaseData");
     Navigate("/dashboard/overview");
   };
 
   const handleLiveDemoBtn = () => {
-    setIsSupabaseData(false);
+    setDataSource("mockData");
     Navigate("/dashboard/overview");
   };
 

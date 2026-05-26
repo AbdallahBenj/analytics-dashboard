@@ -1,7 +1,10 @@
-import useDataModeStore from "../store/useDataModeStore.js";
+import useDataSourceStore from "../store/useDataSourceStore.js";
 
 const DataSourceNotice = () => {
-  const isSupabaseData = useDataModeStore((state) => state.isSupabaseData);
+  const dataSource = useDataSourceStore((state) => state.dataSource);
+  const isMockData = dataSource === "mockData";
+
+  dataSource;
 
   const demoMode = "Demo Mode — Showing mock analytics data";
   const liveMode = "Live Mode — Connected to Supabase";
@@ -9,10 +12,10 @@ const DataSourceNotice = () => {
     <div
       className={`w-full h-fit min-h-7 md:min-h-8
     flex justify-center items-center
-    ${isSupabaseData ? "bg-green-500" : "bg-indigo-500"}`}
+    ${isMockData ? "bg-indigo-500" : "bg-green-500"}`}
     >
       <p className="text-white text-sm font-semibold">
-        {isSupabaseData ? liveMode : demoMode}
+        {isMockData ? demoMode : liveMode}
       </p>
     </div>
   );

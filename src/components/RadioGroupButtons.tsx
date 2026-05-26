@@ -15,7 +15,7 @@ const RadioGroupButtons = <Type extends string>({
     <RadioGroup
       value={state}
       onChange={setState}
-      aria-label="Select range"
+      aria-label="Select option"
       className="flex flex-wrap justify-end gap-4"
     >
       {(Object.entries(stateConfig) as [Type, { label: string }][]).map(
