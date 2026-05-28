@@ -41,7 +41,7 @@ const OverviewActivityTable = () => {
   return (
     <div
       className="recent-activity-table h-fit
-            rounded-2xl p-4 cursor-pointer
+            rounded-2xl p-4 cursor-default
             col-span-4
             
             bg-white/60 dark:bg-gray-900/40

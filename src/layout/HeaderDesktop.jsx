@@ -33,7 +33,7 @@ const HeaderDesktop = () => {
     >
       <div
         className=" w-full px-2 z-20
-        rounded-2xl cursor-pointer
+        rounded-2xl cursor-default
         
         bg-white/60 dark:bg-gray-900/40
         backdrop-blur-md

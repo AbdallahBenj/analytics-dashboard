@@ -72,7 +72,7 @@ const OverviewRevenueChart = () => {
   return (
     <div
       className="relative primary-chart h-auto
-            rounded-2xl p-4 cursor-pointer 
+            rounded-2xl p-4 cursor-default 
             col-span-4 md:col-span-2 lg:col-span-3
             flex flex-col
 

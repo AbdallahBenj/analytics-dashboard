@@ -37,7 +37,7 @@ const OverviewPlansPieChart = () => {
   return (
     <div
       className="relative primary-chart h-96 md:h-auto
-            rounded-2xl p-4 cursor-pointer
+            rounded-2xl p-4 cursor-default
             col-span-4 md:col-span-2 lg:col-span-1 
 
             bg-white/60 dark:bg-gray-900/40

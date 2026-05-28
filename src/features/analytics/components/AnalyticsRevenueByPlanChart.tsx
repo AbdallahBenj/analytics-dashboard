@@ -73,7 +73,7 @@ const AnalyticsRevenueByPlanChart = () => {
   return (
     <div
       className="analytics-chart-revenue h-auto
-            rounded-2xl p-4 cursor-pointer 
+            rounded-2xl p-4 cursor-default 
             col-span-4 md:col-span-4 lg:col-span-4
             flex flex-col
 

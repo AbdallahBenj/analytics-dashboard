@@ -77,7 +77,7 @@ const OverviewMiniCards = () => {
             <div
               key={id}
               className="mini-card flex-1 min-h-16
-            rounded-2xl p-4 cursor-pointer
+            rounded-2xl p-4 cursor-default
             flex flex-row items-center gap-3
 
             bg-white/60 dark:bg-gray-900/40

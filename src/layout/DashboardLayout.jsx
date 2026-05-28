@@ -12,7 +12,10 @@ const DashboardLayout = () => {
 
       <div className="min-h-[calc(100vh-28px)] md:min-h-[calc(100vh-32px)]  flex">
         <Sidebar />
-        <div className="w-full min-h-[calc(100vh-28px)] md:min-h-[calc(100vh-32px)] flex flex-col">
+        <div
+          className="w-full flex flex-col
+        min-h-[calc(100vh-28px)] md:min-h-[calc(100vh-32px)]"
+        >
           <Header />
           <PageHeader />
           <main
