@@ -15,17 +15,20 @@ import {
 
 import useMockDataStore from "../store/useMockDataStore.js";
 
-import type { DataTypesMap, EventsTypesMap } from "../types/storeTypes.js";
+import type { DataTypesMap } from "../types/storeTypes.js";
 
 const useReloadMockData = () => {
   const retryFetchData = useMockDataStore((state) => state.retryFetchData);
-  const retryFetchEvents = useMockDataStore((state) => state.retryFetchEvents);
+  // const retryFetchEvents = useMockDataStore((state) => state.retryFetchEvents);
 
   const dataMap = {
     timeline,
     users,
     subscriptions,
     payments,
+    usersEvents,
+    subscriptionsEvents,
+    paymentsEvents,
   };
 
   const LabelDataMap = {
@@ -33,19 +36,22 @@ const useReloadMockData = () => {
     users: "Users data",
     subscriptions: "Subscriptions data",
     payments: "Payments data",
-  };
-
-  const eventsMap = {
-    usersEvents,
-    subscriptionsEvents,
-    paymentsEvents,
-  };
-
-  const LabelEventsMap = {
     usersEvents: "Users events",
     subscriptionsEvents: "Subscriptions events",
     paymentsEvents: "Payments events",
   };
+
+  // const eventsMap = {
+  //   usersEvents,
+  //   subscriptionsEvents,
+  //   paymentsEvents,
+  // };
+
+  // const LabelEventsMap = {
+  //   usersEvents: "Users events",
+  //   subscriptionsEvents: "Subscriptions events",
+  //   paymentsEvents: "Payments events",
+  // };
 
   // Retry fetch data and events functions:
   const retryData = () => {
@@ -54,15 +60,15 @@ const useReloadMockData = () => {
     });
   };
 
-  const retryEvents = () => {
-    (Object.keys(eventsMap) as (keyof EventsTypesMap)[]).forEach((key) => {
-      retryFetchEvents(key, eventsMap[key], LabelEventsMap[key]);
-    });
-  };
+  // const retryEvents = () => {
+  //   (Object.keys(eventsMap) as (keyof EventsTypesMap)[]).forEach((key) => {
+  //     retryFetchEvents(key, eventsMap[key], LabelEventsMap[key]);
+  //   });
+  // };
 
   const reloadMockData = () => {
     retryData();
-    retryEvents();
+    // retryEvents();
   };
 
   return reloadMockData;

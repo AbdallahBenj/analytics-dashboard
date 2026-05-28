@@ -1,6 +1,9 @@
 import { useEffect } from "react";
 import useMockDataStore from "../store/useMockDataStore.js";
 
+// test
+import generateMockData from "../service/mock/generateMockData.js";
+
 import {
   timeline,
   users,
@@ -14,57 +17,100 @@ import {
   paymentsEvents,
 } from "../service/events/generateEvents.js";
 
-import type { DataTypesMap, EventsTypesMap } from "../types/storeTypes.js";
+import type { DataTypesMap } from "../types/storeTypes.js";
 
 const useMockData = () => {
   // Data and Events
   const dataStore = useMockDataStore((state) => state.data);
-  const eventsStore = useMockDataStore((state) => state.events);
+  // const eventsStore = useMockDataStore((state) => state.events);
 
   // Get the fetch functions and initialization flag
   const fetchData = useMockDataStore((state) => state.fetchData);
-  const fetchEvents = useMockDataStore((state) => state.fetchEvents);
+  // const fetchEvents = useMockDataStore((state) => state.fetchEvents);
   const setHasFetched = useMockDataStore((state) => state.setHasFetched);
   const hasFetched = useMockDataStore((state) => state.hasFetched);
 
-  const dataMap = {
-    timeline,
-    users,
-    subscriptions,
-    payments,
-  };
+  // const dataMap = {
+  //   timeline,
+  //   users,
+  //   subscriptions,
+  //   payments,
+  // };
 
-  const LabelDataMap = {
-    timeline: "Time data",
-    users: "Users data",
-    subscriptions: "Subscriptions data",
-    payments: "Payments data",
-  };
+  // const LabelDataMap = {
+  //   timeline: "Time data",
+  //   users: "Users data",
+  //   subscriptions: "Subscriptions data",
+  //   payments: "Payments data",
+  // };
 
-  const eventsMap = {
-    usersEvents,
-    subscriptionsEvents,
-    paymentsEvents,
-  };
+  // const eventsMap = {
+  //   usersEvents,
+  //   subscriptionsEvents,
+  //   paymentsEvents,
+  // };
 
-  const LabelEventsMap = {
-    usersEvents: "Users events",
-    subscriptionsEvents: "Subscriptions events",
-    paymentsEvents: "Payments events",
-  };
+  // const LabelEventsMap = {
+  //   usersEvents: "Users events",
+  //   subscriptionsEvents: "Subscriptions events",
+  //   paymentsEvents: "Payments events",
+  // };
 
   // Fetch data and events on mount (only once):
   useEffect(() => {
     // Only fetch if we haven't already fetched
     if (hasFetched) return;
 
+    // test
+    const {
+      timeline,
+      users,
+      subscriptions,
+      payments,
+      usersEvents,
+      subscriptionsEvents,
+      paymentsEvents,
+    } = generateMockData();
+
+    const dataMap = {
+      timeline,
+      users,
+      subscriptions,
+      payments,
+      usersEvents,
+      subscriptionsEvents,
+      paymentsEvents,
+    };
+
+    const LabelDataMap = {
+      timeline: "Time data",
+      users: "Users data",
+      subscriptions: "Subscriptions data",
+      payments: "Payments data",
+      usersEvents: "Users events",
+      subscriptionsEvents: "Subscriptions events",
+      paymentsEvents: "Payments events",
+    };
+
+    // const eventsMap = {
+    //   usersEvents,
+    //   subscriptionsEvents,
+    //   paymentsEvents,
+    // };
+
+    // const LabelEventsMap = {
+    //   usersEvents: "Users events",
+    //   subscriptionsEvents: "Subscriptions events",
+    //   paymentsEvents: "Payments events",
+    // };
+
     (Object.keys(dataMap) as (keyof DataTypesMap)[]).forEach((key) => {
       fetchData(key, dataMap[key], LabelDataMap[key]);
     });
 
-    (Object.keys(eventsMap) as (keyof EventsTypesMap)[]).forEach((key) => {
-      fetchEvents(key, eventsMap[key], LabelEventsMap[key]);
-    });
+    // (Object.keys(eventsMap) as (keyof EventsTypesMap)[]).forEach((key) => {
+    //   fetchEvents(key, eventsMap[key], LabelEventsMap[key]);
+    // });
 
     // Mark that initial fetch has been done
     setHasFetched(true);
@@ -76,35 +122,36 @@ const useMockData = () => {
     users: dataStore.users?.dataValue || [],
     subscriptions: dataStore.subscriptions?.dataValue || [],
     payments: dataStore.payments?.dataValue || [],
+    usersEvents: dataStore.usersEvents?.dataValue || [],
+    subscriptionsEvents: dataStore.subscriptionsEvents?.dataValue || [],
+    paymentsEvents: dataStore.paymentsEvents?.dataValue || [],
   };
 
-  const fetchedEvents = {
-    usersEvents: eventsStore.usersEvents?.eventsValue || [],
-    subscriptionsEvents: eventsStore.subscriptionsEvents?.eventsValue || [],
-    paymentsEvents: eventsStore.paymentsEvents?.eventsValue || [],
-  };
+  // const fetchedEvents = {
+
+  // };
 
   // Get loading status:
   const isDataLoading = Object.values(dataStore || {}).some(
     (item) => item?.loading,
   );
 
-  const isEventsLoading = Object.values(eventsStore || {}).some(
-    (item) => item?.loading,
-  );
+  // const isEventsLoading = Object.values(eventsStore || {}).some(
+  //   (item) => item?.loading,
+  // );
 
-  const isLoading = isDataLoading || isEventsLoading;
+  const isLoading = isDataLoading;
 
   // Get errors:
   const dataErrors = Object.values(dataStore || {}).flatMap(
     (item) => item?.errors || [],
   );
 
-  const eventsErrors = Object.values(eventsStore || {}).flatMap(
-    (item) => item?.errors || [],
-  );
+  // const eventsErrors = Object.values(eventsStore || {}).flatMap(
+  //   (item) => item?.errors || [],
+  // );
 
-  const errors = [...dataErrors, ...eventsErrors];
+  const errors = [...dataErrors];
 
   const isErrors = errors.length > 0;
 
@@ -118,9 +165,9 @@ const useMockData = () => {
     subscriptions: fetchedData.subscriptions,
     payments: fetchedData.payments,
 
-    usersEvents: fetchedEvents.usersEvents,
-    subscriptionsEvents: fetchedEvents.subscriptionsEvents,
-    paymentsEvents: fetchedEvents.paymentsEvents,
+    usersEvents: fetchedData.usersEvents,
+    subscriptionsEvents: fetchedData.subscriptionsEvents,
+    paymentsEvents: fetchedData.paymentsEvents,
   };
 
   // console.log("mockData", mockData);

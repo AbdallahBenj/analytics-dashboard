@@ -28,29 +28,46 @@ const useMockDataStore = create<StoreType>((set, get) => ({
       errors: [],
       dataValue: [],
     },
-  },
-
-  // Initial Events Object // events: {eventType: {isLoading, error, eventValue}}
-
-  events: {
     usersEvents: {
       loading: false,
       errors: [],
-      eventsValue: [],
+      dataValue: [],
     },
 
     subscriptionsEvents: {
       loading: false,
       errors: [],
-      eventsValue: [],
+      dataValue: [],
     },
 
     paymentsEvents: {
       loading: false,
       errors: [],
-      eventsValue: [],
+      dataValue: [],
     },
   },
+
+  // Initial Events Object // events: {eventType: {isLoading, error, eventValue}}
+
+  // events: {
+  //   usersEvents: {
+  //     loading: false,
+  //     errors: [],
+  //     eventsValue: [],
+  //   },
+
+  //   subscriptionsEvents: {
+  //     loading: false,
+  //     errors: [],
+  //     eventsValue: [],
+  //   },
+
+  //   paymentsEvents: {
+  //     loading: false,
+  //     errors: [],
+  //     eventsValue: [],
+  //   },
+  // },
 
   fetchData: async (dataType, realData, label) => {
     const state = get();
@@ -118,79 +135,79 @@ const useMockDataStore = create<StoreType>((set, get) => ({
     }
   },
 
-  fetchEvents: async (eventsType, realEvents, label) => {
-    const state = get();
+  // fetchEvents: async (eventsType, realEvents, label) => {
+  //   const state = get();
 
-    if (state.events[eventsType]?.loading) return;
-    set({
-      events: {
-        ...state.events,
-        [eventsType]: {
-          ...state.events[eventsType],
-          loading: true,
-          errors: [],
-          eventsValue: [],
-        },
-      },
-    });
+  //   if (state.events[eventsType]?.loading) return;
+  //   set({
+  //     events: {
+  //       ...state.events,
+  //       [eventsType]: {
+  //         ...state.events[eventsType],
+  //         loading: true,
+  //         errors: [],
+  //         eventsValue: [],
+  //       },
+  //     },
+  //   });
 
-    try {
-      await new Promise((res) => setTimeout(res, 500));
-      const isSuccess = Math.random() >= 0.05;
+  //   try {
+  //     await new Promise((res) => setTimeout(res, 500));
+  //     const isSuccess = Math.random() >= 0.05;
 
-      if (isSuccess) {
-        set((state) => ({
-          events: {
-            ...state.events,
-            [eventsType]: {
-              ...state.events[eventsType],
-              loading: false,
-              errors: [],
-              eventsValue: realEvents,
-            },
-          },
-        }));
-      } else {
-        set((state) => ({
-          events: {
-            ...state.events,
-            [eventsType]: {
-              ...state.events[eventsType],
-              loading: false,
-              errors: [{ id: Date.now(), label, message: "Failed to load" }],
-              eventsValue: [],
-            },
-          },
-        }));
-      }
-    } catch (err) {
-      set((state) => ({
-        events: {
-          ...state.events,
-          [eventsType]: {
-            ...state.events[eventsType],
-            loading: false,
-            errors: [
-              {
-                id: Date.now(),
-                label,
-                message: err instanceof Error ? err.message : "Unknown error",
-              },
-            ],
-            eventsValue: [],
-          },
-        },
-      }));
-    }
-  },
+  //     if (isSuccess) {
+  //       set((state) => ({
+  //         events: {
+  //           ...state.events,
+  //           [eventsType]: {
+  //             ...state.events[eventsType],
+  //             loading: false,
+  //             errors: [],
+  //             eventsValue: realEvents,
+  //           },
+  //         },
+  //       }));
+  //     } else {
+  //       set((state) => ({
+  //         events: {
+  //           ...state.events,
+  //           [eventsType]: {
+  //             ...state.events[eventsType],
+  //             loading: false,
+  //             errors: [{ id: Date.now(), label, message: "Failed to load" }],
+  //             eventsValue: [],
+  //           },
+  //         },
+  //       }));
+  //     }
+  //   } catch (err) {
+  //     set((state) => ({
+  //       events: {
+  //         ...state.events,
+  //         [eventsType]: {
+  //           ...state.events[eventsType],
+  //           loading: false,
+  //           errors: [
+  //             {
+  //               id: Date.now(),
+  //               label,
+  //               message: err instanceof Error ? err.message : "Unknown error",
+  //             },
+  //           ],
+  //           eventsValue: [],
+  //         },
+  //       },
+  //     }));
+  //   }
+  // },
 
   retryFetchData: (dataType, realData, label) => {
     get().fetchData(dataType, realData, label);
   },
 
-  retryFetchEvents: (eventsType, realEvents, label) => {
-    get().fetchEvents(eventsType, realEvents, label);
-  },
+  // retryFetchEvents: (eventsType, realEvents, label) => {
+  //   get().fetchEvents(eventsType, realEvents, label);
+  // },
 
   // Mark that initial fetch has been completed
   setHasFetched: (value) => {

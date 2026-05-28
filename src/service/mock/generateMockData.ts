@@ -8,7 +8,6 @@ import generateSubscriptionsEvents from "../events/generateSubscriptionsEvents.j
 import generatePaymentsEvents from "../events/generatePaymentsEvents.js";
 
 const generateMockData = () => {
-  console.log("Generate Mock Data");
   const timeline = generateTimeline(366);
   const users = generateUsers(timeline);
   const subscriptions = generateSubscriptions(users);
@@ -17,6 +16,8 @@ const generateMockData = () => {
   const usersEvents = generateUsersEvents(users);
   const subscriptionsEvents = generateSubscriptionsEvents(subscriptions);
   const paymentsEvents = generatePaymentsEvents(payments);
+
+  // console.log("generateMockData");
 
   return {
     timeline,
