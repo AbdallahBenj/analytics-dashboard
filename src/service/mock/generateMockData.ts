@@ -1,3 +1,6 @@
+import useMockDataStore from "../../store/useMockDataStore.js";
+import type { DataTypesMap } from "../../types/MockDataStoreTypes.js";
+
 import generateTimeline from "./generateTimeline.js";
 import generateUsers from "./generateUsers.js";
 import generateSubscriptions from "./generateSubscriptions.js";
@@ -17,9 +20,7 @@ const generateMockData = () => {
   const subscriptionsEvents = generateSubscriptionsEvents(subscriptions);
   const paymentsEvents = generatePaymentsEvents(payments);
 
-  // console.log("generateMockData");
-
-  return {
+  const mockData = {
     timeline,
     users,
     subscriptions,
@@ -28,6 +29,16 @@ const generateMockData = () => {
     subscriptionsEvents,
     paymentsEvents,
   };
+
+  const setGenerateData = useMockDataStore.getState().setGenerateData;
+
+  (Object.keys(mockData) as (keyof DataTypesMap)[]).forEach((key) =>
+    setGenerateData(key, mockData[key]),
+  );
+
+  // console.log("generateMockData");
+
+  return mockData;
 };
 
 export default generateMockData;
