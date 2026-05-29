@@ -4,7 +4,7 @@ import type {
   UsersEvents,
   SubsEvents,
   PaymentsEvents,
-} from "./eventsTypes.js";
+} from "./dataTypes.js";
 
 // feature Overview Section OverviewMiniCards Types
 

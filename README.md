@@ -190,7 +190,7 @@ src/
 │   ├── dataTypes.ts
 │   ├── eventTypes.ts
 │   ├── overviewSectionTypes.ts
-│   ├── storeTypes.ts
+│   ├── useMockDataStore.ts
 │   ├── utilsTypes.ts
 │   └── .ts
 │
@@ -259,11 +259,11 @@ src/
 ├── generateData.ts
 ├── generateEvents.ts
         ↓
-        └── useMockDataStore.ts (Zustand - Simulate Fetch and Store Data and Events)
+        └── useMockDataStore.ts (Zustand - Simulate Fetch and Store Mock Data and Events)
                 ↓
-                └── useMockData.ts (Mock Data and Events Hook)
+                └── useMockData.ts (Get Mock Data and Events from Zustand MockDataStore)
                         ↓
-                        └── useDashboardData.js (Dashboard Data Mode - MockData/SupabaseData)
+                        └── useDashboardData.js (Dashboard Data Mode - Switch between MockData/SupabaseData)
                                 ↓
                                 └── Components (Ui logic)
                                         ↓
@@ -281,15 +281,15 @@ src/
 ├── generateData.ts
 ├── generateEvents.ts
         ↓
-        └── updateSupabaseData.js (Supabase Data)
+        └── updateSupabaseData.js (Update Supabase Data)
                 ↓
-                └── fetchSupabaseData.js (Supabase Data)
+                └── fetchSupabaseData.js (Fetch Supabase Data)
                         ↓
-                        └── useSupabaseDataStore.js (Zustand - Store Fetched Data and Events)
+                        └── useSupabaseDataStore.js (Zustand - Store Fetched Supabase Data and Events)
                                 ↓
-                                └── useSupabaseData.js (Supabase Data and Events Hook)
+                                └── useSupabaseData.js (Get Supabase Data and Events from Zustand SupabaseDataStore)
                                         ↓
-                                        └── useDashboardData.js (Dashboard Data Mode - MockData/SupabaseData)
+                                        └── useDashboardData.js (Dashboard Data Mode - Switch between MockData/SupabaseData)
                                                 ↓
                                                 └── Components (Ui logic)
                                                         ↓

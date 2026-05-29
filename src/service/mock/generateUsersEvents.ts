@@ -1,7 +1,7 @@
 import getTimeAgo from "../../utils/getTimeAgo.js";
 
 import type { User } from "../../types/dataTypes.js";
-import type { UsersEvents } from "../../types/eventsTypes.js";
+import type { UsersEvents } from "../../types/dataTypes.js";
 
 const generateUsersEvents = (usersData: User[]): UsersEvents[] => {
   if (!usersData || usersData.length === 0) {

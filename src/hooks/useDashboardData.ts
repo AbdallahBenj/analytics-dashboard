@@ -1,6 +1,6 @@
-import useMockData from "./useMockData";
-import useSupabaseData from "./useSupabaseData";
-import useDataSourceStore from "../store/useDataSourceStore";
+import useMockData from "./useMockData.js";
+import useSupabaseData from "./useSupabaseData.js";
+import useDataSourceStore from "../store/useDataSourceStore.js";
 
 const useDashboardData = () => {
   const dataSource = useDataSourceStore((state) => state.dataSource);

@@ -1,17 +1,19 @@
-import type { Timeline, User, Subscription, Payment } from "./dataTypes.js";
-
 import type {
+  Timeline,
+  User,
+  Subscription,
+  Payment,
   UsersEvents,
   SubsEvents,
   PaymentsEvents,
-} from "./eventsTypes.js";
+} from "./dataTypes.js";
 
 type DataTypesMap = {
   timeline: Timeline[];
   users: User[];
   subscriptions: Subscription[];
   payments: Payment[];
-    usersEvents: UsersEvents[];
+  usersEvents: UsersEvents[];
   subscriptionsEvents: SubsEvents[];
   paymentsEvents: PaymentsEvents[];
 };
@@ -22,15 +24,16 @@ type DataTypesMap = {
 //   paymentsEvents: PaymentsEvents[];
 // };
 
-type StoreType = {
+type MockDataStoreTypes = {
   hasFetched: boolean;
+  hasRefresh: boolean;
+
   data: {
     [key in keyof DataTypesMap]: {
       loading: boolean;
       errors: { id: number; label: string; message: string }[];
       dataValue: DataTypesMap[key];
     };
-    
   };
   // events: {
   //   [key in keyof EventsTypesMap]: {
@@ -62,6 +65,7 @@ type StoreType = {
   // ) => void;
 
   setHasFetched: (value: boolean) => void;
+  setHasRefreshed: (value: boolean) => void;
 };
 
-export type { StoreType, DataTypesMap };
+export type { MockDataStoreTypes, DataTypesMap };

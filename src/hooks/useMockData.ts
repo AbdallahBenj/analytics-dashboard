@@ -4,20 +4,7 @@ import useMockDataStore from "../store/useMockDataStore.js";
 // test
 import generateMockData from "../service/mock/generateMockData.js";
 
-import {
-  timeline,
-  users,
-  subscriptions,
-  payments,
-} from "../service/mock/generateData.js";
-
-import {
-  usersEvents,
-  subscriptionsEvents,
-  paymentsEvents,
-} from "../service/events/generateEvents.js";
-
-import type { DataTypesMap } from "../types/storeTypes.js";
+import type { DataTypesMap } from "../types/MockDataStoreTypes.js";
 
 const useMockData = () => {
   // Data and Events
@@ -29,32 +16,6 @@ const useMockData = () => {
   // const fetchEvents = useMockDataStore((state) => state.fetchEvents);
   const setHasFetched = useMockDataStore((state) => state.setHasFetched);
   const hasFetched = useMockDataStore((state) => state.hasFetched);
-
-  // const dataMap = {
-  //   timeline,
-  //   users,
-  //   subscriptions,
-  //   payments,
-  // };
-
-  // const LabelDataMap = {
-  //   timeline: "Time data",
-  //   users: "Users data",
-  //   subscriptions: "Subscriptions data",
-  //   payments: "Payments data",
-  // };
-
-  // const eventsMap = {
-  //   usersEvents,
-  //   subscriptionsEvents,
-  //   paymentsEvents,
-  // };
-
-  // const LabelEventsMap = {
-  //   usersEvents: "Users events",
-  //   subscriptionsEvents: "Subscriptions events",
-  //   paymentsEvents: "Payments events",
-  // };
 
   // Fetch data and events on mount (only once):
   useEffect(() => {
@@ -92,25 +53,9 @@ const useMockData = () => {
       paymentsEvents: "Payments events",
     };
 
-    // const eventsMap = {
-    //   usersEvents,
-    //   subscriptionsEvents,
-    //   paymentsEvents,
-    // };
-
-    // const LabelEventsMap = {
-    //   usersEvents: "Users events",
-    //   subscriptionsEvents: "Subscriptions events",
-    //   paymentsEvents: "Payments events",
-    // };
-
     (Object.keys(dataMap) as (keyof DataTypesMap)[]).forEach((key) => {
       fetchData(key, dataMap[key], LabelDataMap[key]);
     });
-
-    // (Object.keys(eventsMap) as (keyof EventsTypesMap)[]).forEach((key) => {
-    //   fetchEvents(key, eventsMap[key], LabelEventsMap[key]);
-    // });
 
     // Mark that initial fetch has been done
     setHasFetched(true);
@@ -136,20 +81,12 @@ const useMockData = () => {
     (item) => item?.loading,
   );
 
-  // const isEventsLoading = Object.values(eventsStore || {}).some(
-  //   (item) => item?.loading,
-  // );
-
   const isLoading = isDataLoading;
 
   // Get errors:
   const dataErrors = Object.values(dataStore || {}).flatMap(
     (item) => item?.errors || [],
   );
-
-  // const eventsErrors = Object.values(eventsStore || {}).flatMap(
-  //   (item) => item?.errors || [],
-  // );
 
   const errors = [...dataErrors];
 

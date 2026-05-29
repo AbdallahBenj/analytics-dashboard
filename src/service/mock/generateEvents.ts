@@ -1,4 +1,4 @@
-import { users, subscriptions, payments } from "../mock/generateData.js";
+import { users, subscriptions, payments } from "./generateData.js";
 
 import generateUsersEvents from "./generateUsersEvents.js";
 import generateSubscriptionsEvents from "./generateSubscriptionsEvents.js";

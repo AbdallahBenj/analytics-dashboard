@@ -2,7 +2,7 @@ import getTimeAgo from "../../utils/getTimeAgo.js";
 import formatCurrency from "../../utils/formatCurrency.js";
 
 import type { Payment } from "../../types/dataTypes.js";
-import type { PaymentsEvents } from "../../types/eventsTypes.js";
+import type { PaymentsEvents } from "../../types/dataTypes.js";
 
 const generatePaymentsEvents = (
   paymentsData: Payment[] = [],

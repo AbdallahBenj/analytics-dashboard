@@ -1,10 +1,11 @@
 import { create } from "zustand";
 
-import type { StoreType } from "../types/storeTypes.js";
+import type { MockDataStoreTypes } from "../types/MockDataStoreTypes.js";
 
-const useMockDataStore = create<StoreType>((set, get) => ({
+const useMockDataStore = create<MockDataStoreTypes>((set, get) => ({
   // Initialization flag to prevent duplicate fetches
   hasFetched: false,
+  hasRefresh: false,
 
   // Initial Data Object // data: {dataType: {isLoading, error, dataValue}}
   data: {
@@ -46,28 +47,6 @@ const useMockDataStore = create<StoreType>((set, get) => ({
       dataValue: [],
     },
   },
-
-  // Initial Events Object // events: {eventType: {isLoading, error, eventValue}}
-
-  // events: {
-  //   usersEvents: {
-  //     loading: false,
-  //     errors: [],
-  //     eventsValue: [],
-  //   },
-
-  //   subscriptionsEvents: {
-  //     loading: false,
-  //     errors: [],
-  //     eventsValue: [],
-  //   },
-
-  //   paymentsEvents: {
-  //     loading: false,
-  //     errors: [],
-  //     eventsValue: [],
-  //   },
-  // },
 
   fetchData: async (dataType, realData, label) => {
     const state = get();
@@ -205,13 +184,12 @@ const useMockDataStore = create<StoreType>((set, get) => ({
     get().fetchData(dataType, realData, label);
   },
 
-  // retryFetchEvents: (eventsType, realEvents, label) => {
-  //   get().fetchEvents(eventsType, realEvents, label);
-  // },
-
   // Mark that initial fetch has been completed
   setHasFetched: (value) => {
     set({ hasFetched: value });
+  },
+  setHasRefreshed: (value) => {
+    set({ hasRefresh: value });
   },
 }));
 

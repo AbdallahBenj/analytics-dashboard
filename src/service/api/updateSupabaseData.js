@@ -6,13 +6,10 @@ import {
   users,
   subscriptions,
   payments,
-} from "../mock/generateData.js";
-
-import {
   usersEvents,
   subscriptionsEvents,
   paymentsEvents,
-} from "../events/generateEvents.js";
+} from "../mock/generateData.js";
 
 const isClearDataEnabled = false;
 const isUpsertDataEnabled = false;

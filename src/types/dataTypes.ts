@@ -35,4 +35,41 @@ type Payment = {
   invoiceEnd: string;
 };
 
-export type { Timeline, User, Subscription, Payment };
+type EventsTitle = string;
+
+type UsersEvents = {
+  userId: string;
+  userName: string;
+  userEmail: string;
+  eventDate: string | null;
+  eventTimeAgo?: string;
+};
+
+type SubsEvents = {
+  userName: string;
+  subscriptionId: string;
+  subscriptionPlan: string;
+  subscriptionStatus: string;
+  eventDate: string | null;
+  eventTimeAgo?: string;
+};
+
+type PaymentsEvents = {
+  paymentId: string;
+  paymentStatus: string;
+  userName: string;
+  eventDate: string | null;
+  invoicePrice: string;
+  eventTimeAgo?: string;
+};
+
+export type {
+  Timeline,
+  User,
+  Subscription,
+  Payment,
+  EventsTitle,
+  UsersEvents,
+  SubsEvents,
+  PaymentsEvents,
+};
