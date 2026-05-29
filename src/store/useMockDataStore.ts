@@ -5,10 +5,23 @@ import type { MockDataStoreTypes } from "../types/MockDataStoreTypes.js";
 const useMockDataStore = create<MockDataStoreTypes>((set, get) => ({
   // Initialization flag to prevent duplicate fetches
   hasFetched: false,
+
+  // Not used yet
   hasRefresh: false,
 
+  // Initial Generated Data Object
+  generatedData: {
+    timeline: [],
+    users: [],
+    subscriptions: [],
+    payments: [],
+    usersEvents: [],
+    subscriptionsEvents: [],
+    paymentsEvents: [],
+  },
+
   // Initial Data Object // data: {dataType: {isLoading, error, dataValue}}
-  data: {
+  fetchedData: {
     timeline: {
       loading: false,
       errors: [],
@@ -48,15 +61,20 @@ const useMockDataStore = create<MockDataStoreTypes>((set, get) => ({
     },
   },
 
-  fetchData: async (dataType, realData, label) => {
+  setGenerateData: (dataType, dataValue) =>
+    set((state) => ({
+      generatedData: { ...state.generatedData, [dataType]: dataValue },
+    })),
+
+  setFetchData: async (dataType, realData, label) => {
     const state = get();
-    if (state.data[dataType]?.loading) return;
+    if (state.fetchedData[dataType]?.loading) return;
 
     set({
-      data: {
-        ...state.data,
+      fetchedData: {
+        ...state.fetchedData,
         [dataType]: {
-          ...state.data[dataType],
+          ...state.fetchedData[dataType],
           loading: true,
           errors: [],
           dataValue: [],
@@ -70,10 +88,10 @@ const useMockDataStore = create<MockDataStoreTypes>((set, get) => ({
 
       if (isSuccess) {
         set((state) => ({
-          data: {
-            ...state.data,
+          fetchedData: {
+            ...state.fetchedData,
             [dataType]: {
-              ...state.data[dataType],
+              ...state.fetchedData[dataType],
               loading: false,
               errors: [],
               dataValue: realData,
@@ -82,10 +100,10 @@ const useMockDataStore = create<MockDataStoreTypes>((set, get) => ({
         }));
       } else {
         set((state) => ({
-          data: {
-            ...state.data,
+          fetchedData: {
+            ...state.fetchedData,
             [dataType]: {
-              ...state.data[dataType],
+              ...state.fetchedData[dataType],
               loading: false,
               errors: [{ id: Date.now(), label, message: "Failed to load" }],
               dataValue: [],
@@ -95,10 +113,10 @@ const useMockDataStore = create<MockDataStoreTypes>((set, get) => ({
       }
     } catch (err) {
       set((state) => ({
-        data: {
-          ...state.data,
+        fetchedData: {
+          ...state.fetchedData,
           [dataType]: {
-            ...state.data[dataType],
+            ...state.fetchedData[dataType],
             loading: false,
             errors: [
               {
@@ -181,7 +199,7 @@ const useMockDataStore = create<MockDataStoreTypes>((set, get) => ({
   // },
 
   retryFetchData: (dataType, realData, label) => {
-    get().fetchData(dataType, realData, label);
+    get().setFetchData(dataType, realData, label);
   },
 
   // Mark that initial fetch has been completed

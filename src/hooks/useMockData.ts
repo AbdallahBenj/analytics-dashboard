@@ -8,11 +8,11 @@ import type { DataTypesMap } from "../types/MockDataStoreTypes.js";
 
 const useMockData = () => {
   // Data and Events
-  const dataStore = useMockDataStore((state) => state.data);
+  const dataStore = useMockDataStore((state) => state.fetchedData);
   // const eventsStore = useMockDataStore((state) => state.events);
 
   // Get the fetch functions and initialization flag
-  const fetchData = useMockDataStore((state) => state.fetchData);
+  const setFetchData = useMockDataStore((state) => state.setFetchData);
   // const fetchEvents = useMockDataStore((state) => state.fetchEvents);
   const setHasFetched = useMockDataStore((state) => state.setHasFetched);
   const hasFetched = useMockDataStore((state) => state.hasFetched);
@@ -54,7 +54,7 @@ const useMockData = () => {
     };
 
     (Object.keys(dataMap) as (keyof DataTypesMap)[]).forEach((key) => {
-      fetchData(key, dataMap[key], LabelDataMap[key]);
+      setFetchData(key, dataMap[key], LabelDataMap[key]);
     });
 
     // Mark that initial fetch has been done

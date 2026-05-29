@@ -28,7 +28,9 @@ type MockDataStoreTypes = {
   hasFetched: boolean;
   hasRefresh: boolean;
 
-  data: {
+  generatedData: DataTypesMap;
+
+  fetchedData: {
     [key in keyof DataTypesMap]: {
       loading: boolean;
       errors: { id: number; label: string; message: string }[];
@@ -42,11 +44,18 @@ type MockDataStoreTypes = {
   //     eventsValue: EventsTypesMap[key]; // { events: EventsTypesMap[key]; eventsTitle: EventsTitle[] };
   //   };
   // };
-  fetchData: <key extends keyof DataTypesMap>(
+
+  setGenerateData: <key extends keyof DataTypesMap>(
+    dataType: key,
+    dataValue: DataTypesMap[key],
+  ) => void;
+
+  setFetchData: <key extends keyof DataTypesMap>(
     dataType: key,
     realData: DataTypesMap[key],
     label: string,
   ) => void;
+
   // fetchEvents: <key extends keyof EventsTypesMap>(
   //   eventsType: key,
   //   realEvents: EventsTypesMap[key], // { events: EventsTypesMap[key]; eventsTitle: EventsTitle[] },
@@ -58,6 +67,7 @@ type MockDataStoreTypes = {
     realData: DataTypesMap[key],
     label: string,
   ) => void;
+
   // retryFetchEvents: <key extends keyof EventsTypesMap>(
   //   eventsType: key,
   //   realEvents: EventsTypesMap[key], // { events: EventsTypesMap[key]; eventsTitle: EventsTitle[] },
