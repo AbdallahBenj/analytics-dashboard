@@ -3,10 +3,10 @@ import generateMockData from "../service/mock/generateMockData.js";
 
 import type { DataTypesMap } from "../types/MockDataStoreTypes.js";
 
-const useReloadMockData = () => {
+const useRefreshMockData = () => {
   const retryFetchData = useMockDataStore((state) => state.retryFetchData);
 
-  const reloadMockData = () => {
+  const refreshMockData = () => {
     const mockData = generateMockData();
 
     const LabelDataMap = {
@@ -25,7 +25,7 @@ const useReloadMockData = () => {
     });
   };
 
-  return reloadMockData;
+  return refreshMockData;
 };
 
-export default useReloadMockData;
+export default useRefreshMockData;
