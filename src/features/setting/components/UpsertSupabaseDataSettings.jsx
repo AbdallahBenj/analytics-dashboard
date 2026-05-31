@@ -8,18 +8,14 @@ import PrimaryButton from "../../../components/PrimaryButton.jsx";
 import useSupabaseDataStore from "../../../store/useSupabaseDataStore.js";
 
 const UpsertSupabaseDataSettings = () => {
-  const { isClearLoading, clearError } = useSupabaseDataStore(
-    (state) => state.clear,
-  );
-  const { isUpsertLoading, upsertError } = useSupabaseDataStore(
-    (state) => state.upsert,
-  );
+  const { isClearLoading } = useSupabaseDataStore((state) => state.clear);
+  const { isUpsertLoading } = useSupabaseDataStore((state) => state.upsert);
 
-  console.log("isClearSupabaseLoading", isClearLoading);
-  console.log("isUpsertSupabaseLoading", isUpsertLoading);
+  // console.log("isClearSupabaseLoading", isClearLoading);
+  // console.log("isUpsertSupabaseLoading", isUpsertLoading);
 
-  console.log("Clear Supabase Error", clearError);
-  console.log("Upsert Supabase Error", upsertError);
+  // console.log("Clear Supabase Error", clearError);
+  // console.log("Upsert Supabase Error", upsertError);
 
   const [enableUpdate, setEnableUpdate] = useState(false);
 
