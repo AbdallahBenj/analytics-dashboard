@@ -157,7 +157,7 @@ const Sidebar = () => {
                           : "opacity-0 max-w-0"
                       }`}
                   >
-                    Refresh
+                    {isLoading ? "Loading.." : "Reload"}
                   </span>
                 </div>
               </button>

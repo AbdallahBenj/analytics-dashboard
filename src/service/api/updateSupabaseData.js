@@ -1,15 +1,17 @@
 import { supabase } from "../../lib/supabase.js";
+import useMockDataStore from "../../store/useMockDataStore.ts";
+
 import convertKeysToSnakeCase from "../utils/toSnakeCase.js";
 
-import {
-  timeline,
-  users,
-  subscriptions,
-  payments,
-  usersEvents,
-  subscriptionsEvents,
-  paymentsEvents,
-} from "../mock/generateData.js";
+// import {
+//   timeline,
+//   users,
+//   subscriptions,
+//   payments,
+//   usersEvents,
+//   subscriptionsEvents,
+//   paymentsEvents,
+// } from "../mock/generateData.js";
 
 const isClearDataEnabled = false;
 const isUpsertDataEnabled = false;
@@ -52,6 +54,18 @@ const insertTableData = async (dataType, table, label = "") => {
 
 const updateSupabaseData = async () => {
   if (!isUpdateDataEnabled) return;
+
+  const generatedData = useMockDataStore.getState().generatedData;
+
+  const {
+    timeline,
+    users,
+    subscriptions,
+    payments,
+    usersEvents,
+    subscriptionsEvents,
+    paymentsEvents,
+  } = generatedData;
 
   // Convert data objects keys to snakeCase
   const formattedUsers = users.map(convertKeysToSnakeCase);

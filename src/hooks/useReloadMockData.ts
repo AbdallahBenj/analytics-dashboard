@@ -1,5 +1,4 @@
 import useMockDataStore from "../store/useMockDataStore.js";
-import generateMockData from "../service/mock/generateMockData.js";
 
 import type { DataTypesMap } from "../types/MockDataStoreTypes.js";
 

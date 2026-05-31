@@ -68,11 +68,11 @@ const PageHeader = () => {
           active:ring-2 active:ring-offset-2 active:ring-indigo-500
           disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          <div className="flex items-center">
+          <div className="flex justify-center items-center min-h-6 min-w-25">
             <span>
               <ArrowPathIcon
                 aria-hidden="true"
-                className={`size-7 transition-transform duration-500 
+                className={`size-7 transition-transform duration-500 ease-in-out
                 ${isLoading ? "rotate-180" : ""}`}
               />
             </span>
@@ -80,7 +80,7 @@ const PageHeader = () => {
               // aria-hidden={!isSidebarOpen}
               className="overflow-hidden whitespace-nowrap ml-2"
             >
-              Refresh
+              {isLoading ? "Loading" : "ReLoad"}
             </span>
           </div>
         </button>

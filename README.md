@@ -216,7 +216,7 @@ src/
 ---
 
 
-##  1. Data Generation Flow
+##  1. Mock Data Generation Flow
 
 ```bash
 
@@ -228,38 +228,26 @@ src/
                         ↓
                         └── generatePayments.ts
                                 ↓
-                                └── generateData.ts
+                                └── generateUsersEvents.ts
+                                        ↓
+                                        └── generateSubscriptionsEvents.ts
+                                                ↓
+                                                └── generatePaymentsEvents.ts
+                                                        ↓
+                                                        └── generateMockData.ts
 
 ```
 
 ---
 
-##  2. Events Generation Flow
+
+##  2. Mock Data Flow
 
 ```bash
 
-├── generateData.ts
+├── generateMockData.ts (Generate and store generated Data and Events on Zustand generatedData)
         ↓
-        └── generateUsersEvents.ts
-                ↓
-                └── generateSubscriptionsEvents.ts
-                        ↓
-                        └── generatePaymentsEvents.ts
-                                ↓
-                                └── generateEvents.ts
-
-```
-
----
-
-##  3. Mock Data Flow
-
-```bash
-
-├── generateData.ts
-├── generateEvents.ts
-        ↓
-        └── useMockDataStore.ts (Zustand - Simulate Fetch and Store Mock Data and Events)
+        └── useMockDataStore.ts (Zustand - Simulate Fetch and Store Mock Data and Events on Zustand fetchedData)
                 ↓
                 └── useMockData.ts (Get Mock Data and Events from Zustand MockDataStore)
                         ↓
@@ -274,12 +262,11 @@ src/
 ---
 
 
-##  4. Supabase Data Flow
+##  3. Supabase Data Flow
 
 ```bash
 
-├── generateData.ts
-├── generateEvents.ts
+├── generateMockData.ts
         ↓
         └── updateSupabaseData.js (Update Supabase Data)
                 ↓

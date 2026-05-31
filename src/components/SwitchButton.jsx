@@ -1,13 +1,14 @@
 import { Switch } from "@headlessui/react";
-import { useState } from "react";
+// import { useState } from "react";
 
-const SwitchButton = () => {
-  const [enabled, setEnabled] = useState(false);
+const SwitchButton = ({ enabled, setEnabled, ariaLabel }) => {
+  // const [enabled, setEnabled] = useState(false);
 
   return (
     <Switch
       checked={enabled}
       onChange={setEnabled}
+      aria-label={ariaLabel}
       className="group relative flex 
       h-6 w-12 cursor-pointer rounded-full 
       dark:bg-white/10 p-1 ease-in-out

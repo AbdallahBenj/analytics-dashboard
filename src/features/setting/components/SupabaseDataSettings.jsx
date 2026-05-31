@@ -3,7 +3,7 @@ const SupabaseDataSettings = () => {
     <div
       className="relative primary-chart h-auto
             rounded-2xl p-4 cursor-default 
-            col-span-4 md:col-span-4 lg:col-span-2
+            col-span-4 md:col-span-4 lg:col-span-4
             flex flex-col
 
             bg-white/60 dark:bg-gray-900/40

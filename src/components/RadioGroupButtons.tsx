@@ -26,7 +26,7 @@ const RadioGroupButtons = <Type extends string>({
             value={key}
             className={({ active, checked }) =>
               [
-                "px-3 py-1.5 rounded-md text-sm text-center font-medium transition w-fit flex items-center justify-center",
+                "cursor-pointer px-3 py-1.5 rounded-md text-sm text-center font-medium transition w-fit flex items-center justify-center",
                 checked ? "bg-indigo-500 shadow" : "bg-gray-500/20",
                 active ? "ring-2 ring-offset-2 ring-indigo-500" : "",
               ].join(" ")
@@ -34,7 +34,7 @@ const RadioGroupButtons = <Type extends string>({
           >
             {({ checked }) => (
               <span
-                className={`cursor-pointer text-sm font-medium 
+                className={`text-sm font-medium 
                   ${
                     checked
                       ? "text-indigo-50"

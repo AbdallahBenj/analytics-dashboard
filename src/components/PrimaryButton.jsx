@@ -1,23 +1,28 @@
 import { Button } from "@headlessui/react";
 
-const PrimaryButton = ({ onClick }) => {
+const PrimaryButton = ({ onClick, label, disabled, ariaLabel }) => {
   return (
     <Button
       onClick={onClick}
-      className="inline-flex items-center gap-2 
+      disabled={disabled}
+      aria-label={ariaLabel}
+      className="inline-flex justify-center items-center gap-2 
+      min-h-9 min-w-25
     rounded-full
     cursor-pointer 
     px-3 py-1.5 
     text-sm/6 font-semibold 
-    text-white bg-indigo-500 dark:bg-indigo-500 
+    text-white bg-indigo-500 
     shadow-inner shadow-white/10 
     focus:not-data-focus:outline-none 
     data-focus:outline 
     data-focus:outline-white 
-    data-hover:bg-indigo-400
-    data-open:bg-indigo-700"
+    data-hover:bg-indigo-600
+    data-open:bg-indigo-700
+    disabled:bg-gray-600
+    disabled:cursor-not-allowed"
     >
-      Save changes
+      {label}
     </Button>
   );
 };

@@ -1,5 +1,5 @@
 import ComingSoon from "../components/ComingSoon.tsx";
-import MockDataSettings from "../features/setting/components/MockDataSettings.jsx";
+import DashboardDataSettings from "../features/setting/components/DashboardDataSettings.jsx";
 import SupabaseDataSettings from "../features/setting/components/SupabaseDataSettings.jsx";
 
 // import Errors Dialog
@@ -23,8 +23,8 @@ const SettingsPage = () => {
       {/* The content */}
 
       {/* Coming soon content */}
-      <MockDataSettings />
-      <SupabaseDataSettings />
+      <DashboardDataSettings />
+      {/* <SupabaseDataSettings /> */}
       <ComingSoon />
     </section>
   );

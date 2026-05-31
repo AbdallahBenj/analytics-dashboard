@@ -1,28 +1,23 @@
 import { useEffect } from "react";
 import useMockDataStore from "../store/useMockDataStore.js";
 
-// test
 import generateMockData from "../service/mock/generateMockData.js";
 
 import type { DataTypesMap } from "../types/MockDataStoreTypes.js";
 
 const useMockData = () => {
-  // Data and Events
+  // Get fetched Data and Events
   const dataStore = useMockDataStore((state) => state.fetchedData);
-  // const eventsStore = useMockDataStore((state) => state.events);
 
   // Get the fetch functions and initialization flag
-  const setFetchData = useMockDataStore((state) => state.setFetchData);
-  // const fetchEvents = useMockDataStore((state) => state.fetchEvents);
-  const setHasFetched = useMockDataStore((state) => state.setHasFetched);
   const hasFetched = useMockDataStore((state) => state.hasFetched);
+  const setFetchData = useMockDataStore((state) => state.setFetchData);
+  const setHasFetched = useMockDataStore((state) => state.setHasFetched);
 
   // Fetch data and events on mount (only once):
   useEffect(() => {
     // Only fetch if we haven't already fetched
     if (hasFetched) return;
-
-    // test
     const {
       timeline,
       users,
@@ -71,10 +66,6 @@ const useMockData = () => {
     subscriptionsEvents: dataStore.subscriptionsEvents?.dataValue || [],
     paymentsEvents: dataStore.paymentsEvents?.dataValue || [],
   };
-
-  // const fetchedEvents = {
-
-  // };
 
   // Get loading status:
   const isDataLoading = Object.values(dataStore || {}).some(

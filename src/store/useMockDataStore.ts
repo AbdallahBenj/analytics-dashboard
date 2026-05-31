@@ -6,9 +6,6 @@ const useMockDataStore = create<MockDataStoreTypes>((set, get) => ({
   // Initialization flag to prevent duplicate fetches
   hasFetched: false,
 
-  // Not used yet
-  hasRefresh: false,
-
   // Initial Generated Data Object
   generatedData: {
     timeline: [],
@@ -132,72 +129,6 @@ const useMockDataStore = create<MockDataStoreTypes>((set, get) => ({
     }
   },
 
-  // fetchEvents: async (eventsType, realEvents, label) => {
-  //   const state = get();
-
-  //   if (state.events[eventsType]?.loading) return;
-  //   set({
-  //     events: {
-  //       ...state.events,
-  //       [eventsType]: {
-  //         ...state.events[eventsType],
-  //         loading: true,
-  //         errors: [],
-  //         eventsValue: [],
-  //       },
-  //     },
-  //   });
-
-  //   try {
-  //     await new Promise((res) => setTimeout(res, 500));
-  //     const isSuccess = Math.random() >= 0.05;
-
-  //     if (isSuccess) {
-  //       set((state) => ({
-  //         events: {
-  //           ...state.events,
-  //           [eventsType]: {
-  //             ...state.events[eventsType],
-  //             loading: false,
-  //             errors: [],
-  //             eventsValue: realEvents,
-  //           },
-  //         },
-  //       }));
-  //     } else {
-  //       set((state) => ({
-  //         events: {
-  //           ...state.events,
-  //           [eventsType]: {
-  //             ...state.events[eventsType],
-  //             loading: false,
-  //             errors: [{ id: Date.now(), label, message: "Failed to load" }],
-  //             eventsValue: [],
-  //           },
-  //         },
-  //       }));
-  //     }
-  //   } catch (err) {
-  //     set((state) => ({
-  //       events: {
-  //         ...state.events,
-  //         [eventsType]: {
-  //           ...state.events[eventsType],
-  //           loading: false,
-  //           errors: [
-  //             {
-  //               id: Date.now(),
-  //               label,
-  //               message: err instanceof Error ? err.message : "Unknown error",
-  //             },
-  //           ],
-  //           eventsValue: [],
-  //         },
-  //       },
-  //     }));
-  //   }
-  // },
-
   retryFetchData: (dataType, realData, label) => {
     get().setFetchData(dataType, realData, label);
   },
@@ -205,9 +136,6 @@ const useMockDataStore = create<MockDataStoreTypes>((set, get) => ({
   // Mark that initial fetch has been completed
   setHasFetched: (value) => {
     set({ hasFetched: value });
-  },
-  setHasRefreshed: (value) => {
-    set({ hasRefresh: value });
   },
 }));
 
