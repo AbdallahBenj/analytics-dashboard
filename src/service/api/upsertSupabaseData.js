@@ -1,27 +1,24 @@
 import { supabase } from "../../lib/supabase.js";
 import useMockDataStore from "../../store/useMockDataStore.ts";
+import useSupabaseDataStore from "../../store/useSupabaseDataStore.js";
 
 import convertKeysToSnakeCase from "../utils/toSnakeCase.js";
 
-// import {
-//   timeline,
-//   users,
-//   subscriptions,
-//   payments,
-//   usersEvents,
-//   subscriptionsEvents,
-//   paymentsEvents,
-// } from "../mock/generateData.js";
+const { isClearEnabled } = useSupabaseDataStore.getState().clear;
+const { isUpsertEnabled } = useSupabaseDataStore.getState().upsert;
+const isUpdateDataEnabled = isClearEnabled || isUpsertEnabled;
 
-const isClearDataEnabled = false;
-const isUpsertDataEnabled = false;
-const isUpdateDataEnabled = isClearDataEnabled || isUpsertDataEnabled;
+// const isClearDataEnabled = true;
+// const isUpsertDataEnabled = true;
+// const isUpdateDataEnabled = isClearDataEnabled || isUpsertDataEnabled;
 
 const clearDataType = async (table) => {
-  if (!isClearDataEnabled) return;
+  if (!isClearEnabled) return;
   const { error } = await supabase.from(table).delete().neq("id", 0);
 
-  if (error) console.error("Delete Errors", error);
+  if (error)
+    // console.error("Delete Errors", error);
+    return error;
 };
 
 const insertChunkData = async (dataType, table) => {
@@ -31,28 +28,28 @@ const insertChunkData = async (dataType, table) => {
     .select("*");
 
   if (error) {
-    console.error("error", error);
-    return;
+    // console.error("error", error);
+    return error;
   }
   console.log("success");
   return data;
 };
 
 const insertTableData = async (dataType, table, label = "") => {
-  if (!isUpsertDataEnabled) return;
+  if (!isUpsertEnabled) return;
 
   console.log(`START INSERT ${label}`);
 
   for (let i = 0; i < dataType.length; i += 500) {
     let dataPart = dataType.slice(i, i + 500);
-    console.log(`${label}:`, `${i} - ${i + dataPart.length}`);
+    // console.log(`${label}:`, `${i} - ${i + dataPart.length}`);
     await insertChunkData(dataPart, table);
   }
 
   console.log(`END INSERT ${label}`);
 };
 
-const updateSupabaseData = async () => {
+const upsertSupabaseData = async () => {
   if (!isUpdateDataEnabled) return;
 
   const generatedData = useMockDataStore.getState().generatedData;
@@ -89,15 +86,41 @@ const updateSupabaseData = async () => {
     { dataTable: formattedPaymentsEvents, table: "payments_events" },
   ];
 
-  for (const item of tablesToUpdate) {
-    await clearDataType(item.table);
+  const { setClearLoading, setClearError } = useSupabaseDataStore.getState();
+  setClearLoading(true);
+
+  try {
+    for (const item of tablesToUpdate) {
+      const error = await clearDataType(item.table);
+      if (error) throw error;
+    }
+  } catch (error) {
+    // console.log("Clear Supabase Error", error.message);
+    setClearError(error.message);
+  } finally {
+    setClearLoading(false);
   }
 
-  for (const item of tablesToUpdate) {
-    await insertTableData(item.dataTable, item.table, item.table);
+  const { setUpsertLoading, setUpsertError } = useSupabaseDataStore.getState();
+  setUpsertLoading(true);
+
+  try {
+    for (const item of tablesToUpdate) {
+      const error = await insertTableData(
+        item.dataTable,
+        item.table,
+        item.table,
+      );
+      if (error) throw error;
+    }
+  } catch (error) {
+    // console.log("Upsert Supabase Error", error.message);
+    setUpsertError(error.message);
+  } finally {
+    setUpsertLoading(false);
   }
 
   console.log("END ALLData INSERT");
 };
 
-export default updateSupabaseData;
+export default upsertSupabaseData;

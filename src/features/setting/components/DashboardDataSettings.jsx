@@ -1,7 +1,7 @@
 import useDataSourceStore from "../../../store/useDataSourceStore.ts";
 import RadioGroupButtons from "../../../components/RadioGroupButtons.js";
 import GenerateMockDataSetting from "./GenerateMockDataSetting.jsx";
-import UpdateSupabaseDataSettings from "./UpdateSupabaseDataSettings.jsx";
+import UpsertSupabaseDataSettings from "./UpsertSupabaseDataSettings.jsx";
 
 const DashboardDataSettings = () => {
   const dataSource = useDataSourceStore((state) => state.dataSource);
@@ -59,8 +59,7 @@ const DashboardDataSettings = () => {
 
         <div className="border-b border-gray-500/25"></div>
 
-        <UpdateSupabaseDataSettings />
-        
+        <UpsertSupabaseDataSettings />
       </div>
     </div>
   );

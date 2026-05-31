@@ -1,36 +1,37 @@
 import useSupabaseDataStore from "../store/useSupabaseDataStore.js";
 
 const useSupabaseData = () => {
-  const dataStore = useSupabaseDataStore((state) => state.data);
+  const fetchedDataStored = useSupabaseDataStore((state) => state.fetchedData);
 
   // get fetched supabase data
-  const fetchedUsers = dataStore.users?.dataValue || [];
-  const fetchedTimeline = dataStore.timeline?.dataValue || [];
-  const fetchedSubscriptions = dataStore.subscriptions?.dataValue || [];
-  const fetchedPayments = dataStore.payments?.dataValue || [];
+  const fetchedUsers = fetchedDataStored.users?.dataValue || [];
+  const fetchedTimeline = fetchedDataStored.timeline?.dataValue || [];
+  const fetchedSubscriptions = fetchedDataStored.subscriptions?.dataValue || [];
+  const fetchedPayments = fetchedDataStored.payments?.dataValue || [];
 
-  const fetchedUsersEvents = dataStore.usersEvents?.dataValue || [];
+  const fetchedUsersEvents = fetchedDataStored.usersEvents?.dataValue || [];
   const fetchedSubscriptionsEvents =
-    dataStore.subscriptionsEvents?.dataValue || [];
-  const fetchedPaymentsEvents = dataStore.paymentsEvents?.dataValue || [];
+    fetchedDataStored.subscriptionsEvents?.dataValue || [];
+  const fetchedPaymentsEvents =
+    fetchedDataStored.paymentsEvents?.dataValue || [];
 
   const isLoading =
-    dataStore.users?.loading ||
-    dataStore.timeline?.loading ||
-    dataStore.subscriptions?.loading ||
-    dataStore.payments?.loading ||
-    dataStore.usersEvents?.loading ||
-    dataStore.subscriptionsEvents?.loading ||
-    dataStore.paymentsEvents?.loading;
+    fetchedDataStored.users?.loading ||
+    fetchedDataStored.timeline?.loading ||
+    fetchedDataStored.subscriptions?.loading ||
+    fetchedDataStored.payments?.loading ||
+    fetchedDataStored.usersEvents?.loading ||
+    fetchedDataStored.subscriptionsEvents?.loading ||
+    fetchedDataStored.paymentsEvents?.loading;
 
   const errors = [
-    ...(dataStore.users?.errors || []),
-    ...(dataStore.timeline?.errors || []),
-    ...(dataStore.subscriptions?.errors || []),
-    ...(dataStore.payments?.errors || []),
-    ...(dataStore.usersEvents?.errors || []),
-    ...(dataStore.subscriptionsEvents?.errors || []),
-    ...(dataStore.paymentsEvents?.errors || []),
+    ...(fetchedDataStored.users?.errors || []),
+    ...(fetchedDataStored.timeline?.errors || []),
+    ...(fetchedDataStored.subscriptions?.errors || []),
+    ...(fetchedDataStored.payments?.errors || []),
+    ...(fetchedDataStored.usersEvents?.errors || []),
+    ...(fetchedDataStored.subscriptionsEvents?.errors || []),
+    ...(fetchedDataStored.paymentsEvents?.errors || []),
   ];
 
   const isErrors = errors.length > 0;

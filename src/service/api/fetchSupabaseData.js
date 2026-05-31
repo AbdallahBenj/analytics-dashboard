@@ -5,10 +5,10 @@ import convertKeysToCamelCase from "../utils/toCamelCase.js";
 const isFetchEnabled = true;
 
 const fetchSupabaseTable = async (dataType, table, label = "") => {
-  const updateData = useSupabaseDataStore.getState().updateData;
+  const setFetchData = useSupabaseDataStore.getState().setFetchData;
 
   try {
-    updateData(dataType, { loading: true, errors: [] });
+    setFetchData(dataType, { loading: true, errors: [] });
     const { data, error } = await supabase.from(table).select("*");
     const formattedData = data.map(convertKeysToCamelCase);
 
@@ -16,7 +16,7 @@ const fetchSupabaseTable = async (dataType, table, label = "") => {
       throw error;
     }
 
-    updateData(dataType, {
+    setFetchData(dataType, {
       dataValue: formattedData,
       errors: [],
     });
@@ -26,7 +26,7 @@ const fetchSupabaseTable = async (dataType, table, label = "") => {
     const currentErrors =
       useSupabaseDataStore.getState().data[dataType].errors || [];
     console.error("Supabase error:", error.message);
-    updateData(dataType, {
+    setFetchData(dataType, {
       errors: [
         ...currentErrors,
         { id: Date.now(), label: `${label} Data`, message: "Failed to load" },
@@ -34,7 +34,7 @@ const fetchSupabaseTable = async (dataType, table, label = "") => {
     });
     return [];
   } finally {
-    updateData(dataType, { loading: false });
+    setFetchData(dataType, { loading: false });
   }
 };
 
