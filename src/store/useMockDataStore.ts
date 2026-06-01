@@ -6,6 +6,9 @@ const useMockDataStore = create<MockDataStoreTypes>((set, get) => ({
   // Initialization flag to prevent duplicate fetches
   hasFetched: false,
 
+  timelineLimit: 366,
+  setTimelineLimit: (value) => set({ timelineLimit: value }),
+
   // Initial Generated Data Object
   generatedData: {
     timeline: [],

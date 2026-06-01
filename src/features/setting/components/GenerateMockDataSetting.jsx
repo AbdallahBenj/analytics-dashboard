@@ -2,23 +2,29 @@ import { useState } from "react";
 
 import useRefreshMockData from "../../../hooks/useRefreshMockData.ts";
 import useMockData from "../../../hooks/useMockData.ts";
+import useMockDataStore from "../../../store/useMockDataStore.ts";
 
 import useGenerateMockDataSettings from "../hooks/useGenerateMockDataSettings.js";
 
 // import SwitchButton from "../../../components/SwitchButton.jsx";
 import PrimaryButton from "../../../components/PrimaryButton.jsx";
+import SelectInput from "../../../components/SelectInput.jsx";
 
 const GenerateMockDataSetting = () => {
   const [isGenerated, setGenerated] = useState(false);
+
+  const timelineLimit = useMockDataStore((state) => state.timelineLimit);
+  const setTimelineLimit = useMockDataStore((state) => state.setTimelineLimit);
 
   const refreshMockData = useRefreshMockData();
   const { mockData } = useMockData();
   const { isLoading } = mockData;
 
-  const GenerateMockDataConfig = useGenerateMockDataSettings();
+  const { GenerateMockDataConfig, SelectTimelineLimitConfig } =
+    useGenerateMockDataSettings();
 
   return (
-    <div className="body-container py-6 px-2">
+    <div className="body-container py-6">
       <p className="text-lg font-semibold text-gray-700 dark:text-gray-200 py-2">
         Generate Mock Data
       </p>
@@ -33,7 +39,19 @@ const GenerateMockDataSetting = () => {
           setEnabled={() => setEnableGenerate(!enableGenerate)}
         /> */}
       </div>
-      <div className="flex justify-between items-center py-2">
+      <div className="flex justify-between items-center gap-2 py-2">
+        <label className="font-semibold text-gray-700 dark:text-gray-200">
+          Select timeline range
+        </label>
+        <SelectInput
+          name={"Timeline limit"}
+          ariaLabel={"Select timeline limit"}
+          options={SelectTimelineLimitConfig}
+          value={timelineLimit}
+          onChange={(e) => setTimelineLimit(Number(e.target.value))}
+        />
+      </div>
+      <div className="flex justify-between items-center gap-2 py-2">
         <span className="font-semibold text-gray-700 dark:text-gray-200">
           Generate New Data
         </span>

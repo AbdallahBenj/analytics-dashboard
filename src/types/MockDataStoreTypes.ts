@@ -21,6 +21,9 @@ type DataTypesMap = {
 type MockDataStoreTypes = {
   hasFetched: boolean;
 
+  timelineLimit: number;
+  setTimelineLimit: (value: number) => void;
+
   generatedData: DataTypesMap;
 
   fetchedData: {

@@ -11,7 +11,8 @@ import generateSubscriptionsEvents from "./generateSubscriptionsEvents.js";
 import generatePaymentsEvents from "./generatePaymentsEvents.js";
 
 const generateMockData = () => {
-  const timeline = generateTimeline(366);
+  const timelineLimit = useMockDataStore.getState().timelineLimit;
+  const timeline = generateTimeline(timelineLimit);
   const users = generateUsers(timeline);
   const subscriptions = generateSubscriptions(users);
   const payments = generatePayments(subscriptions);
