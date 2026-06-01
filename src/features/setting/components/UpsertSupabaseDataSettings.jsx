@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import upsertSupabaseData from "../../../service/api/upsertSupabaseData.js";
+import updateSupabaseData from "../../../service/api/updateSupabaseData.js";
 
 import SwitchButton from "../../../components/SwitchButton.jsx";
 import PrimaryButton from "../../../components/PrimaryButton.jsx";
@@ -44,7 +44,7 @@ const UpsertSupabaseDataSettings = () => {
           ariaLabel={"update supabase data"}
           onClick={() => {
             if (!enableUpdate) return;
-            upsertSupabaseData();
+            updateSupabaseData();
           }}
           label={
             isClearLoading

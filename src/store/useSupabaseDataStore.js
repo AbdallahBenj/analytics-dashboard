@@ -10,7 +10,7 @@ const useSupabaseDataStore = create((set) => ({
   // Clear Supabase data
 
   clear: {
-    isClearEnabled: false,
+    isClearEnabled: true,
     isClearLoading: false,
     clearError: null,
   },
