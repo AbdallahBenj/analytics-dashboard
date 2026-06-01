@@ -1,13 +1,21 @@
+import { useState } from "react";
+
 import useRefreshMockData from "../../../hooks/useRefreshMockData.ts";
 import useMockData from "../../../hooks/useMockData.ts";
 
-import SwitchButton from "../../../components/SwitchButton.jsx";
+import useGenerateMockDataSettings from "../hooks/useGenerateMockDataSettings.js";
+
+// import SwitchButton from "../../../components/SwitchButton.jsx";
 import PrimaryButton from "../../../components/PrimaryButton.jsx";
 
 const GenerateMockDataSetting = () => {
+  const [isGenerated, setGenerated] = useState(false);
+
   const refreshMockData = useRefreshMockData();
   const { mockData } = useMockData();
   const { isLoading } = mockData;
+
+  const GenerateMockDataConfig = useGenerateMockDataSettings();
 
   return (
     <div className="body-container py-6 px-2">
@@ -15,8 +23,7 @@ const GenerateMockDataSetting = () => {
         Generate Mock Data
       </p>
       <div className="flex justify-between items-center pb-4">
-        <span className="text-gray-700 dark:text-gray-200">
-          {/* Enable generation */}
+        <span className="text-gray-600 dark:text-gray-400">
           Generate sample analytics data for testing and portfolio
           demonstrations.
         </span>
@@ -27,15 +34,64 @@ const GenerateMockDataSetting = () => {
         /> */}
       </div>
       <div className="flex justify-between items-center py-2">
-        <span className="text-gray-700 dark:text-gray-200">
+        <span className="font-semibold text-gray-700 dark:text-gray-200">
           Generate New Data
         </span>
         <PrimaryButton
           ariaLabel={"generate new mock data "}
-          onClick={refreshMockData}
+          onClick={() => {
+            setGenerated(true);
+            refreshMockData();
+          }}
           label={isLoading ? "Loading.." : "Generate"}
         />
       </div>
+      {isGenerated && (
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="p-4">
+            <p className="text-base font-medium text-gray-700 dark:text-gray-200">
+              Generated Data
+            </p>
+            <div className="border-b border-gray-500/25 my-4"></div>
+            <ul className="space-y-1">
+              {GenerateMockDataConfig.map(
+                (data) =>
+                  data?.data && (
+                    <li key={data?.label} className="flex justify-between">
+                      <span className="text-indigo-600 dark:text-indigo-400">
+                        {data?.label}:
+                      </span>{" "}
+                      <span className="font-mono font-semibold text-green-500">
+                        {data?.data?.length}
+                      </span>
+                    </li>
+                  ),
+              )}
+            </ul>
+          </div>
+          <div className="p-4">
+            <p className="text-base font-medium text-gray-700 dark:text-gray-200">
+              Generated Events
+            </p>
+            <div className="border-b border-gray-500/25 my-4"></div>
+            <ul className="space-y-1">
+              {GenerateMockDataConfig.map(
+                (data) =>
+                  data?.events && (
+                    <li key={data?.label} className="flex justify-between">
+                      <span className="text-indigo-600 dark:text-indigo-400">
+                        {data?.label}:
+                      </span>{" "}
+                      <span className="font-mono font-semibold text-green-500">
+                        {data?.events?.length}
+                      </span>
+                    </li>
+                  ),
+              )}
+            </ul>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

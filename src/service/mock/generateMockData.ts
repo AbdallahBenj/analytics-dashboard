@@ -36,7 +36,7 @@ const generateMockData = () => {
     setGenerateData(key, mockData[key]),
   );
 
-  // console.log("generateMockData");
+  // console.log("generateMockData", mockData);
 
   return mockData;
 };
