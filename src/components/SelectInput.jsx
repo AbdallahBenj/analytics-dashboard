@@ -11,13 +11,18 @@ const SelectInput = ({ value, onChange, options, name, ariaLabel }) => {
         onChange={onChange}
         className="
         appearance-none
-        min-h-9 min-w-30
+        min-h-9 min-w-34
         rounded-full
         cursor-pointer
-        pl-3 pr-8 py-1.5
+        pl-4 pr-8 py-1.5
         text-sm font-semibold
         text-white
         bg-indigo-500
+        focus:not-data-focus:outline-none 
+        data-focus:outline 
+        data-focus:outline-white 
+        data-hover:bg-indigo-600
+        data-open:bg-indigo-700
         shadow-inner shadow-white/10"
       >
         {options.map((option) => (

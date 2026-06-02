@@ -6,9 +6,8 @@ import useMockDataStore from "../../../store/useMockDataStore.ts";
 
 import useGenerateMockDataSettings from "../hooks/useGenerateMockDataSettings.js";
 
-// import SwitchButton from "../../../components/SwitchButton.jsx";
 import PrimaryButton from "../../../components/PrimaryButton.jsx";
-import SelectInput from "../../../components/SelectInput.jsx";
+import SelectListbox from "../../../components/SelectListbox.jsx";
 
 const GenerateMockDataSetting = () => {
   const [isGenerated, setGenerated] = useState(false);
@@ -20,7 +19,7 @@ const GenerateMockDataSetting = () => {
   const { mockData } = useMockData();
   const { isLoading } = mockData;
 
-  const { GenerateMockDataConfig, SelectTimelineLimitConfig } =
+  const { GenerateMockDataConfig, TimelineOptions } =
     useGenerateMockDataSettings();
 
   return (
@@ -28,30 +27,26 @@ const GenerateMockDataSetting = () => {
       <p className="text-lg font-semibold text-gray-700 dark:text-gray-200 py-2">
         Generate Mock Data
       </p>
-      <div className="flex justify-between items-center pb-4">
+      <div className="flex justify-between items-center pb-4 mb-2">
         <span className="text-gray-600 dark:text-gray-400">
           Generate sample analytics data for testing and portfolio
           demonstrations.
         </span>
-        {/* <SwitchButton
-          enabled={enableGenerate}
-          ariaLabel={"Enable mock data generation"}
-          setEnabled={() => setEnableGenerate(!enableGenerate)}
-        /> */}
       </div>
-      <div className="flex justify-between items-center gap-2 py-2">
+      {/* // Select Listbox */}
+      <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2 py-2 mb-4">
         <label className="font-semibold text-gray-700 dark:text-gray-200">
-          Select timeline range
+          Timeline range
         </label>
-        <SelectInput
+        <SelectListbox
           name={"Timeline limit"}
           ariaLabel={"Select timeline limit"}
-          options={SelectTimelineLimitConfig}
+          options={TimelineOptions}
           value={timelineLimit}
-          onChange={(e) => setTimelineLimit(Number(e.target.value))}
+          onChange={setTimelineLimit}
         />
       </div>
-      <div className="flex justify-between items-center gap-2 py-2">
+      <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2 py-2">
         <span className="font-semibold text-gray-700 dark:text-gray-200">
           Generate New Data
         </span>

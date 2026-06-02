@@ -2,7 +2,7 @@ import useDataSourceStore from "../store/useDataSourceStore.js";
 
 const DataSourceNotice = () => {
   const dataSource = useDataSourceStore((state) => state.dataSource);
-  const isMockData = dataSource === "mockData";
+  const isSupabaseData = dataSource === "supabaseData";
 
   dataSource;
 
@@ -12,10 +12,10 @@ const DataSourceNotice = () => {
     <div
       className={`w-full h-fit min-h-7 md:min-h-8
     flex justify-center items-center
-    ${isMockData ? "bg-indigo-500" : "bg-green-500"}`}
+    ${isSupabaseData ? "bg-emerald-500" : "bg-indigo-500"}`}
     >
       <p className="text-white text-sm font-semibold">
-        {isMockData ? demoMode : liveMode}
+        {isSupabaseData ? liveMode : demoMode}
       </p>
     </div>
   );

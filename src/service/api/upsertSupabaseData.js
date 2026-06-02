@@ -2,6 +2,8 @@ import { supabase } from "../../lib/supabase.js";
 import useSupabaseDataStore from "../../store/useSupabaseDataStore.js";
 import getTablesToUpdate from "./getTablesToUpdate.js";
 
+import fetchSupabaseData from "./fetchSupabaseData.js";
+
 // Upsert table part to Supabase
 const upsertChunkData = async (tableData, table) => {
   const { error } = await supabase.from(table).upsert(tableData);
@@ -17,6 +19,7 @@ const upsertTableData = async (tableData, table) => {
   for (let i = 0; i < tableData.length; i += 500) {
     const dataPart = tableData.slice(i, i + 500);
     await upsertChunkData(dataPart, table);
+    console.log("Upsert", `${table}:`, `${i} - ${i + 500}`);
   }
 
   console.log(`END UPSERT ${table}`);
@@ -45,6 +48,7 @@ const upsertSupabaseData = async () => {
     setUpsertLoading(false);
   }
 
+  fetchSupabaseData();
   console.log("UPSERT COMPLETED");
 };
 

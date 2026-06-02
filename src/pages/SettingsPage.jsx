@@ -24,7 +24,7 @@ const SettingsPage = () => {
 
       {/* Coming soon content */}
       <DashboardDataSettings />
-      {/* <SupabaseDataSettings /> */}
+      <SupabaseDataSettings />
       <ComingSoon />
     </section>
   );

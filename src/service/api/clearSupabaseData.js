@@ -8,7 +8,7 @@ const clearTableData = async (table) => {
   const { error } = await supabase.from(table).delete().neq("id", 0);
 
   if (error) {
-    console.error(`Delete Error (${table})`, error);
+    console.log(`Delete Error ${table}`, error);
   }
   return error;
 };
@@ -27,12 +27,12 @@ const clearSupabaseData = async () => {
     const tablesToUpdate = getTablesToUpdate();
 
     for (const table of tablesToUpdate) {
-      const error = await clearTableData(table);
+      const error = await clearTableData(table.table);
 
       if (error) throw error;
     }
   } catch (error) {
-    console.log("Clear Supabase Error", error.message);
+    console.error("Clear Supabase Error", error.message);
     setClearError(error.message);
   } finally {
     setClearLoading(false);

@@ -6,6 +6,7 @@ import UpsertSupabaseDataSettings from "./UpsertSupabaseDataSettings.jsx";
 const DashboardDataSettings = () => {
   const dataSource = useDataSourceStore((state) => state.dataSource);
   const setDataSource = useDataSourceStore((state) => state.setDataSource);
+  const isSupabaseData = dataSource === "supabaseData";
 
   const dataSourceOptions = {
     mockData: { label: "Mock Data" },
@@ -39,7 +40,12 @@ const DashboardDataSettings = () => {
               Data Sources
             </h3>
             <p className="text-md font-semibold text-indigo-500 dark:text-indigo-400">
-              {dataSources?.label}{" "}
+              <span
+                className={` ${isSupabaseData ? "text-emerald-500" : "text-indigo-500"}`}
+              >
+                {dataSources?.label}{" "}
+              </span>
+
               <span className="text-gray-600 dark:text-gray-300">Options</span>
             </p>
           </div>
@@ -56,10 +62,6 @@ const DashboardDataSettings = () => {
         <div className="border-b border-gray-500/25"></div>
 
         <GenerateMockDataSetting />
-
-        <div className="border-b border-gray-500/25"></div>
-
-        <UpsertSupabaseDataSettings />
       </div>
     </div>
   );

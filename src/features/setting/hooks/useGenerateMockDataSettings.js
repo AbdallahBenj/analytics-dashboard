@@ -24,15 +24,15 @@ const useGenerateMockDataSettings = () => {
     { events: paymentsEvents, label: "Payments events" },
   ];
 
-  const SelectTimelineLimitConfig = [
-    { value: 30, label: "Last 30 Days" },
-    { value: 90, label: "Last 90 months" },
-    { value: 180, label: "Last 6 months" },
-    { value: 366, label: "Last years" },
-    { value: 730, label: "Last 2 years" },
+  const TimelineOptions = [
+    { label: "30 Days", value: 30 },
+    { label: "90 months", value: 90 },
+    { label: "6 months", value: 180 },
+    { label: "1 years", value: 366 },
+    { label: "2 years", value: 730 },
   ];
 
-  return { GenerateMockDataConfig, SelectTimelineLimitConfig };
+  return { GenerateMockDataConfig, TimelineOptions };
 };
 
 export default useGenerateMockDataSettings;
