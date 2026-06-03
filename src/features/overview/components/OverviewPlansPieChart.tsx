@@ -86,7 +86,7 @@ const OverviewPlansPieChart = () => {
               dominantBaseline="middle"
               className="text-sm fill-gray-500"
             >
-              {!totalUsers ? "" : "Total Users"}
+              {!totalUsers ? "" : "Users"}
             </text>
             <Pie
               data={usersByPlan}

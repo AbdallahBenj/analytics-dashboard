@@ -6,6 +6,7 @@ type Props<Type extends string> = {
   stateConfig: Record<Type, { label: string }>;
   RadioGroupClass: string;
   RadioGroupOptionsClass: string;
+  ButtonColorClass: string;
 };
 
 const RadioGroupButtons = <Type extends string>({
@@ -14,6 +15,7 @@ const RadioGroupButtons = <Type extends string>({
   stateConfig,
   RadioGroupClass,
   RadioGroupOptionsClass,
+  ButtonColorClass = "bg-indigo-500",
 }: Props<Type>) => {
   return (
     <RadioGroup
@@ -32,7 +34,7 @@ const RadioGroupButtons = <Type extends string>({
               [
                 `${RadioGroupOptionsClass}`,
                 "cursor-pointer px-3 py-1.5 rounded-md text-sm text-center font-medium transition flex items-center justify-center",
-                checked ? "bg-indigo-500 shadow" : "bg-gray-500/20",
+                checked ? `${ButtonColorClass} shadow` : "bg-gray-500/20",
                 active ? "ring-2 ring-offset-2 ring-indigo-500" : "",
               ].join(" ")
             }

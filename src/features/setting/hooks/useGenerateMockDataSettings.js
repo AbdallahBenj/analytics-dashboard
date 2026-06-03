@@ -14,7 +14,7 @@ const useGenerateMockDataSettings = () => {
   } = generatedData;
 
   const GenerateMockDataConfig = [
-    { data: timeline, label: "Timeline" },
+    { data: timeline, label: "Timeline (day)" },
     { data: users, label: "Users" },
     { data: subscriptions, label: "subscriptions" },
     { data: payments, label: "payments" },

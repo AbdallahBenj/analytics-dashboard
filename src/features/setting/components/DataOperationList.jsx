@@ -1,0 +1,47 @@
+import { CheckCircleIcon } from "@heroicons/react/24/outline";
+import { LineSpinner } from "ldrs/react";
+import "ldrs/react/LineSpinner.css";
+
+const DataOperationList = ({
+  listTitle,
+  dataType,
+  isLoading,
+  operationConfig,
+}) => {
+  return (
+    <div className="px-4">
+      <p className="text-base font-medium text-gray-700 dark:text-gray-200">
+        {listTitle}
+      </p>
+      <div className="border-b border-gray-500/25 my-4"></div>
+      <ul className="space-y-1">
+        {operationConfig
+          .filter((data) => data[dataType])
+          .map((data) => (
+            <li key={data.label} className="flex justify-between">
+              <span className="flex justify-center items-center text-indigo-600 dark:text-indigo-400">
+                {isLoading ? (
+                  <span className="flex items-center justify-center h-full mr-2">
+                    <LineSpinner
+                      size="24"
+                      stroke="3"
+                      speed="1"
+                      color="#615fff"
+                    />
+                  </span>
+                ) : (
+                  <CheckCircleIcon className="inline-block size-6 text-emerald-500 mr-2" />
+                )}
+                <span>{data.label}</span>
+              </span>
+              <span className="font-mono font-semibold text-emerald-500">
+                {data[dataType].length}
+              </span>
+            </li>
+          ))}
+      </ul>
+    </div>
+  );
+};
+
+export default DataOperationList;

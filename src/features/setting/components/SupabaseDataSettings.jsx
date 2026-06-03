@@ -1,3 +1,5 @@
+import DataOperationPanel from "./DataOperationPanel.jsx";
+
 import RadioGroupButtons from "../../../components/RadioGroupButtons.js";
 import GenerateMockDataSetting from "./GenerateMockDataSetting.jsx";
 import UpsertSupabaseDataSettings from "./UpsertSupabaseDataSettings.jsx";
@@ -23,6 +25,33 @@ const SupabaseDataSettings = () => {
     >
       <div className="max-w-4xl w-full">
         <UpsertSupabaseDataSettings />
+
+        <div className="border-b border-gray-500/25 my-4"></div>
+
+        <DataOperationPanel
+          title={"Clear Supabase Data"}
+          description={"Remove all existing records."}
+          buttonLabel={"Clear"}
+          loadingButtonLabel={"Clearing.."}
+        />
+
+        <div className="border-b border-gray-500/25 my-4"></div>
+
+        <DataOperationPanel
+          title={"Upsert Supabase Data"}
+          description={"Upload generated dataset."}
+          buttonLabel={"Upload"}
+          loadingButtonLabel={"Uploading.."}
+        />
+
+        <div className="border-b border-gray-500/25 my-4"></div>
+
+        <DataOperationPanel
+          title={"Sync Supabase Data"}
+          description={"Clear existing data and upload a fresh dataset."}
+          buttonLabel={"Update"}
+          loadingButtonLabel={"Updating.."}
+        />
       </div>
     </div>
   );

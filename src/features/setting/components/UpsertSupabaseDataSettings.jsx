@@ -60,9 +60,9 @@ const UpsertSupabaseDataSettings = () => {
           <p className="text-gray-700 dark:text-gray-200">
             Upsert Supabase Data
           </p>
-          <span className="text-sm text-gray-600 dark:text-gray-400">
+          <p className="text-sm text-gray-600 dark:text-gray-400">
             Upload generated dataset.
-          </span>
+          </p>
         </div>
         <PrimaryButton
           disabled={!enableUpdate}

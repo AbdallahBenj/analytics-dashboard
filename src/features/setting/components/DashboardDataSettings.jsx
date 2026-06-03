@@ -57,6 +57,7 @@ const DashboardDataSettings = () => {
               stateConfig={dataSourceOptions}
               RadioGroupClass={"w-full min-h-9 sm:min-w-36"}
               RadioGroupOptionsClass={"w-full sm:w-[calc(50%-16px)]"}
+              ButtonColorClass={`${isSupabaseData ? "bg-emerald-500" : "bg-indigo-500"}`}
             />
           </div>
         </div>
