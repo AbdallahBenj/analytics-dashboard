@@ -11,7 +11,7 @@ const SelectListbox = ({ value, onChange, options }) => {
   const label = options.find((option) => option.value === value)?.label;
 
   return (
-    <div className="w-full sm:w-fit min-h-9 sm:min-w-36">
+    <div className="w-full sm:w-fit min-h-9 sm:min-w-50">
       <Listbox value={value} onChange={onChange}>
         <ListboxButton
           className={clsx(

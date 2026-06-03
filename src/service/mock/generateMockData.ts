@@ -31,6 +31,9 @@ const generateMockData = () => {
     paymentsEvents,
   };
 
+  // const setGenerateData = useMockDataStore.getState().setGenerateData;
+  //   const setGeneratedDataLoading = useMockDataStore.getState().setGenerateData;
+
   const setGenerateData = useMockDataStore.getState().setGenerateData;
 
   (Object.keys(mockData) as (keyof DataTypesMap)[]).forEach((key) =>

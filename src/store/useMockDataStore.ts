@@ -10,6 +10,7 @@ const useMockDataStore = create<MockDataStoreTypes>((set, get) => ({
   setTimelineLimit: (value) => set({ timelineLimit: value }),
 
   // Initial Generated Data Object
+
   generatedData: {
     timeline: [],
     users: [],

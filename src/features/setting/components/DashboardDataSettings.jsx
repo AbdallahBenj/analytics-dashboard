@@ -34,14 +34,14 @@ const DashboardDataSettings = () => {
     >
       <div className="max-w-4xl w-full">
         {/* Header */}
-        <div className="header-container flex flex-col md:flex-row justify-between gap-2 mb-4">
-          <div className="mb-4">
+        <div className="header-container flex flex-col md:flex-row justify-between sm:items-center gap-x-2 gap-y-6 py-2 mb-4">
+          <div className="basis-1/3">
             <h3 className="text-xl font-bold mb-1 text-gray-700 dark:text-gray-200">
               Data Sources
             </h3>
             <p className="text-md font-semibold text-indigo-500 dark:text-indigo-400">
               <span
-                className={` ${isSupabaseData ? "text-emerald-500" : "text-indigo-500"}`}
+                className={`${isSupabaseData ? "text-emerald-500" : "text-indigo-500"}`}
               >
                 {dataSources?.label}{" "}
               </span>
@@ -50,11 +50,13 @@ const DashboardDataSettings = () => {
             </p>
           </div>
 
-          <div className="mb-2">
+          <div className="basis-2/3 mb-2">
             <RadioGroupButtons
               state={dataSource}
               setState={setDataSource}
               stateConfig={dataSourceOptions}
+              RadioGroupClass={"w-full min-h-9 sm:min-w-36"}
+              RadioGroupOptionsClass={"w-full sm:w-[calc(50%-16px)]"}
             />
           </div>
         </div>

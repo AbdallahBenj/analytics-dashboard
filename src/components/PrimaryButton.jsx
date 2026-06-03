@@ -8,7 +8,7 @@ const PrimaryButton = ({ onClick, label, disabled, ariaLabel }) => {
       aria-label={ariaLabel}
       className="inline-flex justify-center items-center gap-2 
       w-full sm:w-fit
-      min-h-9 sm:min-w-36
+      min-h-9 sm:min-w-50
       rounded-full
       cursor-pointer 
       px-3 py-1.5 

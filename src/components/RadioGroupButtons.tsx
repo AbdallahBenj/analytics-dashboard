@@ -4,19 +4,23 @@ type Props<Type extends string> = {
   state: Type;
   setState: React.Dispatch<React.SetStateAction<Type>>;
   stateConfig: Record<Type, { label: string }>;
+  RadioGroupClass: string;
+  RadioGroupOptionsClass: string;
 };
 
 const RadioGroupButtons = <Type extends string>({
   state,
   setState,
   stateConfig,
+  RadioGroupClass,
+  RadioGroupOptionsClass,
 }: Props<Type>) => {
   return (
     <RadioGroup
       value={state}
       onChange={setState}
       aria-label="Select option"
-      className="flex flex-wrap justify-end gap-4"
+      className={`flex flex-wrap justify-end gap-4 ${RadioGroupClass}`}
     >
       {(Object.entries(stateConfig) as [Type, { label: string }][]).map(
         ([key, { label }]) => (
@@ -26,7 +30,8 @@ const RadioGroupButtons = <Type extends string>({
             value={key}
             className={({ active, checked }) =>
               [
-                "cursor-pointer px-3 py-1.5 rounded-md text-sm text-center font-medium transition w-fit flex items-center justify-center",
+                `${RadioGroupOptionsClass}`,
+                "cursor-pointer px-3 py-1.5 rounded-md text-sm text-center font-medium transition flex items-center justify-center",
                 checked ? "bg-indigo-500 shadow" : "bg-gray-500/20",
                 active ? "ring-2 ring-offset-2 ring-indigo-500" : "",
               ].join(" ")

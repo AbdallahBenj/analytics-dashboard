@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { CheckCircleIcon } from "@heroicons/react/24/outline";
+import { LineSpinner } from "ldrs/react";
+import "ldrs/react/LineSpinner.css";
 
 import useRefreshMockData from "../../../hooks/useRefreshMockData.ts";
 import useMockData from "../../../hooks/useMockData.ts";
@@ -23,18 +26,18 @@ const GenerateMockDataSetting = () => {
     useGenerateMockDataSettings();
 
   return (
-    <div className="body-container py-6">
-      <p className="text-lg font-semibold text-gray-700 dark:text-gray-200 py-2">
-        Generate Mock Data
-      </p>
-      <div className="flex justify-between items-center pb-4 mb-2">
+    <div className="body-container my-4">
+      <div className="flex-row justify-between items-center py-2 mb-2">
+        <p className="text-lg font-semibold text-gray-700 dark:text-gray-200">
+          Generate Mock Data
+        </p>
         <span className="text-gray-600 dark:text-gray-400">
           Generate sample analytics data for testing and portfolio
           demonstrations.
         </span>
       </div>
       {/* // Select Listbox */}
-      <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2 py-2 mb-4">
+      <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2 py-2 mb-2">
         <label className="font-semibold text-gray-700 dark:text-gray-200">
           Timeline range
         </label>
@@ -59,9 +62,10 @@ const GenerateMockDataSetting = () => {
           label={isLoading ? "Loading.." : "Generate"}
         />
       </div>
-      {isGenerated && (
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="p-4">
+      {/* // Generated MockData */}
+      {/* {isGenerated && ( */}
+        <div className="grid md:grid-cols-2 gap-6 pt-6">
+          <div className="px-4">
             <p className="text-base font-medium text-gray-700 dark:text-gray-200">
               Generated Data
             </p>
@@ -69,20 +73,32 @@ const GenerateMockDataSetting = () => {
             <ul className="space-y-1">
               {GenerateMockDataConfig.map(
                 (data) =>
-                  data?.data && (
+                  data.data && (
                     <li key={data?.label} className="flex justify-between">
-                      <span className="text-indigo-600 dark:text-indigo-400">
-                        {data?.label}:
-                      </span>{" "}
-                      <span className="font-mono font-semibold text-green-500">
-                        {data?.data?.length}
+                      <span className="flex justify-center items-center text-indigo-600 dark:text-indigo-400">
+                        {isLoading ? (
+                          <span className="flex items-center justify-center h-full mr-2">
+                            <LineSpinner
+                              size="24"
+                              stroke="3"
+                              speed="1"
+                              color="#615fff"
+                            />
+                          </span>
+                        ) : (
+                          <CheckCircleIcon className="inline-block size-6 text-emerald-500 mr-2" />
+                        )}
+                        <span>{data.label}</span>
+                      </span>
+                      <span className="font-mono font-semibold text-emerald-500">
+                        {data.data.length}
                       </span>
                     </li>
                   ),
               )}
             </ul>
           </div>
-          <div className="p-4">
+          <div className="px-4">
             <p className="text-base font-medium text-gray-700 dark:text-gray-200">
               Generated Events
             </p>
@@ -90,13 +106,25 @@ const GenerateMockDataSetting = () => {
             <ul className="space-y-1">
               {GenerateMockDataConfig.map(
                 (data) =>
-                  data?.events && (
+                  data.events && (
                     <li key={data?.label} className="flex justify-between">
-                      <span className="text-indigo-600 dark:text-indigo-400">
-                        {data?.label}:
-                      </span>{" "}
-                      <span className="font-mono font-semibold text-green-500">
-                        {data?.events?.length}
+                      <span className="flex justify-center items-center text-indigo-600 dark:text-indigo-400">
+                        {isLoading ? (
+                          <span className="flex items-center justify-center h-full mr-2">
+                            <LineSpinner
+                              size="24"
+                              stroke="3"
+                              speed="1"
+                              color="#615fff"
+                            />
+                          </span>
+                        ) : (
+                          <CheckCircleIcon className="inline-block size-6 text-emerald-500 mr-2" />
+                        )}
+                        <span>{data.label}</span>
+                      </span>
+                      <span className="font-mono font-semibold text-emerald-500">
+                        {data.events.length}
                       </span>
                     </li>
                   ),
@@ -104,7 +132,7 @@ const GenerateMockDataSetting = () => {
             </ul>
           </div>
         </div>
-      )}
+      {/* )} */}
     </div>
   );
 };
