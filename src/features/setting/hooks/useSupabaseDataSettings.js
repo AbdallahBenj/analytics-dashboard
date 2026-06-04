@@ -1,4 +1,7 @@
 import useSupabaseDataStore from "../../../store/useSupabaseDataStore.js";
+import fetchSupabaseData from "../../../service/api/fetchSupabaseData.js";
+
+import useAuthStore from "../../../store/useAuthStore.ts";
 
 import {
   CheckCircleIcon,
@@ -15,6 +18,8 @@ const useSupabaseDataSettings = () => {
   const { isClearLoading } = useSupabaseDataStore((state) => state.clear);
   const { isUpsertLoading } = useSupabaseDataStore((state) => state.upsert);
   const isUpdateLoading = isClearLoading || isUpsertLoading;
+
+  const isAdmin = useAuthStore((state) => state.isAdmin);
 
   const fetchedData = useSupabaseDataStore((state) => state.fetchedData);
 
@@ -46,10 +51,14 @@ const useSupabaseDataSettings = () => {
       ariaLabel: "clear supabase data",
       buttonLabel: "Clear",
       loadingButtonLabel: "Clearing..",
+      isEnabled: isAdmin,
       isLoading: isClearLoading,
       // isOperated: isGenerated,
       // setIsOperated: setGenerated,
-      setAction: clearSupabaseData,
+      action: async () => {
+        clearSupabaseData();
+        fetchSupabaseData();
+      },
       operationConfig: fetchedDataConfig,
       icon: TrashIcon,
       iconColor: "#fb2c36",
@@ -62,10 +71,14 @@ const useSupabaseDataSettings = () => {
       ariaLabel: "upsert supabase data",
       buttonLabel: "Upload",
       loadingButtonLabel: "Uploading..",
+      isEnabled: isAdmin,
       isLoading: isUpsertLoading,
       // isOperated: isGenerated,
       // setIsOperated: setGenerated,
-      setAction: upsertSupabaseData,
+      action: async () => {
+        upsertSupabaseData();
+        fetchSupabaseData();
+      },
       operationConfig: fetchedDataConfig,
       icon: ArrowUpTrayIcon,
       iconColor: "#00bc7d",
@@ -77,13 +90,17 @@ const useSupabaseDataSettings = () => {
       ariaLabel: "Update supabase data",
       buttonLabel: "Update",
       loadingButtonLabel: "Updating..",
+      isEnabled: isAdmin,
       isLoading: isUpdateLoading,
       // isOperated: isGenerated,
       // setIsOperated: setGenerated,
-      setAction: updateSupabaseData,
+      action: async () => {
+        updateSupabaseData();
+        fetchSupabaseData();
+      },
       operationConfig: fetchedDataConfig,
       icon: ArrowPathIcon,
-      iconColor: "#2b7fff"
+      iconColor: "#2b7fff",
       // #2b7fff
     },
   ];

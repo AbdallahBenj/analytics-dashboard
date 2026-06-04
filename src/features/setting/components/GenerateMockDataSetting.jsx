@@ -73,10 +73,11 @@ const GenerateMockDataSetting = () => {
           ariaLabel={"generate new mock data"}
           buttonLabel={"Generate"}
           loadingButtonLabel={"Loading.."}
+          isEnabled={true}
           isLoading={isLoading}
           isOperated={isGenerated}
           setIsOperated={() => setGenerated(true)}
-          setAction={refreshMockData}
+          action={refreshMockData}
           operationConfig={GenerateMockDataConfig}
           icon={CheckCircleIcon}
           iconColor={"#615fff"}

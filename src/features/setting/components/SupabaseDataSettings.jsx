@@ -53,10 +53,11 @@ const SupabaseDataSettings = () => {
               ariaLabel={section.ariaLabel}
               buttonLabel={section.buttonLabel}
               loadingButtonLabel={section.loadingButtonLabel}
+              isEnabled={section.isEnabled}
               isLoading={section.isLoading}
               isOperated={isGenerated}
               setIsOperated={() => setGenerated(true)}
-              setAction={section.setAction}
+              action={section.action}
               operationConfig={section.operationConfig}
               icon={section.icon}
               iconColor={section.iconColor}
