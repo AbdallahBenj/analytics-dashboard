@@ -1,6 +1,7 @@
 import ComingSoon from "../components/ComingSoon.tsx";
-import DashboardDataSettings from "../features/setting/components/DashboardDataSettings.jsx";
+import SourcesDataSettings from "../features/setting/components/SourcesDataSettings.jsx";
 import SupabaseDataSettings from "../features/setting/components/SupabaseDataSettings.jsx";
+import GenerateMockDataSetting from "../features/setting/components/GenerateMockDataSetting.jsx";
 
 // import Errors Dialog
 // import useDashboardData from "../hooks/useDashboardData.js";
@@ -20,12 +21,10 @@ const SettingsPage = () => {
       {/* Errors Dialog */}
       {/* {isErrors && <ErrorsDialog />} */}
 
-      {/* The content */}
-
-      {/* Coming soon content */}
-      <DashboardDataSettings />
+      <SourcesDataSettings />
+      <GenerateMockDataSetting />
       <SupabaseDataSettings />
-      <ComingSoon />
+      {/* <ComingSoon /> */}
     </section>
   );
 };

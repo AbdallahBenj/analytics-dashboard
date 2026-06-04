@@ -24,9 +24,22 @@ const SupabaseDataSettings = () => {
     transition-all duration-300"
     >
       <div className="max-w-4xl w-full">
-        <UpsertSupabaseDataSettings />
+        <div className="flex-row justify-between items-center py-2 mb-2">
+          <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-200">
+            Update Supabase Data{" "}
+            <span className="text-sm font-medium inline-block text-gray-500 dark:text-gray-500">
+              (admin only)
+            </span>
+          </h3>
+          <p className="text-md text-gray-600 dark:text-gray-400">
+            Manage analytics data stored in Supabase for testing, demos, and
+            portfolio presentations.
+          </p>
+        </div>
 
-        <div className="border-b border-gray-500/25 my-4"></div>
+        {/* <UpsertSupabaseDataSettings /> */}
+
+        {/* <div className="border-b border-gray-500/25 my-4"></div> */}
 
         <DataOperationPanel
           title={"Clear Supabase Data"}

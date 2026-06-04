@@ -2,15 +2,16 @@ import PrimaryButton from "../../../components/PrimaryButton.jsx";
 import DataOperationList from "./DataOperationList.jsx";
 
 const DataOperationPanel = ({
-  title,
+  title = "",
   description = "",
-  buttonLabel,
-  loadingButtonLabel,
-  isLoading,
+  ariaLabel = "",
+  buttonLabel = "",
+  loadingButtonLabel = "",
+  isLoading = false,
   isOperated,
-  setOperation,
-  refreshOperation,
-  operationConfig,
+  setIsOperated,
+  setAction,
+  operationConfig = {},
 }) => {
   return (
     <div>
@@ -24,10 +25,10 @@ const DataOperationPanel = ({
           </p>
         </div>
         <PrimaryButton
-          ariaLabel={"generate new mock data "}
+          ariaLabel={ariaLabel}
           onClick={() => {
-            setOperation(true);
-            refreshOperation();
+            setIsOperated?.();
+            setAction?.();
           }}
           label={isLoading ? loadingButtonLabel : buttonLabel}
         />

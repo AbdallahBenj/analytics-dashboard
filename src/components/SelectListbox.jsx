@@ -15,7 +15,7 @@ const SelectListbox = ({ value, onChange, options }) => {
       <Listbox value={value} onChange={onChange}>
         <ListboxButton
           className={clsx(
-            "relative block w-full rounded-lg bg-indigo-500 py-1.5 pr-8 pl-3 text-left text-sm/6 text-white",
+            "cursor-pointer relative block w-full rounded-lg bg-indigo-500 py-1.5 pr-8 pl-3 text-left text-sm/6 text-white",
             "focus:not-data-focus:outline-none data-focus:outline-2 data-focus:-outline-offset-2 data-focus:outline-white/25",
           )}
         >
@@ -37,7 +37,7 @@ const SelectListbox = ({ value, onChange, options }) => {
             <ListboxOption
               key={option.value}
               value={option.value}
-              className="group flex cursor-default items-center gap-2 rounded-lg px-3 py-1.5 select-none data-focus:bg-white/50 dark:data-focus:bg-white/10"
+              className="group cursor-pointer flex items-center gap-2 rounded-lg px-3 py-1.5 select-none data-focus:bg-white/50 dark:data-focus:bg-white/10"
             >
               <CheckIcon className="invisible size-4 fill-gray-700 dark:fill-white group-data-selected:visible" />
               <div className="text-sm/6 text-gray-700 dark:text-white">
