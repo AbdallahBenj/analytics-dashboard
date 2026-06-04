@@ -1,10 +1,9 @@
 import DataOperationPanel from "./DataOperationPanel.jsx";
 
-import RadioGroupButtons from "../../../components/RadioGroupButtons.js";
-import GenerateMockDataSetting from "./GenerateMockDataSetting.jsx";
-import UpsertSupabaseDataSettings from "./UpsertSupabaseDataSettings.jsx";
+import useSupabaseDataSettings from "../hooks/useSupabaseDataSettings.js";
 
 const SupabaseDataSettings = () => {
+  const SupabaseDataSettingsConfig = useSupabaseDataSettings();
   return (
     <div
       className="relative primary-chart h-auto
@@ -37,34 +36,24 @@ const SupabaseDataSettings = () => {
           </p>
         </div>
 
-        {/* <UpsertSupabaseDataSettings /> */}
-
         {/* <div className="border-b border-gray-500/25 my-4"></div> */}
 
-        <DataOperationPanel
-          title={"Clear Supabase Data"}
-          description={"Remove all existing records."}
-          buttonLabel={"Clear"}
-          loadingButtonLabel={"Clearing.."}
-        />
-
-        <div className="border-b border-gray-500/25 my-4"></div>
-
-        <DataOperationPanel
-          title={"Upsert Supabase Data"}
-          description={"Upload generated dataset."}
-          buttonLabel={"Upload"}
-          loadingButtonLabel={"Uploading.."}
-        />
-
-        <div className="border-b border-gray-500/25 my-4"></div>
-
-        <DataOperationPanel
-          title={"Sync Supabase Data"}
-          description={"Clear existing data and upload a fresh dataset."}
-          buttonLabel={"Update"}
-          loadingButtonLabel={"Updating.."}
-        />
+        {SupabaseDataSettingsConfig.map((section) => (
+          <div key={section.title}>
+            {SupabaseDataSettingsConfig[0] !== section && (
+              <div className="border-b border-gray-500/25 my-4"></div>
+            )}
+            <DataOperationPanel
+              title={section.title}
+              description={section.description}
+              ariaLabel={section.ariaLabel}
+              buttonLabel={section.buttonLabel}
+              loadingButtonLabel={section.loadingButtonLabel}
+              isLoading={section.isLoading}
+              setAction={section.setAction}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );

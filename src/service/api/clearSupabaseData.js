@@ -10,6 +10,8 @@ const clearTableData = async (table) => {
   if (error) {
     console.log(`Delete Error ${table}`, error);
   }
+  console.log(`Clear Supabase ${table} table`);
+
   return error;
 };
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import clearSupabaseData from "../../../service/api/clearSupabaseData.js";
-import upsertSupabaseData from "../../../service/api/updateSupabaseData.js";
+import upsertSupabaseData from "../../../service/api/upsertSupabaseData.js";
 import updateSupabaseData from "../../../service/api/updateSupabaseData.js";
 
 import SwitchButton from "../../../components/SwitchButton.jsx";
