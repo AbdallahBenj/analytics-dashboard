@@ -1,5 +1,12 @@
 import useSupabaseDataStore from "../../../store/useSupabaseDataStore.js";
 
+import {
+  CheckCircleIcon,
+  TrashIcon,
+  ArrowUpTrayIcon,
+  ArrowPathIcon,
+} from "@heroicons/react/24/outline";
+
 import clearSupabaseData from "../../../service/api/clearSupabaseData.js";
 import upsertSupabaseData from "../../../service/api/upsertSupabaseData.js";
 import updateSupabaseData from "../../../service/api/updateSupabaseData.js";
@@ -9,7 +16,30 @@ const useSupabaseDataSettings = () => {
   const { isUpsertLoading } = useSupabaseDataStore((state) => state.upsert);
   const isUpdateLoading = isClearLoading || isUpsertLoading;
 
-  const SupabaseDataSettingsConfig = [
+  const fetchedData = useSupabaseDataStore((state) => state.fetchedData);
+
+  const {
+    timeline,
+    users,
+    usersEvents,
+    subscriptions,
+    subscriptionsEvents,
+    payments,
+    paymentsEvents,
+  } = fetchedData;
+
+  const fetchedDataConfig = [
+    { data: timeline, label: "Timeline (day)" },
+    { data: users, label: "Users" },
+    { data: subscriptions, label: "subscriptions" },
+    { data: payments, label: "payments" },
+
+    { events: usersEvents, label: "Users events" },
+    { events: subscriptionsEvents, label: "Subscriptions events" },
+    { events: paymentsEvents, label: "Payments events" },
+  ];
+
+  const supabaseDataSettingsConfig = [
     {
       title: "Clear Supabase Data",
       description: "Remove all existing records from the database.",
@@ -20,7 +50,10 @@ const useSupabaseDataSettings = () => {
       // isOperated: isGenerated,
       // setIsOperated: setGenerated,
       setAction: clearSupabaseData,
-      // operationConfig: GenerateMockDataConfig,
+      operationConfig: fetchedDataConfig,
+      icon: TrashIcon,
+      iconColor: "#fb2c36",
+      // #fb2c36
     },
     {
       title: "Upsert Supabase Data",
@@ -33,7 +66,10 @@ const useSupabaseDataSettings = () => {
       // isOperated: isGenerated,
       // setIsOperated: setGenerated,
       setAction: upsertSupabaseData,
-      // operationConfig: GenerateMockDataConfig,
+      operationConfig: fetchedDataConfig,
+      icon: ArrowUpTrayIcon,
+      iconColor: "#00bc7d",
+      //#00bc7d
     },
     {
       title: "Sync Supabase Data",
@@ -45,11 +81,14 @@ const useSupabaseDataSettings = () => {
       // isOperated: isGenerated,
       // setIsOperated: setGenerated,
       setAction: updateSupabaseData,
-      // operationConfig: GenerateMockDataConfig,
+      operationConfig: fetchedDataConfig,
+      icon: ArrowPathIcon,
+      iconColor: "#2b7fff"
+      // #2b7fff
     },
   ];
 
-  return SupabaseDataSettingsConfig;
+  return { supabaseDataSettingsConfig, fetchedDataConfig };
 };
 
 export default useSupabaseDataSettings;

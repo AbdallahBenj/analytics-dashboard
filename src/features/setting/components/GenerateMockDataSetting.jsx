@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { CheckCircleIcon } from "@heroicons/react/24/outline";
 
 import DataOperationPanel from "./DataOperationPanel.jsx";
 
@@ -77,6 +78,8 @@ const GenerateMockDataSetting = () => {
           setIsOperated={() => setGenerated(true)}
           setAction={refreshMockData}
           operationConfig={GenerateMockDataConfig}
+          icon={CheckCircleIcon}
+          iconColor={"#615fff"}
         />
       </div>
     </div>

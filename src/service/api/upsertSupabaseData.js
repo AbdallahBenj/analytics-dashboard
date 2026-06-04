@@ -4,6 +4,8 @@ import getTablesToUpdate from "./getTablesToUpdate.js";
 
 import fetchSupabaseData from "./fetchSupabaseData.js";
 
+import useAuthStore from "../../store/useAuthStore.ts";
+
 // Upsert table part to Supabase
 const upsertChunkData = async (tableData, table) => {
   const { error } = await supabase.from(table).upsert(tableData);
@@ -29,8 +31,9 @@ const upsertTableData = async (tableData, table) => {
 
 const upsertSupabaseData = async () => {
   const { isUpsertEnabled } = useSupabaseDataStore.getState().upsert;
+  const isAdmin = useAuthStore.getState().isAdmin;
 
-  if (!isUpsertEnabled) return;
+  if (!isUpsertEnabled || !isAdmin) return;
 
   const tablesToUpdate = getTablesToUpdate();
   const { setUpsertLoading, setUpsertError } = useSupabaseDataStore.getState();

@@ -1,5 +1,7 @@
 import { supabase } from "../../lib/supabase.js";
 
+import useAuthStore from "../../store/useAuthStore.ts";
+
 import useSupabaseDataStore from "../../store/useSupabaseDataStore.js";
 import getTablesToUpdate from "./getTablesToUpdate.js";
 
@@ -18,8 +20,9 @@ const clearTableData = async (table) => {
 // Clear all tables
 const clearSupabaseData = async () => {
   const { isClearEnabled } = useSupabaseDataStore.getState().clear;
+  const isAdmin = useAuthStore.getState().isAdmin;
 
-  if (!isClearEnabled) return;
+  if (!isClearEnabled || !isAdmin) return;
 
   const { setClearLoading, setClearError } = useSupabaseDataStore.getState();
   setClearLoading(true);

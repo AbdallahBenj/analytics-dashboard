@@ -12,6 +12,8 @@ const DataOperationPanel = ({
   setIsOperated,
   setAction,
   operationConfig = {},
+  icon,
+  iconColor,
 }) => {
   return (
     <div>
@@ -42,6 +44,8 @@ const DataOperationPanel = ({
             dataType="data"
             isLoading={isLoading}
             operationConfig={operationConfig}
+            icon={icon}
+            iconColor={iconColor}
           />
 
           {/* // Events list */}
@@ -50,6 +54,8 @@ const DataOperationPanel = ({
             dataType="events"
             isLoading={isLoading}
             operationConfig={operationConfig}
+            icon={icon}
+            iconColor={iconColor}
           />
         </div>
       )}

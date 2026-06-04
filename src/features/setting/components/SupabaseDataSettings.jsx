@@ -1,9 +1,13 @@
+import { useState } from "react";
+
 import DataOperationPanel from "./DataOperationPanel.jsx";
 
 import useSupabaseDataSettings from "../hooks/useSupabaseDataSettings.js";
 
 const SupabaseDataSettings = () => {
-  const SupabaseDataSettingsConfig = useSupabaseDataSettings();
+  const [isGenerated, setGenerated] = useState(true);
+
+  const { supabaseDataSettingsConfig } = useSupabaseDataSettings();
   return (
     <div
       className="relative primary-chart h-auto
@@ -38,9 +42,9 @@ const SupabaseDataSettings = () => {
 
         {/* <div className="border-b border-gray-500/25 my-4"></div> */}
 
-        {SupabaseDataSettingsConfig.map((section) => (
+        {supabaseDataSettingsConfig.map((section) => (
           <div key={section.title}>
-            {SupabaseDataSettingsConfig[0] !== section && (
+            {supabaseDataSettingsConfig[0] !== section && (
               <div className="border-b border-gray-500/25 my-4"></div>
             )}
             <DataOperationPanel
@@ -50,7 +54,12 @@ const SupabaseDataSettings = () => {
               buttonLabel={section.buttonLabel}
               loadingButtonLabel={section.loadingButtonLabel}
               isLoading={section.isLoading}
+              isOperated={isGenerated}
+              setIsOperated={() => setGenerated(true)}
               setAction={section.setAction}
+              operationConfig={section.operationConfig}
+              icon={section.icon}
+              iconColor={section.iconColor}
             />
           </div>
         ))}

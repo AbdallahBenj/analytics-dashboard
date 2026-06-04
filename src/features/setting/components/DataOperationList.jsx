@@ -7,7 +7,10 @@ const DataOperationList = ({
   dataType,
   isLoading,
   operationConfig,
+  icon = CheckCircleIcon,
+  iconColor = "#00bc7d",
 }) => {
+  const Icon = icon;
   return (
     <div className="px-4">
       <p className="text-base font-medium text-gray-700 dark:text-gray-200">
@@ -26,11 +29,14 @@ const DataOperationList = ({
                       size="24"
                       stroke="3"
                       speed="1"
-                      color="#615fff"
+                      color={iconColor}
                     />
                   </span>
                 ) : (
-                  <CheckCircleIcon className="inline-block size-6 text-emerald-500 mr-2" />
+                  <Icon
+                    className="inline-block size-6  mr-2"
+                    style={{ color: `${iconColor}` }}
+                  />
                 )}
                 <span>{data.label}</span>
               </span>
