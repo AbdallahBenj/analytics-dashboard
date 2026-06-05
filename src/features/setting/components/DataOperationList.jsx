@@ -1,6 +1,7 @@
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
-import { LineSpinner } from "ldrs/react";
+import { LineSpinner, DotPulse } from "ldrs/react";
 import "ldrs/react/LineSpinner.css";
+import "ldrs/react/DotPulse.css";
 
 const DataOperationList = ({
   listTitle,
@@ -23,7 +24,7 @@ const DataOperationList = ({
           .map((data) => (
             <li key={data.label} className="flex justify-between">
               <span className="flex justify-center items-center text-indigo-600 dark:text-indigo-400">
-                {isLoading ? (
+                {data.loading ? (
                   <span className="flex items-center justify-center h-full mr-2">
                     <LineSpinner
                       size="24"
@@ -41,7 +42,11 @@ const DataOperationList = ({
                 <span>{data.label}</span>
               </span>
               <span className="font-mono font-semibold text-emerald-500">
-                {data[dataType].length}
+                {data.loading ? (
+                  <DotPulse size="32" speed="1.3" color={iconColor} />
+                ) : (
+                  data[dataType].length
+                )}
               </span>
             </li>
           ))}

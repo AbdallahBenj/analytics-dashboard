@@ -2,6 +2,7 @@ import useMockDataStore from "../../../store/useMockDataStore.ts";
 
 const useGenerateMockDataSettings = () => {
   const generatedData = useMockDataStore((state) => state.generatedData);
+  const fetchedData = useMockDataStore((state) => state.fetchedData);
 
   const {
     timeline,
@@ -13,15 +14,40 @@ const useGenerateMockDataSettings = () => {
     paymentsEvents,
   } = generatedData;
 
-  const GenerateMockDataConfig = [
-    { data: timeline, label: "Timeline (day)" },
-    { data: users, label: "Users" },
-    { data: subscriptions, label: "subscriptions" },
-    { data: payments, label: "payments" },
+  // Get loading state for each data type
+  const loadingStates = Object.fromEntries(
+    Object.entries(fetchedData).map((arr) => [arr[0], arr[1].loading]),
+  );
 
-    { events: usersEvents, label: "Users events" },
-    { events: subscriptionsEvents, label: "Subscriptions events" },
-    { events: paymentsEvents, label: "Payments events" },
+  const GenerateMockDataConfig = [
+    {
+      data: timeline,
+      label: "Timeline (day)",
+      loading: loadingStates.timeline,
+    },
+    { data: users, label: "Users", loading: loadingStates.users },
+    {
+      data: subscriptions,
+      label: "subscriptions",
+      loading: loadingStates.subscriptions,
+    },
+    { data: payments, label: "payments", loading: loadingStates.payments },
+
+    {
+      events: usersEvents,
+      label: "Users events",
+      loading: loadingStates.usersEvents,
+    },
+    {
+      events: subscriptionsEvents,
+      label: "Subscriptions events",
+      loading: loadingStates.subscriptionsEvents,
+    },
+    {
+      events: paymentsEvents,
+      label: "Payments events",
+      loading: loadingStates.paymentsEvents,
+    },
   ];
 
   const TimelineOptions = [
