@@ -71,6 +71,7 @@ const GenerateMockDataSetting = () => {
           title={"Generate New Data"}
           description={""}
           ariaLabel={"generate new mock data"}
+          listTitleStart={"Generated"}
           buttonLabel={"Generate"}
           loadingButtonLabel={"Loading.."}
           isEnabled={true}

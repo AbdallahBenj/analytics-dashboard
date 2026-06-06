@@ -10,9 +10,9 @@ import {
   ArrowPathIcon,
 } from "@heroicons/react/24/outline";
 
-import clearSupabaseData from "../../../service/api/clearSupabaseData.js";
-import upsertSupabaseData from "../../../service/api/upsertSupabaseData.js";
-import updateSupabaseData from "../../../service/api/updateSupabaseData.js";
+import { clearSupabaseData } from "../../../service/api/clearSupabaseData.js";
+import { upsertSupabaseData } from "../../../service/api/upsertSupabaseData.js";
+import syncSupabaseData from "../../../service/api/syncSupabaseData.js";
 
 const useSupabaseDataSettings = () => {
   const { isClearLoading } = useSupabaseDataStore((state) => state.clear);
@@ -29,10 +29,16 @@ const useSupabaseDataSettings = () => {
     Object.entries(clearedData).map((arr) => [arr[0], arr[1].loading]),
   );
 
-  // Loading Clear data States
+  // Loading Upsert data States
   const upsertData = useSupabaseDataStore((state) => state.upsertData);
   const upsertLoadingStates = Object.fromEntries(
     Object.entries(upsertData).map((arr) => [arr[0], arr[1].loading]),
+  );
+
+  // Loading sync data States
+  const syncData = useSupabaseDataStore((state) => state.syncData);
+  const syncLoadingStates = Object.fromEntries(
+    Object.entries(syncData).map((arr) => [arr[0], arr[1].loading]),
   );
 
   const {
@@ -51,24 +57,28 @@ const useSupabaseDataSettings = () => {
       label: "Timeline (day)",
       clearLoading: clearLoadingStates.timeline,
       upsertLoading: upsertLoadingStates.timeline,
+      syncLoading: syncLoadingStates.timeline,
     },
     {
       data: users,
       label: "Users",
       clearLoading: clearLoadingStates.users,
       upsertLoading: upsertLoadingStates.users,
+      syncLoading: syncLoadingStates.users,
     },
     {
       data: subscriptions,
       label: "subscriptions",
       clearLoading: clearLoadingStates.subscriptions,
       upsertLoading: upsertLoadingStates.subscriptions,
+      syncLoading: syncLoadingStates.subscriptions,
     },
     {
       data: payments,
       label: "payments",
       clearLoading: clearLoadingStates.payments,
       upsertLoading: upsertLoadingStates.payments,
+      syncLoading: syncLoadingStates.payments,
     },
 
     {
@@ -76,18 +86,21 @@ const useSupabaseDataSettings = () => {
       label: "Users events",
       clearLoading: clearLoadingStates.usersEvents,
       upsertLoading: upsertLoadingStates.usersEvents,
+      syncLoading: syncLoadingStates.usersEvents,
     },
     {
       events: subscriptionsEvents,
       label: "Subscriptions events",
       clearLoading: clearLoadingStates.subscriptionsEvents,
       upsertLoading: upsertLoadingStates.subscriptionsEvents,
+      syncLoading: syncLoadingStates.subscriptionsEvents,
     },
     {
       events: paymentsEvents,
       label: "Payments events",
       clearLoading: clearLoadingStates.paymentsEvents,
       upsertLoading: upsertLoadingStates.paymentsEvents,
+      syncLoading: syncLoadingStates.paymentsEvents,
     },
   ];
 
@@ -96,6 +109,7 @@ const useSupabaseDataSettings = () => {
       title: "Clear Supabase Data",
       description: "Remove all existing records from the database.",
       ariaLabel: "clear supabase data",
+      listTitleStart: "Clear",
       buttonLabel: "Clear",
       loadingButtonLabel: "Clearing..",
       isEnabled: isAdmin,
@@ -117,6 +131,7 @@ const useSupabaseDataSettings = () => {
       description:
         "Upload the generated dataset and update matching records when needed.",
       ariaLabel: "upsert supabase data",
+      listTitleStart: "Upsert",
       buttonLabel: "Upload",
       loadingButtonLabel: "Uploading..",
       isEnabled: isAdmin,
@@ -137,15 +152,18 @@ const useSupabaseDataSettings = () => {
     {
       title: "Sync Supabase Data",
       description: "Reset the database and upload a fresh generated dataset.",
-      ariaLabel: "Update supabase data",
-      buttonLabel: "Update",
-      loadingButtonLabel: "Updating..",
+      ariaLabel: "Sync supabase data",
+      listTitleStart: "Sync",
+      buttonLabel: "Sync",
+      loadingButtonLabel: "Synchronizing..",
       isEnabled: isAdmin,
       isLoading: isUpdateLoading,
+      loadingType: "syncLoading",
+
       // isOperated: isGenerated,
       // setIsOperated: setGenerated,
       action: async () => {
-        updateSupabaseData();
+        syncSupabaseData();
         fetchSupabaseData();
       },
       operationConfig: fetchedDataConfig,

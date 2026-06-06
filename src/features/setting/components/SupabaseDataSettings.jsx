@@ -52,6 +52,7 @@ const SupabaseDataSettings = () => {
               title={section.title}
               description={section.description}
               ariaLabel={section.ariaLabel}
+              listTitleStart={section.listTitleStart}
               buttonLabel={section.buttonLabel}
               loadingButtonLabel={section.loadingButtonLabel}
               isEnabled={section.isEnabled}

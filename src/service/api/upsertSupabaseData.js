@@ -8,22 +8,14 @@ import useAuthStore from "../../store/useAuthStore.ts";
 
 import { toCamelCase } from "../utils/toCamelCase.js";
 
-// Upsert table part to Supabase
-// const upsertChunkData = async (tableData, table) => {
-//   const { error } = await supabase.from(table).upsert(tableData);
-//   // .select("*");
-
-//   if (error) throw error;
-// };
-
 // Upsert table to Supabase
-const upsertTableData = async (tableData, table) => {
+const upsertTableData = async (tableData, table, isUpdateData = false) => {
   const dataTable = toCamelCase(table);
 
   console.log(`START UPSERT ${table}`);
 
   const { setUpsertData } = useSupabaseDataStore.getState();
-  setUpsertData(dataTable, { loading: true, errors: [] });
+  if (!isUpdateData) setUpsertData(dataTable, { loading: true, errors: [] });
 
   try {
     for (let i = 0; i < tableData.length; i += 500) {
@@ -52,7 +44,7 @@ const upsertTableData = async (tableData, table) => {
     }
   } finally {
     await fetchSupabaseTable(dataTable, table);
-    setUpsertData(dataTable, { loading: false });
+    if (!isUpdateData) setUpsertData(dataTable, { loading: false });
   }
 
   console.log(`END UPSERT ${table}`);
@@ -72,8 +64,8 @@ const upsertSupabaseData = async () => {
   setUpsertError(null);
 
   try {
-    for (const { dataTable, table } of tablesToUpdate) {
-      await upsertTableData(dataTable, table);
+    for (const { tableData, tableName } of tablesToUpdate) {
+      await upsertTableData(tableData, tableName);
     }
   } catch (error) {
     console.log("Upsert Supabase Error", error.message);
@@ -85,4 +77,4 @@ const upsertSupabaseData = async () => {
   console.log("UPSERT COMPLETED");
 };
 
-export default upsertSupabaseData;
+export { upsertSupabaseData, upsertTableData };

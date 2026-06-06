@@ -5,6 +5,7 @@ const DataOperationPanel = ({
   title = "",
   description = "",
   ariaLabel = "",
+  listTitleStart = "",
   buttonLabel = "",
   loadingButtonLabel = "",
   isEnabled,
@@ -46,7 +47,7 @@ const DataOperationPanel = ({
         <div className="grid md:grid-cols-2 gap-6 pt-6">
           {/* // Data list */}
           <DataOperationList
-            listTitle="Generated Data"
+            listTitle={`${listTitleStart} Data`}
             dataType="data"
             isLoading={isLoading}
             loadingType={loadingType}
@@ -57,7 +58,7 @@ const DataOperationPanel = ({
 
           {/* // Events list */}
           <DataOperationList
-            listTitle="Generated Events"
+            listTitle={`${listTitleStart} Events`}
             dataType="events"
             isLoading={isLoading}
             loadingType={loadingType}

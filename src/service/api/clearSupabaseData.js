@@ -10,11 +10,11 @@ import getTablesToUpdate from "./getTablesToUpdate.js";
 import { toCamelCase } from "../utils/toCamelCase.js";
 
 // Clear table
-const clearTableData = async (table) => {
+const clearTableData = async (table, isUpdateData = false) => {
   const dataTable = toCamelCase(table);
 
   const { setClearData } = useSupabaseDataStore.getState();
-  setClearData(dataTable, { loading: true, errors: [] });
+  if (!isUpdateData) setClearData(dataTable, { loading: true, errors: [] });
 
   try {
     const { error } = await supabase.from(table).delete().neq("id", 0);
@@ -41,7 +41,7 @@ const clearTableData = async (table) => {
     return null;
   } finally {
     await fetchSupabaseTable(dataTable, table);
-    setClearData(dataTable, { loading: false });
+    if (!isUpdateData) setClearData(dataTable, { loading: false });
   }
 };
 
@@ -60,8 +60,8 @@ const clearSupabaseData = async () => {
   try {
     const tablesToUpdate = getTablesToUpdate();
 
-    for (const table of tablesToUpdate) {
-      const error = await clearTableData(table.table);
+    for (const { tableName } of tablesToUpdate) {
+      const error = await clearTableData(tableName);
 
       if (error) throw error;
     }
@@ -73,4 +73,4 @@ const clearSupabaseData = async () => {
   }
 };
 
-export default clearSupabaseData;
+export { clearSupabaseData, clearTableData };

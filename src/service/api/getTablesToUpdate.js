@@ -25,32 +25,32 @@ const getTablesToUpdate = () => {
   const formattedPaymentsEvents = paymentsEvents.map(convertKeysToSnakeCase);
 
   const tablesToUpdate = [
-    { dataTable: timeline, table: "timeline", dataLabel: "timeline" },
-    { dataTable: formattedUsers, table: "users", dataLabel: "users" },
+    { tableData: timeline, tableName: "timeline", dataName: "timeline" },
+    { tableData: formattedUsers, tableName: "users", dataName: "users" },
     {
-      dataTable: formattedSubscriptions,
-      table: "subscriptions",
-      dataLabel: "subscriptions",
+      tableData: formattedSubscriptions,
+      tableName: "subscriptions",
+      dataName: "subscriptions",
     },
     {
-      dataTable: formattedPayments,
-      table: "payments",
-      dataLabel: "payments",
+      tableData: formattedPayments,
+      tableName: "payments",
+      dataName: "payments",
     },
     {
-      dataTable: formattedUsersEvents,
-      table: "users_events",
-      dataLabel: "usersEvents",
+      tableData: formattedUsersEvents,
+      tableName: "users_events",
+      dataName: "usersEvents",
     },
     {
-      dataTable: formattedSubscriptionsEvents,
-      table: "subscriptions_events",
-      dataLabel: "subscriptionsEvents",
+      tableData: formattedSubscriptionsEvents,
+      tableName: "subscriptions_events",
+      dataName: "subscriptionsEvents",
     },
     {
-      dataTable: formattedPaymentsEvents,
-      table: "payments_events",
-      dataLabel: "paymentsEvents",
+      tableData: formattedPaymentsEvents,
+      tableName: "payments_events",
+      dataName: "paymentsEvents",
     },
   ];
 

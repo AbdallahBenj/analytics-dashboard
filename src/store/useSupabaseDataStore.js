@@ -6,14 +6,20 @@ const defaultState = {
   dataValue: [],
 };
 
-// Clear loading states
+// Clear Data  loading states
 const clearedDefaultState = {
   loading: false,
   errors: [],
 };
 
-// test Upsert loading states
+// Upsert Data  loading states
 const upsertDefaultState = {
+  loading: false,
+  errors: [],
+};
+
+// test Sync Data  loading states
+const syncDefaultState = {
   loading: false,
   errors: [],
 };
@@ -51,7 +57,7 @@ const useSupabaseDataStore = create((set) => ({
       upsert: { ...state.upsert, upsertError: value },
     })),
 
-  // Clear loading states
+  // Clear Data loading states
   clearedData: {
     timeline: { ...clearedDefaultState },
     users: { ...clearedDefaultState },
@@ -62,7 +68,7 @@ const useSupabaseDataStore = create((set) => ({
     paymentsEvents: { ...clearedDefaultState },
   },
 
-  // Clear loading states
+  // Clear Data loading states
   setClearData: (dataType, newData) =>
     set((state) => ({
       clearedData: {
@@ -74,7 +80,7 @@ const useSupabaseDataStore = create((set) => ({
       },
     })),
 
-  // test Upsert loading states
+  // Upsert Data loading states
   upsertData: {
     timeline: { ...upsertDefaultState },
     users: { ...upsertDefaultState },
@@ -85,13 +91,36 @@ const useSupabaseDataStore = create((set) => ({
     paymentsEvents: { ...upsertDefaultState },
   },
 
-  // test Upsert loading states
+  // Upsert Data loading states
   setUpsertData: (dataType, newData) =>
     set((state) => ({
       upsertData: {
         ...state.upsertData,
         [dataType]: {
           ...state.upsertData[dataType],
+          ...newData,
+        },
+      },
+    })),
+
+  // test Sync Data loading states
+  syncData: {
+    timeline: { ...syncDefaultState },
+    users: { ...syncDefaultState },
+    usersEvents: { ...syncDefaultState },
+    subscriptions: { ...syncDefaultState },
+    subscriptionsEvents: { ...syncDefaultState },
+    payments: { ...syncDefaultState },
+    paymentsEvents: { ...syncDefaultState },
+  },
+
+  // test Sync Data loading states
+  setSyncData: (dataType, newData) =>
+    set((state) => ({
+      syncData: {
+        ...state.syncData,
+        [dataType]: {
+          ...state.syncData[dataType],
           ...newData,
         },
       },

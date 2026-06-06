@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import clearSupabaseData from "../../../service/api/clearSupabaseData.js";
-import upsertSupabaseData from "../../../service/api/upsertSupabaseData.js";
-import updateSupabaseData from "../../../service/api/updateSupabaseData.js";
+import { clearSupabaseData } from "../../../service/api/clearSupabaseData.js";
+import { upsertSupabaseData } from "../../../service/api/upsertSupabaseData.js";
+import syncSupabaseData from "../../../service/api/syncSupabaseData.js";
 
 import SwitchButton from "../../../components/SwitchButton.jsx";
 import PrimaryButton from "../../../components/PrimaryButton.jsx";
@@ -90,7 +90,7 @@ const UpsertSupabaseDataSettings = () => {
           ariaLabel={"update supabase data"}
           onClick={() => {
             if (!enableUpdate) return;
-            updateSupabaseData();
+            syncSupabaseData();
           }}
           label={
             isClearLoading
