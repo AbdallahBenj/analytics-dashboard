@@ -5,16 +5,41 @@ import useAuthStore from "../../store/useAuthStore.ts";
 import useSupabaseDataStore from "../../store/useSupabaseDataStore.js";
 import getTablesToUpdate from "./getTablesToUpdate.js";
 
+import { toCamelCase } from "../utils/toCamelCase.js";
+
 // Clear table
 const clearTableData = async (table) => {
-  const { error } = await supabase.from(table).delete().neq("id", 0);
+  const dataTable = toCamelCase(table);
 
-  if (error) {
-    console.log(`Delete Error ${table}`, error);
+  const { setClearData } = useSupabaseDataStore.getState();
+  setClearData(dataTable, { loading: true, errors: [] });
+
+  try {
+    const { error } = await supabase.from(table).delete().neq("id", 0);
+
+    if (error) {
+      console.log(`Delete Error ${table}`, error);
+      const currentErrors =
+        useSupabaseDataStore.getState().clearedData[dataTable].errors || [];
+      setClearData(dataTable, {
+        errors: [
+          ...currentErrors,
+          {
+            id: Date.now(),
+            label: `${dataTable} Data`,
+            message: "Failed to Clear",
+          },
+        ],
+      });
+
+      return error;
+    }
+    console.log(`Clear Supabase ${table} table`);
+
+    return null;
+  } finally {
+    setClearData(dataTable, { loading: false });
   }
-  console.log(`Clear Supabase ${table} table`);
-
-  return error;
 };
 
 // Clear all tables
@@ -25,6 +50,7 @@ const clearSupabaseData = async () => {
   if (!isClearEnabled || !isAdmin) return;
 
   const { setClearLoading, setClearError } = useSupabaseDataStore.getState();
+
   setClearLoading(true);
   setClearError(null);
 

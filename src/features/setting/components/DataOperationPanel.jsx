@@ -9,6 +9,7 @@ const DataOperationPanel = ({
   loadingButtonLabel = "",
   isEnabled,
   isLoading = false,
+  loadingType,
   isOperated,
   setIsOperated,
   action,
@@ -48,6 +49,7 @@ const DataOperationPanel = ({
             listTitle="Generated Data"
             dataType="data"
             isLoading={isLoading}
+            loadingType={loadingType}
             operationConfig={operationConfig}
             icon={icon}
             iconColor={iconColor}
@@ -58,6 +60,7 @@ const DataOperationPanel = ({
             listTitle="Generated Events"
             dataType="events"
             isLoading={isLoading}
+            loadingType={loadingType}
             operationConfig={operationConfig}
             icon={icon}
             iconColor={iconColor}

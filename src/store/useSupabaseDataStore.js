@@ -6,6 +6,12 @@ const defaultState = {
   dataValue: [],
 };
 
+// test Clear loading states
+const clearedDefaultState = {
+  loading: false,
+  errors: [],
+};
+
 const useSupabaseDataStore = create((set) => ({
   // Clear Supabase data
 
@@ -37,6 +43,29 @@ const useSupabaseDataStore = create((set) => ({
   setUpsertError: (value) =>
     set((state) => ({
       upsert: { ...state.upsert, upsertError: value },
+    })),
+
+  // test Clear loading states
+  clearedData: {
+    timeline: { ...clearedDefaultState },
+    users: { ...clearedDefaultState },
+    usersEvents: { ...clearedDefaultState },
+    subscriptions: { ...clearedDefaultState },
+    subscriptionsEvents: { ...clearedDefaultState },
+    payments: { ...clearedDefaultState },
+    paymentsEvents: { ...clearedDefaultState },
+  },
+
+  // test Clear loading states
+  setClearData: (dataType, newData) =>
+    set((state) => ({
+      clearedData: {
+        ...state.clearedData,
+        [dataType]: {
+          ...state.clearedData[dataType],
+          ...newData,
+        },
+      },
     })),
 
   // Fetch Supabase data

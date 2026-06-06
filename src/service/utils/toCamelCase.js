@@ -12,4 +12,4 @@ const convertKeysToCamelCase = (obj) => {
   );
 };
 
-export default convertKeysToCamelCase;
+export { toCamelCase, convertKeysToCamelCase };

@@ -8,6 +8,7 @@ const SupabaseDataSettings = () => {
   const [isGenerated, setGenerated] = useState(true);
 
   const { supabaseDataSettingsConfig } = useSupabaseDataSettings();
+
   return (
     <div
       className="relative primary-chart h-auto
@@ -55,6 +56,7 @@ const SupabaseDataSettings = () => {
               loadingButtonLabel={section.loadingButtonLabel}
               isEnabled={section.isEnabled}
               isLoading={section.isLoading}
+              loadingType={section.loadingType}
               isOperated={isGenerated}
               setIsOperated={() => setGenerated(true)}
               action={section.action}

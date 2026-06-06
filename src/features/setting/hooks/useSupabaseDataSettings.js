@@ -23,6 +23,12 @@ const useSupabaseDataSettings = () => {
 
   const fetchedData = useSupabaseDataStore((state) => state.fetchedData);
 
+  // Loading Clear data States
+  const clearedData = useSupabaseDataStore((state) => state.clearedData);
+  const loadingStates = Object.fromEntries(
+    Object.entries(clearedData).map((arr) => [arr[0], arr[1].loading]),
+  );
+
   const {
     timeline,
     users,
@@ -34,15 +40,37 @@ const useSupabaseDataSettings = () => {
   } = fetchedData;
 
   const fetchedDataConfig = [
-    { data: timeline, label: "Timeline (day)" },
-    { data: users, label: "Users" },
-    { data: subscriptions, label: "subscriptions" },
-    { data: payments, label: "payments" },
+    {
+      data: timeline,
+      label: "Timeline (day)",
+      clearLoading: loadingStates.timeline,
+    },
+    { data: users, label: "Users", clearLoading: loadingStates.users },
+    {
+      data: subscriptions,
+      label: "subscriptions",
+      clearLoading: loadingStates.subscriptions,
+    },
+    { data: payments, label: "payments", clearLoading: loadingStates.payments },
 
-    { events: usersEvents, label: "Users events" },
-    { events: subscriptionsEvents, label: "Subscriptions events" },
-    { events: paymentsEvents, label: "Payments events" },
+    {
+      events: usersEvents,
+      label: "Users events",
+      clearLoading: loadingStates.usersEvents,
+    },
+    {
+      events: subscriptionsEvents,
+      label: "Subscriptions events",
+      clearLoading: loadingStates.subscriptionsEvents,
+    },
+    {
+      events: paymentsEvents,
+      label: "Payments events",
+      clearLoading: loadingStates.paymentsEvents,
+    },
   ];
+
+  console.log("fetchedData", fetchedData);
 
   const supabaseDataSettingsConfig = [
     {
@@ -53,6 +81,7 @@ const useSupabaseDataSettings = () => {
       loadingButtonLabel: "Clearing..",
       isEnabled: isAdmin,
       isLoading: isClearLoading,
+      loadingType: "clearLoading",
       // isOperated: isGenerated,
       // setIsOperated: setGenerated,
       action: async () => {
