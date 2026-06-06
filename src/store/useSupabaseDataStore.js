@@ -6,11 +6,17 @@ const defaultState = {
   dataValue: [],
 };
 
-// test Clear loading states
+// Clear loading states
 const clearedDefaultState = {
   loading: false,
   errors: [],
 };
+
+// test Upsert loading states
+// const upsertDefaultState = {
+//   loading: false,
+//   errors: [],
+// };
 
 const useSupabaseDataStore = create((set) => ({
   // Clear Supabase data
@@ -45,7 +51,7 @@ const useSupabaseDataStore = create((set) => ({
       upsert: { ...state.upsert, upsertError: value },
     })),
 
-  // test Clear loading states
+  // Clear loading states
   clearedData: {
     timeline: { ...clearedDefaultState },
     users: { ...clearedDefaultState },
@@ -56,7 +62,7 @@ const useSupabaseDataStore = create((set) => ({
     paymentsEvents: { ...clearedDefaultState },
   },
 
-  // test Clear loading states
+  // Clear loading states
   setClearData: (dataType, newData) =>
     set((state) => ({
       clearedData: {
@@ -67,6 +73,29 @@ const useSupabaseDataStore = create((set) => ({
         },
       },
     })),
+
+  // test Upsert loading states
+  // upsertData: {
+  //   timeline: { ...upsertDefaultState },
+  //   users: { ...upsertDefaultState },
+  //   usersEvents: { ...upsertDefaultState },
+  //   subscriptions: { ...upsertDefaultState },
+  //   subscriptionsEvents: { ...upsertDefaultState },
+  //   payments: { ...upsertDefaultState },
+  //   paymentsEvents: { ...upsertDefaultState },
+  // },
+
+  // // test Upsert loading states
+  // setUpsertDataVersion2: (dataType, newData) =>
+  //   set((state) => ({
+  //     upsertData: {
+  //       ...state.upsertData,
+  //       [dataType]: {
+  //         ...state.upsertData[dataType],
+  //         ...newData,
+  //       },
+  //     },
+  //   })),
 
   // Fetch Supabase data
 

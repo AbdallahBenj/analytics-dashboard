@@ -70,8 +70,6 @@ const useSupabaseDataSettings = () => {
     },
   ];
 
-  console.log("fetchedData", fetchedData);
-
   const supabaseDataSettingsConfig = [
     {
       title: "Clear Supabase Data",
