@@ -1,5 +1,5 @@
 import useSupabaseDataStore from "../../../store/useSupabaseDataStore.js";
-import {fetchSupabaseData} from "../../../service/api/fetchSupabaseData.js";
+import { fetchSupabaseData } from "../../../service/api/fetchSupabaseData.js";
 
 import useAuthStore from "../../../store/useAuthStore.ts";
 
@@ -25,8 +25,14 @@ const useSupabaseDataSettings = () => {
 
   // Loading Clear data States
   const clearedData = useSupabaseDataStore((state) => state.clearedData);
-  const loadingStates = Object.fromEntries(
+  const clearLoadingStates = Object.fromEntries(
     Object.entries(clearedData).map((arr) => [arr[0], arr[1].loading]),
+  );
+
+  // Loading Clear data States
+  const upsertData = useSupabaseDataStore((state) => state.upsertData);
+  const upsertLoadingStates = Object.fromEntries(
+    Object.entries(upsertData).map((arr) => [arr[0], arr[1].loading]),
   );
 
   const {
@@ -43,30 +49,45 @@ const useSupabaseDataSettings = () => {
     {
       data: timeline,
       label: "Timeline (day)",
-      clearLoading: loadingStates.timeline,
+      clearLoading: clearLoadingStates.timeline,
+      upsertLoading: upsertLoadingStates.timeline,
     },
-    { data: users, label: "Users", clearLoading: loadingStates.users },
+    {
+      data: users,
+      label: "Users",
+      clearLoading: clearLoadingStates.users,
+      upsertLoading: upsertLoadingStates.users,
+    },
     {
       data: subscriptions,
       label: "subscriptions",
-      clearLoading: loadingStates.subscriptions,
+      clearLoading: clearLoadingStates.subscriptions,
+      upsertLoading: upsertLoadingStates.subscriptions,
     },
-    { data: payments, label: "payments", clearLoading: loadingStates.payments },
+    {
+      data: payments,
+      label: "payments",
+      clearLoading: clearLoadingStates.payments,
+      upsertLoading: upsertLoadingStates.payments,
+    },
 
     {
       events: usersEvents,
       label: "Users events",
-      clearLoading: loadingStates.usersEvents,
+      clearLoading: clearLoadingStates.usersEvents,
+      upsertLoading: upsertLoadingStates.usersEvents,
     },
     {
       events: subscriptionsEvents,
       label: "Subscriptions events",
-      clearLoading: loadingStates.subscriptionsEvents,
+      clearLoading: clearLoadingStates.subscriptionsEvents,
+      upsertLoading: upsertLoadingStates.subscriptionsEvents,
     },
     {
       events: paymentsEvents,
       label: "Payments events",
-      clearLoading: loadingStates.paymentsEvents,
+      clearLoading: clearLoadingStates.paymentsEvents,
+      upsertLoading: upsertLoadingStates.paymentsEvents,
     },
   ];
 
@@ -100,6 +121,8 @@ const useSupabaseDataSettings = () => {
       loadingButtonLabel: "Uploading..",
       isEnabled: isAdmin,
       isLoading: isUpsertLoading,
+      loadingType: "upsertLoading",
+
       // isOperated: isGenerated,
       // setIsOperated: setGenerated,
       action: async () => {
