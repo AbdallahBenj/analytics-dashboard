@@ -2,7 +2,7 @@ import { supabase } from "../../lib/supabase.js";
 import useSupabaseDataStore from "../../store/useSupabaseDataStore.js";
 import getTablesToUpdate from "./getTablesToUpdate.js";
 
-import fetchSupabaseData from "./fetchSupabaseData.js";
+import {fetchSupabaseData} from "./fetchSupabaseData.js";
 
 import useAuthStore from "../../store/useAuthStore.ts";
 

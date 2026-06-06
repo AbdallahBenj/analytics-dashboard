@@ -1,5 +1,5 @@
 import useSupabaseDataStore from "../../../store/useSupabaseDataStore.js";
-import fetchSupabaseData from "../../../service/api/fetchSupabaseData.js";
+import {fetchSupabaseData} from "../../../service/api/fetchSupabaseData.js";
 
 import useAuthStore from "../../../store/useAuthStore.ts";
 

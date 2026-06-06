@@ -3,6 +3,8 @@ import { supabase } from "../../lib/supabase.js";
 import useAuthStore from "../../store/useAuthStore.ts";
 
 import useSupabaseDataStore from "../../store/useSupabaseDataStore.js";
+import { fetchSupabaseTable } from "./fetchSupabaseData.js";
+
 import getTablesToUpdate from "./getTablesToUpdate.js";
 
 import { toCamelCase } from "../utils/toCamelCase.js";
@@ -38,6 +40,7 @@ const clearTableData = async (table) => {
 
     return null;
   } finally {
+    await fetchSupabaseTable(dataTable, table);
     setClearData(dataTable, { loading: false });
   }
 };

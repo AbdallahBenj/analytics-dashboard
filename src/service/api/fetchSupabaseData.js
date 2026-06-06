@@ -59,4 +59,4 @@ const fetchSupabaseData = async () => {
   ]);
 };
 
-export default fetchSupabaseData;
+export { fetchSupabaseData, fetchSupabaseTable };
