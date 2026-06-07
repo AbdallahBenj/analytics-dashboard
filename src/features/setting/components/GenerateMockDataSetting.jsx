@@ -1,25 +1,22 @@
-import { useState } from "react";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
 
 import DataOperationPanel from "./DataOperationPanel.jsx";
 
 import useRefreshMockData from "../../../hooks/useRefreshMockData.ts";
 import useMockDataStore from "../../../store/useMockDataStore.ts";
-// import useMockData from "../../../hooks/useMockData.ts";
+import useMockData from "../../../hooks/useMockData.ts";
 
 import useGenerateMockDataSettings from "../hooks/useGenerateMockDataSettings.js";
 
 import SelectListbox from "../../../components/SelectListbox.jsx";
 
 const GenerateMockDataSetting = () => {
-  const [isGenerated, setGenerated] = useState(true);
-
   const timelineLimit = useMockDataStore((state) => state.timelineLimit);
   const setTimelineLimit = useMockDataStore((state) => state.setTimelineLimit);
 
   const refreshMockData = useRefreshMockData();
-  // const { mockData } = useMockData();
-  // const { isLoading } = mockData;
+  const { mockData } = useMockData();
+  const { isLoading } = mockData;
 
   const { GenerateMockDataConfig, TimelineOptions } =
     useGenerateMockDataSettings();
@@ -75,9 +72,7 @@ const GenerateMockDataSetting = () => {
           buttonLabel={"Generate"}
           loadingButtonLabel={"Loading.."}
           isEnabled={true}
-          // isLoading={isLoading}
-          isOperated={isGenerated}
-          setIsOperated={() => setGenerated(true)}
+          isLoading={isLoading}
           action={refreshMockData}
           operationConfig={GenerateMockDataConfig}
           icon={CheckCircleIcon}

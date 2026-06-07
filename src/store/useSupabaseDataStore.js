@@ -1,25 +1,14 @@
 import { create } from "zustand";
 
+// Fetch Data default loading states
 const defaultState = {
   loading: false,
   errors: [],
   dataValue: [],
 };
 
-// Clear Data  loading states
-const clearedDefaultState = {
-  loading: false,
-  errors: [],
-};
-
-// Upsert Data  loading states
-const upsertDefaultState = {
-  loading: false,
-  errors: [],
-};
-
-// test Sync Data  loading states
-const syncDefaultState = {
+// Clear, Upsert, and Sync Data default loading states
+const updateDefaultState = {
   loading: false,
   errors: [],
 };
@@ -59,13 +48,13 @@ const useSupabaseDataStore = create((set) => ({
 
   // Clear Data loading states
   clearedData: {
-    timeline: { ...clearedDefaultState },
-    users: { ...clearedDefaultState },
-    usersEvents: { ...clearedDefaultState },
-    subscriptions: { ...clearedDefaultState },
-    subscriptionsEvents: { ...clearedDefaultState },
-    payments: { ...clearedDefaultState },
-    paymentsEvents: { ...clearedDefaultState },
+    timeline: { ...updateDefaultState },
+    users: { ...updateDefaultState },
+    usersEvents: { ...updateDefaultState },
+    subscriptions: { ...updateDefaultState },
+    subscriptionsEvents: { ...updateDefaultState },
+    payments: { ...updateDefaultState },
+    paymentsEvents: { ...updateDefaultState },
   },
 
   // Clear Data loading states
@@ -82,13 +71,13 @@ const useSupabaseDataStore = create((set) => ({
 
   // Upsert Data loading states
   upsertData: {
-    timeline: { ...upsertDefaultState },
-    users: { ...upsertDefaultState },
-    usersEvents: { ...upsertDefaultState },
-    subscriptions: { ...upsertDefaultState },
-    subscriptionsEvents: { ...upsertDefaultState },
-    payments: { ...upsertDefaultState },
-    paymentsEvents: { ...upsertDefaultState },
+    timeline: { ...updateDefaultState },
+    users: { ...updateDefaultState },
+    usersEvents: { ...updateDefaultState },
+    subscriptions: { ...updateDefaultState },
+    subscriptionsEvents: { ...updateDefaultState },
+    payments: { ...updateDefaultState },
+    paymentsEvents: { ...updateDefaultState },
   },
 
   // Upsert Data loading states
@@ -105,13 +94,13 @@ const useSupabaseDataStore = create((set) => ({
 
   // test Sync Data loading states
   syncData: {
-    timeline: { ...syncDefaultState },
-    users: { ...syncDefaultState },
-    usersEvents: { ...syncDefaultState },
-    subscriptions: { ...syncDefaultState },
-    subscriptionsEvents: { ...syncDefaultState },
-    payments: { ...syncDefaultState },
-    paymentsEvents: { ...syncDefaultState },
+    timeline: { ...updateDefaultState },
+    users: { ...updateDefaultState },
+    usersEvents: { ...updateDefaultState },
+    subscriptions: { ...updateDefaultState },
+    subscriptionsEvents: { ...updateDefaultState },
+    payments: { ...updateDefaultState },
+    paymentsEvents: { ...updateDefaultState },
   },
 
   // test Sync Data loading states

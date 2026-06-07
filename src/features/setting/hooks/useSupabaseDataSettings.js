@@ -1,6 +1,4 @@
 import useSupabaseDataStore from "../../../store/useSupabaseDataStore.js";
-import { fetchSupabaseData } from "../../../service/api/fetchSupabaseData.js";
-
 import useAuthStore from "../../../store/useAuthStore.ts";
 
 import {
@@ -115,16 +113,10 @@ const useSupabaseDataSettings = () => {
       isEnabled: isAdmin,
       isLoading: isClearLoading,
       loadingType: "clearLoading",
-      // isOperated: isGenerated,
-      // setIsOperated: setGenerated,
-      action: async () => {
-        clearSupabaseData();
-        fetchSupabaseData();
-      },
+      action: async () => clearSupabaseData(),
       operationConfig: fetchedDataConfig,
       icon: TrashIcon,
       iconColor: "#fb2c36",
-      // #fb2c36
     },
     {
       title: "Upsert Supabase Data",
@@ -138,16 +130,10 @@ const useSupabaseDataSettings = () => {
       isLoading: isUpsertLoading,
       loadingType: "upsertLoading",
 
-      // isOperated: isGenerated,
-      // setIsOperated: setGenerated,
-      action: async () => {
-        upsertSupabaseData();
-        fetchSupabaseData();
-      },
+      action: async () => upsertSupabaseData(),
       operationConfig: fetchedDataConfig,
       icon: ArrowUpTrayIcon,
       iconColor: "#00bc7d",
-      //#00bc7d
     },
     {
       title: "Sync Supabase Data",
@@ -160,16 +146,10 @@ const useSupabaseDataSettings = () => {
       isLoading: isUpdateLoading,
       loadingType: "syncLoading",
 
-      // isOperated: isGenerated,
-      // setIsOperated: setGenerated,
-      action: async () => {
-        syncSupabaseData();
-        fetchSupabaseData();
-      },
+      action: async () => syncSupabaseData(),
       operationConfig: fetchedDataConfig,
       icon: ArrowPathIcon,
       iconColor: "#2b7fff",
-      // #2b7fff
     },
   ];
 

@@ -11,12 +11,10 @@ const DataOperationPanel = ({
   isEnabled,
   isLoading = false,
   loadingType,
-  isOperated,
-  setIsOperated,
   action,
-  operationConfig = {},
   icon,
   iconColor,
+  operationConfig = {},
 }) => {
   return (
     <div>
@@ -35,15 +33,12 @@ const DataOperationPanel = ({
         <PrimaryButton
           disabled={!isEnabled}
           ariaLabel={ariaLabel}
-          onClick={() => {
-            setIsOperated?.();
-            action?.();
-          }}
+          onClick={() => action?.()}
           label={isLoading ? loadingButtonLabel : buttonLabel}
         />
       </div>
       {/* // Generated MockData */}
-      {isOperated && (
+      {
         <div className="grid md:grid-cols-2 gap-6 pt-6">
           {/* // Data list */}
           <DataOperationList
@@ -67,7 +62,7 @@ const DataOperationPanel = ({
             iconColor={iconColor}
           />
         </div>
-      )}
+      }
     </div>
   );
 };
