@@ -71,7 +71,7 @@ const GenerateMockDataSetting = () => {
           listTitleStart={"Generated"}
           buttonLabel={"Generate"}
           loadingButtonLabel={"Loading.."}
-          isEnabled={true}
+          isEnabled={!isLoading}
           isLoading={isLoading}
           action={refreshMockData}
           operationConfig={GenerateMockDataConfig}

@@ -13,9 +13,9 @@ import { upsertSupabaseData } from "../../../service/api/upsertSupabaseData.js";
 import syncSupabaseData from "../../../service/api/syncSupabaseData.js";
 
 const useSupabaseDataSettings = () => {
-  const { isClearLoading } = useSupabaseDataStore((state) => state.clear);
-  const { isUpsertLoading } = useSupabaseDataStore((state) => state.upsert);
-  const isUpdateLoading = isClearLoading || isUpsertLoading;
+  const { isClearLoading, isUpsertLoading, isSyncLoading } =
+    useSupabaseDataStore((state) => state);
+  const isLoading = isClearLoading || isUpsertLoading || isSyncLoading;
 
   const isAdmin = useAuthStore((state) => state.isAdmin);
 
@@ -110,7 +110,7 @@ const useSupabaseDataSettings = () => {
       listTitleStart: "Clear",
       buttonLabel: "Clear",
       loadingButtonLabel: "Clearing..",
-      isEnabled: isAdmin,
+      isEnabled: isAdmin && !isLoading,
       isLoading: isClearLoading,
       loadingType: "clearLoading",
       action: async () => clearSupabaseData(),
@@ -126,7 +126,7 @@ const useSupabaseDataSettings = () => {
       listTitleStart: "Upsert",
       buttonLabel: "Upload",
       loadingButtonLabel: "Uploading..",
-      isEnabled: isAdmin,
+      isEnabled: isAdmin && !isLoading,
       isLoading: isUpsertLoading,
       loadingType: "upsertLoading",
 
@@ -142,8 +142,8 @@ const useSupabaseDataSettings = () => {
       listTitleStart: "Sync",
       buttonLabel: "Sync",
       loadingButtonLabel: "Synchronizing..",
-      isEnabled: isAdmin,
-      isLoading: isUpdateLoading,
+      isEnabled: isAdmin && !isLoading,
+      isLoading: isSyncLoading,
       loadingType: "syncLoading",
 
       action: async () => syncSupabaseData(),

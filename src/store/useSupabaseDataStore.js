@@ -14,39 +14,25 @@ const updateDefaultState = {
 };
 
 const useSupabaseDataStore = create((set) => ({
-  // Clear Supabase data
+  // Clear Supabase data * Global State
+  isClearEnabled: true,
+  isClearLoading: false,
 
-  clear: {
-    isClearEnabled: true,
-    isClearLoading: false,
-    clearError: null,
-  },
-  setClearLoading: (value) =>
-    set((state) => ({
-      clear: { ...state.clear, isClearLoading: value },
-    })),
-  setClearError: (value) =>
-    set((state) => ({
-      clear: { ...state.clear, clearError: value },
-    })),
+  setClearLoading: (value) => set({ isClearLoading: value }),
 
-  // Upsert Supabase data
+  // Upsert Supabase data * Global State
+  isUpsertEnabled: true,
+  isUpsertLoading: false,
 
-  upsert: {
-    isUpsertEnabled: true,
-    isUpsertLoading: false,
-    upsertError: null,
-  },
-  setUpsertLoading: (value) =>
-    set((state) => ({
-      upsert: { ...state.upsert, isUpsertLoading: value },
-    })),
-  setUpsertError: (value) =>
-    set((state) => ({
-      upsert: { ...state.upsert, upsertError: value },
-    })),
+  setUpsertLoading: (value) => set({ isUpsertLoading: value }),
 
-  // Clear Data loading states
+  // Sync Supabase data * Global State
+  isSyncEnabled: true,
+  isSyncLoading: false,
+
+  setSyncLoading: (value) => set({ isSyncLoading: value }),
+
+  // Clear Data loading and errors * Individuals states
   clearedData: {
     timeline: { ...updateDefaultState },
     users: { ...updateDefaultState },
@@ -57,7 +43,6 @@ const useSupabaseDataStore = create((set) => ({
     paymentsEvents: { ...updateDefaultState },
   },
 
-  // Clear Data loading states
   setClearData: (dataType, newData) =>
     set((state) => ({
       clearedData: {
@@ -69,7 +54,7 @@ const useSupabaseDataStore = create((set) => ({
       },
     })),
 
-  // Upsert Data loading states
+  // Upsert Data loading and errors * Individuals states
   upsertData: {
     timeline: { ...updateDefaultState },
     users: { ...updateDefaultState },
@@ -80,7 +65,6 @@ const useSupabaseDataStore = create((set) => ({
     paymentsEvents: { ...updateDefaultState },
   },
 
-  // Upsert Data loading states
   setUpsertData: (dataType, newData) =>
     set((state) => ({
       upsertData: {
@@ -92,7 +76,7 @@ const useSupabaseDataStore = create((set) => ({
       },
     })),
 
-  // test Sync Data loading states
+  // Sync Data loading and errors * Individuals states
   syncData: {
     timeline: { ...updateDefaultState },
     users: { ...updateDefaultState },
@@ -103,7 +87,6 @@ const useSupabaseDataStore = create((set) => ({
     paymentsEvents: { ...updateDefaultState },
   },
 
-  // test Sync Data loading states
   setSyncData: (dataType, newData) =>
     set((state) => ({
       syncData: {

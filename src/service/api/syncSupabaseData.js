@@ -1,28 +1,21 @@
 import useSupabaseDataStore from "../../store/useSupabaseDataStore.js";
-// import { clearSupabaseData } from "./clearSupabaseData.js";
-// import { upsertSupabaseData } from "./upsertSupabaseData.js";
-
-// test start Sync loading states
 
 import useAuthStore from "../../store/useAuthStore.ts";
 import getTablesToUpdate from "./getTablesToUpdate.js";
 import { clearTableData } from "./clearSupabaseData.js";
 import { upsertTableData } from "./upsertSupabaseData.js";
 
-// test end Sync loading states
-
 const syncSupabaseData = async () => {
-  const { isClearEnabled } = useSupabaseDataStore.getState().clear;
-  const { isUpsertEnabled } = useSupabaseDataStore.getState().upsert;
-  const isUpdateDataEnabled = isClearEnabled || isUpsertEnabled;
+  const { isSyncEnabled } = useSupabaseDataStore.getState();
   const isAdmin = useAuthStore.getState().isAdmin;
 
-  if (!isUpdateDataEnabled || !isAdmin) return; // need to moveUp
+  if (!isSyncEnabled || !isAdmin) return;
 
-  // test start Sync loading states
-  const { setSyncData } = useSupabaseDataStore.getState();
   const tablesToUpdate = getTablesToUpdate();
+  const { setSyncLoading } = useSupabaseDataStore.getState();
+  setSyncLoading(true);
 
+  const { setSyncData } = useSupabaseDataStore.getState();
   for (const { tableData, dataName, tableName } of tablesToUpdate) {
     // Clear Supabase Table
     try {
@@ -70,12 +63,7 @@ const syncSupabaseData = async () => {
       setSyncData(dataName, { loading: false });
     }
   }
-
-  // test end Sync loading states
-
-  // await clearSupabaseData();
-  // await upsertSupabaseData();
-
+  setSyncLoading(false);
   console.log("SYNCHRONIZING COMPLETED");
 };
 

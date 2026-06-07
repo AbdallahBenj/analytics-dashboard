@@ -6,7 +6,6 @@ import "ldrs/react/DotPulse.css";
 const DataOperationList = ({
   listTitle,
   dataType,
-  isLoading,
   loadingType = "loading",
   icon = CheckCircleIcon,
   iconColor = "#00bc7d",
@@ -23,7 +22,7 @@ const DataOperationList = ({
         {operationConfig
           .filter((data) => data[dataType])
           .map((data) => {
-            const loadingState = data[loadingType] ?? isLoading;
+            const loadingState = data[loadingType];
 
             return (
               <li key={data.label} className="flex justify-between">

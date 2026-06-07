@@ -20,7 +20,6 @@ const upsertTableData = async (tableData, table, isUpdateData = false) => {
   try {
     for (let i = 0; i < tableData.length; i += 500) {
       const dataPart = tableData.slice(i, i + 500);
-      // await upsertChunkData(dataPart, table);
       const { error } = await supabase.from(table).upsert(dataPart);
       if (error) {
         console.log(`Delete Error ${table}`, error);
@@ -53,15 +52,14 @@ const upsertTableData = async (tableData, table, isUpdateData = false) => {
 // Upsert all tables to Supabase
 
 const upsertSupabaseData = async () => {
-  const { isUpsertEnabled } = useSupabaseDataStore.getState().upsert;
+  const { isUpsertEnabled } = useSupabaseDataStore.getState();
   const isAdmin = useAuthStore.getState().isAdmin;
 
   if (!isUpsertEnabled || !isAdmin) return;
 
   const tablesToUpdate = getTablesToUpdate();
-  const { setUpsertLoading, setUpsertError } = useSupabaseDataStore.getState();
+  const { setUpsertLoading } = useSupabaseDataStore.getState();
   setUpsertLoading(true);
-  setUpsertError(null);
 
   try {
     for (const { tableData, tableName } of tablesToUpdate) {
@@ -69,7 +67,7 @@ const upsertSupabaseData = async () => {
     }
   } catch (error) {
     console.log("Upsert Supabase Error", error.message);
-    setUpsertError(error.message);
+    // setUpsertError(error.message);
   } finally {
     setUpsertLoading(false);
   }
