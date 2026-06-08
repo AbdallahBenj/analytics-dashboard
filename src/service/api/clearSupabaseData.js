@@ -9,6 +9,8 @@ import getTablesToUpdate from "./getTablesToUpdate.js";
 
 import { toCamelCase } from "../utils/toCamelCase.js";
 
+const testError = true;
+
 // Clear table
 const clearTableData = async (table, isUpdateData = false) => {
   const dataTable = toCamelCase(table);
@@ -19,8 +21,8 @@ const clearTableData = async (table, isUpdateData = false) => {
   try {
     const { error } = await supabase.from(table).delete().neq("id", 0);
 
-    if (error) {
-      console.log(`Delete Error ${table}`, error.message);
+    if (error || testError) {
+      console.log(`Delete Error ${table}`, error?.message);
       const currentErrors =
         useSupabaseDataStore.getState().clearedData[dataTable].errors;
       setClearData(dataTable, {

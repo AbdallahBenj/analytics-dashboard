@@ -5,6 +5,8 @@ import getTablesToUpdate from "./getTablesToUpdate.js";
 import { clearTableData } from "./clearSupabaseData.js";
 import { upsertTableData } from "./upsertSupabaseData.js";
 
+const testError = false;
+
 const syncSupabaseData = async () => {
   const { isSyncEnabled } = useSupabaseDataStore.getState();
   const isAdmin = useAuthStore.getState().isAdmin;
@@ -12,7 +14,8 @@ const syncSupabaseData = async () => {
   if (!isSyncEnabled || !isAdmin) return;
 
   const tablesToUpdate = getTablesToUpdate();
-  const { setSyncLoading } = useSupabaseDataStore.getState();
+  const { setSyncLoading, resetSyncData } = useSupabaseDataStore.getState();
+  resetSyncData();
   setSyncLoading(true);
 
   const { setSyncData } = useSupabaseDataStore.getState();
@@ -22,9 +25,9 @@ const syncSupabaseData = async () => {
       setSyncData(dataName, { loading: true, errors: [] });
       const error = await clearTableData(tableName, true);
 
-      if (error) throw error;
+      if (error || testError) throw error;
     } catch (error) {
-      console.error("Clear Supabase Error", error.message);
+      console.error("Clear Supabase Error", error?.message);
       const currentErrors =
         useSupabaseDataStore.getState().syncData[dataName].errors || [];
       setSyncData(dataName, {
@@ -37,7 +40,7 @@ const syncSupabaseData = async () => {
           },
         ],
       });
-      continue;
+      // continue;
     }
 
     // Upsert Supabase Table

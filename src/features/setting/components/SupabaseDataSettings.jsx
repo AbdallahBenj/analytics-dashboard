@@ -19,6 +19,20 @@ const SupabaseDataSettings = () => {
   // );
   // console.log(("clearErrorsStates", clearErrorsStates));
 
+  // test upsertData errors
+  // const upsertData = useSupabaseDataStore((state) => state.upsertData);
+  // const upsertErrorsStates = Object.fromEntries(
+  //   Object.entries(upsertData).map((arr) => [arr[0], arr[1].errors]),
+  // );
+  // console.log(("clearErrorsStates", upsertErrorsStates));
+
+  // test syncData errors
+  // const syncData = useSupabaseDataStore((state) => state.syncData);
+  // const syncErrorsStates = Object.fromEntries(
+  //   Object.entries(syncData).map((arr) => [arr[0], arr[1].errors]),
+  // );
+  // console.log(("clearErrorsStates", syncErrorsStates));
+
   return (
     <div
       className="relative primary-chart h-auto

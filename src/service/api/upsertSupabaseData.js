@@ -8,6 +8,8 @@ import useAuthStore from "../../store/useAuthStore.ts";
 
 import { toCamelCase } from "../utils/toCamelCase.js";
 
+const testError = false;
+
 // Upsert table to Supabase
 const upsertTableData = async (tableData, table, isUpdateData = false) => {
   const dataTable = toCamelCase(table);
@@ -21,10 +23,10 @@ const upsertTableData = async (tableData, table, isUpdateData = false) => {
     for (let i = 0; i < tableData.length; i += 500) {
       const dataPart = tableData.slice(i, i + 500);
       const { error } = await supabase.from(table).upsert(dataPart);
-      if (error) {
-        console.log(`Delete Error ${table}`, error);
+      if (error || testError) {
+        console.log(`Delete Error ${table}`, error?.message);
         const currentErrors =
-          useSupabaseDataStore.getState().clearedData[dataTable].errors || [];
+          useSupabaseDataStore.getState().clearedData[dataTable].errors;
         setUpsertData(dataTable, {
           errors: [
             ...currentErrors,
@@ -58,7 +60,8 @@ const upsertSupabaseData = async () => {
   if (!isUpsertEnabled || !isAdmin) return;
 
   const tablesToUpdate = getTablesToUpdate();
-  const { setUpsertLoading } = useSupabaseDataStore.getState();
+  const { setUpsertLoading, resetUpsertData } = useSupabaseDataStore.getState();
+  resetUpsertData();
   setUpsertLoading(true);
 
   try {
@@ -67,7 +70,6 @@ const upsertSupabaseData = async () => {
     }
   } catch (error) {
     console.log("Upsert Supabase Error", error.message);
-    // setUpsertError(error.message);
   } finally {
     setUpsertLoading(false);
   }
