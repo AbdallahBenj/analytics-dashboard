@@ -30,11 +30,16 @@ const setDefaultData = (set, storedData, dataType, newData) =>
     [storedData]: {
       ...state[storedData],
       [dataType]: {
-        ...state[storedData][dataType],
+        ...(state[storedData][dataType] ?? {}),
         ...newData,
       },
     },
   }));
+
+const resetDefaultData = (set, storedData, defaultState) =>
+  set({
+    [storedData]: defaultData(defaultState),
+  });
 
 const useSupabaseDataStore = create((set) => ({
   // Clear Supabase data * Global State
@@ -61,11 +66,17 @@ const useSupabaseDataStore = create((set) => ({
   setClearData: (dataType, newData) =>
     setDefaultData(set, "clearedData", dataType, newData),
 
+  resetClearData: () =>
+    resetDefaultData(set, "clearedData", updateDefaultState),
+
   // Upsert Data loading and errors * Individuals states
   upsertData: defaultData(updateDefaultState),
 
   setUpsertData: (dataType, newData) =>
     setDefaultData(set, "upsertData", dataType, newData),
+
+  resetUpsertData: () =>
+    resetDefaultData(set, "upsertData", updateDefaultState),
 
   // Sync Data loading and errors * Individuals states
   syncData: defaultData(updateDefaultState),
@@ -73,11 +84,15 @@ const useSupabaseDataStore = create((set) => ({
   setSyncData: (dataType, newData) =>
     setDefaultData(set, "syncData", dataType, newData),
 
+  resetSyncData: () => resetDefaultData(set, "syncData", updateDefaultState),
+
   // Fetch Supabase data
   fetchedData: defaultData(fetchDefaultState),
 
   setFetchData: (dataType, newData) =>
     setDefaultData(set, "fetchedData", dataType, newData),
+
+  resetFetchData: () => resetDefaultData(set, "fetchData", fetchDefaultState),
 }));
 
 export default useSupabaseDataStore;

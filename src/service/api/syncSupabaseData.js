@@ -25,7 +25,6 @@ const syncSupabaseData = async () => {
       if (error) throw error;
     } catch (error) {
       console.error("Clear Supabase Error", error.message);
-      // setClearError(error.message);
       const currentErrors =
         useSupabaseDataStore.getState().syncData[dataName].errors || [];
       setSyncData(dataName, {

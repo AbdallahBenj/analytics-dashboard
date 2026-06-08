@@ -52,10 +52,10 @@ const clearSupabaseData = async () => {
 
   if (!isClearEnabled || !isAdmin) return;
 
-  const { setClearLoading } = useSupabaseDataStore.getState();
+  const { setClearLoading, resetClearData } = useSupabaseDataStore.getState();
 
+  resetClearData();
   setClearLoading(true);
-  // setClearError(null);
 
   try {
     const tablesToUpdate = getTablesToUpdate();
@@ -67,7 +67,6 @@ const clearSupabaseData = async () => {
     }
   } catch (error) {
     console.error("Clear Supabase Error", error.message);
-    // setClearError(error.message);
   } finally {
     setClearLoading(false);
   }
