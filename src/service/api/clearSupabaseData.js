@@ -20,9 +20,9 @@ const clearTableData = async (table, isUpdateData = false) => {
     const { error } = await supabase.from(table).delete().neq("id", 0);
 
     if (error) {
-      console.log(`Delete Error ${table}`, error);
+      console.log(`Delete Error ${table}`, error.message);
       const currentErrors =
-        useSupabaseDataStore.getState().clearedData[dataTable].errors || [];
+        useSupabaseDataStore.getState().clearedData[dataTable].errors;
       setClearData(dataTable, {
         errors: [
           ...currentErrors,

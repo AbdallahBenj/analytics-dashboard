@@ -73,6 +73,7 @@ const GenerateMockDataSetting = () => {
           loadingButtonLabel={"Loading.."}
           isEnabled={!isLoading}
           isLoading={isLoading}
+          loadingType={"loading"}
           action={refreshMockData}
           operationConfig={GenerateMockDataConfig}
           icon={CheckCircleIcon}

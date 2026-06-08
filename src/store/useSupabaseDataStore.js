@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 // Fetch Data default loading states
-const defaultState = {
+const fetchDefaultState = {
   loading: false,
   errors: [],
   dataValue: [],
@@ -12,6 +12,29 @@ const updateDefaultState = {
   loading: false,
   errors: [],
 };
+
+// Helper function for Data default states
+
+const defaultData = (defaultState) => ({
+  timeline: { ...defaultState },
+  users: { ...defaultState },
+  usersEvents: { ...defaultState },
+  subscriptions: { ...defaultState },
+  subscriptionsEvents: { ...defaultState },
+  payments: { ...defaultState },
+  paymentsEvents: { ...defaultState },
+});
+
+const setDefaultData = (set, storedData, dataType, newData) =>
+  set((state) => ({
+    [storedData]: {
+      ...state[storedData],
+      [dataType]: {
+        ...state[storedData][dataType],
+        ...newData,
+      },
+    },
+  }));
 
 const useSupabaseDataStore = create((set) => ({
   // Clear Supabase data * Global State
@@ -33,93 +56,28 @@ const useSupabaseDataStore = create((set) => ({
   setSyncLoading: (value) => set({ isSyncLoading: value }),
 
   // Clear Data loading and errors * Individuals states
-  clearedData: {
-    timeline: { ...updateDefaultState },
-    users: { ...updateDefaultState },
-    usersEvents: { ...updateDefaultState },
-    subscriptions: { ...updateDefaultState },
-    subscriptionsEvents: { ...updateDefaultState },
-    payments: { ...updateDefaultState },
-    paymentsEvents: { ...updateDefaultState },
-  },
+  clearedData: defaultData(updateDefaultState),
 
   setClearData: (dataType, newData) =>
-    set((state) => ({
-      clearedData: {
-        ...state.clearedData,
-        [dataType]: {
-          ...state.clearedData[dataType],
-          ...newData,
-        },
-      },
-    })),
+    setDefaultData(set, "clearedData", dataType, newData),
 
   // Upsert Data loading and errors * Individuals states
-  upsertData: {
-    timeline: { ...updateDefaultState },
-    users: { ...updateDefaultState },
-    usersEvents: { ...updateDefaultState },
-    subscriptions: { ...updateDefaultState },
-    subscriptionsEvents: { ...updateDefaultState },
-    payments: { ...updateDefaultState },
-    paymentsEvents: { ...updateDefaultState },
-  },
+  upsertData: defaultData(updateDefaultState),
 
   setUpsertData: (dataType, newData) =>
-    set((state) => ({
-      upsertData: {
-        ...state.upsertData,
-        [dataType]: {
-          ...state.upsertData[dataType],
-          ...newData,
-        },
-      },
-    })),
+    setDefaultData(set, "upsertData", dataType, newData),
 
   // Sync Data loading and errors * Individuals states
-  syncData: {
-    timeline: { ...updateDefaultState },
-    users: { ...updateDefaultState },
-    usersEvents: { ...updateDefaultState },
-    subscriptions: { ...updateDefaultState },
-    subscriptionsEvents: { ...updateDefaultState },
-    payments: { ...updateDefaultState },
-    paymentsEvents: { ...updateDefaultState },
-  },
+  syncData: defaultData(updateDefaultState),
 
   setSyncData: (dataType, newData) =>
-    set((state) => ({
-      syncData: {
-        ...state.syncData,
-        [dataType]: {
-          ...state.syncData[dataType],
-          ...newData,
-        },
-      },
-    })),
+    setDefaultData(set, "syncData", dataType, newData),
 
   // Fetch Supabase data
-
-  fetchedData: {
-    timeline: { ...defaultState },
-    users: { ...defaultState },
-    usersEvents: { ...defaultState },
-    subscriptions: { ...defaultState },
-    subscriptionsEvents: { ...defaultState },
-    payments: { ...defaultState },
-    paymentsEvents: { ...defaultState },
-  },
+  fetchedData: defaultData(fetchDefaultState),
 
   setFetchData: (dataType, newData) =>
-    set((state) => ({
-      fetchedData: {
-        ...state.fetchedData,
-        [dataType]: {
-          ...state.fetchedData[dataType],
-          ...newData,
-        },
-      },
-    })),
+    setDefaultData(set, "fetchedData", dataType, newData),
 }));
 
 export default useSupabaseDataStore;

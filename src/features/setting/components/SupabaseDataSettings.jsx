@@ -4,10 +4,20 @@ import DataOperationPanel from "./DataOperationPanel.jsx";
 
 import useSupabaseDataSettings from "../hooks/useSupabaseDataSettings.js";
 
+// test clearedData errors
+// import useSupabaseDataStore from "../../../store/useSupabaseDataStore.js";
+
 const SupabaseDataSettings = () => {
   const [isGenerated, setGenerated] = useState(true);
 
   const { supabaseDataSettingsConfig } = useSupabaseDataSettings();
+
+  // test clearedData errors
+  // const clearedData = useSupabaseDataStore((state) => state.clearedData);
+  // const clearErrorsStates = Object.fromEntries(
+  //   Object.entries(clearedData).map((arr) => [arr[0], arr[1].errors]),
+  // );
+  // console.log(("clearErrorsStates", clearErrorsStates));
 
   return (
     <div
