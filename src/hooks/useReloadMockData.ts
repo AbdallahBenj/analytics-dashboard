@@ -1,4 +1,5 @@
 import useMockDataStore from "../store/useMockDataStore.js";
+import MockDataLabel from "../service/mock/MockDataLabel.js";
 
 import type { DataTypesMap } from "../types/MockDataStoreTypes.js";
 
@@ -9,19 +10,9 @@ const useReloadMockData = () => {
   const reloadMockData = () => {
     const mockData = generatedData;
 
-    const LabelDataMap = {
-      timeline: "Time data",
-      users: "Users data",
-      subscriptions: "Subscriptions data",
-      payments: "Payments data",
-      usersEvents: "Users events",
-      subscriptionsEvents: "Subscriptions events",
-      paymentsEvents: "Payments events",
-    };
-
     // Retry fetch data and events functions:
     (Object.keys(mockData) as (keyof DataTypesMap)[]).forEach((key) => {
-      retryFetchData(key, mockData[key], LabelDataMap[key]);
+      retryFetchData(key, mockData[key], MockDataLabel[key]);
     });
   };
 

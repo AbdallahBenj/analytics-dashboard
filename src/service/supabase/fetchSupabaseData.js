@@ -36,7 +36,7 @@ const fetchSupabaseTable = async (dataType, table, label = "") => {
         ...currentErrors,
         {
           id: Date.now(),
-          label: `${label} Data`,
+          label: `${label} (Supabase Data)`,
           message: error?.message || "Failed to load",
         },
       ],
@@ -53,7 +53,7 @@ const fetchSupabaseData = async () => {
   // console.log("fetch All Supabase Data");
 
   await Promise.all([
-    fetchSupabaseTable("timeline", "timeline", "Time"),
+    fetchSupabaseTable("timeline", "timeline", "Timeline"),
     fetchSupabaseTable("users", "users", "Users"),
     fetchSupabaseTable("subscriptions", "subscriptions", "Subscriptions"),
     fetchSupabaseTable("payments", "payments", "Payments"),

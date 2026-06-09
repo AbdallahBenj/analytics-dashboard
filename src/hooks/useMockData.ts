@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import useMockDataStore from "../store/useMockDataStore.js";
 
 import generateMockData from "../service/mock/generateMockData.js";
+import MockDataLabel from "../service/mock/MockDataLabel.js";
 
 import type { DataTypesMap } from "../types/MockDataStoreTypes.js";
 
@@ -38,18 +39,8 @@ const useMockData = () => {
       paymentsEvents,
     };
 
-    const LabelDataMap = {
-      timeline: "Time data",
-      users: "Users data",
-      subscriptions: "Subscriptions data",
-      payments: "Payments data",
-      usersEvents: "Users events",
-      subscriptionsEvents: "Subscriptions events",
-      paymentsEvents: "Payments events",
-    };
-
     (Object.keys(dataMap) as (keyof DataTypesMap)[]).forEach((key) => {
-      setFetchData(key, dataMap[key], LabelDataMap[key]);
+      setFetchData(key, dataMap[key], MockDataLabel[key]);
     });
 
     // Mark that initial fetch has been done
