@@ -25,7 +25,14 @@ const syncSupabaseData = async () => {
       setSyncData(dataName, { loading: true, errors: [] });
       const error = await clearTableData(tableName, true);
 
-      if (error || testError) throw error;
+      if (error) {
+        throw error;
+      }
+
+      if (testError) {
+        throw new Error("Test Error");
+      }
+      
     } catch (error) {
       console.error("Clear Supabase Error", error?.message);
       const currentErrors =
