@@ -19,9 +19,9 @@ import AdminLoginDialog from "./components/AdminLoginDialog.tsx";
 
 // import SupabaseData
 import { useEffect, useRef } from "react";
-import { fetchSupabaseData } from "./service/api/fetchSupabaseData.js";
-// import {upsertSupabaseData} from "./service/api/upsertSupabaseData.js";
-import listenAuthChange from "./service/api/listenAuthChange.js";
+import { fetchSupabaseData } from "./service/supabase/fetchSupabaseData.js";
+// import {upsertSupabaseData} from "./service/supabase/upsertSupabaseData.js";
+import listenAuthChange from "./service/supabase/listenAuthChange.js";
 
 // Dashboard Data Mode
 import useDashboardData from "./hooks/useDashboardData.js";

@@ -1,6 +1,6 @@
 import useDataSourceStore from "../store/useDataSourceStore.js";
 
-const DataSourceNotice = () => {
+const TopHeaderNotice = () => {
   const dataSource = useDataSourceStore((state) => state.dataSource);
   const isSupabaseData = dataSource === "supabaseData";
 
@@ -21,4 +21,4 @@ const DataSourceNotice = () => {
   );
 };
 
-export default DataSourceNotice;
+export default TopHeaderNotice;

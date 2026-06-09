@@ -1,4 +1,4 @@
-import PrimaryButton from "../../../components/PrimaryButton.jsx";
+import PrimaryButton from "../../../ui/PrimaryButton.jsx";
 import DataOperationList from "./DataOperationList.jsx";
 
 const DataOperationPanel = ({

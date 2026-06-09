@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { supabase } from "../lib/supabase.js";
-import adminLogin from "../service/api/adminLogin.js";
+import adminLogin from "../service/supabase/adminLogin.js";
 import useAdminLoginStore from "../store/useAdminLoginStore.js";
 
 import {

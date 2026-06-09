@@ -1,5 +1,5 @@
 import useDataSourceStore from "../../../store/useDataSourceStore.ts";
-import RadioGroupButtons from "../../../components/RadioGroupButtons.js";
+import RadioGroupButtons from "../../../ui/RadioGroupButtons.js";
 
 const SourcesDataSettings = () => {
   const dataSource = useDataSourceStore((state) => state.dataSource);

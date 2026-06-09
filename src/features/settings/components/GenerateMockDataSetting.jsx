@@ -8,7 +8,7 @@ import useMockData from "../../../hooks/useMockData.ts";
 
 import useGenerateMockDataSettings from "../hooks/useGenerateMockDataSettings.js";
 
-import SelectListbox from "../../../components/SelectListbox.jsx";
+import SelectListbox from "../../../ui/SelectListbox.jsx";
 
 const GenerateMockDataSetting = () => {
   const timelineLimit = useMockDataStore((state) => state.timelineLimit);

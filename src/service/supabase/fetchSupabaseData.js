@@ -2,6 +2,7 @@ import { supabase } from "../../lib/supabase.js";
 import useSupabaseDataStore from "../../store/useSupabaseDataStore.js";
 import { convertKeysToCamelCase } from "../utils/toCamelCase.js";
 
+const testError = false;
 const isFetchEnabled = true;
 
 const fetchSupabaseTable = async (dataType, table, label = "") => {
@@ -12,7 +13,7 @@ const fetchSupabaseTable = async (dataType, table, label = "") => {
     const { data, error } = await supabase.from(table).select("*");
     const formattedData = data.map(convertKeysToCamelCase);
 
-    if (error) {
+    if (error || testError) {
       throw error;
     }
 

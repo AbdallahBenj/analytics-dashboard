@@ -4,7 +4,7 @@ import { ArrowPathIcon } from "@heroicons/react/20/solid";
 import useDashboardData from "../hooks/useDashboardData.js";
 import useReloadDashboardData from "../hooks/useReloadDashboardData.js";
 
-import SearchInput from "../components/SearchInput.tsx";
+import SearchInput from "../ui/SearchInput.tsx";
 import navContent from "../data/navContent.ts";
 const { navigation } = navContent;
 

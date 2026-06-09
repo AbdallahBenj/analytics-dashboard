@@ -10,7 +10,7 @@ import NotificationMenu from "../components/NotificationMenu.tsx";
 
 import useLoginStore from "../store/useLoginStore.js";
 
-const HeaderDesktop = () => {
+const DesktopHeader = () => {
   const userLogin = useLoginStore((state) => state.userLogin);
   const setLoginOpen = useLoginStore((state) => state.setLoginOpen);
   const resetLogin = useLoginStore((state) => state.resetLogin);
@@ -164,4 +164,4 @@ const HeaderDesktop = () => {
   );
 };
 
-export default HeaderDesktop;
+export default DesktopHeader;

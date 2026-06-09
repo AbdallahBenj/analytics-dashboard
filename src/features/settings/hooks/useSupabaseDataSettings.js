@@ -8,9 +8,9 @@ import {
   ArrowPathIcon,
 } from "@heroicons/react/24/outline";
 
-import { clearSupabaseData } from "../../../service/api/clearSupabaseData.js";
-import { upsertSupabaseData } from "../../../service/api/upsertSupabaseData.js";
-import syncSupabaseData from "../../../service/api/syncSupabaseData.js";
+import { clearSupabaseData } from "../../../service/supabase/clearSupabaseData.js";
+import { upsertSupabaseData } from "../../../service/supabase/upsertSupabaseData.js";
+import syncSupabaseData from "../../../service/supabase/syncSupabaseData.js";
 
 const useSupabaseDataSettings = () => {
   const { isClearLoading, isUpsertLoading, isSyncLoading } =

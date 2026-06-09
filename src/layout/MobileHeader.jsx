@@ -6,7 +6,7 @@ import {
 } from "@headlessui/react";
 
 import ThemeMode from "../components/ThemeMode.tsx";
-import SearchInput from "../components/SearchInput.tsx";
+import SearchInput from "../ui/SearchInput.tsx";
 import NotificationMenu from "../components/NotificationMenu.tsx";
 
 import {

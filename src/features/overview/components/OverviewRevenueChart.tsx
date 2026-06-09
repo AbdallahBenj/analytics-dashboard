@@ -1,5 +1,5 @@
 import { useState } from "react";
-import RadioGroupButtons from "../../../components/RadioGroupButtons.js";
+import RadioGroupButtons from "../../../ui/RadioGroupButtons.js";
 
 // Loading snipper icon
 import { DotPulse, Cardio } from "ldrs/react";

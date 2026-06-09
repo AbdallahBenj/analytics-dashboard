@@ -1,7 +1,7 @@
 import ComingSoon from "../components/ComingSoon.tsx";
-import SourcesDataSettings from "../features/setting/components/SourcesDataSettings.jsx";
-import SupabaseDataSettings from "../features/setting/components/SupabaseDataSettings.jsx";
-import GenerateMockDataSetting from "../features/setting/components/GenerateMockDataSetting.jsx";
+import SourcesDataSettings from "../features/settings/components/SourcesDataSettings.jsx";
+import SupabaseDataSettings from "../features/settings/components/SupabaseDataSettings.jsx";
+import GenerateMockDataSetting from "../features/settings/components/GenerateMockDataSetting.jsx";
 
 // import Errors Dialog
 // import useDashboardData from "../hooks/useDashboardData.js";

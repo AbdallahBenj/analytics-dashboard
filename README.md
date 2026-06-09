@@ -69,23 +69,32 @@ src/
 │   ├── dashboard-logo.svg
 │   └── react.svg
 │
-├── components/            # Reusable UI components
+│
+├── components/            # Shared UI components
 │   ├── AdminLoginDialog.tsx
 │   ├── ComingSoon.tsx
-│   ├── DataSourceNotice.tsx
 │   ├── ErrorsDialog.tsx
 │   ├── LoginDialog.tsx
 │   ├── NotificationMenu.tsx
-│   ├── RadioGroupButtons.tsx
-│   ├── SearchInput.tsx
 │   └── ThemeMode.tsx
+│
 │
 ├── data/                  # Static content
 │   ├── countries.ts
 │   ├── navContent.ts
 │   └── usersNames.ts
 │
+│
 ├── features/              # Feature-based modules
+│   ├── analytics/
+│   │   ├── components/
+│   │   │   ├── AnalyticsRevenueByPlanChart.tsx
+│   │   │   └── 
+│   │   │
+│   │   └── hooks/
+│   │       ├── useAnalyticsRevenueByPlanChart.ts
+│   │       └── 
+│   │    
 │   ├── overview/
 │   │   ├── components/
 │   │   │   ├── OverviewMiniCards.tsx
@@ -99,17 +108,17 @@ src/
 │   │       ├── useOverviewRevenueChart.ts
 │   │       └── useOverviewActivityTable.ts
 │   │
-│   ├── analytics/
+│   ├── settings/
 │   │   ├── components/
-│   │   │   ├── AnalyticsRevenueByPlanChart.jsx
-│   │   │   ├── .jsx
-│   │   │   └── .jsx
+│   │   │   ├── DataOperationList.jsx
+│   │   │   ├── DataOperationPanel.jsx
+│   │   │   ├── GenerateMockDataSetting.jsx
+│   │   │   ├── SourcesDataSettings.jsx
+│   │   │   └── SupabaseDataSettings.jsx
 │   │   │
 │   │   └── hooks/
-│   │       ├── useAnalyticsRevenueByPlanChart.js
-│   │       ├── .js
-│   │       └── .js
-│   │    
+│   │       ├── useGenerateMockDataSettings.js
+│   │       └── useSupabaseDataSettings.js
 │   │
 │   └── utils/
 │       ├── getActiveSubscriptions.ts
@@ -120,24 +129,29 @@ src/
 │       ├── getRevenue.ts
 │       └── getUsersByPlan.ts
 │   
+│
 ├── hooks/                 # Global reusable hooks
-│   ├── useDashboardData.js
+│   ├── useDashboardData.ts
 │   ├── useMockData.ts
+│   ├── useRefreshMockData.ts
 │   ├── useReloadDashboardData.js
 │   ├── useReloadMockData.ts
 │   ├── useSupabaseData.js
 │   ├── useSystemMode.js
 │   └── useThemeMode.js
 │
+│
 ├── layout/
 │   ├── DashboardLayout.jsx
+│   ├── DesktopHeader.jsx
 │   ├── Header.jsx
-│   ├── HeaderDesktop.jsx
-│   ├── HeaderMobile.jsx
 │   ├── MainHeader.jsx
 │   ├── MainLayout.jsx
+│   ├── MobileHeader.jsx
 │   ├── PageHeader.jsx
-│   └── Sidebar.jsx
+│   ├── Sidebar.jsx
+│   └── TopHeaderNotice.tsx
+│
 │
 ├── pages/
 │   ├── AnalyticsPage.jsx
@@ -147,35 +161,39 @@ src/
 │   ├── NotFoundPage.jsx
 │   ├── OverviewPage.jsx
 │   ├── ReportsPage.jsx
+│   ├── SettingsPage.jsx
 │   └── SubscriptionsPage.jsx
 │
+│
 ├── services/
-│   ├── api/              # Future real API
+│   ├── mock/
+│   │   ├── generateData.ts             // statics generated Data
+│   │   ├── generateEvents.ts           // statics generated Events
+│   │   ├── generateMockData.ts         // dynamics generated Data and Events
+│   │   ├── generatePayments.ts
+│   │   ├── generatePaymentsEvents.ts
+│   │   ├── generateSubscriptions.ts
+│   │   ├── generateSubscriptionsEvents.ts
+│   │   ├── generateTimeline.ts
+│   │   ├── generateUsers.ts
+│   │   └── generateUsersEvents.ts
+│   │
+│   ├── supabase/              # Future real API
 │   │   ├── adminLogin.js
 │   │   ├── adminLogout.js
 │   │   ├── checkAdmin.js
+│   │   ├── clearSupabaseData.js
 │   │   ├── fetchSupabaseData.js
-│   │   ├── updateSupabaseData.js
-│   │   └── listenAuthChange.js
-│   │
-│   ├── events/
-│   │   ├── generateEvents.ts
-│   │   ├── generatePaymentsEvents.ts
-│   │   ├── generateSubscriptionsEvents.ts
-│   │   └── generateUsersEvents.ts
-│   │
-│   ├── mock/
-│   │   ├── generateData.ts
-│   │   ├── generatePayments.ts
-│   │   ├── generateSubscriptions.ts
-│   │   ├── generateTimeline.ts
-│   │   └── generateUsers.ts
-│   │
+│   │   ├── getTablesToUpdate.js        // get Supabase Tables to update
+│   │   ├── listenAuthChange.js
+│   │   ├── syncSupabaseData.js
+│   │   └── upsertSupabaseData.js
 │   │
 │   └── utils/
-│   │   ├── toCamelCase.js
-│   │   ├── toDynamicTime.ts
+│       ├── toCamelCase.js
+│       ├── toDynamicTime.ts
 │       └── toSnakeCase.js
+│
 │
 ├── store/                # Zustand global state
 │   ├── useAdminLoginStore.ts 
@@ -185,14 +203,25 @@ src/
 │   ├── useMockDataStore.ts
 │   └── useSupabaseDataStore.js
 │
+│
 ├── types/    
 │   ├── analyticsSectionTypes.ts          # Global utilities
 │   ├── dataTypes.ts
 │   ├── eventTypes.ts
+│   ├── MockDataStoreTypes.ts
 │   ├── overviewSectionTypes.ts
-│   ├── useMockDataStore.ts
 │   ├── utilsTypes.ts
-│   └── .ts
+│   └── 
+
+├── ui/                 # Reusable UI components
+│   ├── PrimaryButton.jsx 
+│   ├── RadioGroupButtons.tsx 
+│   ├── SearchInput.tsx 
+│   ├── SelectInput.jsx 
+│   ├── SelectListbox.jsx 
+│   └── SwitchButton.jsx 
+│ 
+│
 │
 ├── utils/                # Global utilities
 │   ├── convertToKilo.ts // Not used

@@ -7,7 +7,7 @@ import useAuthStore from "../store/useAuthStore.ts";
 import useAdminLoginStore from "../store/useAdminLoginStore.ts";
 
 import ThemeMode from "../components/ThemeMode.tsx";
-import adminLogout from "../service/api/adminLogout.js";
+import adminLogout from "../service/supabase/adminLogout.js";
 
 const MainHeader = () => {
   const editor = useAuthStore((state) => state.editor);

@@ -1,11 +1,11 @@
-import HeaderDesktop from "./HeaderDesktop";
-import HeaderMobile from "./HeaderMobile";
+import DesktopHeader from "./DesktopHeader";
+import MobileHeader from "./MobileHeader";
 
 const Header = () => {
   return (
     <header>
-      <HeaderDesktop />
-      <HeaderMobile />
+      <DesktopHeader />
+      <MobileHeader />
     </header>
   );
 };
