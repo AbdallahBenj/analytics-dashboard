@@ -13,6 +13,7 @@ const useDashboardData = () => {
 
   // console.log("mockData", mockData);
   // console.log("supabaseData", supabaseData);
+  // console.log("dashboardData", dashboardData);
 
   return { dashboardData };
 };

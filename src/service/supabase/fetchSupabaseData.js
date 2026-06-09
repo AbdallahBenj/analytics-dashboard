@@ -2,7 +2,7 @@ import { supabase } from "../../lib/supabase.js";
 import useSupabaseDataStore from "../../store/useSupabaseDataStore.js";
 import { convertKeysToCamelCase } from "../utils/toCamelCase.js";
 
-const testError = false;
+const testError = true;
 const isFetchEnabled = true;
 
 const fetchSupabaseTable = async (dataType, table, label = "") => {
@@ -11,12 +11,16 @@ const fetchSupabaseTable = async (dataType, table, label = "") => {
   try {
     setFetchData(dataType, { loading: true, errors: [] });
     const { data, error } = await supabase.from(table).select("*");
-    const formattedData = data.map(convertKeysToCamelCase);
 
-    if (error || testError) {
+    if (error) {
       throw error;
     }
 
+    if (testError) {
+      throw new Error("Test Error");
+    }
+
+    const formattedData = data.map(convertKeysToCamelCase);
     setFetchData(dataType, {
       dataValue: formattedData,
       errors: [],
@@ -25,12 +29,16 @@ const fetchSupabaseTable = async (dataType, table, label = "") => {
     return formattedData;
   } catch (error) {
     const currentErrors =
-      useSupabaseDataStore.getState().data[dataType].errors || [];
+      useSupabaseDataStore.getState().fetchedData[dataType].errors;
     console.error("Supabase error:", error.message);
     setFetchData(dataType, {
       errors: [
         ...currentErrors,
-        { id: Date.now(), label: `${label} Data`, message: "Failed to load" },
+        {
+          id: Date.now(),
+          label: `${label} Data`,
+          message: error?.message || "Failed to load",
+        },
       ],
     });
     return [];

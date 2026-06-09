@@ -31,7 +31,7 @@ const clearTableData = async (table, isUpdateData = false) => {
           {
             id: Date.now(),
             label: `${dataTable} Data`,
-            message: "Failed to Clear",
+            message: error?.message || "Failed to Clear",
           },
         ],
       });

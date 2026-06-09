@@ -39,6 +39,14 @@ const useSupabaseDataSettings = () => {
     Object.entries(syncData).map((arr) => [arr[0], arr[1].loading]),
   );
 
+  // Loading fetch data States
+  // const fetchedData = useSupabaseDataStore((state) => state.fetchedData);
+  const fetchLoadingStates = Object.fromEntries(
+    Object.entries(fetchedData).map((arr) => [arr[0], arr[1].errors]),
+  );
+
+  console.log("fetchLoadingStates", fetchLoadingStates);
+
   const {
     timeline,
     users,
