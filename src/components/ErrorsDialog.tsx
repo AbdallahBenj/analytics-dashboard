@@ -6,16 +6,21 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 
-import useDashboardData from "../hooks/useDashboardData.js";
-import useReloadDashboardData from "../hooks/useReloadDashboardData.js";
+// import useDashboardData from "../hooks/useDashboardData.js";
+// import useReloadDashboardData from "../hooks/useReloadDashboardData.js";
+
+import useErrorsDialog from "../hooks/useErrorsDialog.js";
 
 const ErrorsDialog = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   // Get DashboardData
-  const reloadDashboardData = useReloadDashboardData();
-  const { dashboardData } = useDashboardData();
-  const { isErrors, errors } = dashboardData;
+  // const reloadDashboardData = useReloadDashboardData();
+  // const { dashboardData } = useDashboardData();
+  // const { isErrors, errors } = dashboardData;
+
+  const errorsDialogConfig = useErrorsDialog();
+  const { isErrors, errors, reloadDashboardData } = errorsDialogConfig;
 
   // Track the latest error
   const latestErrorId = errors.at(-1)?.id;
