@@ -1,4 +1,5 @@
 import useSupabaseDataStore from "../../../store/useSupabaseDataStore.js";
+import useDataSourceStore from "../../../store/useDataSourceStore.js";
 import useAuthStore from "../../../store/useAuthStore.ts";
 
 import {
@@ -20,6 +21,9 @@ const useSupabaseDataSettings = () => {
   const isAdmin = useAuthStore((state) => state.isAdmin);
 
   const fetchedData = useSupabaseDataStore((state) => state.fetchedData);
+
+  // Update Data Source
+  const setDataSource = useDataSourceStore((state) => state.setDataSource);
 
   // Loading fetch data States
   // const fetchLoadingStates = Object.fromEntries(
@@ -119,7 +123,10 @@ const useSupabaseDataSettings = () => {
       isEnabled: isAdmin && !isLoading,
       isLoading: isClearLoading,
       loadingType: "clearLoading",
-      action: async () => clearSupabaseData(),
+      action: async () => {
+        setDataSource("supabaseData");
+        clearSupabaseData();
+      },
       operationConfig: fetchedDataConfig,
       icon: TrashIcon,
       iconColor: "#fb2c36",
@@ -136,7 +143,10 @@ const useSupabaseDataSettings = () => {
       isLoading: isUpsertLoading,
       loadingType: "upsertLoading",
 
-      action: async () => upsertSupabaseData(),
+      action: async () => {
+        setDataSource("supabaseData");
+        upsertSupabaseData();
+      },
       operationConfig: fetchedDataConfig,
       icon: ArrowUpTrayIcon,
       iconColor: "#00bc7d",
@@ -152,7 +162,10 @@ const useSupabaseDataSettings = () => {
       isLoading: isSyncLoading,
       loadingType: "syncLoading",
 
-      action: async () => syncSupabaseData(),
+      action: async () => {
+        setDataSource("supabaseData");
+        syncSupabaseData();
+      },
       operationConfig: fetchedDataConfig,
       icon: ArrowPathIcon,
       iconColor: "#2b7fff",

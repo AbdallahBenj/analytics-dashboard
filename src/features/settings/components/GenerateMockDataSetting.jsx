@@ -74,7 +74,7 @@ const GenerateMockDataSetting = () => {
           isEnabled={!isLoading}
           isLoading={isLoading}
           loadingType={"loading"}
-          action={refreshMockData}
+          action={() => refreshMockData()}
           operationConfig={GenerateMockDataConfig}
           icon={CheckCircleIcon}
           iconColor={"#00bc7d"}
