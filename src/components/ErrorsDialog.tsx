@@ -17,9 +17,15 @@ const ErrorsDialog = () => {
   const { dashboardData } = useDashboardData();
   const { isErrors, errors } = dashboardData;
 
+  // Track the latest error
+  const latestErrorId = errors.at(-1)?.id;
+
+  // Open the dialog whenever a new error is added
   useEffect(() => {
-    setIsOpen(isErrors);
-  }, [isErrors]);
+    if (latestErrorId) {
+      setIsOpen(true);
+    }
+  }, [latestErrorId]);
 
   return (
     <Dialog
