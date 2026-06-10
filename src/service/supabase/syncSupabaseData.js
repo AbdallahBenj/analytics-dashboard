@@ -32,7 +32,6 @@ const syncSupabaseData = async () => {
       if (testError) {
         throw new Error("Test Error");
       }
-      
     } catch (error) {
       console.error("Clear Supabase Error", error?.message);
       const currentErrors =
@@ -43,7 +42,7 @@ const syncSupabaseData = async () => {
           {
             id: Date.now(),
             label: `${dataName} Data`,
-            message: "Failed to Clear",
+            message: "Failed to Clear on Sync",
           },
         ],
       });
@@ -64,7 +63,7 @@ const syncSupabaseData = async () => {
           {
             id: Date.now(),
             label: `${dataName} Data`,
-            message: "Failed to Upsert",
+            message: "Failed to Upsert on Sync",
           },
         ],
       });

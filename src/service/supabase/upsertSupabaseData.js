@@ -26,14 +26,14 @@ const upsertTableData = async (tableData, table, isUpdateData = false) => {
       if (error || testError) {
         console.log(`Delete Error ${table}`, error?.message);
         const currentErrors =
-          useSupabaseDataStore.getState().clearedData[dataTable].errors;
+          useSupabaseDataStore.getState().upsertData[dataTable].errors;
         setUpsertData(dataTable, {
           errors: [
             ...currentErrors,
             {
               id: Date.now(),
               label: `${dataTable} Data`,
-              message: "Failed to Clear",
+              message: "Failed to Upsert",
             },
           ],
         });
