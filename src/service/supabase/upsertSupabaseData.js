@@ -8,7 +8,7 @@ import useAuthStore from "../../store/useAuthStore.ts";
 
 import { toCamelCase } from "../utils/toCamelCase.js";
 
-const testError = false;
+const testError = true;
 
 // Upsert table to Supabase
 const upsertTableData = async (tableData, table, isUpdateData = false) => {
@@ -31,8 +31,8 @@ const upsertTableData = async (tableData, table, isUpdateData = false) => {
           errors: [
             ...currentErrors,
             {
-              id: Date.now(),
-              label: `${dataTable} Data`,
+              id: crypto.randomUUID(),
+              label: `${dataTable} (Supabase)`,
               message: "Failed to Upsert",
             },
           ],

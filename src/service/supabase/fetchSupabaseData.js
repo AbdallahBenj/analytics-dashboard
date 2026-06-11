@@ -2,7 +2,7 @@ import { supabase } from "../../lib/supabase.js";
 import useSupabaseDataStore from "../../store/useSupabaseDataStore.js";
 import { convertKeysToCamelCase } from "../utils/toCamelCase.js";
 
-const testError = false;
+const testError = true;
 const isFetchEnabled = true;
 
 const fetchSupabaseTable = async (dataType, table, label = "") => {
@@ -17,7 +17,7 @@ const fetchSupabaseTable = async (dataType, table, label = "") => {
     }
 
     if (testError) {
-      throw new Error("Test Error");
+      throw new Error("Test Failed to load");
     }
 
     const formattedData = data.map(convertKeysToCamelCase);
@@ -35,8 +35,8 @@ const fetchSupabaseTable = async (dataType, table, label = "") => {
       errors: [
         ...currentErrors,
         {
-          id: Date.now(),
-          label: `${label} (Supabase Data)`,
+          id: crypto.randomUUID(),
+          label: `${label} (Supabase)`,
           message: error?.message || "Failed to load",
         },
       ],

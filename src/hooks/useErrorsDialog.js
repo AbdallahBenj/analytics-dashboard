@@ -3,6 +3,7 @@ import useReloadDashboardData from "../hooks/useReloadDashboardData.js";
 
 // test
 import useSupabaseDataStore from "../store/useSupabaseDataStore.js";
+import useMockDataStore from "../store/useMockDataStore.js";
 
 const useErrorsDialog = () => {
   const reloadDashboardData = useReloadDashboardData();
@@ -12,21 +13,50 @@ const useErrorsDialog = () => {
   // console.log("dashboardData", dashboardData);
 
   // test start
+  const mockData = useMockDataStore((state) => state.fetchedData);
+  const fetchedData = useSupabaseDataStore((state) => state.fetchedData);
   const clearedData = useSupabaseDataStore((state) => state.clearedData);
   const upsertData = useSupabaseDataStore((state) => state.upsertData);
-  // const syncData = useSupabaseDataStore((state) => state.syncData);
+  const syncData = useSupabaseDataStore((state) => state.syncData);
 
-  const clearErrors = Object.values(clearedData).flatMap((obj) => obj.errors);
-  const isClearErrors = clearErrors.length >= 1;
-  // console.table("clearedDataErrors", clearErrors, isClearErrors);
+  const getDataErrors = (
+    data,
+    dataName = "Data",
+    message = "Failed to Load",
+  ) => {
+    const dataErrors = Object.values(data).flatMap((obj) => obj.errors);
+    const isErrors = dataErrors.length >= 1;
+    const errorsResult = isErrors
+      ? [
+          {
+            id: crypto.randomUUID(),
+            label: `${dataName}`,
+            message: message,
+          },
+        ]
+      : [];
+    // console.table(`${dataName} Errors`, dataErrors, isErrors);
+    return dataErrors;
+  };
 
-  const upsertErrors = Object.values(upsertData).flatMap((obj) => obj.errors);
-  const isUpsertErrors = upsertErrors.length >= 1;
-  // console.log("upsertDataErrors", upsertErrors, isUpsertErrors);
+  const mockDataErrors = getDataErrors(mockData, "MockData");
+  const fetchedDataErrors = getDataErrors(fetchedData, "Supabase Data");
+  const clearedDataErrors = getDataErrors(
+    clearedData,
+    "Supabase Data",
+    "Failed to Clear",
+  );
+  const upsertDataErrors = getDataErrors(
+    upsertData,
+    "Supabase Data",
+    "Failed to Upsert",
+  );
+  const syncDataErrors = getDataErrors(
+    syncData,
+    "Supabase Data",
+    "Failed to Synchronize",
+  );
 
-  // const syncErrors = Object.values(syncData).flatMap((obj) => obj.errors);
-  // const isSyncErrors = syncErrors.length >= 1;
-  // console.log("SyncDataErrors", syncErrors, isSyncErrors);
   // test end
 
   const errorsDialogConfig = {

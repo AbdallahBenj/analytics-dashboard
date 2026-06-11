@@ -109,7 +109,7 @@ const useMockDataStore = create<MockDataStoreTypes>((set, get) => ({
               errors: [
                 {
                   id: Date.now(),
-                  label: `${label} (Mock Data)`,
+                  label: `${label} (MockData)`,
                   message: "Failed to load",
                 },
               ],
@@ -128,7 +128,7 @@ const useMockDataStore = create<MockDataStoreTypes>((set, get) => ({
             errors: [
               {
                 id: Date.now(),
-                label: `${label} (Mock Data)`,
+                label: `${label} (MockData)`,
                 message: err instanceof Error ? err.message : "Unknown error",
               },
             ],

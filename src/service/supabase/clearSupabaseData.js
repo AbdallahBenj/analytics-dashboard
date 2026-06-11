@@ -9,7 +9,7 @@ import getTablesToUpdate from "./getTablesToUpdate.js";
 
 import { toCamelCase } from "../utils/toCamelCase.js";
 
-const testError = false;
+const testError = true;
 
 // Clear table
 const clearTableData = async (table, isUpdateData = false) => {
@@ -29,8 +29,8 @@ const clearTableData = async (table, isUpdateData = false) => {
         errors: [
           ...currentErrors,
           {
-            id: Date.now(),
-            label: `${dataTable} Data`,
+            id: crypto.randomUUID(),
+            label: `${dataTable} (Supabase)`,
             message: error?.message || "Failed to Clear",
           },
         ],

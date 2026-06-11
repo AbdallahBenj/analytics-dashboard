@@ -5,7 +5,7 @@ import getTablesToUpdate from "./getTablesToUpdate.js";
 import { clearTableData } from "./clearSupabaseData.js";
 import { upsertTableData } from "./upsertSupabaseData.js";
 
-const testError = false;
+const testError = true;
 
 const syncSupabaseData = async () => {
   const { isSyncEnabled } = useSupabaseDataStore.getState();
@@ -40,8 +40,8 @@ const syncSupabaseData = async () => {
         errors: [
           ...currentErrors,
           {
-            id: Date.now(),
-            label: `${dataName} Data`,
+            id: crypto.randomUUID(),
+            label: `${dataName} (Supabase)`,
             message: "Failed to Clear on Sync",
           },
         ],
@@ -52,7 +52,15 @@ const syncSupabaseData = async () => {
     // Upsert Supabase Table
 
     try {
-      await upsertTableData(tableData, tableName, true);
+      const error = await upsertTableData(tableData, tableName, true);
+
+      if (error) {
+        throw error;
+      }
+
+      if (testError) {
+        throw new Error("Test Error");
+      }
     } catch (error) {
       console.log("Upsert Supabase Error", error.message);
       const currentErrors =
@@ -62,7 +70,7 @@ const syncSupabaseData = async () => {
           ...currentErrors,
           {
             id: Date.now(),
-            label: `${dataName} Data`,
+            label: `${dataName} (Supabase)`,
             message: "Failed to Upsert on Sync",
           },
         ],
