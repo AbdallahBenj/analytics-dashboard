@@ -9,7 +9,7 @@ import getTablesToUpdate from "./getTablesToUpdate.js";
 
 import { toCamelCase } from "../utils/toCamelCase.js";
 
-const testError = true;
+const testError = false;
 
 // Clear table
 const clearTableData = async (table, isUpdateData = false) => {

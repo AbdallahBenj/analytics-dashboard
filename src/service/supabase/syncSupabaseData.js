@@ -5,7 +5,7 @@ import getTablesToUpdate from "./getTablesToUpdate.js";
 import { clearTableData } from "./clearSupabaseData.js";
 import { upsertTableData } from "./upsertSupabaseData.js";
 
-const testError = true;
+const testError = false;
 
 const syncSupabaseData = async () => {
   const { isSyncEnabled } = useSupabaseDataStore.getState();

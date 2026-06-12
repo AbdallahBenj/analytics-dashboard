@@ -92,7 +92,7 @@ const useSupabaseDataStore = create((set) => ({
   setFetchData: (dataType, newData) =>
     setDefaultData(set, "fetchedData", dataType, newData),
 
-  resetFetchData: () => resetDefaultData(set, "fetchData", fetchDefaultState),
+  resetFetchData: () => resetDefaultData(set, "fetchedData", fetchDefaultState),
 }));
 
 export default useSupabaseDataStore;

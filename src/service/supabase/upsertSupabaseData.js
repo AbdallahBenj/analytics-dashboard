@@ -8,7 +8,7 @@ import useAuthStore from "../../store/useAuthStore.ts";
 
 import { toCamelCase } from "../utils/toCamelCase.js";
 
-const testError = true;
+const testError = false;
 
 // Upsert table to Supabase
 const upsertTableData = async (tableData, table, isUpdateData = false) => {
