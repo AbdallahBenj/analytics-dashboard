@@ -1,4 +1,4 @@
-// import useDashboardData from "../hooks/useDashboardData.js";
+import useDashboardData from "../hooks/useDashboardData.js";
 import useReloadDashboardData from "../hooks/useReloadDashboardData.js";
 
 // test
@@ -7,8 +7,8 @@ import useMockDataStore from "../store/useMockDataStore.js";
 
 const useErrorsDialog = () => {
   const reloadDashboardData = useReloadDashboardData();
-  // const { dashboardData } = useDashboardData();
-  // const { isErrors, errors } = dashboardData;
+  const { dashboardData } = useDashboardData();
+  const { errors, isErrors } = dashboardData;
 
   // console.log("dashboardData", dashboardData);
 
@@ -30,8 +30,8 @@ const useErrorsDialog = () => {
   const upsertDataErrors = getDataErrors(upsertData);
   const syncDataErrors = getDataErrors(syncData);
 
-  const errors = mockDataErrors;
-  const isErrors = errors.length >= 1;
+  // const errors = syncDataErrors;
+  // const isErrors = errors.length >= 1;
 
   // test end
 
