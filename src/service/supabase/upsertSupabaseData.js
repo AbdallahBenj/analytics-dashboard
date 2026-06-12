@@ -4,6 +4,8 @@ import getTablesToUpdate from "./getTablesToUpdate.js";
 
 import { fetchSupabaseTable } from "./fetchSupabaseData.js";
 
+import useErrorsDialogStore from "../../store/useErrorsDialogStore.js";
+
 import useAuthStore from "../../store/useAuthStore.ts";
 
 import { toCamelCase } from "../utils/toCamelCase.js";
@@ -63,6 +65,9 @@ const upsertSupabaseData = async () => {
   const { setUpsertLoading, resetUpsertData } = useSupabaseDataStore.getState();
   resetUpsertData();
   setUpsertLoading(true);
+
+  // Switch to upsertData type dialog errors
+  useErrorsDialogStore.getState().setDialogType("upsertData");
 
   try {
     for (const { tableData, tableName } of tablesToUpdate) {

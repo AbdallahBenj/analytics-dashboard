@@ -2,6 +2,8 @@ import { supabase } from "../../lib/supabase.js";
 
 import useAuthStore from "../../store/useAuthStore.ts";
 
+import useErrorsDialogStore from "../../store/useErrorsDialogStore.js";
+
 import useSupabaseDataStore from "../../store/useSupabaseDataStore.js";
 import { fetchSupabaseTable } from "./fetchSupabaseData.js";
 
@@ -58,6 +60,9 @@ const clearSupabaseData = async () => {
 
   resetClearData();
   setClearLoading(true);
+
+  // Switch to clearedData type dialog errors
+  useErrorsDialogStore.getState().setDialogType("clearedData");
 
   try {
     const tablesToUpdate = getTablesToUpdate();

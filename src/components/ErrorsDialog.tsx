@@ -10,9 +10,15 @@ import {
 // import useReloadDashboardData from "../hooks/useReloadDashboardData.js";
 
 import useErrorsDialog from "../hooks/useErrorsDialog.js";
+import useErrorsDialogStore from "../store/useErrorsDialogStore.js";
 
 const ErrorsDialog = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  // const isDialogOpen = useErrorsDialogStore((state) => state.isDialogOpen);
+  // const openDialog = useErrorsDialogStore((state) => state.openDialog);
+  // const closeDialog = useErrorsDialogStore((state) => state.closeDialog);
+  const setDialogType = useErrorsDialogStore((state) => state.setDialogType);
 
   // Get DashboardData
   // const reloadDashboardData = useReloadDashboardData();
@@ -20,7 +26,8 @@ const ErrorsDialog = () => {
   // const { isErrors, errors } = dashboardData;
 
   const errorsDialogConfig = useErrorsDialog();
-  const { isErrors, errors, reloadDashboardData } = errorsDialogConfig;
+  const { errors, retry } = errorsDialogConfig;
+  const isErrors = errors.length >= 1;
 
   // Track the latest error
   const latestErrorId = errors.at(-1)?.id;
@@ -30,6 +37,9 @@ const ErrorsDialog = () => {
     if (latestErrorId) {
       setIsOpen(true);
     }
+    else {
+      setIsOpen(false);
+    }
   }, [latestErrorId]);
 
   return (
@@ -37,6 +47,7 @@ const ErrorsDialog = () => {
       open={isOpen}
       onClose={() => {
         setIsOpen(false);
+        setDialogType("dashboardData");
       }}
       className="relative z-50"
     >
@@ -86,7 +97,10 @@ const ErrorsDialog = () => {
           )}
           <div className="flex gap-4">
             <button
-              onClick={() => setIsOpen(false)}
+              onClick={() => {
+                setIsOpen(false);
+                setDialogType("dashboardData");
+              }}
               className="cursor-pointer
                 px-3 py-1.5 rounded-md 
                 text-sm text-center font-medium
@@ -98,7 +112,7 @@ const ErrorsDialog = () => {
               Cancel
             </button>
             <button
-              onClick={reloadDashboardData}
+              onClick={retry}
               className="cursor-pointer flex-1
                 px-3 py-1.5 rounded-md 
                 text-sm text-center font-medium 

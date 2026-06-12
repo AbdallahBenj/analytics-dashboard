@@ -1,19 +1,23 @@
 import { create } from "zustand";
 
 const useErrorsDialogStore = create((set) => ({
-  isOpen: false,
-  dialogType: null,
+  isDialogOpen: false,
+  dialogType: "dashboardData",
 
-  openDialog: (type) =>
-    set({
-      isOpen: true,
-      dialogType: type,
-    }),
-  closeDialog: () =>
-    set({
-      isOpen: false,
-      dialogType: null,
-    }),
+  setDialogType: (type) => set({ dialogType: type }),
+
+  // *** Not used on this version
+
+  // openDialog: () =>
+  //   set({
+  //     isDialogOpen: true,
+  //     // dialogType: type,
+  //   }),
+  // closeDialog: () =>
+  //   set({
+  //     isDialogOpen: false,
+  //     // dialogType: null,
+  //   }),
 }));
 
 export default useErrorsDialogStore;

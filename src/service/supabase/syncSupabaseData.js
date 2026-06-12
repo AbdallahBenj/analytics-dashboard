@@ -1,5 +1,7 @@
 import useSupabaseDataStore from "../../store/useSupabaseDataStore.js";
 
+import useErrorsDialogStore from "../../store/useErrorsDialogStore.js";
+
 import useAuthStore from "../../store/useAuthStore.ts";
 import getTablesToUpdate from "./getTablesToUpdate.js";
 import { clearTableData } from "./clearSupabaseData.js";
@@ -18,6 +20,9 @@ const syncSupabaseData = async () => {
   const { setSyncLoading, resetSyncData } = useSupabaseDataStore.getState();
   resetSyncData();
   setSyncLoading(true);
+
+  // Switch to syncData type dialog errors
+  useErrorsDialogStore.getState().setDialogType("syncData");
 
   const tablesToUpdate = getTablesToUpdate();
 
